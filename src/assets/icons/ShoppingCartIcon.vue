@@ -16,8 +16,6 @@
         <path d="M20 15H7H5.23077C3.44646 15 2.5 15.7812 2.5 17C2.5 18.2188 3.44646 19 5.23077 19H19.5" stroke="#000000"
           stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
-      <span
-        class="absolute -top-1 -right-2 translate-middle w-5 h-5 leading-normal rounded-full flex justify-center items-center rounded-full bg-red-600 text-white">{{ cartItemCount }}</span>
     </div>
   </div>
 </template>
