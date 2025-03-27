@@ -10,8 +10,6 @@ const LoginView = () => import('@/views/LoginView.vue')
 const ResetPasswordView = () => import('@/views/ResetPasswordView.vue')
 const EasterEggView = () => import('@/views/EasterEggView.vue')
 const AccountView = () => import('@/views/AccountView.vue')
-const PlantAdminView = () => import('@/views/PlantAdmin.vue')
-const AdminView = () => import('@/views/AdminView.vue')
 const GiveawayView = () => import('@/views/GiveawayView.vue')
 const EbayLoginSuccess = () => import('@/views/EbayLoginSuccess.vue')
 const AdminPanel = () => import('@/views/AdminPanelView.vue')
@@ -114,7 +112,7 @@ const routeData = [
     label: 'Giveaway',
     component: GiveawayView,
     meta: {
-      showInNav: true,
+      showInNav: false,
       requiresLogin: false,
       requiresAdmin: false,
     }
@@ -130,28 +128,28 @@ const routeData = [
       requiresAdmin: true,
     }
   },
-  {
-    path: "/orderAdmin",
-    name: 'Order Admin',
-    label: 'Order Admin',
-    component: AdminView,
-    meta: {
-      showInNav: true,
-      requiresLogin: true,
-      requiresAdmin: true,
-    }
-  },
-  {
-    path: "/plantAdmin",
-    name: 'Plant Admin',
-    label: 'Plant Admin',
-    component: PlantAdminView,
-    meta: {
-      showInNav: true,
-      requiresLogin: true,
-      requiresAdmin: true,
-    }
-  },
+  // {
+  //   path: "/orderAdmin",
+  //   name: 'Order Admin',
+  //   label: 'Order Admin',
+  //   component: AdminView,
+  //   meta: {
+  //     showInNav: false,
+  //     requiresLogin: true,
+  //     requiresAdmin: true,
+  //   }
+  // },
+  // {
+  //   path: "/plantAdmin",
+  //   name: 'Plant Admin',
+  //   label: 'Plant Admin',
+  //   component: PlantAdminView,
+  //   meta: {
+  //     showInNav: true,
+  //     requiresLogin: true,
+  //     requiresAdmin: true,
+  //   }
+  // },
   {
     path: "/login",
     name: 'login',
