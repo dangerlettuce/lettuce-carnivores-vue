@@ -179,7 +179,7 @@
   }
 
   .mobile-menu-search {
-    margin: 0 auto;
+    margin: .5rem auto;
   }
 
   .mobile-nav-link {
