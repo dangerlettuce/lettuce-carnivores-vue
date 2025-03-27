@@ -7,7 +7,7 @@
         <Search class="size-6 text-muted-foreground" />
       </span>
     </div>
-    <SearchResults :searchResults :searchTerm @navigate="clearSearch" />
+    <SearchResults :searchResults :searchTerm @navigate="handleResultSelection" />
   </div>
 </template>
 
@@ -24,7 +24,7 @@
   const plantStore = usePlantStore()
   const { filteredCategories } = storeToRefs(plantStore)
   const { fetchAllCategories, updateFilteredCategories } = plantStore
-
+  const emit = defineEmits(['navigate'])
   onMounted(async () => {
     if (filteredCategories.value.length === 0) {
       await fetchAllCategories();
@@ -36,9 +36,10 @@
 
   const searchResults: Ref<PlantCategory[]> = ref([])
 
-  function clearSearch() {
+  function handleResultSelection() {
     searchTerm.value = ''
     searchResults.value.length = 0
+    emit('navigate')
   }
 
   const uf = new uFuzzy({});
@@ -51,15 +52,11 @@
     const info = uf.info(idxs, haystack, searchTerm.value);
     const order = uf.sort(info, haystack, searchTerm.value);
     const results = []
-    const maxResults = idxs.length > 10 ? 10 : idxs.length
+    const maxResults = idxs.length > 8 ? 8 : idxs.length
     for (let i = 0; i < maxResults; i++) {
       results.push(filteredCategories.value[idxs[i]])
     }
     searchResults.value = results
-    //order.map(index => )
-    // searchResults.value = results.map(result => {
-    //   return filteredCategories.value[result.indexOf('|') - 1]
-    // })
   }
 
   const debouncedSearch = useDebounceFn(executeSearch);

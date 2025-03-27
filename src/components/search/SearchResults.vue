@@ -29,7 +29,7 @@
 <style scoped lang="scss">
 
   .search-container {
-    background-color: $primary;
+    background-color: $accent-orange;
     border: 3px solid black;
     border-radius: .5rem;
     min-width: 60dvw;
@@ -37,7 +37,7 @@
   }
 
   li:hover {
-    background-color: $dark-primary;
+    background-color: $yellow-color;
   }
 
   li,

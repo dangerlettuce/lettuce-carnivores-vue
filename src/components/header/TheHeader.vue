@@ -31,7 +31,7 @@
             <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none" @openAutoFocus.prevent>
               <div class="mobile-menu">
                 <div class="mobile-menu-search">
-                  <TheSearch />
+                  <TheSearch @navigate="closeMobileMenu" />
                 </div>
                 <div v-for="item in allowedNavLinks" :key="item.name" class="mobile-nav-link">
                   <Button variant="ghost" class="p-6 text-xl">
