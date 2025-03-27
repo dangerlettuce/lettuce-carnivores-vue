@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/users'
 import ProductsView from '@/views/ProductsView.vue'
+import ProductDetailView from '@/views/ProductDetailView.vue'
 const ShoppingCart = () => import('@/views/ShoppingCartView.vue')
 const CheckoutComplete = () => import('@/views/CheckoutComplete.vue')
-const ProductDetailView = () => import('@/views/ProductDetailView.vue')
 const AboutView = () => import('@/views/AboutView.vue')
 const CareGuideView = () => import('@/views/CareGuideView.vue')
 const LoginView = () => import('@/views/LoginView.vue')
