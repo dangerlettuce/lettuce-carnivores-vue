@@ -20,8 +20,6 @@
             <div class="cart" @click="closeMobileMenu">
               <router-link to="/cart">
                 <ShoppingCartIcon />
-                <span
-                  class="absolute -top-1 -right-2 translate-middle w-5 h-5 leading-normal rounded-full flex justify-center items-center rounded-full bg-red-600 text-white">{{ cartItemCount }}</span>
               </router-link>
             </div>
           </div>
@@ -31,7 +29,7 @@
             <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none" @openAutoFocus.prevent>
               <div class="mobile-menu">
                 <div class="mobile-menu-search">
-                  <TheSearch @navigate="closeMobileMenu" />
+                  <TheSearch />
                 </div>
                 <div v-for="item in allowedNavLinks" :key="item.name" class="mobile-nav-link">
                   <Button variant="ghost" class="p-6 text-xl">
@@ -63,14 +61,11 @@
   import { computed } from 'vue';
   import { navData } from '@/router/index'
   import { useUserStore } from '@/stores/users';
-  import { useOrderStore } from '@/stores/order';
   import HamburgerButton from './HamburgerButton.vue'
   import TheSearch from '@/components/search/TheSearch.vue';
   import ShoppingCartIcon from '@/assets/icons/ShoppingCartIcon.vue'
-  import { storeToRefs } from 'pinia';
 
   const userStore = useUserStore()
-  const { cartItemCount } = storeToRefs(useOrderStore())
   const allowedNavLinks = computed(() => {
     let allowedNavData = navData.filter((ele) => { return ele.meta.showInNav })
     if (!userStore.isFamily) {
