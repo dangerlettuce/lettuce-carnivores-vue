@@ -42,7 +42,7 @@
     emit('navigate')
   }
 
-  const uf = new uFuzzy({});
+  const uf = new uFuzzy({ intraMode: 1 });
   function executeSearch() {
     searchResults.value.length = 0
     if (!searchTerm.value || searchTerm.value.length < 3) return;
@@ -51,12 +51,14 @@
     if (idxs === null) return []
     const info = uf.info(idxs, haystack, searchTerm.value);
     const order = uf.sort(info, haystack, searchTerm.value);
-    const results = []
+    const results: Array<any> = []
+    results.fill({}, 0, order.length)
     const maxResults = idxs.length > 8 ? 8 : idxs.length
-    for (let i = 0; i < maxResults; i++) {
-      results.push(filteredCategories.value[idxs[i]])
+    for (let i = 0; i < order.length; i++) {
+      results[order[i]] = filteredCategories.value[idxs[i]]
+      //results.push(filteredCategories.value[idxs[i]])
     }
-    searchResults.value = results
+    searchResults.value = results.slice(0, 8)
   }
 
   const debouncedSearch = useDebounceFn(executeSearch);

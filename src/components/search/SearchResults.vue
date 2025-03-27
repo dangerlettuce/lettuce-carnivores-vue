@@ -1,12 +1,14 @@
 <template>
-  <div v-if="searchTerm.length > 2" class="search-container">
-    <div v-if="searchResults.length === 0" class="no-results">No results found</div>
-    <ol v-else>
-      <li v-for="result in searchResults" :key="result.id" @click="navigate(result.id)">
-        {{ result.name }}
-      </li>
-    </ol>
-  </div>
+  <Transition name="fade" appear>
+    <div v-if="searchTerm.length > 2" class="search-container">
+      <li v-if="searchResults.length === 0" class="no-results">No results found</li>
+      <TransitionGroup tag="ul" name="list" appear>
+        <li v-for="result in searchResults" :key="result.id" @click="navigate(result.id)">
+          {{ result.name }}
+        </li>
+      </TransitionGroup>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -60,5 +62,31 @@
     .search-container {
       min-width: 40rem;
     }
+  }
+
+  .list-enter-active,
+  .list-leave-active {
+    transition: all .3s ease;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  .list-move {
+    transition: transform .3s ease;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+
+  .fade-enter,
+  .fade-appear,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
