@@ -12,6 +12,8 @@
     "paths": {},
     "types": [
       "vue3-toastify/global"
-    ]
+    ],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
 }

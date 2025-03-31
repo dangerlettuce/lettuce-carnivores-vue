@@ -1,5 +1,5 @@
 <template>
-  <AgGridVue 
+  <AgGridVue
     :id="id"
     :rowData
     :columnDefs
@@ -11,25 +11,24 @@
     :gridOptions
     @grid-ready="onGridReady"
     @grid-destroyed="onGridDestroyed"
-    suppressColumnVirtualisation
-  />
+    suppressColumnVirtualisation />
 
 </template>
 
 <script setup lang="ts" generic="T">
-import { ref, shallowRef, watch, type PropType, type Ref, type ShallowRef } from 'vue';
-import { AgGridVue } from 'ag-grid-vue3'
-import { ClientSideRowModelModule, ModuleRegistry, TextEditorModule, SelectEditorModule, ValidationModule, ColumnAutoSizeModule, DateEditorModule, themeBalham } from 'ag-grid-community'
-import type { ColDef, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community'
+  import { ref, shallowRef, watch, type PropType, type Ref, type ShallowRef } from 'vue';
+  import { AgGridVue } from 'ag-grid-vue3'
+  import { ClientSideRowModelModule, ModuleRegistry, TextEditorModule, SelectEditorModule, ValidationModule, ColumnAutoSizeModule, DateEditorModule, themeBalham } from 'ag-grid-community'
+  import type { AgGridEvent, ColDef, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community'
   ModuleRegistry.registerModules([ClientSideRowModelModule, TextEditorModule, SelectEditorModule, ValidationModule, ColumnAutoSizeModule, DateEditorModule]);
 
   const gridApi: ShallowRef<GridApi | null> = shallowRef(null)
   let filters: Ref<{ [colId: string]: any } | undefined> = ref(undefined)
-  
+
   defineExpose({
     gridApi
   })
-  
+
   const props = defineProps({
     id: {
       type: String,
@@ -92,7 +91,7 @@ import type { ColDef, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-commu
   watch(
     () => props.quickFilterText,
     () => {
-      if(gridApi.value && !gridApi.value.isDestroyed()) {
+      if (gridApi.value && !gridApi.value.isDestroyed()) {
         gridApi.value.setGridOption('quickFilterText', props.quickFilterText)
       }
     }
