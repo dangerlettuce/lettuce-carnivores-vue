@@ -100,25 +100,23 @@ export const useOrderStore = defineStore('order', () => {
         }
     }
 
-
-
-    async function validateCart() {
+    async function validateCart(): Promise<string | null> {
         const plantData = await getPlantsFromFirestore(cart.value.cartItems)
-        let errors = ''
-        cart.value.cartItems.forEach((item, index) => {
+        let errors = []
+        for (let index = cart.value.cartItems.length - 1; index >= 0; index--) {
+            const item = cart.value.cartItems[index];
             const dbPlant = plantData.find((plant) => plant.sku === item.sku)
-            if(!dbPlant || ['In Stock', 'Hidden'].includes(dbPlant.status) === false || dbPlant.quantity === 0) {
+            if (!dbPlant || ['In Stock', 'Hidden'].includes(dbPlant.status) === false || dbPlant.quantity === 0) {
                 cart.value.cartItems.splice(index, 1)
-                errors = errors + `${item.name} - ${item.sku}: this item is no longer available and has been removed from your cart.\n`
-                return
-            }
-            if(item.quantity > dbPlant.quantity) {
+                errors.push(`${item.name} - ${item.sku}: this item is no longer available and has been removed from your cart.`)
+            } else if (item.quantity > dbPlant.quantity) {
                 cart.value.cartItems[index].quantity = dbPlant.quantity
-                errors = errors + `${item.name} - ${item.sku}: The requested quantity is no longer available, your cart has been adjusted.\n`
+                errors.push(`${item.name} - ${item.sku}: The requested quantity is no longer available, your cart has been adjusted.\n`)
             }
-        })
-        return errors
+        }
+        return errors.length === 0 ? null : errors.join('\n')
     }
+
     const activeDiscount: Ref<Discount | null> = ref(null)
     const activeDiscountMessage: Ref<string | null> = ref(null)
     const discountedItems: Ref<CartItem[] | null> = ref(null)
