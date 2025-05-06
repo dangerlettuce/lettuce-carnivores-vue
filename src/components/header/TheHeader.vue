@@ -4,9 +4,13 @@
       <Button class="hamburger-icon-container hover:bg-opacity-0" variant="ghost" @click="toggleMobileMenu">
         <HamburgerButton :isOpen />
       </Button>
-
       <div class="logo">
-        <h1 class="logo-text"><router-link to="/">Danger Lettuce</router-link></h1>
+        <router-link  to="/">
+          <img src="@/assets/logo/LogoWithBugLettuceCentered.png" alt="Danger Lettuce Logo" />
+        </router-link>
+        <router-link  to="/">
+          <h1><span class="danger">DANGER</span><span class="lettuce">Lettuce</span></h1>
+        </router-link>
       </div>
 
       <div class="flex flex-row justify-end">
@@ -30,6 +34,14 @@
           <Sheet v-model:open="isOpen">
             <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none" @openAutoFocus.prevent>
               <div class="mobile-menu">
+                <div class="logo mobile-logo">
+                  <router-link  to="/">
+                    <img src="@/assets/logo/LogoWithBugNoText.png" alt="Danger Lettuce Logo" />
+                  </router-link>
+                  <router-link  to="/">
+                    <h1><span class="danger">DANGER</span><span class="lettuce">Lettuce</span></h1>
+                  </router-link>
+                </div>
                 <div class="mobile-menu-search">
                   <TheSearch @navigate="closeMobileMenu" />
                 </div>
@@ -101,7 +113,7 @@
 <style scoped lang='scss'>
   header {
     width: 100%;
-    padding-top: .5rem;
+    padding-top: .4rem;
     min-height: 4rem;
   }
 
@@ -115,7 +127,7 @@
     flex-direction: row;
     justify-content: space-between;
     border: 2px solid black;
-    border-radius: 3rem;
+    border-radius: 1rem;
     padding-block: .3rem;
     padding-inline: 1.25rem;
     margin: auto;
@@ -124,21 +136,38 @@
   }
 
   .logo {
-    font-weight: bold;
-    font-size: clamp(1.5rem, 2.5vw, 2.75rem);
-    font-family: 'Carter One', cursive;
-    color: $cream;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 4rem;
+      margin-block: .1rem;
+    }
   }
 
-  .logo-text {
-    text-shadow: 3px 2px 1px $medium-red;
-    // text-box: trim-both cap alphabetic;
-    // color: transparent;
-    // background-clip: text;
-    // background-image: $navbar-bg;
+  h1 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    line-height: .8;
+    font-size: clamp(2.5rem, 4vw, 4.25rem);
+    .danger {
+      font-family: 'Whitelion', sans-serif;
+      color: $logoTextDanger;
+    }
+    .lettuce {
+      font-family: 'GrandAventure', sans-serif;
+      color: $logoTextLettuce;
+    }
   }
-
+  .mobile-logo {
+    h1 {
+      display: flex;
+      font-size: clamp(2.5rem, 4vw, 3rem);
+    }
+  }
   .logo-link {
     text-decoration: none;
     cursor: pointer;
@@ -188,6 +217,9 @@
 
   .hamburger-icon-container {
     display: block;
+    button {
+      transform: scale(1.5);
+    }
   }
 
   .shop-button {
@@ -205,7 +237,7 @@
   .cart {
     align-items: center;
     justify-content: center;
-    transform: scale(.8);
+    transform: scale(1);
   }
 
   @media(min-width: 400px) {
@@ -214,34 +246,55 @@
       padding-inline: 1rem;
     }
 
-    .logo {
-      font-size: clamp(1.75rem, 3vw, 2.75rem);
-    }
+
   }
 
   @media(min-width: 600px) {
+
+    .logo {
+      img {
+        height: 5.5rem;
+        margin-block: .3rem;
+      }
+    }
     .header-container {
       padding-block: 0.1rem;
       padding-inline: 2.5rem;
       grid-template-columns: 1fr 2fr 1fr;
-    }
-
-    .logo-text {
-      text-shadow: 4px 4px 1px $medium-red;
+      border-radius: 1.5rem;
     }
 
     .cart {
-      transform: scale(1.0);
+      transform: scale(1.3);
     }
+
+    .hamburger-icon-container {
+      button {
+        transform: scale(2);
+      }
+  }
   }
 
   @media(min-width: 900px) {
+
     .header-search {
       display: block;
+      margin-right: 1rem
     }
 
     .mobile-menu-search {
       display: none;
+    }
+  }
+
+  @media(min-width: 1200px) {
+    .logo {
+      h1 {
+        display: flex;
+      }
+        img {
+          height: 8rem;
+        }
     }
   }
 </style>

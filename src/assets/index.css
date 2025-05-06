@@ -79,3 +79,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: 'Whitelion';
+  src: url('/fonts/whitelion.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'GrandAventure';
+  src: url('/fonts/Grand_Aventure.otf') format('truetype');
+}
