@@ -109,9 +109,15 @@ export const useOrderStore = defineStore('order', () => {
             if (!dbPlant || ['In Stock', 'Hidden'].includes(dbPlant.status) === false || dbPlant.quantity === 0) {
                 cart.value.cartItems.splice(index, 1)
                 errors.push(`${item.name} - ${item.sku}: this item is no longer available and has been removed from your cart.`)
-            } else if (item.quantity > dbPlant.quantity) {
-                cart.value.cartItems[index].quantity = dbPlant.quantity
-                errors.push(`${item.name} - ${item.sku}: The requested quantity is no longer available, your cart has been adjusted.\n`)
+            } else {
+                if (item.quantity > dbPlant.quantity) {
+                    cart.value.cartItems[index].quantity = dbPlant.quantity
+                    errors.push(`${item.name} - ${item.sku}: The requested quantity is no longer available, your cart has been adjusted.\n`)
+                }
+                if (item.price !== dbPlant.price) {
+                    cart.value.cartItems[index].price = dbPlant.price
+                    errors.push(`${item.name} - ${item.sku}: The price has changed, your cart has been adjusted.\n`)
+                }
             }
         }
         return errors.length === 0 ? null : errors.join('\n')
@@ -124,6 +130,7 @@ export const useOrderStore = defineStore('order', () => {
         const discounts = await getDiscounts(cart.value)
         let bestDiscount = null
         let bestDiscountMessage = null
+        let bestDiscountAmountOff = 0
         if (!discounts || !discounts.discountValues) {
             activeDiscount.value = bestDiscount
             activeDiscountMessage.value = bestDiscountMessage
@@ -140,7 +147,11 @@ export const useOrderStore = defineStore('order', () => {
             activeDiscount.value = buyGetDiscount
             activeDiscountMessage.value = discountDetails?.message ?? null
             discountedItems.value = discountDetails?.discountedItems as CartItem[]
-            return discountDetails?.totalDiscount ?? 0
+            if (discountDetails?.totalDiscount && discountDetails?.totalDiscount > bestDiscountAmountOff) { 
+                bestDiscountAmountOff = discountDetails?.totalDiscount ?? 0
+                bestDiscountMessage = discountDetails?.message ?? null
+                bestDiscount = buyGetDiscount
+            }
         }
 
         let multiPlantAmountOff = 0
@@ -149,18 +160,32 @@ export const useOrderStore = defineStore('order', () => {
             if (cartItemCount.value >= multiPlantDiscount.parameters.minimumQuantity) {
                 discounts.discountValues.reduce(function (acc, obj) { return acc + obj.percent_off; }, 0);
                 multiPlantAmountOff = Math.round((cartTotal.value * multiPlantDiscount.percent_off / 100) * 100) / 100
-                bestDiscount = multiPlantDiscount
-                bestDiscountMessage = `Your order qualifies for a ${multiPlantDiscount.percent_off}% discount!`
+                if( multiPlantAmountOff > bestDiscountAmountOff) {
+                    bestDiscount = multiPlantDiscount
+                    bestDiscountAmountOff = multiPlantAmountOff
+                    bestDiscountMessage = `Your order qualifies for a ${multiPlantDiscount.percent_off}% discount!`
+                }
             } else {
                 bestDiscountMessage ??= multiPlantDiscount.message
             }
             
         }
-        
+
+        const siteWideDiscount = discounts.discountValues.find(discount => discount.type === 'siteWide') as SiteWideDiscount
+        if (siteWideDiscount) {
+            const siteWideAmountOff = Math.round((cartTotal.value * siteWideDiscount.percent_off / 100) * 100) / 100
+            if (siteWideAmountOff > bestDiscountAmountOff) {
+                bestDiscount = siteWideDiscount
+                bestDiscountMessage = `Your order qualifies for a ${siteWideDiscount.percent_off}% discount!`
+                bestDiscountAmountOff = siteWideAmountOff
+            } else {
+                bestDiscountMessage ??= siteWideDiscount.message
+            }
+        }
         
         activeDiscount.value = bestDiscount
         activeDiscountMessage.value = bestDiscountMessage
-        return Math.max(multiPlantAmountOff)
+        return Math.max(bestDiscountAmountOff)
     }
 
     const discountDocs: Ref<Discount[] | undefined> = ref()
@@ -188,7 +213,6 @@ export const useOrderStore = defineStore('order', () => {
         if (multiPlantDiscount && !buyGetDiscount) {
             discountValues.push(multiPlantDiscount)
         }
-        
         const siteWideDiscount = activeDiscounts.find(item => item.type === 'siteWide') as SiteWideDiscount
         if(siteWideDiscount && siteWideDiscount.id !== null) {
             discountValues.push(siteWideDiscount)

@@ -141,7 +141,7 @@
     align-items: center;
     img {
       height: 4rem;
-      margin-block: .1rem;
+      margin-block: .2rem;
     }
   }
 
@@ -235,6 +235,7 @@
   }
 
   .cart {
+    display: flex;;
     align-items: center;
     justify-content: center;
     transform: scale(1);
@@ -245,8 +246,6 @@
       padding-block: .1rem;
       padding-inline: 1rem;
     }
-
-
   }
 
   @media(min-width: 600px) {
@@ -254,7 +253,7 @@
     .logo {
       img {
         height: 5.5rem;
-        margin-block: .3rem;
+        margin-block: .5rem;
       }
     }
     .header-container {

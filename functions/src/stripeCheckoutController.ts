@@ -17,7 +17,7 @@ import {
 import Stripe from 'stripe'
 import type { Plant, PlantCategory } from './types/Plants'
 import { FunctionResponse } from './types/Functions'
-import { BuyGetDiscount, CartItem, Discount, MultiPlantDiscount, SiteWideDiscount } from './types/Orders'
+import { CartItem } from './types/Orders'
 import { type CustomerRecord } from './types/Users'
 import { StripeLineItem } from './types/Stripe'
 import { handleDiscounts } from './stripe/stripeService'
@@ -49,6 +49,7 @@ export default onCall(async (request: CheckoutSessionRequest): Promise<FunctionR
     request.data.cancelUrl,
     request.data.stripeCustomer,
   )
+  
   if (checkoutSession === null) {
     return { success: false, error: true, message: 'Error creating checkout session', errorDetails: null, data: null }
   }
@@ -77,13 +78,17 @@ async function buildCheckoutSession(
   }
   const discountData = await handleDiscounts(stripeCart.data as unknown as CartItem[])
   const lineItems: StripeLineItem[] = (discountData.cart as unknown as CartItem[]).map((item: CartItem) => {
+    let description = `SKU: ${item.sku} Size: ${item.size}`
+    if (item.clone) {
+      description += ` Clone: ${item.clone}`
+    }
     return {
       price_data: {
         currency: 'usd',
         unit_amount: item.price,
         product_data: {
           name: item.name,
-          description: item.size,
+          description,
           metadata: {
             sku: item.sku,
             categoryId: item.categoryId,
@@ -154,57 +159,6 @@ async function buildStripeCart(cartItems: CartItem[]): Promise<FunctionResponse>
   }
   return { success: true, error: false, message: 'Success', errorDetails: null, data: stripeCart }
 }
-
-// async function getDiscounts(line_items: StripeLineItem[]) {
-//   const discountDocs = await getAllDocs<MultiPlantDiscount | BuyGetDiscount | SiteWideDiscount>('discounts')
-//   if (!discountDocs || discountDocs.length === 0 || !line_items || line_items.length === 0) {
-//     return null
-//   }
-//   const activeDiscounts = discountDocs.filter(
-//     (item) => item.valid && item.validThrough.toMillis() >= admin.firestore.Timestamp.now().toMillis(),
-//   )
-//   const stripeDiscounts: { coupon: string }[] = []
-//   const discountValues: Discount[] = []
-
-//   const multiPlantDiscount = activeDiscounts.find((item) => item.type === 'multiplePlants')
-//   const cartQuantity = line_items.reduce((accumulator, item) => accumulator + item.quantity!, 0)
-//   if(multiPlantDiscount && multiPlantDiscount.type === 'multiplePlants') {
-//     if(cartQuantity >= multiPlantDiscount.parameters.minimumQuantity)
-//   }
-//   if (multiPlantDiscount && multiPlantDiscount.type === 'multiplePlants' && cartQuantity >= multiPlantDiscount.parameters.minimumQuantity) {
-//     stripeDiscounts.push({ coupon: multiPlantDiscount.id })
-//     discountValues.push(multiPlantDiscount)
-//   }
-
-//   const siteWideDiscount = activeDiscounts.find((item) => item.type === 'siteWide')
-//   if (siteWideDiscount && siteWideDiscount.id !== null) {
-//     stripeDiscounts.push({ coupon: siteWideDiscount.id })
-//     discountValues.push(siteWideDiscount)
-//   }
-//   const buyGetDiscount = activeDiscounts.find((item) => item.type === 'buyGet')
-//   if (buyGetDiscount && buyGetDiscount.id !== null) {
-//     stripeDiscounts.push({ coupon: buyGetDiscount.id })
-//     discountValues.push(buyGetDiscount)
-//   }
-//   return {
-//     stripeDiscounts: stripeDiscounts,
-//     discountValues: discountValues,
-//   }
-// }
-
-// function calculateDiscounts(cartTotal: number, discountValues: Discount[]) {
-//   if (!discountValues || discountValues.length === 0) {
-//     return 0
-//   }
-//   const totalPercentageOff = discountValues.reduce(function (acc, obj) {
-//     return acc + obj.percent_off
-//   }, 0)
-//   const percentageOffAmount = Math.round(((cartTotal * totalPercentageOff) / 100) * 100) / 100
-//   const totalAmountOff = discountValues.reduce(function (acc, obj) {
-//     return acc + obj.amount_off
-//   }, 0)
-//   return percentageOffAmount + totalAmountOff
-// }
 
 type PlantDetailsFromFirestoreRequest = {
   collection: string

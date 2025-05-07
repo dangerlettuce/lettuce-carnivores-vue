@@ -2,7 +2,7 @@
   <div class="search-wrapper">
     <div class="relative w-full max-w-sm items-center">
       <Input id="search" type="text" v-model="searchTerm" @input="debouncedSearch" placeholder="Search..."
-        class="pl-10" />
+        class="search-input pl-10" />
       <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
         <Search class="size-6 text-muted-foreground" />
       </span>
@@ -64,3 +64,10 @@
   const debouncedSearch = useDebounceFn(executeSearch);
 
 </script>
+
+<style scoped lang="scss">
+  .search-input {
+    height: 2.6rem;
+    font-size: 1.2rem;
+  }
+</style>

@@ -1,8 +1,9 @@
 <template>
   <div class="cart-layout">
     <div v-if="cartErrors !== null" class="cart-errors">
-      <Alert class="bg-stone-100 border-2 border-red-400">
-        <AlertDescription class="text-red-400">
+      <Alert class="alert-container bg-stone-50 border-2 border-red-400">
+        <img src="@/assets/icons/sad-fly.png" alt="Sad fly" class="alert-icon" />
+        <AlertDescription class="alert-text text-red-400">
           {{ cartErrors }}
         </AlertDescription>
       </Alert>
@@ -171,6 +172,7 @@ async function getCartErrors() {
 </script>
 
 <style scoped lang="scss">
+
 .cart-layout {
   display: flex;
   flex-direction: column;
@@ -211,6 +213,17 @@ async function getCartErrors() {
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+}
+.alert-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.alert-icon {
+  height: 6rem;
+}
+.alert-text {
+  width: 100%;
 }
 // .checkout-button {
 //   border-radius: 0.5rem;
