@@ -9,7 +9,7 @@
           <img src="@/assets/logo/LogoWithBugLettuceCentered.png" alt="Danger Lettuce Logo" />
         </router-link>
         <router-link  to="/">
-          <h1><span class="danger">DANGER</span><span class="lettuce">Lettuce</span></h1>
+          <h1><span class="danger">DANGER</span><span class="lettuce">LETTUCE</span></h1>
         </router-link>
       </div>
 
@@ -39,7 +39,7 @@
                     <img src="@/assets/logo/LogoWithBugNoText.png" alt="Danger Lettuce Logo" />
                   </router-link>
                   <router-link  to="/">
-                    <h1><span class="danger">DANGER</span><span class="lettuce">Lettuce</span></h1>
+                    <h1><span class="danger">DANGER</span><span class="lettuce">LETTUCE</span></h1>
                   </router-link>
                 </div>
                 <div class="mobile-menu-search">
@@ -152,20 +152,29 @@
     flex-direction: column;
     margin: 0;
     line-height: .8;
-    font-size: clamp(2.5rem, 4vw, 4.25rem);
+    margin-inline-end: 30%;
     .danger {
       font-family: 'Whitelion', sans-serif;
       color: $logoTextDanger;
+      font-size: clamp(2.5rem, 4vw, 4.25rem);
     }
     .lettuce {
-      font-family: 'GrandAventure', sans-serif;
+      font-family: 'Blokletters', sans-serif;
       color: $logoTextLettuce;
+      font-size: clamp(1.5rem, 2vw, 2.6rem);
+      font-weight: bold;
+      transform: translate(30%, 0);
     }
   }
   .mobile-logo {
     h1 {
       display: flex;
-      font-size: clamp(2.5rem, 4vw, 3rem);
+      .danger {
+        font-size: clamp(2rem, 3vw, 3rem);
+      }
+      .lettuce {
+        font-size: clamp(1.25rem, 2vw, 1.75rem);
+      }
     }
   }
   .logo-link {

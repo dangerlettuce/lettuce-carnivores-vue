@@ -2,7 +2,7 @@ import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/
 import type { AppData, AppError, AppResponse } from '@/types/App'
 import type { HttpsCallableResult } from 'firebase/functions'
 
-let emulateFunctions = true
+let emulateFunctions = false
 export function getFirebaseFunction(functionName: string) {
   const functions = getFunctions()
   if (emulateFunctions === true) {
