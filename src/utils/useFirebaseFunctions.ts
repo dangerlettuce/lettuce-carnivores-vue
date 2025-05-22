@@ -2,7 +2,7 @@ import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/
 import type { AppData, AppError, AppResponse } from '@/types/App'
 import type { HttpsCallableResult } from 'firebase/functions'
 
-let emulateFunctions = false
+const emulateFunctions = import.meta.env.MODE === 'PRODUCTION' ? false : import.meta.env.VITE_EMULATE_FIREBASE_FUNCTIONS;
 export function getFirebaseFunction(functionName: string) {
   const functions = getFunctions()
   if (emulateFunctions === true) {

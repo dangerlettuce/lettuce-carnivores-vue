@@ -8,7 +8,7 @@ export async function handleDiscounts(cart: CartItem[]) {
   const cartItemWithId = cart.map((item) => ({ ...item, id: item.sku }))
   const activeDiscounts = await getActiveDiscounts()
   const bestDiscount = calculateDiscounts (cartItemWithId, activeDiscounts)
-  return await applyItemDiscounts(cartItemWithId, activeDiscounts)
+  return await applyItemDiscounts(cartItemWithId, bestDiscount.bestDiscount)
 }
 
 
@@ -23,8 +23,12 @@ export async function getActiveDiscounts() {
 }
 
 
-export async function applyItemDiscounts(cart: DiscountableItem[], discounts: Discount[]) {
-  if (cart.length === 0 || discounts.length === 0) { 
+export async function applyItemDiscounts(cart: DiscountableItem[], discounts: null | Discount | Discount[]) {
+  let discountArr: Discount[] = [];
+  if (discounts !== null && !Array.isArray(discounts)) {
+    discountArr = [discounts]
+  }
+  if (cart.length === 0 || !discounts || discountArr.length === 0) { 
     return { cart, stripeCoupons: [], totalCartDiscountedAmount: 0 }
   }
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0)
@@ -32,7 +36,8 @@ export async function applyItemDiscounts(cart: DiscountableItem[], discounts: Di
   const stripeCoupons: { coupon: string }[] = []
   let totalCartDiscountedAmount = 0
   let isBuyGetApplied = false
-  discounts.forEach((discount) => {
+
+  discountArr.forEach((discount) => {
     if (discount.type === 'buyGet') {
       const buyGetDiscount = calculateBuyGetDiscounts(cart, discount as BuyGetDiscount)
       if (buyGetDiscount?.isQualified) {

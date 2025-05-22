@@ -139,6 +139,7 @@ export const useOrderStore = defineStore('order', () => {
         }
         if (discounts?.discountValues.length === 1) {
             bestDiscount = discounts.discountValues[0]
+            activeDiscountMessage.value = bestDiscount.message
         }
 
         const buyGetDiscount = discounts.discountValues.find(discount => discount.type === 'buyGet') as BuyGetDiscount
@@ -183,8 +184,8 @@ export const useOrderStore = defineStore('order', () => {
             }
         }
         
-        activeDiscount.value = bestDiscount
-        activeDiscountMessage.value = bestDiscountMessage
+        activeDiscount.value ??= bestDiscount
+        activeDiscountMessage.value ??= bestDiscountMessage
         return Math.max(bestDiscountAmountOff)
     }
 

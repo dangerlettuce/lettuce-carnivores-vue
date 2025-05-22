@@ -24,12 +24,31 @@ import { useOrderStore } from '@/stores/order';
 import { useUserStore } from '@/stores/users';
 import { storeToRefs } from 'pinia'
 import { isColdWeatherShippingActive } from '@/constants/OrderConstants'
-
+import { event } from 'vue-gtag'
 const {user} = storeToRefs(useUserStore())
 const { resetCart } = useOrderStore()
-
+const { cart, cartTotal, activeDiscount } = storeToRefs(useOrderStore())
 
 onMounted(() => {
-    resetCart()
+    event('conversion_event_purchase', {
+        amount: cartTotal.value,
+        discount: {
+            id: activeDiscount.value?.id,
+            type: activeDiscount.value?.type,
+            message: activeDiscount.value?.message,
+        },
+        cartItems: cart.value.cartItems.map((item) => ({
+            sku: item.sku,
+            quantity: item.quantity,
+            price: item.price,
+        })),
+        user: {
+            id: user.value?.uid,
+            email: user.value?.email,
+            isAnonymous: user.value?.isAnonymous,
+        }
+    })
+
+    resetCart();
 })
 </script>

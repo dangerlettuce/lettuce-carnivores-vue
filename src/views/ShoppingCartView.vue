@@ -39,8 +39,8 @@
           </h3>
         </div>
         
-        <div v-if="activeDiscountMessage !== null" class="flex row justify-center gap-2 mx-4">
-          <h5 class="center-message">
+        <div v-if="activeDiscountMessage !== null && activeDiscountMessage" class="flex row justify-center gap-2 mx-4">
+          <h5 class="center-message discount-message">
             {{ activeDiscountMessage }}
           </h5>
         </div>
@@ -224,6 +224,17 @@ async function getCartErrors() {
 }
 .alert-text {
   width: 100%;
+}
+
+.discount-message {
+  background-color: $accent-orange;
+  border-radius: .5rem;
+  color: $dark;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  
 }
 // .checkout-button {
 //   border-radius: 0.5rem;
