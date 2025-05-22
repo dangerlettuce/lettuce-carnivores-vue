@@ -47,6 +47,9 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
       message = `${message} ${getY}% off another plant`
     }
   }
+  if (itemsBoughtCounter === 0 && discountedItemCounter === 0 && discountedItems.length > 0) {
+    message = `Your order qualifies for ${discountedItems.length === 1 ? 'a' : discountedItems.length} free plant${discountedItems.length > 1 ? 's' : ''}! The discount has been applied to your cart.`
+  }
   if (discountedItemCounter > 0 && itemsBoughtCounter === 0) {
     message = `Your order qualifies for ${discountedItemCounter === 1 ? 'a' : discountedItemCounter} free plant${discountedItemCounter > 1 ? 's' : ''}! The discount will automatically applied when you add another plant to your cart.`
   }

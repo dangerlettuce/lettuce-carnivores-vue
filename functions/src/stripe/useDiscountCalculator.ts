@@ -1,6 +1,7 @@
 import type { BuyGetDiscount, Discount, DiscountableItem, MultiPlantDiscount, SiteWideDiscount } from '../types/Orders'
 
 export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount: BuyGetDiscount) {
+  debugger
   if (discount.type !== 'buyGet' || !discount.percent_off || !discount.parameters.buyX || !discount.parameters.getY) {
     return null
   }
@@ -46,6 +47,9 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
       message = `${message} ${getY}% off another plant`
     }
   }
+  if (itemsBoughtCounter === 0 && discountedItemCounter === 0 && discountedItems.length > 0) {
+    message = `Your order qualifies for ${discountedItems.length === 1 ? 'a' : discountedItems.length} free plant${discountedItems.length > 1 ? 's' : ''}! The discount has been applied to your cart.`
+  }
   if (discountedItemCounter > 0 && itemsBoughtCounter === 0) {
     message = `Your order qualifies for ${discountedItemCounter === 1 ? 'a' : discountedItemCounter} free plant${discountedItemCounter > 1 ? 's' : ''}! The discount will automatically applied when you add another plant to your cart.`
   }
@@ -68,7 +72,7 @@ export function calculateDiscounts(items: DiscountableItem[], discounts: Discoun
   if (!discounts || discounts.length === 0 || !items || items.length === 0) {
       return { bestDiscount, bestDiscountMessage, bestDiscountAmountOff }
   }
-
+  debugger
   const buyGetDiscount = discounts.find(discount => discount.type === 'buyGet') as BuyGetDiscount
   if (buyGetDiscount) {
       const discountDetails = calculateBuyGetDiscounts(items, buyGetDiscount)

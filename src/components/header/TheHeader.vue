@@ -152,7 +152,8 @@
     flex-direction: column;
     margin: 0;
     line-height: .8;
-    margin-inline-end: 30%;
+    margin-inline-start: 25%;
+    margin-inline-end: 25%;
     .danger {
       font-family: 'Whitelion', sans-serif;
       color: $logoTextDanger;
@@ -161,14 +162,15 @@
     .lettuce {
       font-family: 'Blokletters', sans-serif;
       color: $logoTextLettuce;
-      font-size: clamp(1.5rem, 2vw, 2.6rem);
+      font-size: clamp(1.5rem, 2.25vw, 2.6rem);
       font-weight: bold;
-      transform: translate(30%, 0);
+      transform: translate(25%, 0);
     }
   }
   .mobile-logo {
     h1 {
       display: flex;
+      margin-inline-start: 0;
       .danger {
         font-size: clamp(2rem, 3vw, 3rem);
       }
