@@ -14,7 +14,7 @@ export async function createEbayInventoryItem (plantCategory: PlantCategory, pla
             packageWeightAndSize: getShippingSize(plant.size),
             availability: {
                 shipToLocationAvailability: {
-                    quantity: 1
+                    quantity: plant.quantity
                 }
             }
         }
@@ -73,7 +73,7 @@ function buildAspects(plantCategory: PlantCategory, plant: Plant) {
         "Watering": ["Heavy"],
         "Genus": [plantCategory.genus],
         "Number in Pack": ["1"],
-        "Sunlight": [plantCategory.genus === 'Heliamphora' ? "Medium Sun" : ''],
+        "Sunlight": [plantCategory.genus === 'Heliamphora' ? 'Medium Sun' : 'Medium Sun'],
     }
     if(plant.size !== 'Bare Root') {
         aspects["Features"] = ['Potted']

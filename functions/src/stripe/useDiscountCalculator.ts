@@ -1,7 +1,6 @@
 import type { BuyGetDiscount, Discount, DiscountableItem, MultiPlantDiscount, SiteWideDiscount } from '../types/Orders'
 
 export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount: BuyGetDiscount) {
-  debugger
   if (discount.type !== 'buyGet' || !discount.percent_off || !discount.parameters.buyX || !discount.parameters.getY) {
     return null
   }
@@ -72,7 +71,6 @@ export function calculateDiscounts(items: DiscountableItem[], discounts: Discoun
   if (!discounts || discounts.length === 0 || !items || items.length === 0) {
       return { bestDiscount, bestDiscountMessage, bestDiscountAmountOff }
   }
-  debugger
   const buyGetDiscount = discounts.find(discount => discount.type === 'buyGet') as BuyGetDiscount
   if (buyGetDiscount) {
       const discountDetails = calculateBuyGetDiscounts(items, buyGetDiscount)

@@ -24,7 +24,7 @@
                     </Transition>
                     <Transition>
                         <div v-show="showRules">
-                            <p>{{`Valid in the United States only. The winner will be contacted via their selected contact method within 48 hours of the close of the contest and will need to respond within 7 calendar days with a valid U.S. shipping address. Failing to provide a valid contact method or eligible shipping address within 7 calendar days will void their claim to the prize. Odds are winning depend on the number of entries into the giveaway, with each entrant having one chance to win. Prize valued at $${giveawayDetails?.prizeValue?.toString()} but may not be exchanged for a cash prize. No purchase necessary, and neither purchase, nor completion of the game will increase odds of winning. Void where prohibited.`}}</p>
+                            <p>{{`Valid in the United States only. The winner will be contacted via their selected contact method within 48 hours of the close of the contest and will need to respond within 31 calendar days with a valid U.S. shipping address. Failing to provide a valid contact method or eligible shipping address within 31 calendar days will void their claim to the prize. Odds are winning depend on the number of entries into the giveaway, with each entrant having one chance to win. Prize valued at $${giveawayDetails?.prizeValue?.toString()} but may not be exchanged for a cash prize. No purchase necessary, and neither purchase, nor completion of the game will increase odds of winning. Void where prohibited.`}}</p>
                         </div>
                     </Transition>
                 </div>
@@ -45,7 +45,7 @@ import GiveawayEntryForm from './GiveawayEntryForm.vue';
 import { useGiveawayStore } from '@/stores/giveaway'
 import { storeToRefs } from 'pinia'
     const activeGame = HalloweenLetterGame
-    const gameHelpLine1 = `Go to the 'Shop' link at the top and click on any of the plants.  Then find the`
+    const gameHelpLine1 = `Go to the 'Shop' link in that navigation menu and click on any of the plants.  Then find the`
     const gameHelpLine2 = `Once you collect all the letters, come back to this page to submit your name for the contest`
 
     const {isGiveawayActive, isGiveawayLoading, giveawayDetails, isGameActive, isGameComplete, bypassGame} = storeToRefs(useGiveawayStore())

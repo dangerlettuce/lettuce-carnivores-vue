@@ -1,5 +1,9 @@
 <template>
   <header class="w-full sticky top-0 z-50 bg-background">
+  <div v-if="showBanner" class="banner">
+      <router-link v-if="bannerLink" :to="bannerLink">{{ bannerMessage }}</router-link>
+      <p v-else>{{bannerMessage}}</p>
+  </div>
     <div class="header-container">
       <Button class="hamburger-icon-container hover:bg-opacity-0" variant="ghost" @click="toggleMobileMenu">
         <HamburgerButton :isOpen />
@@ -9,7 +13,7 @@
           <img src="@/assets/logo/LogoWithBugLettuceCentered.png" alt="Danger Lettuce Logo" />
         </router-link>
         <router-link  to="/">
-          <h1><span class="danger">DANGER</span><span class="lettuce">LETTUCE</span></h1>
+          <h1><span class="danger stroke">DANGER</span><span class="lettuce stroke">LETTUCE</span></h1>
         </router-link>
       </div>
 
@@ -39,7 +43,7 @@
                     <img src="@/assets/logo/LogoWithBugNoText.png" alt="Danger Lettuce Logo" />
                   </router-link>
                   <router-link  to="/">
-                    <h1><span class="danger">DANGER</span><span class="lettuce">LETTUCE</span></h1>
+                    <h1><span class="danger stroke">DANGER</span><span class="lettuce stroke">LETTUCE</span></h1>
                   </router-link>
                 </div>
                 <div class="mobile-menu-search">
@@ -66,7 +70,7 @@
 </template>
 
 <script setup lang='ts'>
-  import { type Ref } from 'vue'
+  import { ref, type Ref } from 'vue'
   import {
     Sheet,
     SheetContent,
@@ -96,6 +100,9 @@
     }
     return allowedNavData
   })
+  const showBanner = ref(false);
+  const bannerLink = ref('/giveaway')
+  const bannerMessage = 'Our Halloween Giveaway is live! Click here for details.';
   const isOpen: Ref<boolean> = defineModel({ default: false })
   function toggleMobileMenu() {
     isOpen.value = !isOpen.value
@@ -115,6 +122,16 @@
     width: 100%;
     padding-top: .4rem;
     min-height: 4rem;
+  }
+  .banner {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.5rem;
+    width: 100%;
+    background-color: $medium-red;
+    border-radius: .4rem;;
   }
 
   .header-search {
@@ -162,11 +179,16 @@
     .lettuce {
       font-family: 'Blokletters', sans-serif;
       color: $logoTextLettuce;
-      font-size: clamp(1.5rem, 2.25vw, 2.6rem);
+      font-size: clamp(1.6rem, 2.3vw, 2.6rem);
       font-weight: bold;
       transform: translate(25%, 0);
     }
   }
+  .stroke {
+    -webkit-text-stroke: 1px #000;
+    text-stroke: 2px #000;;
+  }
+
   .mobile-logo {
     h1 {
       display: flex;
@@ -297,7 +319,11 @@
     }
   }
 
-  @media(min-width: 1200px) {
+  @media(min-width: 1300px) {
+    .stroke {
+      -webkit-text-stroke: 1.5px #000;
+      text-stroke: 2px #000;;
+    }
     .logo {
       h1 {
         display: flex;

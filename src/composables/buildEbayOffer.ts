@@ -1,7 +1,9 @@
 import type { EbayOfferDetailsWithKeys } from '@/types/ebayApi/types'
 import type { Plant, PlantCategory } from '@/types/Plant'
 import { formattedDate } from '@/utils/utils'
-
+const ebayMarkupPercentage = 1.13 as const;
+const autoDeclinePricePercentage = 0.7 as const;
+const autoAcceptPricePercentage = .9 as const;
 export async function buildEbayOffer(plantCategory: PlantCategory, plant: Plant) {
     const ebayPrice = getEbayPrice(plant.price)
     if(!isValidPrice(ebayPrice)) {
@@ -9,6 +11,7 @@ export async function buildEbayOffer(plantCategory: PlantCategory, plant: Plant)
     }
     const offer: EbayOfferDetailsWithKeys = {...getConstantOfferData()}
     offer.sku = plant.sku
+    offer.availableQuantity = Number.isFinite(plant.quantity) ? plant.quantity : 1,
     offer.categoryId = getCategoryId(plantCategory)
     offer.listingDescription = getListingDescription(plantCategory, plant)
     offer.pricingSummary = {
@@ -17,18 +20,28 @@ export async function buildEbayOffer(plantCategory: PlantCategory, plant: Plant)
                 value: ebayPrice.toString()
             }
         }
-    return offer
+    
+    offer.listingPolicies!.bestOfferTerms!.autoDeclinePrice = getAutoAcceptDeclinePrice(ebayPrice, autoDeclinePricePercentage) ?? undefined;
+    offer.listingPolicies!.bestOfferTerms!.autoAcceptPrice = getAutoAcceptDeclinePrice(ebayPrice, autoAcceptPricePercentage) ?? undefined;
+    return offer;
 }
 
 function getEbayPrice(price: number) {
-    const markupPercent = 1.12
     if (!isValidPrice(price)) {
         return null
     }
-    const markedUpPrice = price * markupPercent
+    const markedUpPrice = price * ebayMarkupPercentage
     return parseFloat(markedUpPrice.toFixed(0))
 }
 
+function getAutoAcceptDeclinePrice(price: number, percentage: number) {
+    const declinePrice = price * percentage;
+    if (declinePrice < price) return null;
+    return {
+        value: declinePrice.toFixed(0),
+        currency: 'USD',
+    }
+}
 function getCategoryId(plantCategory: PlantCategory) {
     return '19617' //"categoryName": "Plants & Seedlings"
 }
@@ -40,7 +53,11 @@ function getListingDescription(plantCategory: PlantCategory, plant: Plant) {
         text = text + ` which was divided on ${formattedDate(plant.propagationDate,'mm/dd/yy')}<br>`
     }
     text = text + '<br>'
-    text = text + 'The plant in the photo is the actual plant for sale.<br><br>'
+    if (plant.isRepresentative) {
+        text = text + 'The plant in the photo is representative of the actual plant for sale.<br><br>'
+    } else {
+        text = text + 'The plant in the photo is the actual plant for sale.<br><br>'
+    };
     if(plantCategory.genus === 'Heliamphora') {
         text = text + `<b>Care</b><br>This would be a great plant for someone with experience growing nepenthes, orchids, or similar. Heliamphora grow in similar conditions as intermediate / highland nepenthes. They like bright light, high humidity, low-mineral water, and good airflow.<br>`
         text = text + '<br>'
@@ -51,7 +68,7 @@ function getListingDescription(plantCategory: PlantCategory, plant: Plant) {
     } else {
         text = text + `Your plant will be shipped potted.<br>`
      }
-    text = text + `Live arrival is guaranteed.  If you experience any issues, please take photos and contact me the day of receipt.  I'm happy to combine shipping.`
+    text = text + `Live arrival is guaranteed.  If you experience any issues, please take photos and contact me the day of receipt.`
     return text
 }
 function isValidPrice(price: number | null): price is number {
@@ -64,13 +81,11 @@ function isValidPrice(price: number | null): price is number {
 function getConstantOfferData() {
     return {
         marketplaceId: 'EBAY_US',
-        availableQuantity: 1,
         format: 'FIXED_PRICE',
         listingDuration: 'GTC',
         listingPolicies: {
             bestOfferTerms: {
                 bestOfferEnabled: true,
-
             },
             eBayPlusIfEligible: false,
             fulfillmentPolicyId: '285168399011',

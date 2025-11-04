@@ -14,7 +14,7 @@ export const useGiveawayStore = defineStore('giveaway', () => {
     const isGameActive = ref(false)
     const isGameComplete = ref(false)
     const isEntered = ref(false)
-    const beenRickRolled = ref(false)
+    const hasBeenRickRolled = ref(false)
     const giveawayCollectionName = 'giveaways'
 
     //giveaway specifics
@@ -31,7 +31,7 @@ export const useGiveawayStore = defineStore('giveaway', () => {
         remainingLetters.value = password.value.toLowerCase().split("")
         myLetters.value.length = 0
         bypassGame.value = false
-        beenRickRolled.value = false
+        hasBeenRickRolled.value = false
 
         //populate data for new game
         myBlanks.value = Array(password.value.length).fill('_')
@@ -116,7 +116,7 @@ export const useGiveawayStore = defineStore('giveaway', () => {
         addLetter,
         fetchActiveGiveaway,
         giveawayDetails,
-        beenRickRolled,
+        hasBeenRickRolled,
         isGiveawayLoading,
         isGiveawayActive
     }

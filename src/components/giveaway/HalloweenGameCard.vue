@@ -27,7 +27,9 @@
     </Teleport>
     <Teleport to="body">
         <Transition>
-            <div v-show="showBlackout" class="blackout"></div>
+            <div v-show="showBlackout" class="blackout">
+                <div class="flashlight"></div>
+            </div>
         </Transition>
     </Teleport>
 
@@ -51,7 +53,7 @@ import { useGiveawayStore } from '@/stores/giveaway'
 import { toast } from 'vue3-toastify'
 import { storeToRefs } from 'pinia'
 const { addLetter, newGame, fetchActiveGiveaway } = useGiveawayStore()
-const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveawayStore())
+const { isGameComplete, isGameActive, hasBeenRickRolled } = storeToRefs(useGiveawayStore())
     onMounted( async() => {
         await fetchActiveGiveaway()
         if(!isGameActive.value && !isGameComplete.value) {
@@ -146,12 +148,12 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
         } else if(randomTrick < .5) {
             upsideDownScreen()
         } else if (randomTrick < .75) {
-            if(beenRickRolled.value === false) {
-                rickRoll()
+            if(hasBeenRickRolled.value === false) {
+                rickRoll();
             } else {
-                doAFlip()
+                blackout();
             }
-            beenRickRolled.value = true
+            hasBeenRickRolled.value = true;
         } else if (randomTrick < .9) {
             hideTreat()
         } else {
@@ -176,8 +178,64 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
         ghostMessage.value = 'Who turned off the lights???'
         setTimeout(()=>{appendGhost(3000)}, 600)
         showBlackout.value = true
-        setTimeout(() => {showBlackout.value = false}, 2500)
-        appendClassToBody('hide-overflow', 4500)
+        createFlashlight();
+        setTimeout(() => {showBlackout.value = false; destroyFlashlight()}, 6000)
+        appendClassToBody('hide-overflow', 6000)
+    }
+
+    function createFlashlight() {
+
+        const buttonRect = document.querySelector('.trick')?.getBoundingClientRect();
+        const xPosition = ref(buttonRect?.x ?? 250);
+        const yPosition = ref(buttonRect?.y ?? 900);
+    
+        const flashlight = document.querySelector('.flashlight') as HTMLElement;
+        flashlight.style.setProperty("--cursor-x", `${xPosition.value}px`);
+        flashlight.style.setProperty("--cursor-y", `${xPosition.value}px`);
+        
+        function setPosition(e: any) {
+            e.preventDefault();
+            const xPos = e.clientX ?? e.touches[0].clientX;
+            const yPos = e.clientY ?? e.touches[0].clientY;
+            flashlight.style.setProperty("--cursor-x", `${xPos}px`);
+            flashlight.style.setProperty("--cursor-y", `${yPos}px`);
+            xPosition.value = xPos;
+            yPosition.value = yPos;
+        };
+        window.addEventListener('mousemove', setPosition);
+        window.addEventListener('touchmove', setPosition);
+        window.addEventListener('pointermove', setPosition);
+        window.addEventListener('scroll', (e) => {
+            e.preventDefault();
+            flashlight.style.setProperty("--cursor-x", `${xPosition.value}px`);
+            flashlight.style.setProperty("--cursor-y", `${xPosition.value}px`);
+        });
+
+        // const box = document.querySelector('blackout') as HTMLElement;
+        // if (!box) return;
+        // const rect = box.getBoundingClientRect();
+
+        // box.addEventListener("mousemove", (e: any) => {
+        //     const x = e.clientX - rect.left;
+        //     const y = e.clientY - rect.top;
+
+        //     box.style.setProperty("--flashlight-x-pos", `${x - rect.width / 2}px`);
+        //     box.style.setProperty("--flashlight-y-pos", `${y - rect.height / 2}px`);
+        // });
+
+        // box.addEventListener("mouseleave", () => {
+        //     const inset = box.style.getPropertyValue("--flashlight-inset");
+
+        //     box.style.setProperty("--flashlight-x-pos", inset);
+        //     box.style.setProperty("--flashlight-y-pos", inset);
+        // });
+    }
+
+    function destroyFlashlight() {
+        window.removeEventListener("mousemove", ()=>{});
+        window.removeEventListener("touchmove", ()=>{});
+        window.removeEventListener("pointermove", ()=>{});
+        window.removeEventListener("scroll", ()=>{});
     }
 
     function upsideDownScreen() {
@@ -212,7 +270,7 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
 
 </script>
 
-<style scoped>
+<style>
     .game-card {
         width: 20rem;
         display: flex;
@@ -239,7 +297,17 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
         width: 100dvw;
         height: 100dvh;
         z-index: 9990;
-        background-color: black;
+        cursor: none;
+    }
+
+    .flashlight {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: radial-gradient(circle at var(--cursor-x) var(--cursor-y),
+        transparent 25px, rgba(0, 0, 0, 0.94) 150px);
     }
 
     .ghost-card {
@@ -310,23 +378,7 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
         animation-name: roll;
         animation-duration: 4s;
         animation-iteration-count: 1;
-        /* -moz-animation-name: roll;
-        -moz-animation-duration: 4s;
-        -moz-animation-iteration-count: 1; */
-        /* -webkit-animation-name: roll;
-        -webkit-animation-duration: 4s;
-        -webkit-animation-iteration-count: 1; */
     }
-
-    /* @-webkit-keyframes roll {
-        from { -webkit-transform: rotate(0deg) }
-        to   { -webkit-transform: rotate(360deg) }
-    }
-
-    @-moz-keyframes roll {
-        from { -moz-transform: rotate(0deg) }
-        to   { -moz-transform: rotate(360deg) }
-    } */
 
     @keyframes roll {
         from { transform: rotate(0deg) }
@@ -337,23 +389,8 @@ const { isGameComplete, isGameActive, beenRickRolled } = storeToRefs(useGiveaway
         animation-name: flip;
         animation-duration: 4s;
         animation-iteration-count: 1;
-        /* -moz-animation-name: flip;
-        -moz-animation-duration: 4s;
-        -moz-animation-iteration-count: 1; */
-        /* -webkit-animation-name: flip;
-        -webkit-animation-duration: 4s;
-        -webkit-animation-iteration-count: 1; */
     }
 
-    /* @-webkit-keyframes flip {
-        from { -webkit-transform: scale(1, 1) }
-        to   { -webkit-transform: scale(1, -1) }
-    }
-
-    @-moz-keyframes flip {
-        from { -moz-transform: scale(1, 1) }
-        to   { -moz-transform: scale(1, -1) }
-    } */
 
     @keyframes flip {
         0% { transform: scale(1, 1) }

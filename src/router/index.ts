@@ -112,7 +112,7 @@ const routeData = [
     label: 'Giveaway',
     component: GiveawayView,
     meta: {
-      showInNav: false,
+      showInNav: true,
       requiresLogin: false,
       requiresAdmin: false,
     }
