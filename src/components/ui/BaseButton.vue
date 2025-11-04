@@ -25,7 +25,7 @@ const props = defineProps({
     .base-button {
         font-weight: 500;
         cursor: pointer;
-        box-shadow: 0 0 2px darkslategray;
+        box-shadow: 0 0 4px rgb(35, 59, 59);
         height: fit-content
     }
     .base-button:hover {

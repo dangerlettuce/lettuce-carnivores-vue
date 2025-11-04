@@ -1,12 +1,10 @@
 <template>
     <div class="form-container">
+        <h2 class="text-2xl font-bold mb-1 text-center">Enter Giveaway</h2>
         <FormKit
             type="form"
-            submit-label="Submit Entry"
-            id="giveaway-entry"
-            @submit="submitHandler"
+            :actions="false"
         >
-            <h2 class="text-2xl font-bold mb-1 text-center">Enter Giveaway</h2>
 
             <FormKit
                 type="text"
@@ -40,10 +38,12 @@
                 name="facebookUsername"
                 label="Facebook Account Name (Optional)"
                 outer-class="mb-3"
-                help="Optional"
                 v-model="formData.facebookUsername"
             />
             <p>The information provided will only be used to facilitate the giveaway.  This information will NEVER be used for marketing or sold/shared with any third parties.  Your information will be deleted within 60 days of the close of the giveaway.</p>
+            <FormKit type="submit">
+                <BaseButton @click="submitHandler" type='treat'>Submit Entry</BaseButton>
+            </FormKit>
         </FormKit>
     </div>
 </template>
@@ -68,7 +68,7 @@ async function submitHandler() {
             }
         )
         if(res.success) {
-            toast.success('Thanks for entering the giveaway!')
+            toast.success('Thanks for entering the giveaway!', {autoClose: 5000})
             isGameComplete.value = true
             isGameActive.value = false
         } else if (!res.errorDetails?.isDataValid) {

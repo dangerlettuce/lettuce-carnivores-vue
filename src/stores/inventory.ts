@@ -19,7 +19,6 @@ export const useInventoryStore = defineStore('inventory', () => {
 
         if(res && 'success' in res && res.success) {
             return true
-            //add ebay item to inventory refs
         }
         return false
     }

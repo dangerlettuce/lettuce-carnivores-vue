@@ -222,6 +222,14 @@ export type EBayErrorBag = {
   firstError?: EBayFirstError
 }
 
+export type EBayInventoryError = {
+  category: string,
+  domain: string,
+  errorId: number,
+  message: string,
+  subdomain: string,
+  parameters: {name: string, value: string}[],
+}
 /**
  * Extract the error if it wrapper in array.
  * @param data

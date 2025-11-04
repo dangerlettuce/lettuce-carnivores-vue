@@ -6,6 +6,7 @@ import type { HttpsCallableResult } from 'firebase/functions'
 import { createEbayInventoryItem } from './buildEbayInventoryItem'
 import type { Plant, PlantCategory } from '@/types/Plant'
 import { buildEbayOffer } from './buildEbayOffer'
+import type { EBayInventoryError } from '@/types/ebayApi/errors'
 let environment: EbayEnvironment = 'PRODUCTION'
 if((environment === 'PRODUCTION') || import.meta.env.PROD) {
     environment = 'PRODUCTION'
@@ -13,10 +14,9 @@ if((environment === 'PRODUCTION') || import.meta.env.PROD) {
     environment = 'SANDBOX'
 }
 
-type FunctionResponse = {
+type FunctionResponse<T> = {
     success: boolean,
-    error: boolean,
-    data?: Object | null,
+    data?: T | null,
     errorDetails?: Object | null,
     message: string,
 }
@@ -49,15 +49,17 @@ export async function handleEbayLogin(authCode: string, expires: string | null) 
 export async function addOrReplaceEbayInventory(plantCategory: PlantCategory, plant: Plant) {
     const item = await createEbayInventoryItem(plantCategory, plant)
     if(!item || !item.success) {
-        return {success: false, message: 'Unable to create item'}
+        return {success: false, message: 'Unable to create item.'}
     }
         const res = unwrapResponse(await postInventoryItem(plant.sku, item.data, plantCategory.id))
         return res
 }
 
 export async function postInventoryItem(sku: string, item: InventoryItem, plantCategoryId: string): Promise<AppReturn | AppError> {
-    const res = await executeFunction<InventoryItem>('postInventoryItem', {sku, item, plantCategoryId})
-    if(res && res.success) {
+    const res = await executeFunction<InventoryItem | EBayInventoryError>('postInventoryItem', {sku, item, plantCategoryId});
+    const error = getError<EBayInventoryError>(res);
+    if (error) return error;
+    if (res && res.success) {
         return {success: true}
     }
     if(isSuccess(res)) { return res }
@@ -85,4 +87,11 @@ export async function deleteEbayItem(sku: string) {
 
 export function isSuccess<T, E>(res: AppResponse<T> | AppError): res is AppResponse<T> {
     return res.success === true
+}
+
+export function getError<T>(res: AppReturn | FunctionResponse<T> | AppError) {
+    if (res && 'data' in res && typeof res.data === 'object' && res.data && 'errors' in res.data && Array.isArray(res.data.errors)) {
+        return {success: false, message: res.data.errors.length > 0 ? res.data.errors[0].message : 'Something went wrong posing inventory item', errorDetails: res.data.errors}
+    }
+    return false
 }

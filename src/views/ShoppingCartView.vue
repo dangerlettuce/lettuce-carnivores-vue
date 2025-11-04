@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <footer class="footer-sticky">
+    <footer v-if="isCheckoutDisabled === false" class="footer-sticky">
       <div class="checkout-actions">
         <BaseButton v-if="!isLoggedIn" type="info" @click="router.push('/login')">Login</BaseButton>
         
@@ -102,6 +102,7 @@ const { cartTotal, isLoading } = storeToRefs(useOrderStore())
 const { loginAnonymously  } = useUserStore()
 const { isLoggedIn, user } = storeToRefs(useUserStore())
 
+const isCheckoutDisabled = ref(false);
 const amountToQualifyForDiscountedShipping = computed(() => {
   if (cartTotal.value - totalDiscountAmount.value >= discountedShippingThreshold) {
     return USDollar.format(0)
