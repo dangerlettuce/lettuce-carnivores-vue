@@ -1,59 +1,28 @@
 
 $primary: #99dd40;
-$dark-primary: #80d80e;
-$alt-primary: #b2ee63;
 $info: #00A0E5;
 $dark: #44403b;
 
 $font-family-sans-serif: "Arial", Arial, Helvitica, sans-serif;
 
-$body-bg: #44403b;
 $body-color: #e1dcbd;
-$modal-content-bg: #525252;
-$brand-primary: #7dce13;
-$old-brand-primary: #9fdb50;
-
 $better-hyperlink-blue: #2989b3;
-$dark-bg: #44403b;
-$accent-bg: #0b5a11;
 $yellow-color: #f6d73c;
-$info: #00A0E5;
 $bg-contrast: hsl(33, 7%, 25%);
 
 
-$light-green: #E4FDE1;
-$medium-green: #8ACB88;
-$mint-green: #9BFFB2;
-$dark-green: #648381;
-$dark-gray: #575761;
-
 $light-gray: #c4c4cb;
 $accent-orange: #FFBF46;
-$some-blue: #3581B8;
-$dark-red: #C05746;
 $medium-red: rgb(255, 98, 19);
-$medium-orange: #CF5C36;
 $hyperlink-blue: #2989b3;
-$light-green-bg-accent: #f2ffca;
-$green-orange-radial: radial-gradient(circle, hsla(39, 100%, 64%, 1) 0%, #9ac125 48%);
-$light-bg: linear-gradient(.3turn, rgba(255, 254, 238, 1), hsl(0, 0%, 95%), rgba(255, 254, 238, 1), rgba(207, 247, 89, 1));
-$medium-bg: linear-gradient(0.2turn, #deff7b, #ffffb7, #e1f89c);
-$navbar-bgbad: linear-gradient(.2turn, $brand-primary, $accent-orange, $brand-primary);
-$navbar-bg: radial-gradient(circle, #FFBF46 25%, $primary 100%);
-//$navbar-bg: linear-gradient(.3turn, $alt-primary, $primary, $dark-primary, $primary, $alt-primary);
+
 $navbar-bg: linear-gradient(.3turn, $primary,$body-color, $primary);
 // $background: hsl(52 45% 87%);
 $background: hsl(86, 80%, 88%);
-$cream2: hsl(57, 91%, 91%);
-
-$medium-orange-red: #ff6949;
-$dark-orange-red: #f94d26;
 
 $nice-blue: #006b90;
 $purple: #4e28da;
-$cream: hsl(52, 45%, 87%);
 $light-cream: hsl(52, 45%, 92%);
 
 $logoTextDanger: rgb(214,77,33);
-$oldLogoTextDanger: rgb(0, 62, 24);
 $logoTextLettuce: rgb(105, 185, 29);
