@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import type { Order } from '@/types/Orders'
 import { USDollar } from '@/utils/utils';
     const {isAdmin, order} = defineProps<{
