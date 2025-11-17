@@ -106,17 +106,17 @@ const routeData = [
       requiresAdmin: false,
     }
   },
-  {
-    path: "/giveaway",
-    name: 'giveaway',
-    label: 'Giveaway',
-    component: GiveawayView,
-    meta: {
-      showInNav: true,
-      requiresLogin: false,
-      requiresAdmin: false,
-    }
-  },
+  // {
+  //   path: "/giveaway",
+  //   name: 'giveaway',
+  //   label: 'Giveaway',
+  //   component: GiveawayView,
+  //   meta: {
+  //     showInNav: true,
+  //     requiresLogin: false,
+  //     requiresAdmin: false,
+  //   }
+  // },
   {
     path: "/adminPanel",
     name: 'Admin Panel',
