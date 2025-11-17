@@ -1,9 +1,8 @@
 <template>
   <header class="w-full sticky top-0 z-50 bg-background">
-  <div v-if="showBanner" class="banner">
-      <router-link v-if="bannerLink" :to="bannerLink">{{ bannerMessage }}</router-link>
-      <p v-else>{{bannerMessage}}</p>
-  </div>
+  <Suspense>
+    <TheBanner />
+  </Suspense>
     <div class="header-container">
       <Button class="hamburger-icon-container hover:bg-opacity-0" variant="ghost" @click="toggleMobileMenu">
         <HamburgerButton :isOpen />
@@ -70,7 +69,7 @@
 </template>
 
 <script setup lang='ts'>
-  import { ref, type Ref } from 'vue'
+  import { onMounted, type Ref } from 'vue'
   import {
     Sheet,
     SheetContent,
@@ -83,6 +82,7 @@
   import HamburgerButton from './HamburgerButton.vue'
   import TheSearch from '@/components/search/TheSearch.vue';
   import ShoppingCartIcon from '@/assets/icons/ShoppingCartIcon.vue'
+  import TheBanner from '@/components/TheBanner.vue';
   import { storeToRefs } from 'pinia';
 
   const userStore = useUserStore()
@@ -100,9 +100,8 @@
     }
     return allowedNavData
   })
-  const showBanner = ref(false);
-  const bannerLink = ref('/giveaway')
-  const bannerMessage = 'Our Halloween Giveaway is live! Click here for details.';
+
+
   const isOpen: Ref<boolean> = defineModel({ default: false })
   function toggleMobileMenu() {
     isOpen.value = !isOpen.value
@@ -120,18 +119,7 @@
 <style scoped lang='scss'>
   header {
     width: 100%;
-    padding-top: .4rem;
     min-height: 4rem;
-  }
-  .banner {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 2.5rem;
-    width: 100%;
-    background-color: $medium-red;
-    border-radius: .4rem;;
   }
 
   .header-search {
