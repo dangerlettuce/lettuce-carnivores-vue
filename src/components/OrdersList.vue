@@ -28,6 +28,7 @@
                                 </div>
                                 <div>
                                     <BaseButton v-if="isAdmin" @click="openOrderStatusModal(order)" :key="order.id" type="info">Update Status</BaseButton>
+                                    <BaseButton v-if="isAdmin && order.orderStatus.status === 'Shipped'" @click="markOrderComplete(order)" :key="order.id" type="info">Mark Complete</BaseButton>
                                 </div>
                             </div>
                         </div>
@@ -49,11 +50,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import OrderStatusModal from '@/components/OrderStatusModal.vue'
 import type { Order } from '@/types/Orders'
 import { USDollar, formatFirebaseDate } from '@/utils/utils';
+import { useOrders } from '@/composables/useOrders';
 import OrderDetails from './OrderDetails.vue'
 const props = defineProps<{orders: Order[], isAdmin: boolean}>();
 
 const orderStatusModal = ref()
 const selectedOrder: Ref<Order | undefined> = ref(undefined)
+
+const { markOrderComplete } = useOrders();
 async function openOrderStatusModal(order: Order) {
     selectedOrder.value = order
     await nextTick()

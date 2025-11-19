@@ -92,8 +92,9 @@ async function filesDropped(e: DragEvent) {
   await upload()
 }
 async function upload() {
-  const result = await uploadFiles(props.storageFolder, photos)
+  await uploadFiles(props.storageFolder, photos)
   emit('triggerSave')
+  setTimeout(reloadImages, 4250)
 }
 </script>
 

@@ -30,6 +30,19 @@ export const usePlantStore = defineStore('plant', () => {
 
     const saveCategory = async (plantCategory: PlantCategory) => {
         if(plantCategoryToEdit === null) { return false}
+        if (isDuplicate(plantCategory, 'id') || isDuplicate(plantCategory, 'sku')) {
+            const duplicateIds = getDuplicates(plantCategory.plants.map(plant => plant.id))
+            if (duplicateIds.length !== 0) {
+                toast.error('Duplicate Category ID detected. IDs: ' + duplicateIds.join(', '));
+                return false;
+            }
+            const duplicateSkus = getDuplicates(plantCategory.plants.map(plant => plant.sku))
+            if (duplicateSkus.length !== 0) {
+                toast.error('Duplicate SKU detected. SKUs: ' + duplicateSkus.join(', '));
+                return false;
+            }
+            return false;
+        }
         isSaving.value = true
         setDateListed(plantCategory)
         try {
@@ -49,6 +62,24 @@ export const usePlantStore = defineStore('plant', () => {
                 plantCategories.value.push(plantCategory)
             }
         }
+    }
+
+    function isDuplicate(plantCategory: PlantCategory, property: keyof PlantCategory['plants'][number]) {
+        const ids = plantCategory.plants.map(plant => plant[property])
+        const idSet = new Set(ids);
+        return ids.length !== idSet.size
+    }
+
+    function getDuplicates(arr: any[]) {
+        const seen = new Set();
+            const duplicates = arr.filter(item => {
+            if (seen.has(item)) {
+                return true; // It's a duplicate
+            }
+            seen.add(item);
+            return false; // Not a duplicate yet
+            });
+            return [...new Set(duplicates)]; // Get only unique duplicate values
     }
     function setDateListed(plantCategory: PlantCategory) {
         const now = new Date()

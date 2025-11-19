@@ -28,15 +28,8 @@
                         <Label for="carrier">Carrier</Label>
                         <Input type="text" id="carrier" outer-class="grid-col-2" v-model="order.orderStatus.carrier" />
                     </div>
-                    <BaseButton @click="saveOrder">Save</BaseButton>
+                    <BaseButton @click="save(props.order)">Save</BaseButton>
                 </form>
-                <!-- <FormKit type="form" id="order-status" submit-label="Save" @submit="saveOrder" class="tracking-form">
-                    <FormKit type="text" label="Name" outer-class="grid-col-2" v-model="order.orderStatus.status" />
-                    <FormKit type="text" label="Tracking Number" outer-class="grid-col-2"
-                        v-model="order.orderStatus.trackingNumber" />
-                    <FormKit type="text" label="Carrier" outer-class="grid-col-2" v-model="order.orderStatus.carrier" />
-
-                </FormKit> -->
 
             </div>
         </div>
@@ -47,29 +40,16 @@
 import { ref } from 'vue';
 import BaseDialog from '@/components/ui/BaseDialog.vue';
 import type { Order } from '@/types/Orders'
-import { saveItem } from '@/apis/dataServices'
-import { toast } from 'vue3-toastify';
 import Input from '@/components/ui/input/Input.vue';
+import { useOrders } from '@/composables/useOrders';
+
+const { saveOrder } = useOrders();
 const props = defineProps<{ order: Order }>()
 
-const isSaving = ref(false)
-async function saveOrder() {
-
-    isSaving.value = true
-    try {
-        await saveItem('orders', props.order)
-        toast.success('Saved to orders')
-        await saveItem(`customers/${props.order.customer}/orders`, props.order)
-        toast.success('Saved to customer/orders')
-    } catch (e: any) {
-        throw new Error(e.toString())
-    } finally {
-        isSaving.value = false
-    }
-    //save to orders collection
-    //save to customer/uid/orders collection
+async function save(order: Order) {
+    await saveOrder(order);
+    toggleModal();
 }
-
 const open = ref(false)
 defineExpose({ toggleModal })
 function toggleModal() {

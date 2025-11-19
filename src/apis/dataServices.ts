@@ -51,13 +51,32 @@ export async function saveItem(collectionName: string, obj: any, idKey: string =
       return { success: false, errorDetails: e, message: 'Unable to get nextId for collection' }
     }
   }
+  const cleanedObj = convertUndefinedToNull(obj)
   try {
-    await setDoc(doc(db, collectionName, obj.id.toString()), { ...obj })
+    await setDoc(doc(db, collectionName, cleanedObj.id.toString()), { ...cleanedObj })
     return { success: true, message: 'Saved successfully', data: obj }
   } catch (err) {
     console.log(err)
     return { success: false, error: true, message: 'Unable to save', errorDetails: err, data: obj }
   }
+}
+
+function convertUndefinedToNull(obj: any): any {
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+  for (const key in obj) {
+    if (obj[key] === undefined) {
+      console.error(`Converting undefined to null for key: ${key}`)
+      debugger
+      console.log(obj)
+      obj[key] = null
+    }
+    else if (typeof obj[key] === 'object' && obj[key] !== null) {
+      convertUndefinedToNull(obj[key])
+    }
+  }
+  return obj
 }
 
 export async function saveObjectUpdateArray<T>(data: { collectionName: string, obj: Partial<T>, objArr: Array<T>, idKey?: keyof T }) {

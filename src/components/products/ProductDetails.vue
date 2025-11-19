@@ -11,7 +11,7 @@
       <div class="flex justify-evenly">
         <BaseButton v-for="plant in referencePlants" :key="plant.size" class="px-4"
           :type="selectedPlant?.sku == plant.sku ? 'primary' : 'secondary-outline'" @click="setSelectedPlant(plant)">
-          {{ plant.size }}
+          {{`Representative - ${plant.size} `}}
         </BaseButton>
       </div>
       <div class="specimen-button-container">
@@ -109,7 +109,7 @@
       return ''
     }
     return selectedPlant.value.isRepresentative
-      ? 'The photos for this plant show a plant that is similar to the plant that you will receive. Representative plants are generally less expensive due to streamlined inventory management..'
+      ? 'The photos show a plant or plants that are similar to the plant that you will receive. Often, you will receive one of the plants in the photo.'
       : 'The photos for this plant show the exact plant for sale. Note that old pitchers may be trimmed before shipping to ensure safe packaging.'
   })
 
