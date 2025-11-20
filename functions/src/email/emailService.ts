@@ -6,7 +6,7 @@ import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 const isVerified = false;
 
 export function useNodeMailer() {
-
+// TODO: add unsubscribe link
   const env = {
     EMAIL_HOST: process.env.EMAIL_HOST || '',
     EMAIL_PORT: process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT) : 0,
@@ -28,8 +28,6 @@ export function useNodeMailer() {
 
   async function sendMail(options: SMTPTransport.Options) {
     try {
-      await transporter.verify();
-      //TODO remove verify after testing
       await transporter.sendMail({
         from: env.EMAIL_USER,
           ...options,

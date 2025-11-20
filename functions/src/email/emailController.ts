@@ -21,10 +21,11 @@ export const sendOrderStatusEmail = onCall({},async(request: EmailRequest): Prom
     }
 
     const emailRequest = {
-      // to: request.data.order.shippingInfo.email,
-      to: 'test@dangerlettuce.com',
+      to: request.data.shippingInfo.email,
+      bcc: 'noreply@dangerlettuce.com',
       subject,
       html,
+      text: html.toString(),
     };
     
     try {

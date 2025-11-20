@@ -28,8 +28,8 @@
                                 </div>
                                 <div v-if="isAdmin" class="admin-actions">
                                     <BaseButton @click="openOrderStatusModal(order)" :key="order.id" type="info">Update Status</BaseButton>
-                                    <BaseButton v-if="order.orderStatus.status === 'Shipped'" @click="markOrderComplete(order)" :key="order.id" type="info">Mark Complete</BaseButton>
-                                    <BaseButton v-if="order.orderStatus.status === 'Shipped'" @click="sendOrderStatusEmail(order)">Send Shipped Notification</BaseButton>
+                                    <BaseButton v-if="order.orderStatus.status === 'Processing'" @click="sendOrderShippedEmail(order)">Send Shipped Notification</BaseButton>
+                                    <BaseButton v-if="order.orderStatus.status === 'Shipped'" @click="markOrderComplete(order)" :key="order.id">Mark Complete</BaseButton>
                                 </div>
                             </div>
                         </div>
@@ -50,22 +50,22 @@ import { nextTick, type Ref, ref } from 'vue'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import OrderStatusModal from '@/components/OrderStatusModal.vue'
 import type { Order } from '@/types/Orders'
-import { USDollar, formatFirebaseDate } from '@/utils/utils';
+import { formatFirebaseDate } from '@/utils/utils';
 import { useOrders } from '@/composables/useOrders';
 import OrderDetails from './OrderDetails.vue'
-import { useEmailService } from '@/composables/useEmailService'
 const props = defineProps<{orders: Order[], isAdmin: boolean}>();
 
 const orderStatusModal = ref()
 const selectedOrder: Ref<Order | undefined> = ref(undefined)
 
-const { markOrderComplete } = useOrders();
-const { sendOrderStatusEmail } = useEmailService();
+const { markOrderComplete, sendOrderShippedEmail } = useOrders();
+
 async function openOrderStatusModal(order: Order) {
     selectedOrder.value = order
     await nextTick()
     orderStatusModal.value.toggleModal()
 }
+
 
 const columnCount = props.isAdmin ? 7 : 6
 
@@ -110,6 +110,13 @@ const columnCount = props.isAdmin ? 7 : 6
 }
 .justify-right{
     text-align: end;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 @media(min-width: 50rem) {

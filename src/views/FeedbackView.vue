@@ -1,10 +1,9 @@
 <template>
   <div class="container">
-    <h1 v-if="surveyData.great === true">Thanks for letting us know how your order went! Please share any additional comments below.</h1>
-    <h1 v-if="surveyData.great === false">We're sorry your order didn't meet your expectations.  Please let us know what we can do better. </h1>
     <form>
       <div>
-        <label for="additional-comments">Comments:</label>
+        <label v-if="surveyData.great === true" for="additional-comments" >Thanks for letting us know how your order went! Please share any additional comments below.</label>
+        <label v-if="surveyData.great === false" for="additional-comments" >We're sorry your order didn't meet your expectations.  Please let us know what we can do better. </label>
         <textarea id="additional-comments" rows="6" v-model="surveyData.additionalComments" @change="() => {isSaved = false;}"></textarea>
       </div>
       <BaseButton @click.prevent="saveFeedback(surveyData, true)">Save</BaseButton>
@@ -73,7 +72,7 @@ async function setDataFromRouteParams() {
     surveyData.value.email = Array.isArray(query.email) ? query.email[0] : query.email;
   }
   surveyData.value.id = `${surveyData.value.orderId} - ${surveyData.value.email !== null ? surveyData.value.email : Date.now()}`
-  surveyData.value.great = 'great' in query;
+  surveyData.value.great = route.path.includes('/great');
 }
 </script>
 

@@ -20,28 +20,15 @@ export function generateOrderStatusUpdateTemplate(data: Order) {
         return null;
   }
 
-  let trackingUrl = '';
-  switch(data.orderStatus.carrier.toLocaleLowerCase()) {
-    case 'ups':
-      trackingUrl = `https://www.ups.com/track?TypeOfInquiryNumber=T&InquiryNumber1=${data.orderStatus.trackingNumber}`
-      break;
-    case 'usps':
-      trackingUrl = `https://tools.usps.com/go/TrackConfirmAction_input?origTrackNum=${data.orderStatus.trackingNumber}`;
-      break;
-    case 'fedex':
-      trackingUrl = `https://www.fedex.com/apps/fedextrack?trknbr=${data.orderStatus.trackingNumber}`;
-      break;
-    default:
-      console.error(`Invalid carrier ${data.orderStatus.carrier}. Unable to generate email template`)
-      return null;
-  }
+
+  const trackingUrl = `https://dangerlettuce.com/order-tracking/${data.orderStatus.trackingNumber}?carrier=${data.orderStatus.carrier.toLocaleLowerCase()}`
 
   function formatPrice(price: number) {
     const USDollar = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-});
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
     return USDollar.format(price / 100);
   }
 
@@ -81,14 +68,14 @@ mjmlTemplate = mjmlTemplate + `
   `
   // Add cart items
   data.lineItems.forEach(item => {
-mjmlTemplate = mjmlTemplate + `
+    mjmlTemplate = mjmlTemplate + `
       <tr style="border-bottom:1px dashed lightgrey;">
         <td align="left">
           <p style="font-size: 14px; padding: 10 0 0 0; margin: 0px">${item.price_data.product_data.name}</p>
           <p style="font-size: 12px; padding: 4px 0px; margin: 0px">${item.price_data.product_data.metadata.size}</p>
           <p style="font-size: 12px; padding: 0 0 10 0; margin: 0px">SKU: ${item.price_data.product_data.metadata.sku}</p>
         </td>
-        <td align="center">x${item.quantity}</td>
+        <td align="center" style="min-width: 24px">x${item.quantity}</td>
         <td align="right">${formatPrice(item.price_data.unit_amount)}</td>
       </tr>
     `
@@ -139,10 +126,10 @@ mjmlTemplate = mjmlTemplate + `
       <mj-section padding="0">
 
         <mj-column width="50%">
-          <mj-button width="200px" href="https://dangerlettuce.com/feedback/${data.id}?email=${data.shippingInfo.email}&great=true" background-color="#69b91d" color="white">It was great!</mj-button>
+          <mj-button width="200px" href="https://dangerlettuce.com/feedback/${data.id}/great?email=${data.shippingInfo.email}" background-color="#69b91d" color="white">It was great!</mj-button>
         </mj-column>
         <mj-column width="50%">
-            <mj-button width="200px" href="https://dangerlettuce.com/feedback${data.id}?email=${data.shippingInfo.email}" background-color="#d64d21" color="white">It could have been better</mj-button>
+            <mj-button width="200px" href="https://dangerlettuce.com/feedback/${data.id}?email=${data.shippingInfo.email}" background-color="#d64d21" color="white">It could have been better</mj-button>
         </mj-column>
       </mj-section>
       

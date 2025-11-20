@@ -3,6 +3,7 @@ import { useUserStore } from '@/stores/users'
 import ProductsView from '@/views/ProductsView.vue'
 import ProductDetailView from '@/views/ProductDetailView.vue'
 import FeedbackView from '@/views/FeedbackView.vue'
+import TrackOrderView from '@/views/TrackOrderView.vue'
 const ShoppingCart = () => import('@/views/ShoppingCartView.vue')
 const CheckoutComplete = () => import('@/views/CheckoutComplete.vue')
 const AboutView = () => import('@/views/AboutView.vue')
@@ -85,7 +86,18 @@ const routeData = [
     }
   },
   {
-    path: "/feedback/:id",
+    path: "/order-tracking/:id",
+    name: 'tracking',
+    label: 'Tracking',
+    component: TrackOrderView,
+    meta: {
+      showInNav: false,
+      requiresLogin: false,
+      requiresAdmin: false,
+    }
+  },
+  {
+    path: "/feedback/:id/:great?",
     name: 'feedback',
     label: 'Feedback',
     component: FeedbackView,

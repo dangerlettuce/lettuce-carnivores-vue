@@ -9,7 +9,6 @@ export async function executeFunction<T>(
   params: any,
 ): Promise<AppData<HttpsCallableResult<T | AppError>> | AppError> {
   let firebaseFunction
-  debugger
   try {
     const res = getFirebaseFunction(functionName)
     firebaseFunction = res.res

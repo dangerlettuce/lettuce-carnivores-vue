@@ -9,7 +9,9 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "test": "firebase emulators:start --inspect-functions",
+    "emulate": "firebase emulators:start --inspect-functions"
   },
   "engines": {
     "node": "22"
