@@ -19,7 +19,7 @@ Start debug attach in VS Code with this configuration:
 
 Run Locally
 npm run serve
-In the vue app, edit stripe.ts to uncomment the line with connectFunctionsEmulator(functions,'127.0.0.1', 5001), then run that locally
+In the vue app, edit env to set VITE_EMULATE_FIREBASE_FUNCTIONS to true so that functions are emulated.
 
 Deploy one function:
 firebase deploy --only functions:stripeWebhookController

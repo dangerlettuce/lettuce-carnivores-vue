@@ -53,7 +53,7 @@ export async function saveItem(collectionName: string, obj: any, idKey: string =
   }
   const cleanedObj = convertUndefinedToNull(obj)
   try {
-    await setDoc(doc(db, collectionName, cleanedObj.id.toString()), { ...cleanedObj })
+    await setDoc(doc(db, collectionName, cleanedObj[idKey].toString()), { ...cleanedObj })
     return { success: true, message: 'Saved successfully', data: obj }
   } catch (err) {
     console.log(err)

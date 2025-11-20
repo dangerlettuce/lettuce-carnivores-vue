@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
   import BaseGrid from '@/components/BaseGrid.vue';
-  import type { ColDef, GridOptions, ICellRendererParams, ISelectCellEditorParams, RowDataUpdatedEvent, RowValueChangedEvent } from 'ag-grid-community';
+  import type { ColDef, GridOptions, ICellRendererParams, ISelectCellEditorParams, RowValueChangedEvent } from 'ag-grid-community';
   import { onMounted, ref, type Ref } from 'vue';
   import { useProductStore } from '@/stores/productStore';
   import { storeToRefs } from 'pinia';

@@ -26,9 +26,10 @@
                                         'Tracking number not yet assigned' }}
                                     </div>
                                 </div>
-                                <div>
-                                    <BaseButton v-if="isAdmin" @click="openOrderStatusModal(order)" :key="order.id" type="info">Update Status</BaseButton>
-                                    <BaseButton v-if="isAdmin && order.orderStatus.status === 'Shipped'" @click="markOrderComplete(order)" :key="order.id" type="info">Mark Complete</BaseButton>
+                                <div v-if="isAdmin" class="admin-actions">
+                                    <BaseButton @click="openOrderStatusModal(order)" :key="order.id" type="info">Update Status</BaseButton>
+                                    <BaseButton v-if="order.orderStatus.status === 'Shipped'" @click="markOrderComplete(order)" :key="order.id" type="info">Mark Complete</BaseButton>
+                                    <BaseButton v-if="order.orderStatus.status === 'Shipped'" @click="sendOrderStatusEmail(order)">Send Shipped Notification</BaseButton>
                                 </div>
                             </div>
                         </div>
@@ -52,12 +53,14 @@ import type { Order } from '@/types/Orders'
 import { USDollar, formatFirebaseDate } from '@/utils/utils';
 import { useOrders } from '@/composables/useOrders';
 import OrderDetails from './OrderDetails.vue'
+import { useEmailService } from '@/composables/useEmailService'
 const props = defineProps<{orders: Order[], isAdmin: boolean}>();
 
 const orderStatusModal = ref()
 const selectedOrder: Ref<Order | undefined> = ref(undefined)
 
 const { markOrderComplete } = useOrders();
+const { sendOrderStatusEmail } = useEmailService();
 async function openOrderStatusModal(order: Order) {
     selectedOrder.value = order
     await nextTick()

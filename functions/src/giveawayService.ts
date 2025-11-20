@@ -22,7 +22,7 @@ interface GiveawayEntry extends CallableRequest {
     }
 }
 
-export default onCall({},async(request: GiveawayEntry): Promise<FunctionResponse> => {
+export default onCall({}, async(request: GiveawayEntry): Promise<FunctionResponse> => {
     const uid = request.auth?.uid
     const isDataValid = checkIsDataValid(request.data) 
     const isUniqueEntry = await checkIsUniqueEntry(request)
