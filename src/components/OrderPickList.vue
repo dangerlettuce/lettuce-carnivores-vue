@@ -1,9 +1,9 @@
 <template>
   <div v-for="order in ordersToProcess" :key="order.id" class="picklist-text">
-    <div class="picklist-text">{{ `${order.id} - ${order.shippingInfo.name} - ${order.shippingInfo.shippingType}` }}</div>
-    <div v-for="item in order.lineItems" :key="item.price_data.product_data.metadata.sku" class="order-item">
+    <ul class="picklist-text">{{ `${order.id} - ${order.shippingInfo.name} - ${order.shippingInfo.shippingType}` }}</ul>
+    <li v-for="item in order.lineItems" :key="item.price_data.product_data.metadata.sku" class="order-item">
       <span class="square" />{{ `${item.price_data.product_data.metadata.shelfLocation} - ${item.price_data.product_data.metadata.size} - ${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.name}` }}
-    </div>
+    </li>
     <br />
   </div>
 
@@ -37,5 +37,8 @@ const ordersToProcess = computed(() => {
   }
   .picklist-text {
     color: black;
+  }
+  ul, li {
+    font-size: 1.2rem;
   }
 </style>

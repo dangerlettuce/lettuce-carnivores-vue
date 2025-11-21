@@ -31,6 +31,10 @@ export function useOrders() {
   }
 
   async function sendOrderShippedEmail(order: Order) {
+    if (!order.orderStatus.trackingNumber || !order.orderStatus.carrier) {
+        toast.error('Tracking number or carrier missing, mark shipped')
+        return;
+    }
     isSaving.value = true
     order.orderStatus.status = 'Shipped';
     await saveOrder(order);

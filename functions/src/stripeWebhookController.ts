@@ -48,7 +48,7 @@ async function fulfillCheckout(data: Stripe.Checkout.Session) {
   }
   const lineItems = checkoutSession.data()!.lineItems as StripeLineItem[]
 
-  const shippingType = getShippingType('shipping_rate' in data ? data.shipping_rate :  data.shipping_cost?.shipping_rate)
+  const shippingType = getShippingType(data.shipping_cost)
 
   const orderNumber = await getNextSequentialId('orders')
   if (typeof orderNumber !== 'number') {
@@ -111,20 +111,24 @@ async function isDuplicateCall(id: string) {
 }
 
 //@ts-ignore - stripe api seems to have changed, maybe types not working?
-function getShippingType(shippingRateObject: Stripe.Checkout.Session['shipping_rate']) {
-  switch (shippingRateObject.id) { 
+function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost']) {
+  let shippingType = null;
+  switch (shippingCost?.shipping_rate) { 
     case coldWeatherShippingId:
     case discountedColdWeatherShippingId:
-      return 'Cold Weather'
+      shippingType = 'Cold Weather'
+      break;
     case expeditedShippingId:
     case discountedExpeditedShippingId:
-      return 'Expedited'
+      shippingType = 'Expedited'
     case standardShippingId:
     case discountedStandardShippingId:
-      return 'Standard'
+      shippingType = 'Standard'
+      break;
     default:
-      console.error(`Unknown shipping ID ${shippingRateObject.id}`)
-      return 'Standard'
+      console.error(`Unknown shipping ID ${shippingCost?.shipping_rate}`)
+      shippingType = 'Unknown';
   }
+  return shippingType;
 
 }
