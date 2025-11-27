@@ -27,6 +27,8 @@ export async function getInventoryItems(environment: EbayEnvironment, token: str
 }
 
 export async function createOrReplaceInventoryItem(token: string, sku: string, item: any, plantCategoryId: string) {
+    const data = item;
+    data.product.title = shortenLongTitle(data.product.title);
     const config = {
         method: 'put',
         url: `${apiUrl}/sell/inventory/v1/inventory_item/${sku}`,
@@ -36,7 +38,7 @@ export async function createOrReplaceInventoryItem(token: string, sku: string, i
             'Content-Type': 'application/json',
             'Content-Language': 'en-US'
         },
-        data: item
+        data
     }
 
     const res = await axios(config).catch((e: any) => {console.error(e); return e})
@@ -51,6 +53,16 @@ export async function createOrReplaceInventoryItem(token: string, sku: string, i
         return res.response
     }
     return res
+}
+
+function shortenLongTitle(title: string): string {
+    let newTitle = title;
+    newTitle = newTitle.replace('semi-round', 'pot');
+    if (newTitle.length > 80) {
+        newTitle = newTitle.substring(0, 77) + '...';
+        console.warn(`Title ${title} exceeded 80 characters and was truncated.`);
+    }
+    return newTitle;
 }
 
 export async function postEbayOffer(token: string, data: any, environment?: EbayEnvironment, offerId?: string) {

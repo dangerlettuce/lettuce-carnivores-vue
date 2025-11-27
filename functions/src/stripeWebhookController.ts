@@ -111,9 +111,19 @@ async function isDuplicateCall(id: string) {
 }
 
 //@ts-ignore - stripe api seems to have changed, maybe types not working?
-function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost']) {
+function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost'] | string) {
+  let shippingId = null;
+  if (typeof shippingCost === 'string' && shippingCost.length > 20) {
+    shippingId = shippingCost;
+  }
+  if (shippingCost && typeof shippingCost === 'object' && 'shipping_rate' in shippingCost) {
+    shippingId = shippingCost.shipping_rate;
+  }
+  if (shippingId === null) {
+    error(`Unable to parse shippingId from checkout data ${shippingCost}`)
+  } 
   let shippingType = null;
-  switch (shippingCost?.shipping_rate) { 
+  switch (shippingId) { 
     case coldWeatherShippingId:
     case discountedColdWeatherShippingId:
       shippingType = 'Cold Weather'
@@ -121,12 +131,13 @@ function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost'])
     case expeditedShippingId:
     case discountedExpeditedShippingId:
       shippingType = 'Expedited'
+      break;
     case standardShippingId:
     case discountedStandardShippingId:
       shippingType = 'Standard'
       break;
     default:
-      console.error(`Unknown shipping ID ${shippingCost?.shipping_rate}`)
+      console.error(`Unknown shipping ID ${shippingId}`)
       shippingType = 'Unknown';
   }
   return shippingType;

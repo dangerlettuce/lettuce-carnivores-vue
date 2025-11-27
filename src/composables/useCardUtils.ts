@@ -23,7 +23,7 @@ export function getCardPhoto(category: PlantCategory) {
     if(category.plants.length !== 0) {
         let plantPath: undefined | string = undefined
         category.plants.forEach(plant => {
-            if(plantPath === undefined && plant.photos.length !== 0) {
+            if(plantPath === undefined && plant.photos.length !== 0 && plant.status === 'In Stock') {
                 plantPath = plant.photos[0].path
             }
         });

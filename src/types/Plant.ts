@@ -1,3 +1,4 @@
+import type { Timestamp } from "firebase/firestore"
 import type { PhotoItem } from "./Product"
 export type PlantCategory = {
     name: string,
@@ -26,7 +27,9 @@ export type Plant = {
     photos: PhotoItem[],
     plantCategoryId: string,
     shelfLocation: string,
-    dateListedForSale?: Date | undefined | null
+    dateListedForSale?: Date | undefined | null,
+    soldNotes?: string,
+    soldTimestamp?: Timestamp
 }
 export interface PlantWithCategoryDetails extends Plant {
     name: string,

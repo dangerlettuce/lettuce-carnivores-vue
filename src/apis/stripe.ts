@@ -45,19 +45,5 @@ export async function createStripeCheckoutSession(cart: CartItem[]){
         errorDetails: e,
         message: 'Error when trying to create Stripe checkout session'}
     })
-    // const functions = getFunctions()
-    // //connectFunctionsEmulator(functions,'127.0.0.1', 5001)
-    // const createCheckoutSession: Function = httpsCallable(functions, 'stripeCheckoutController')
-    // const res = await createCheckoutSession({
-    //     cart: cart,
-    //     returnUrl: `${window.location.origin}/checkoutComplete`,
-    //     cancelUrl:`${window.location.origin}/cart`,
-    //     stripeCustomer: stripeCustomer,
-    // }).catch((e: any) => {console.error(e); return {
-    //     success: false,
-    //     error: true,
-    //     errorDetails: e,
-    //     message: 'Error when trying to create Stripe checkout session'}
-    // })
     return res
 }

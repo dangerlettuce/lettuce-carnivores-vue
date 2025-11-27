@@ -37,15 +37,15 @@ export const guideData = {
         'Heliamphora are native to highland plateaus called Tepuis in South America. Tepuis receive a ridiculous amount of rainfall which washes away most nutrients in the soil, thus Heliamphora have adapted to get their nutrition from... other sources 😉.',
       humidity: 'Heliamphora need supplemental humidity to thrive. I keep mine between 75-90% RH.',
       water:
-        'Since Heliamphora naturally get a tremendous amount of rain, I generally give them more water than my Nepenthes and I make sure to fill the pitchers with each watering.',
+        'Heliamphora like a lot of water. We prefer to top water daily, filling pitchers with each watering and letting the excess drain. Heliamphora can also be grown in trays but will require potting media that wicks water. We have also had success growing in a flood and drain hydroponic system.',
       temperature:
-        'I grow most of my Heliamphora at mostly intermediate conditions, avoiding temperatures above 79°F. Some more advanced species do require cooler temperatures.',
+        'Heliamphora do not need a nigh-time temperature drop but are very sensitive to warm temperatures. If regularly kept above 82°F, a fungus can develop which causes plant death. The exception is with H. ciliata which is known as a "true lowland" species and can be grown in warmer conditions.',
       media:
-        "I use the same mix as nepenthes, a loose draining mix of long-fibered sphagnum moss and perlite. I also use coco husk chips, although it's important to find a brand that has low salt content.",
+        "In general, heliamphora are not picky about their potting media. They will do well in most mixes with a combination of coco (chips or coir), peat, pumice, peat, long-fiber sphagnum, Fluval Stratum We use a mixture of roughly equal parts coco chips and pumice plus a small percentage of biochar and organic fertilizer. This is an extremely high draining mix which works well for daily top watering. If you choose to top-water, you will need to amend the mix with something to wick water, such as 20-30% long-fibered sphagnum moss.",
       light:
         'Heliamphora will take as much light as you can give them. When given enough light, most species will have beautiful red coloration.',
       fertilization:
-        'If grown indoors, fertilizer is a must for healthy plants. I use a 50/50 mix of Maxsea and MSU Orchid fertilizer. I recommend 250ppm (or 1/4tsp of each fertilizer per gallon) every 2-3 weeks.  Adjust the strength and cadence based on your plants reactions and light levels.',
+        'If grown indoors, fertilizer is a must for healthy plants. Heliamphora do well with a variety of fertilizers including fish hydrolysate, MSU orchid fertilizer, Superthrive, and Maxsea. Miracle Grow Azalea, Camellia, Rhododendron. We typically use a mix of these to avoid nutrient deficiency from any single brand. Aim for a NPK ratio with more nitrogen than phosphorus or potassium. The Miracle Gro mix (30-10-10) and most fish fertilizers are perfect for this. Maxsea (16-16-16) is very unbalanced and should be mixed with something to bring the nitrogen up.',
       referencePhotoFilename: 'Heliamphora.jpg',
       referencePhotoPath: 'referencePhotos/IMG_20240403_071908 (1).jpg',
     },

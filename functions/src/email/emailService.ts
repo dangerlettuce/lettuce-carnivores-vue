@@ -1,5 +1,6 @@
 import { createTransport } from 'nodemailer'
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { debug, error } from 'firebase-functions/logger'
 
 
 // const logger = useLogger('nodemailer');
@@ -23,7 +24,7 @@ export function useNodeMailer() {
       pass: env.EMAIL_PASS,
     }
   }
-
+  debug(config)
   const transporter = createTransport(config);
 
   async function sendMail(options: SMTPTransport.Options) {
@@ -33,22 +34,20 @@ export function useNodeMailer() {
           ...options,
       })
       console.log(`Email sent to ${options.to}`);
+      return {success: true}
     } catch (e: any) {
-      console.log(`Failed to send email to ${options.to}`);
-      return;
+      error(`Failed to send email to ${options.to}`);
+      return {success: false, error: true, message: `Failed to send email to ${options.to}`, errorDetails: e};
     }
   }
 
   async function verifyTransporter() {
-    if (isVerified) {
-      return true;
-    }
     try {
       await transporter.verify();
       console.log('Email transporter verified');
       return true;
     } catch (e: any) {
-      console.log(`Email transporter verification failed. ${e.message}`);
+      error(`Email transporter verification failed. ${e.message}`);
       return false;
     }
   }

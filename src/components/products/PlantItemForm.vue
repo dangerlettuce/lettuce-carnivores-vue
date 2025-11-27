@@ -73,6 +73,7 @@
         <BaseButton @click.prevent="$emit('createEbayItem')" :disabled="plant.status === 'Sold'">{{`${isListedOnEbay ? 'Update' : 'Create'} eBay Item`}}</BaseButton>
         <BaseButton @click.prevent="$emit('listEbayOffer')" :disabled="plant.status === 'Sold' || isListedOnEbay">List on eBay</BaseButton>
         <BaseButton @click.prevent="$emit('deleteEbayItem')" type="danger" :disabled="!isListedOnEbay">Delete from eBay</BaseButton>
+        <div v-if="plant.soldNotes">{{ getSoldNotesDisplay(plant.soldNotes) }}</div>
     </form>
 </template>
 
@@ -132,6 +133,12 @@ watch(() => plant.value.id, () => {
         plant.value.sku = plant.value.id.toString()
     }
 })
+
+function getSoldNotesDisplay(notes: string) {
+    if(notes.length < 10 ) return notes;
+    const orderPosition = notes.indexOf('Order');
+    return `Sold: ${notes.slice(orderPosition, orderPosition + 10)}`;
+}
 
 </script>
 

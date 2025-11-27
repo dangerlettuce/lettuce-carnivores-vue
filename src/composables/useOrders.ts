@@ -36,17 +36,21 @@ export function useOrders() {
         return;
     }
     isSaving.value = true
+    const originalStatus = order.orderStatus.status;
     order.orderStatus.status = 'Shipped';
-    await saveOrder(order);
     try {
-        const response =  await sendOrderStatusEmail(order);
-        if(response.success) {
-            toast.success('Shipping notification email sent')
+      const response =  await sendOrderStatusEmail(order);
+      debugger;
+      if(response.success) {
+        toast.success('Shipping notification email sent')
+        await saveOrder(order);
         } else {
-            toast.error(`Error sending email: ${response.message}`)
+          order.orderStatus.status = originalStatus;
+          toast.error(`Error sending email: ${response.message}`)
         }
     } catch (e: any) {
         toast.error(`Error sending email: ${e.toString()}`)
+        order.orderStatus.status = originalStatus;
     } finally {
         isSaving.value = false
     } 

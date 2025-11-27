@@ -7,7 +7,6 @@ import { debug, error } from 'firebase-functions/logger'
 
 export async function updateInventoryFromStripeSale(items: StripeLineItem[], soldNote: string) {
   for (const item of items) {
-    debug(`Updating inventory for ${item.price_data.product_data.metadata.sku}`)
     const productData = item.price_data.product_data.metadata
     await updateEbayInventory(productData.sku, true)
     await updateWebsiteInventory(productData.sku, soldNote, productData.categoryId, item.quantity)
