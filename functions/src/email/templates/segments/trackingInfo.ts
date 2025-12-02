@@ -1,4 +1,4 @@
-import type { Order } from "../../types/Orders";
+import type { Order } from "../../../types/Orders";
 
 function getStatusMessage(data: Order) {
  let statusMessage = '';

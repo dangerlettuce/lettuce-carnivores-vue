@@ -1,8 +1,8 @@
 <template>
     <div class="layout">
-        <OrdersList v-if="orders.length > 0" :orders :isAdmin="true" />
+        <OrdersList v-if="orders.length > 0" :orders :isAdmin="true" class="hide-print" />
         <div v-else>No orders to display</div>
-        <div class="row gap-2 mt-4 justify-space-around">
+        <div class="row gap-2 mt-4 justify-space-around hide-print">
             <BaseButton @click="fetchOpenOrders">View Open Orders</BaseButton>
             <BaseButton type="info" @click="findAllOrders">View All Orders</BaseButton>
         </div>
@@ -55,5 +55,11 @@ async function findAllOrders() {
         width: 100%;
         display: flex;
         flex-direction: column;
+    }
+
+    @media print {
+        .hide-print {
+            display: none;
+        }
     }
 </style>

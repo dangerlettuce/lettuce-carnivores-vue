@@ -173,3 +173,12 @@ function cleanXML(xml: any) {
     }
     return xml
 }
+
+export function formatPrice(price: number) {
+  const USDollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+  return USDollar.format(price / 100);
+}

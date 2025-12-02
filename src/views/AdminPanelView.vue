@@ -83,4 +83,10 @@
             gap: .25rem;
         }
     }
+
+    @media print {
+        .button-container {
+            display: none;
+        }
+    }
 </style>

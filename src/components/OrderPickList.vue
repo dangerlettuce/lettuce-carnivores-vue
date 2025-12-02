@@ -1,12 +1,11 @@
 <template>
-  <div class="page"></div>
-  <div v-for="order in ordersToProcess" :key="order.id" class="picklist-text order-packing-list page">
+  <div v-for="order in ordersToProcess" :key="order.id" class="black-text packing-slip page">
     <div class="order-picklist-header">
-      <div class="picklist-logo-container">
-        <img class="packing-list-logo" src="/src/assets/logo/LogoWithBugLettuceCentered.png" />
-        <img class="packing-list-logo" src="/src/assets/logo/DangerLettuceStackedText.png" />
+      <div class="packing-slip-logo-container">
+        <img class="packing-slip-logo" src="/src/assets/logo/LogoWithBugNoText.png" />
+        <img class="packing-slip-logo" src="/src/assets/logo/DangerLettuceStackedText.png" />
       </div>
-      <div>
+      <div class="order-id-container">
         <h2>{{ `Order #${order.id}` }}</h2>
         <h2>{{ `Order Date: ${formatDate(order.orderDate)}` }}</h2>
       </div>
@@ -23,7 +22,7 @@
     </section>
 
 
-    <ul class="picklist-text">
+    <ul class="black-text">
       <li v-for="item in order.lineItems" :key="item.price_data.product_data.metadata.sku" class="order-item">
         <span class="square" />{{`${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.name} - ${item.price_data.product_data.metadata.size}` }}
       </li>
@@ -112,22 +111,22 @@ function getShippingType(shippingCost: any | string) {
 
 </script>
 
-<style lang="css">
-/* Styles not scoped so that print media query can hide other crap */
+<style scoped lang="css">
   h2 {
     font-weight: 600;
   }
-  .picklist-logo-container {
+  .packing-slip-logo-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    img {
+      height: 4rem;
+      padding-inline: .5rem;
+    }
 
   }
-  .packing-list-logo {
-    height: 6rem;
 
-  }
-  .order-picklist-header {
+  .packing-slip-header {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -144,9 +143,8 @@ function getShippingType(shippingCost: any | string) {
     padding: .4rem .1rem;
   }
 
-  .order-packing-list { 
+  .packing-slip { 
     margin-top: 2rem;
-    border-top: 2px solid black;
   }
 
   .square {
@@ -157,7 +155,7 @@ function getShippingType(shippingCost: any | string) {
     border: 2px solid black;
     margin: auto 2ch;
   }
-  .picklist-text {
+  .black-text {
     color: black;
 
   }
@@ -170,6 +168,11 @@ function getShippingType(shippingCost: any | string) {
     text-align: left;
   }
 
+
+</style>
+
+<style>
+/* Styles not scoped so that print media query can hide other crap */
   @media print {
     .page, .page-break { break-after: page; }
 
@@ -179,9 +182,12 @@ function getShippingType(shippingCost: any | string) {
     }
 
     /* Doesn't seem to work... TODO */
-    header {
+    header, footer {
       display: none;
 
+    }
+    .__vue-devtools-container__ {
+      display: none;
     }
     .button-container {
       display: none;
@@ -189,5 +195,5 @@ function getShippingType(shippingCost: any | string) {
     .order-container {
       display: none;
     }
-}
+  }
 </style>

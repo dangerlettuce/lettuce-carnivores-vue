@@ -1,4 +1,4 @@
-import type { Order } from "../../types/Orders";
+import type { Order } from "../../../types/Orders";
 
 export function getOrderFeedbackTemplate(data: Order) {
   return `
