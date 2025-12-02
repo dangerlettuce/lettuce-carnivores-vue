@@ -14,7 +14,7 @@
     "emulate": "firebase emulators:start --inspect-functions"
   },
   "engines": {
-    "node": "22"
+    "node": "24"
   },
   "main": "lib/index.js",
   "dependencies": {

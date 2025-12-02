@@ -37,7 +37,7 @@ import TheFooter from '@/components/TheFooter.vue';
 
   .page-container {
     margin: auto;
-    width: 96dvw;
+    width: 98dvw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

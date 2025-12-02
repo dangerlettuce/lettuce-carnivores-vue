@@ -55,7 +55,6 @@ const ordersToProcess = computed(() => {
 const pickList = computed(() => {
   const list: string[] = [];
   ordersToProcess.value.forEach(order => {
-    console.log(getShippingType(order.fullResponse.shipping_cost.shipping_rate))
     order.lineItems.forEach(item => {
       const itemString = `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.metadata.size} - ${item.price_data.product_data.name}`;
       list.push(itemString);

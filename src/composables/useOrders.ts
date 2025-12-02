@@ -2,7 +2,7 @@ import { ref } from "vue"
 import { saveItem } from '@/apis/dataServices'
 import type { Order } from "@/types/Orders"
 import { toast } from 'vue3-toastify';
-import { useEmailService } from "@/composables/useEmailService"
+import { useEmailService, useTestEmail } from "@/composables/useEmailService"
 
 const { sendOrderStatusEmail } = useEmailService();
 export function useOrders() {
@@ -40,10 +40,11 @@ export function useOrders() {
     order.orderStatus.status = 'Shipped';
     try {
       const response =  await sendOrderStatusEmail(order);
-      debugger;
       if(response.success) {
         toast.success('Shipping notification email sent')
-        await saveOrder(order);
+        if (useTestEmail === false) {
+          await saveOrder(order);
+        }
         } else {
           order.orderStatus.status = originalStatus;
           toast.error(`Error sending email: ${response.message}`)
