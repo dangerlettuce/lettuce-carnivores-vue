@@ -15,6 +15,7 @@ export type CartItem = Pick<Plant, 'id' | 'sku' | 'size' | 'isRepresentative' | 
     maxQuantity: number
     photo: PhotoItem,
     priceAfterDiscount?: number,
+    excludeFromDiscounts?: boolean,
 }
 
 //New, more generic, cart item to work with Product.ts

@@ -42,7 +42,7 @@ export function useOrders() {
       const response =  await sendOrderStatusEmail(order);
       if(response.success) {
         toast.success('Shipping notification email sent')
-        if (useTestEmail === false) {
+        if (useTestEmail !== true) {
           await saveOrder(order);
         }
         } else {

@@ -18,4 +18,10 @@
   a {
     font-size: .75rem;
   }
+
+  @media print {
+    footer {
+        display: none;
+    }
+  }
 </style>

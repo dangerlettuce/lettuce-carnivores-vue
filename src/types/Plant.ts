@@ -29,7 +29,8 @@ export type Plant = {
     shelfLocation: string,
     dateListedForSale?: Date | undefined | null,
     soldNotes?: string,
-    soldTimestamp?: Timestamp
+    soldTimestamp?: Timestamp,
+    excludeFromSale?: boolean,
 }
 export interface PlantWithCategoryDetails extends Plant {
     name: string,

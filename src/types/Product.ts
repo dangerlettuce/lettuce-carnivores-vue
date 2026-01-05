@@ -27,6 +27,7 @@ export interface Product {
     photos: Array<PhotoItem>,
     createdDate: Date,
     updatedDate: Date,
+    excludeFromDiscounts?: boolean,
 }
 
 export interface ExtendedProduct extends Product {

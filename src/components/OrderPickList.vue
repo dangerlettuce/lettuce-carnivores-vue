@@ -5,21 +5,23 @@
         <img class="packing-slip-logo" src="/src/assets/logo/LogoWithBugNoText.png" />
         <img class="packing-slip-logo" src="/src/assets/logo/DangerLettuceStackedText.png" />
       </div>
-      <div class="order-id-container">
-        <h2>{{ `Order #${order.id}` }}</h2>
-        <h2>{{ `Order Date: ${formatDate(order.orderDate)}` }}</h2>
-      </div>
     </div>
-    <section class="shipping-picklist">
-      <p>{{`${getShippingType(order)} Shipping`}}</p>
-      <div class="ship-to">
-        <p style="font-weight: 600;">Ship to:</p>
-        <p>{{ order.shippingInfo.name }}</p>
-        <p>{{ order.shippingInfo.address.line1 }}</p>
-        <p v-if="order.shippingInfo.address.line2">{{ order.shippingInfo.address.line2 }}</p>
-        <p>{{ `${order.shippingInfo.address.city}, ${order.shippingInfo.address.state} ${order.shippingInfo.address.postal_code}` }}</p>
+    <div class="order-info">
+        <div class="order-id-container">
+          <h2>{{ `Order #${order.id}` }}</h2>
+          <h2>{{ `Order Date: ${formatDate(order.orderDate)}` }}</h2>
+        </div>
+        <div>
+          <p style="font-weight: 600;">{{`${getShippingType(order)} Shipping:`}}</p>
+          <div class="ship-to">
+            <p>{{ order.shippingInfo.name }}</p>
+            <p>{{ order.shippingInfo.address.line1 }}</p>
+            <p v-if="order.shippingInfo.address.line2">{{ order.shippingInfo.address.line2 }}</p>
+            <p>{{ `${order.shippingInfo.address.city}, ${order.shippingInfo.address.state} ${order.shippingInfo.address.postal_code}` }}</p>
+          </div>
+        </div>
       </div>
-    </section>
+
 
 
     <ul class="black-text">
@@ -122,24 +124,29 @@ function getShippingType(shippingCost: any | string) {
       height: 4rem;
       padding-inline: .5rem;
     }
-
   }
 
-  .packing-slip-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-block: 2rem;
-  }
   .shipping {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-block: 1rem;
   }
 
+  .order-picklist-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .order-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1.2rem;
+  }
+
 
   .order-item {
-    padding: .4rem .1rem;
+    padding: .5rem 0;
   }
 
   .packing-slip { 

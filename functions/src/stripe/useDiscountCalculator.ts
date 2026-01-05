@@ -7,12 +7,14 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
   const buyX = discount.parameters.buyX
   const getY = discount.parameters.getY
  
-  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku }))
+  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku })).filter((item) => {
+    return 'excludeFromDiscounts' in item ? item.excludeFromDiscounts : true;
+  })
   const sortedItems = spreadArray<DiscountableItem>(cartItemWithId)
-  if ('price' in sortedItems[0]) {
+  if (sortedItems.length > 0 && 'price' in sortedItems[0]) {
     sortedItems.sort((a, b) => b.price! - a.price!)
   }
-  if ('unit_amount' in sortedItems[0]) {
+  if (sortedItems.length > 0 && 'unit_amount' in sortedItems[0]) {
     sortedItems.sort((a, b) => b.unit_amount! - a.unit_amount!)
   }
   let totalDiscount = 0

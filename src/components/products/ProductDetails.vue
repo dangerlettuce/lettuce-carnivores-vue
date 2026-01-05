@@ -197,6 +197,7 @@
         isRepresentative: selectedPlant.value.isRepresentative,
         shelfLocation: selectedPlant.value.shelfLocation,
         dateListedForSale: selectedPlant.value?.dateListedForSale,
+        excludeFromDiscounts: 'excludeFromSale' in selectedPlant.value ? selectedPlant.value.excludeFromSale : false,
       })
 
       if (res && res.success === true) {
