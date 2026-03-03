@@ -64,3 +64,16 @@ export function buildBoxSizeMap () {
     })
     return boxSizeMap
 }
+
+
+export function getCarrier(trackingNumber: string): string {
+    if (trackingNumber.startsWith('1Z')) {
+        return 'UPS';
+    } else if (/^\d{12,22}$/.test(trackingNumber)) {
+        return 'FedEx';
+    } else if (/^[0-9]{20}$/.test(trackingNumber) || /^[0-9]{22}$/.test(trackingNumber)) {
+        return 'USPS';
+    } else {
+        return '';
+    }
+}

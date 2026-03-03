@@ -18,11 +18,13 @@
                 <form class="status-form" @submit.prevent>
                     <div>
                         <Label for="status">Status</Label>
-                        <Input type="text" id="status" label="Name" outer-class="grid-col-2" v-model="order.orderStatus.status" />
+                        <Input type="text" id="status" label="Name" outer-class="grid-col-2"
+                            v-model="order.orderStatus.status" />
                     </div>
                     <div>
                         <Label for="tracking">Tracking</Label>
-                        <Input type="text" id="tracking" label="Tracking Number" outer-class="grid-col-2" v-model="order.orderStatus.trackingNumber" />
+                        <Input type="text" id="tracking" label="Tracking Number" outer-class="grid-col-2"
+                            v-model="order.orderStatus.trackingNumber" @change="getCarrier" />
                     </div>
                     <div>
                         <Label for="carrier">Carrier</Label>
@@ -37,68 +39,72 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import BaseDialog from '@/components/ui/BaseDialog.vue';
-import type { Order } from '@/types/Orders'
-import Input from '@/components/ui/input/Input.vue';
-import { useOrders } from '@/composables/useOrders';
+    import { ref } from 'vue';
+    import BaseDialog from '@/components/ui/BaseDialog.vue';
+    import type { Order } from '@/types/Orders'
+    import Input from '@/components/ui/input/Input.vue';
+    import { useOrders } from '@/composables/useOrders';
+    import { getCarrier } from '@/composables/useShippingUtils';
 
-const { saveOrder } = useOrders();
-const props = defineProps<{ order: Order }>()
+    const { saveOrder } = useOrders();
+    const props = defineProps<{ order: Order }>()
 
-async function save(order: Order) {
-    await saveOrder(order);
-    toggleModal();
-}
-const open = ref(false)
-defineExpose({ toggleModal })
-function toggleModal() {
-    open.value = !open.value;
+    async function save(order: Order) {
+        await saveOrder(order);
+        toggleModal();
+    }
+    const open = ref(false)
+    defineExpose({ toggleModal })
+    function toggleModal() {
+        open.value = !open.value;
+    }
 
-}
 </script>
 
 <style scoped>
 
-.modal-container {
-    display: flex;
-    gap: 2rem;
-}
+    .modal-container {
+        display: flex;
+        gap: 2rem;
+    }
 
-.order-modal {
-    min-width: 16rem;
-    max-width: 90dvw;
-    overflow: none;
-}
-header {
-    display: flex;
-    justify-content: space-between;
-    margin-block: 1rem;
-    box-sizing: border-box;
-}
-.close-button {
-    top: 2px;
-    right: 24px;
-}
-.status-form > div {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    margin-block: .5rem;
-    align-items: center;
-}
+    .order-modal {
+        min-width: 16rem;
+        max-width: 90dvw;
+        overflow: none;
+    }
 
-.shipping-address {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-}
+    header {
+        display: flex;
+        justify-content: space-between;
+        margin-block: 1rem;
+        box-sizing: border-box;
+    }
 
-.tracking-form {
-    display: flex;
-    flex-direction: column;
-    width: 200rem;
-    margin-top: 0 !important;
-}
+    .close-button {
+        top: 2px;
+        right: 24px;
+    }
+
+    .status-form>div {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        margin-block: .5rem;
+        align-items: center;
+    }
+
+    .shipping-address {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tracking-form {
+        display: flex;
+        flex-direction: column;
+        width: 200rem;
+        margin-top: 0 !important;
+    }
 
 
 </style>
