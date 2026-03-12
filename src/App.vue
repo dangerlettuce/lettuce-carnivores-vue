@@ -9,15 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import TheHeader from '@/components/header/TheHeader.vue';
-import TheFooter from '@/components/TheFooter.vue';
+  import { RouterView } from 'vue-router'
+  import TheHeader from '@/components/header/TheHeader.vue';
+  import TheFooter from '@/components/TheFooter.vue';
 </script>
 
 <style lang="scss">
   @use '@/assets/scss/main.scss';
+
   a {
-      text-decoration: none;
+    text-decoration: none;
   }
 
   li {
@@ -35,6 +36,13 @@ import TheFooter from '@/components/TheFooter.vue';
     align-items: flex-start;
   }
 
+  @media print {
+    main {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
   .page-container {
     margin: auto;
     width: 98dvw;
@@ -44,7 +52,7 @@ import TheFooter from '@/components/TheFooter.vue';
   }
 
   @media(min-width: 425px) {
-    .page-container  {
+    .page-container {
       width: 90dvw;
     }
   }

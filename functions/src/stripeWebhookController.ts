@@ -3,7 +3,7 @@ import { error, log } from 'firebase-functions/logger'
 import { onRequest } from 'firebase-functions/v2/https'
 import { StripeLineItem } from './types/Stripe'
 import Stripe from 'stripe'
-import { discountedStandardShippingId, standardShippingId, coldWeatherShippingId, discountedColdWeatherShippingId, expeditedShippingId, discountedExpeditedShippingId } from './constants/stripeConstants'
+import { discountedStandardShippingId, standardShippingId, coldWeatherShippingId, discountedColdWeatherShippingId, expeditedShippingId, discountedExpeditedShippingId, mossShippingId } from './constants/stripeConstants'
 import { getNextSequentialId } from './common'
 import { updateInventoryFromStripeSale } from './inventory/inventoryService'
 import { Filter } from 'firebase-admin/firestore'
@@ -121,9 +121,9 @@ function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost'] 
   }
   if (shippingId === null) {
     error(`Unable to parse shippingId from checkout data ${shippingCost}`)
-  } 
+  }
   let shippingType = null;
-  switch (shippingId) { 
+  switch (shippingId) {
     case coldWeatherShippingId:
     case discountedColdWeatherShippingId:
       shippingType = 'Cold Weather'
@@ -134,6 +134,7 @@ function getShippingType(shippingCost: Stripe.Checkout.Session['shipping_cost'] 
       break;
     case standardShippingId:
     case discountedStandardShippingId:
+    case mossShippingId:
       shippingType = 'Standard'
       break;
     default:

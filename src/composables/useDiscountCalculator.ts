@@ -6,10 +6,12 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
   }
   const buyX = discount.parameters.buyX
   const getY = discount.parameters.getY
-  
-  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku })).filter((item) => {
-    return 'excludeFromDiscounts' in item ? item.excludeFromDiscounts : true;
-  })
+
+  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku }))
+  // this logic is broken, fix later
+  // .filter((item) => {
+  //   return 'excludeFromDiscounts' in item ? item.excludeFromDiscounts === false : false;
+  // })
   const sortedItems = spreadArray<DiscountableItem>(cartItemWithId)
   if (sortedItems.length > 0 && 'price' in sortedItems[0]) {
     sortedItems.sort((a, b) => b.price! - a.price!)
@@ -29,7 +31,7 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
       const itemPrice = item?.price ?? item?.unit_amount ?? 0
       const discountedPrice = itemPrice * (discount.percent_off / 100)
       totalDiscount += discountedPrice
-      discountedItems.push({ ...item, priceAfterDiscount: (itemPrice - discountedPrice)})
+      discountedItems.push({ ...item, priceAfterDiscount: (itemPrice - discountedPrice) })
       continue
     }
     itemsBoughtCounter++

@@ -3,6 +3,7 @@ import type { Plant, PlantCategory, PotSize } from '@/types/Plant'
 import type { PhotoItem } from '@/types/Product'
 
 export type StandardBoxSizes = '7x5x5' | '10x5x5' | '10x8x6' | '10x10x5' | '14x6x6'
+export type Carrier = 'UPS' | 'USPS' | 'FedEx' | 'LocalPickup'
 export type ShoppingCart = {
   cartItems: CartItem[]
 }
@@ -16,7 +17,7 @@ export type CartItem = Pick<Plant, 'id' | 'sku' | 'size' | 'isRepresentative' | 
     photo: PhotoItem,
     priceAfterDiscount?: number,
     excludeFromDiscounts?: boolean,
-}
+  }
 
 //New, more generic, cart item to work with Product.ts
 export type NewCartItem = {
@@ -103,7 +104,7 @@ export type Order = {
   }[]
   orderDate: Timestamp
   orderStatus: {
-    carrier: 'UPS' | 'USPS' | 'FedEx' | 'LocalPickup'
+    carrier: Carrier
     status: 'Processing' | 'Shipped' | 'Shipping Scheduled' | 'Complete'
     trackingNumber: string
   }

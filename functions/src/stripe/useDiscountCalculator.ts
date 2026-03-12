@@ -6,10 +6,11 @@ export function calculateBuyGetDiscounts(cartItems: DiscountableItem[], discount
   }
   const buyX = discount.parameters.buyX
   const getY = discount.parameters.getY
- 
-  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku })).filter((item) => {
-    return 'excludeFromDiscounts' in item ? item.excludeFromDiscounts : true;
-  })
+
+  const cartItemWithId = cartItems.map((item) => ({ ...item, id: item.sku }))
+  // .filter((item) => {
+  //   return 'excludeFromDiscounts' in item ? item.excludeFromDiscounts : true;
+  // })
   const sortedItems = spreadArray<DiscountableItem>(cartItemWithId)
   if (sortedItems.length > 0 && 'price' in sortedItems[0]) {
     sortedItems.sort((a, b) => b.price! - a.price!)
@@ -71,52 +72,52 @@ export function calculateDiscounts(items: DiscountableItem[], discounts: Discoun
   let bestDiscountAmountOff = 0
   let discountedItems: DiscountableItem[] = []
   if (!discounts || discounts.length === 0 || !items || items.length === 0) {
-      return { bestDiscount, bestDiscountMessage, bestDiscountAmountOff }
+    return { bestDiscount, bestDiscountMessage, bestDiscountAmountOff }
   }
   const buyGetDiscount = discounts.find(discount => discount.type === 'buyGet') as BuyGetDiscount
   if (buyGetDiscount) {
-      const discountDetails = calculateBuyGetDiscounts(items, buyGetDiscount)
+    const discountDetails = calculateBuyGetDiscounts(items, buyGetDiscount)
 
-      if (discountDetails?.totalDiscount && discountDetails?.totalDiscount > bestDiscountAmountOff) { 
-        bestDiscountAmountOff = discountDetails?.totalDiscount ?? 0
-        bestDiscountMessage = discountDetails?.message ?? null
-        bestDiscount = buyGetDiscount
-        discountedItems = discountDetails?.discountedItems as DiscountableItem[]
-      }
+    if (discountDetails?.totalDiscount && discountDetails?.totalDiscount > bestDiscountAmountOff) {
+      bestDiscountAmountOff = discountDetails?.totalDiscount ?? 0
+      bestDiscountMessage = discountDetails?.message ?? null
+      bestDiscount = buyGetDiscount
+      discountedItems = discountDetails?.discountedItems as DiscountableItem[]
+    }
   }
 
   let multiPlantAmountOff = 0
   const multiPlantDiscount = discounts.find(discount => discount.type === 'multiplePlants') as MultiPlantDiscount
 
   if (multiPlantDiscount) {
-      if (cartItemCount >= multiPlantDiscount.parameters.minimumQuantity) {
-          discounts.reduce(function (acc, obj) { return acc + obj.percent_off; }, 0);
-          multiPlantAmountOff = Math.round((cartTotal * multiPlantDiscount.percent_off / 100) * 100) / 100
-          if( multiPlantAmountOff > bestDiscountAmountOff) {
-              bestDiscount = multiPlantDiscount
-              bestDiscountAmountOff = multiPlantAmountOff
-              bestDiscountMessage = `Your order qualifies for a ${multiPlantDiscount.percent_off}% discount!`
-              discountedItems .length = 0
-          }
+    if (cartItemCount >= multiPlantDiscount.parameters.minimumQuantity) {
+      discounts.reduce(function (acc, obj) { return acc + obj.percent_off; }, 0);
+      multiPlantAmountOff = Math.round((cartTotal * multiPlantDiscount.percent_off / 100) * 100) / 100
+      if (multiPlantAmountOff > bestDiscountAmountOff) {
+        bestDiscount = multiPlantDiscount
+        bestDiscountAmountOff = multiPlantAmountOff
+        bestDiscountMessage = `Your order qualifies for a ${multiPlantDiscount.percent_off}% discount!`
+        discountedItems.length = 0
       }
+    }
   }
 
   const siteWideDiscount = discounts.find(discount => discount.type === 'siteWide') as SiteWideDiscount
   if (siteWideDiscount) {
-      const siteWideAmountOff = Math.round((cartTotal * siteWideDiscount.percent_off / 100) * 100) / 100
-      if (siteWideAmountOff > bestDiscountAmountOff) {
-          bestDiscount = siteWideDiscount
-          bestDiscountMessage = `Your order qualifies for a ${siteWideDiscount.percent_off}% discount!`
-          bestDiscountAmountOff = siteWideAmountOff
-          discountedItems .length = 0
-      }
+    const siteWideAmountOff = Math.round((cartTotal * siteWideDiscount.percent_off / 100) * 100) / 100
+    if (siteWideAmountOff > bestDiscountAmountOff) {
+      bestDiscount = siteWideDiscount
+      bestDiscountMessage = `Your order qualifies for a ${siteWideDiscount.percent_off}% discount!`
+      bestDiscountAmountOff = siteWideAmountOff
+      discountedItems.length = 0
+    }
   }
-  
+
   return {
-      bestDiscount,
-      bestDiscountMessage,
-      bestDiscountAmountOff,
-      discountedItems
+    bestDiscount,
+    bestDiscountMessage,
+    bestDiscountAmountOff,
+    discountedItems
   }
 }
 

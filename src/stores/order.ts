@@ -1,23 +1,23 @@
 import { defineStore } from 'pinia'
 import { computed, type Ref, ref } from 'vue'
-import type{ BuyGetDiscount, CartItem, Discount, MultiPlantDiscount, ShoppingCart, SiteWideDiscount } from '@/types/Orders'
+import type { BuyGetDiscount, CartItem, Discount, MultiPlantDiscount, ShoppingCart, SiteWideDiscount } from '@/types/Orders'
 import { newShoppingCart } from '@/constants/OrderConstants'
 import { usePlantStore } from '@/stores/plant'
 import { type PlantCategory } from '@/types/Plant'
 import { useLocalStorage } from '@vueuse/core'
-import {createStripeCheckoutSession} from '@/apis/stripe'
+import { createStripeCheckoutSession } from '@/apis/stripe'
 import { findAll, getPlantsFromFirestore } from '@/apis/dataServices'
 import { calculateBuyGetDiscounts } from '@/composables/useDiscountCalculator'
 import { Timestamp } from 'firebase/firestore'
 
 export const useOrderStore = defineStore('order', () => {
     const isLoading = ref(false)
-    const cart: Ref<ShoppingCart> = ref(useLocalStorage('cart',{...newShoppingCart}))
+    const cart: Ref<ShoppingCart> = ref(useLocalStorage('cart', { ...newShoppingCart }))
     const cartItemCount = computed(() => {
         const cartCount = cart.value.cartItems.reduce(
             (accumulator, cartItem) => accumulator + cartItem.quantity,
             0
-          );
+        );
         return cartCount
     })
     const cartTotal = computed(() => {
@@ -27,26 +27,26 @@ export const useOrderStore = defineStore('order', () => {
 
     const addItemToCart = async (item: CartItem) => {
         const cartIndex = cart?.value.cartItems.findIndex(cartItem => cartItem.sku === item.sku)
-        if(cart && cartIndex !== undefined) {
-            const {plant} = await getCategoryBySku(item)
-            if(!plant?.isRepresentative && cartIndex !== -1) {
-                return {success: true, message: 'That item is already in your cart'}
+        if (cart && cartIndex !== undefined) {
+            const { plant } = await getCategoryBySku(item)
+            if (!plant?.isRepresentative && cartIndex !== -1) {
+                return { success: true, message: 'That item is already in your cart' }
             }
-            if(!plant|| plant.quantity === 0) {
-                return {success: false, message: 'Unable to add to cart, quantity not available'}
+            if (!plant || plant.quantity === 0) {
+                return { success: false, message: 'Unable to add to cart, quantity not available' }
             }
-            if(cartIndex === -1) {
+            if (cartIndex === -1) {
                 cart.value.cartItems.push(item)
-                return {success: true, message: 'Added to cart!'}
+                return { success: true, message: 'Added to cart!' }
             }
             if (cart?.value.cartItems[cartIndex].quantity < plant.quantity) {
-                cart.value.cartItems[cartIndex].quantity ++
-                return {success: true, message: 'Added to cart!'}
+                cart.value.cartItems[cartIndex].quantity++
+                return { success: true, message: 'Added to cart!' }
             } else {
-                return {success: false, message: 'Unable to add to cart, quantity not available'}
+                return { success: false, message: 'Unable to add to cart, quantity not available' }
             }
         }
-        return {success: false, message: 'Unable to get cart'}
+        return { success: false, message: 'Unable to get cart' }
     }
 
 
@@ -54,7 +54,7 @@ export const useOrderStore = defineStore('order', () => {
         try {
             const category: PlantCategory = await usePlantStore().findPlantCategoryById(item.categoryId)
             const plant = category.plants.find(plantItem => plantItem.sku === item.sku)
-            return {category, plant}
+            return { category, plant }
         } catch (e: any) {
             console.error(e)
             throw new Error('Unable to add to cart')
@@ -63,24 +63,24 @@ export const useOrderStore = defineStore('order', () => {
 
     const removeItemFromCart = (item: CartItem, deleteItem: boolean) => {
         const cartIndex = cart?.value.cartItems.findIndex(cartItem => cartItem.sku === item.sku)
-        if(cart && cartIndex !== -1 && cartIndex !== undefined) {
-            if(deleteItem) {
-                cart.value.cartItems.splice(cartIndex,1)
+        if (cart && cartIndex !== -1 && cartIndex !== undefined) {
+            if (deleteItem) {
+                cart.value.cartItems.splice(cartIndex, 1)
                 return
             }
-            if(cart.value.cartItems[cartIndex].quantity > 1) {
-                cart.value.cartItems[cartIndex].quantity --
+            if (cart.value.cartItems[cartIndex].quantity > 1) {
+                cart.value.cartItems[cartIndex].quantity--
                 return
             }
-            if(cart.value.cartItems[cartIndex].quantity = 1) {
-                cart.value.cartItems.splice(cartIndex,1)
+            if (cart.value.cartItems[cartIndex].quantity = 1) {
+                cart.value.cartItems.splice(cartIndex, 1)
                 return
             }
         }
     }
 
-    function resetCart () {
-        if(cart && cart.value) {
+    function resetCart() {
+        if (cart && cart.value) {
             cart.value.cartItems.length = 0
             applyDiscounts()
         }
@@ -88,13 +88,13 @@ export const useOrderStore = defineStore('order', () => {
 
     async function startCheckoutSession() {
         isLoading.value = true
-        try{
+        try {
             const session = await createStripeCheckoutSession(cart.value.cartItems)
             //@ts-ignore
-            return {success: true, error: false, message: `Success`, data: session.data}
+            return { success: true, error: false, message: `Success`, data: session.data }
         } catch (e: any) {
             console.error(e)
-            return {success: false, error: true, message: `Unable to create checkout session`}
+            return { success: false, error: true, message: `Unable to create checkout session` }
         } finally {
             isLoading.value = false
         }
@@ -127,7 +127,7 @@ export const useOrderStore = defineStore('order', () => {
     const activeDiscountMessage: Ref<string | null> = ref(null)
     const discountedItems: Ref<CartItem[] | null> = ref(null)
     async function applyDiscounts() {
-        const discounts = await getDiscounts(cart.value)
+        const discounts = await getDiscounts(cart.value);
         let bestDiscount = null
         let bestDiscountMessage = null
         let bestDiscountAmountOff = 0
@@ -148,7 +148,7 @@ export const useOrderStore = defineStore('order', () => {
             activeDiscount.value = buyGetDiscount
             activeDiscountMessage.value = discountDetails?.message ?? null
             discountedItems.value = discountDetails?.discountedItems as CartItem[]
-            if (discountDetails?.totalDiscount && discountDetails?.totalDiscount > bestDiscountAmountOff) { 
+            if (discountDetails?.totalDiscount && discountDetails?.totalDiscount > bestDiscountAmountOff) {
                 bestDiscountAmountOff = discountDetails?.totalDiscount ?? 0
                 bestDiscountMessage = discountDetails?.message ?? null
                 bestDiscount = buyGetDiscount
@@ -161,7 +161,7 @@ export const useOrderStore = defineStore('order', () => {
             if (cartItemCount.value >= multiPlantDiscount.parameters.minimumQuantity) {
                 discounts.discountValues.reduce(function (acc, obj) { return acc + obj.percent_off; }, 0);
                 multiPlantAmountOff = Math.round((cartTotal.value * multiPlantDiscount.percent_off / 100) * 100) / 100
-                if( multiPlantAmountOff > bestDiscountAmountOff) {
+                if (multiPlantAmountOff > bestDiscountAmountOff) {
                     bestDiscount = multiPlantDiscount
                     bestDiscountAmountOff = multiPlantAmountOff
                     bestDiscountMessage = `Your order qualifies for a ${multiPlantDiscount.percent_off}% discount!`
@@ -169,7 +169,7 @@ export const useOrderStore = defineStore('order', () => {
             } else {
                 bestDiscountMessage ??= multiPlantDiscount.message
             }
-            
+
         }
 
         const siteWideDiscount = discounts.discountValues.find(discount => discount.type === 'siteWide') as SiteWideDiscount
@@ -183,7 +183,7 @@ export const useOrderStore = defineStore('order', () => {
                 bestDiscountMessage ??= siteWideDiscount.message
             }
         }
-        
+
         activeDiscount.value ??= bestDiscount
         activeDiscountMessage.value ??= bestDiscountMessage
         return Math.max(bestDiscountAmountOff)
@@ -192,16 +192,16 @@ export const useOrderStore = defineStore('order', () => {
     const discountDocs: Ref<Discount[] | undefined> = ref()
 
     async function getActiveDiscounts() {
-        if(discountDocs.value === undefined ) {
+        if (discountDocs.value === undefined) {
             discountDocs.value = await findAll('discounts') as Discount[]
         }
-        if(!discountDocs.value || discountDocs.value.length === 0) { return undefined}
+        if (!discountDocs.value || discountDocs.value.length === 0) { return undefined }
         return discountDocs.value.filter(item => item.valid && item.validThrough.toMillis() >= Timestamp.now().toMillis())
     }
 
     async function getDiscounts(cart: ShoppingCart) {
         const activeDiscounts = await getActiveDiscounts()
-        if(!activeDiscounts || !cart.cartItems || cart.cartItems.length === 0) {
+        if (!activeDiscounts || !cart.cartItems || cart.cartItems.length === 0) {
             return null
         }
 
@@ -215,7 +215,7 @@ export const useOrderStore = defineStore('order', () => {
             discountValues.push(multiPlantDiscount)
         }
         const siteWideDiscount = activeDiscounts.find(item => item.type === 'siteWide') as SiteWideDiscount
-        if(siteWideDiscount && siteWideDiscount.id !== null) {
+        if (siteWideDiscount && siteWideDiscount.id !== null) {
             discountValues.push(siteWideDiscount)
         }
         return {

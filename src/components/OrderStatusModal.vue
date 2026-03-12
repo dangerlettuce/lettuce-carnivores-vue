@@ -24,7 +24,8 @@
                     <div>
                         <Label for="tracking">Tracking</Label>
                         <Input type="text" id="tracking" label="Tracking Number" outer-class="grid-col-2"
-                            v-model="order.orderStatus.trackingNumber" @change="getCarrier" />
+                            v-model="order.orderStatus.trackingNumber"
+                            @change="setCarrier(order)" />
                     </div>
                     <div>
                         <Label for="carrier">Carrier</Label>
@@ -57,6 +58,13 @@
     defineExpose({ toggleModal })
     function toggleModal() {
         open.value = !open.value;
+    }
+
+    function setCarrier(order: Order) {
+        const carrier = getCarrier(order.orderStatus.trackingNumber);
+        if (carrier) {
+            order.orderStatus.carrier = carrier;
+        }
     }
 
 </script>

@@ -1,21 +1,21 @@
 
-import type { StandardBoxSizes } from '@/types/Orders'
-import type { PotSize,  } from '@/types/Plant'
+import type { StandardBoxSizes, Carrier } from '@/types/Orders'
+import type { PotSize, } from '@/types/Plant'
 import type { PackageWeightAndSize, BoxDimensions } from '@/types/Ebay'
 
 export function getShippingSize(size: PotSize): PackageWeightAndSize {
-    const sizeMap = new Map<PotSize, {box: StandardBoxSizes, weight: number}>([
-        ['2.5"',      {box: '7x5x5', weight: 1}],
-        ['3" deep',   {box: '7x5x5', weight: 1}],
-        ['3.5"',      {box: '7x5x5', weight: 1}],
-        ['3.5" deep', {box: '10x5x5', weight: 1.5}],
-        ['4" deep',   {box: '10x8x6', weight: 1.75}],
-        ['4.5" deep', {box: '14x6x6', weight: 2}],
-        ['5" deep',   {box: '7x5x5', weight: 2}],
-        ['Bare Root', {box: '10x8x6', weight: 1}],
-        ['Bundle - 2 sm', {box: '10x8x6', weight: 1.5}],
-        ['Bundle - 3 sm', {box: '10x8x6', weight: 2}],
-        ['Bundle - 2 lg', {box: '10x10x5', weight: 2}],
+    const sizeMap = new Map<PotSize, { box: StandardBoxSizes, weight: number }>([
+        ['2.5"', { box: '7x5x5', weight: 1 }],
+        ['3" deep', { box: '7x5x5', weight: 1 }],
+        ['3.5"', { box: '7x5x5', weight: 1 }],
+        ['3.5" deep', { box: '10x5x5', weight: 1.5 }],
+        ['4" deep', { box: '10x8x6', weight: 1.75 }],
+        ['4.5" deep', { box: '14x6x6', weight: 2 }],
+        ['5" deep', { box: '7x5x5', weight: 2 }],
+        ['Bare Root', { box: '10x8x6', weight: 1 }],
+        ['Bundle - 2 sm', { box: '10x8x6', weight: 1.5 }],
+        ['Bundle - 3 sm', { box: '10x8x6', weight: 2 }],
+        ['Bundle - 2 lg', { box: '10x10x5', weight: 2 }],
         ['Bundle - 3 lg', { box: '14x6x6', weight: 3 }],
         ['Snack Bag', { box: '7x5x5', weight: 1 }],
         ['Sandwich Bag', { box: '7x5x5', weight: 1 }],
@@ -23,7 +23,7 @@ export function getShippingSize(size: PotSize): PackageWeightAndSize {
     ])
 
 
-    const boxWeight = sizeMap.get(size) ?? {box: '10x8x6', weight: 1}
+    const boxWeight = sizeMap.get(size) ?? { box: '10x8x6', weight: 1 }
 
     const boxSizeMap = buildBoxSizeMap()
     return {
@@ -36,7 +36,7 @@ export function getShippingSize(size: PotSize): PackageWeightAndSize {
     }
 }
 
-export function buildBoxSizeMap () {
+export function buildBoxSizeMap() {
     const boxSizeMap: Map<StandardBoxSizes, BoxDimensions> = new Map()
     boxSizeMap.set('7x5x5', {
         height: 7,
@@ -66,7 +66,11 @@ export function buildBoxSizeMap () {
 }
 
 
-export function getCarrier(trackingNumber: string): string {
+export function getCarrier(trackingNumber: string): Carrier | '' {
+    if (typeof trackingNumber !== 'string') {
+        console.error('Invalid tracking number:', trackingNumber);
+        return '';
+    }
     if (trackingNumber.startsWith('1Z')) {
         return 'UPS';
     } else if (/^\d{12,22}$/.test(trackingNumber)) {
