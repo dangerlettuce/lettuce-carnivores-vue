@@ -4,7 +4,7 @@
             <BaseButton v-for="component in adminComponents" :key="component.label" size="small"
                 @click="setSelectedComponent(component)">{{ component.label }}</BaseButton>
         </div>
-        <div class="component-container">
+        <div>
             <component v-if="selectedComponent !== undefined" :is="selectedComponent" />
         </div>
 
@@ -18,6 +18,7 @@
     import GiveawayAdmin from '@/components/giveaway/GiveawayAdmin.vue'
     import BaseButton from '@/components/ui/BaseButton.vue'
     import InventoryManagement from '@/components/InventoryManagement.vue'
+    import BannerAdmin from '@/components/banner/BannerAdmin.vue'
     import OrderAdmin from '@/components/OrderAdmin.vue'
     import PlantInventory from '@/components/PlantInventory.vue'
     import ProductAdminForm from '@/components/products/ProductAdminForm.vue'
@@ -37,6 +38,10 @@
         {
             label: 'Plant Inventory List',
             component: PlantInventory
+        },
+        {
+            label: 'Banner Admin',
+            component: BannerAdmin
         },
         {
             label: 'Product Admin Grid',
@@ -70,10 +75,6 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: .25rem;
         margin-bottom: .5rem;
-    }
-
-    .component-container {
-        margin: 0 3dvw;
     }
 
     @media (min-width: 50rem) {

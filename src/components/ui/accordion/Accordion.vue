@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import type { AccordionRootEmits, AccordionRootProps } from "reka-ui"
 import {
   AccordionRoot,
-  type AccordionRootEmits,
-  type AccordionRootProps,
   useForwardPropsEmits,
-} from 'radix-vue'
+} from "reka-ui"
 
 const props = defineProps<AccordionRootProps>()
 const emits = defineEmits<AccordionRootEmits>()

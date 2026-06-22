@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue';
-import { findDocById } from '@/apis/dataServices'
+import { findDocById, saveExistingItem, saveItem } from '@/apis/dataServices.ts'
 
 const bannerCollectionName = 'banner' as const;
 const bannerDetailsDocId = 'bannerDetails' as const;
@@ -12,7 +12,7 @@ type BannerDetails = {
 }
 
 export function useBannerMessage() {
-  const bannerDetails = ref<BannerDetails | null>(null);
+  const bannerDetails = ref<BannerDetails | null>({message: null, link: null, style: null, showBanner: null});
   const showBanner = computed(() => bannerDetails.value !== null && bannerDetails.value.showBanner === true);
 
   async function getBannerDetails() {
@@ -23,6 +23,16 @@ export function useBannerMessage() {
       return;
     }
     bannerDetails.value = parseBannerDetails(res);
+  }
+
+  async function saveBannerDetails(details: BannerDetails) {
+    const res = await saveExistingItem(bannerCollectionName, details, bannerDetailsDocId);
+    if (!res) {
+      console.error('Unable to save banner details');
+      return false;
+    }
+    return true;
+
   }
 
   function parseBannerDetails(data: any): BannerDetails | null {
@@ -44,5 +54,5 @@ export function useBannerMessage() {
     return null;
   }
 
-  return { bannerDetails, showBanner, getBannerDetails };
+  return { bannerDetails, showBanner, getBannerDetails, saveBannerDetails };
 }

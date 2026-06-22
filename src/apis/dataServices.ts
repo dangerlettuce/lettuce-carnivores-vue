@@ -61,6 +61,20 @@ export async function saveItem(collectionName: string, obj: any, idKey: string =
   }
 }
 
+export async function saveExistingItem(collectionName: string, obj: any, id: string | number) {
+  if (obj == null || typeof obj !== 'object') {
+    return { success: false, message: `Invalid object ${JSON.stringify(obj)}` }
+  }
+  const cleanedObj = convertUndefinedToNull(obj)
+  try {
+    await setDoc(doc(db, collectionName, id.toString()), { ...cleanedObj })
+    return { success: true, message: 'Saved successfully', data: obj }
+  } catch (err) {
+    console.log(err)
+    return { success: false, error: true, message: 'Unable to save', errorDetails: err, data: obj }
+  } 
+}
+
 function convertUndefinedToNull(obj: any): any {
   if (obj === null || typeof obj !== 'object') {
     return obj

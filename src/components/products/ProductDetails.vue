@@ -11,7 +11,7 @@
       <div class="flex justify-evenly">
         <BaseButton v-for="plant in referencePlants" :key="plant.size" class="px-4"
           :type="selectedPlant?.sku == plant.sku ? 'primary' : 'secondary-outline'" @click="setSelectedPlant(plant)">
-          {{`Representative - ${plant.size} `}}
+          {{ `Representative - ${plant.size} ` }}
         </BaseButton>
       </div>
       <div class="specimen-button-container">
@@ -225,7 +225,7 @@
     const formattedPropagationDate = formattedDate(selectedPlant.value.propagationDate)
     if (plantCategory.value.genus === 'Heliamphora') {
       return {
-        isFreshDivision: daysSinceDivision.value < 45,
+        isFreshDivision: daysSinceDivision.value < 40 || !daysSinceDivision.value,
         message: `This is division was taken on ${formattedPropagationDate} and may not yet be rooted or established.
         We've had good success in shipping recent divisions and our live arrival guarantee does apply. However, un-rooted divisions need extra attention
         and therefore are not recommended for beginners. \nFresh divisions may be shipped bare-root, depending on the plant, to ensure the plant arrives safely.`,

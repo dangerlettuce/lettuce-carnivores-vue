@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
+import type { BadgeVariants } from "."
 import { cn } from "@/lib/utils"
+import { badgeVariants } from "."
 
 const props = defineProps<{
+  variant?: BadgeVariants["variant"]
   class?: HTMLAttributes["class"]
 }>()
 </script>
 
 <template>
-  <h5 :class="cn('mb-1 font-medium leading-none tracking-tight', props.class)">
+  <div :class="cn(badgeVariants({ variant }), props.class)">
     <slot />
-  </h5>
+  </div>
 </template>

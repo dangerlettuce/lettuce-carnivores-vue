@@ -50,8 +50,8 @@
             <template v-if="!isColdWeatherShippingActive">
               {{
                 freeShipping
-                ? `Free standard shipping on orders over $${discountedShippingThreshold}!`
-                : `Add ${amountToQualifyForDiscountedShipping} to quality for free standard shipping.`
+                ? `Free economy shipping on orders over $${discountedShippingThreshold}!`
+                : `Add ${amountToQualifyForDiscountedShipping} to quality for free economy shipping.`
               }}
             </template>
             

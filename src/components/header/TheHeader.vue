@@ -1,17 +1,17 @@
 <template>
   <header class="w-full sticky top-0 z-50 bg-background">
-  <Suspense>
-    <TheBanner />
-  </Suspense>
+    <Suspense>
+      <TheBanner />
+    </Suspense>
     <div class="header-container">
-      <Button class="hamburger-icon-container hover:bg-opacity-0" variant="ghost" @click="toggleMobileMenu">
+      <Button class="hamburger-icon-container" variant="ghost" @click="toggleMobileMenu">
         <HamburgerButton :isOpen />
       </Button>
       <div class="logo">
-        <router-link  to="/">
+        <router-link to="/">
           <img src="@/assets/logo/LogoWithBugLettuceCentered.png" alt="Danger Lettuce Logo" />
         </router-link>
-        <router-link  to="/">
+        <router-link to="/">
           <h1><span class="danger stroke">DANGER</span><span class="lettuce stroke">LETTUCE</span></h1>
         </router-link>
       </div>
@@ -34,14 +34,15 @@
           </div>
         </div>
         <nav class="justify-start items-center gap-4">
-          <Sheet v-model:open="isOpen">
-            <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none" @openAutoFocus.prevent>
+          <Sheet v-model:open="isOpen" class="scrollbar-hidden">
+            <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none overflow-y-auto"
+              @openAutoFocus.prevent>
               <div class="mobile-menu">
                 <div class="logo mobile-logo">
-                  <router-link  to="/">
+                  <router-link to="/">
                     <img src="@/assets/logo/LogoWithBugNoText.png" alt="Danger Lettuce Logo" />
                   </router-link>
-                  <router-link  to="/">
+                  <router-link to="/">
                     <h1><span class="danger stroke">DANGER</span><span class="lettuce stroke">LETTUCE</span></h1>
                   </router-link>
                 </div>
@@ -144,6 +145,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     img {
       height: 4rem;
       margin-block: .2rem;
@@ -159,11 +161,13 @@
     line-height: .8;
     margin-inline-start: 25%;
     margin-inline-end: 25%;
+
     .danger {
       font-family: 'Whitelion', sans-serif;
       color: $logoTextDanger;
       font-size: clamp(2.5rem, 4vw, 4.25rem);
     }
+
     .lettuce {
       font-family: 'Blokletters', sans-serif;
       color: $logoTextLettuce;
@@ -172,23 +176,28 @@
       transform: translate(25%, 0);
     }
   }
+
   .stroke {
     -webkit-text-stroke: 1px #000;
-    text-stroke: 2px #000;;
+    text-stroke: 2px #000;
+    ;
   }
 
   .mobile-logo {
     h1 {
       display: flex;
       margin-inline-start: 0;
+
       .danger {
         font-size: clamp(2rem, 3vw, 3rem);
       }
+
       .lettuce {
         font-size: clamp(1.25rem, 2vw, 1.75rem);
       }
     }
   }
+
   .logo-link {
     text-decoration: none;
     cursor: pointer;
@@ -214,10 +223,12 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    margin-bottom: 1rem;
   }
 
   .mobile-menu-sheet {
     background-color: $primary;
+    min-width: 30rem;
   }
 
   .mobile-menu:first-child {
@@ -238,6 +249,13 @@
 
   .hamburger-icon-container {
     display: block;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+      filter: brightness(1.5);
+    }
+
     button {
       transform: scale(1.5);
     }
@@ -256,7 +274,8 @@
   }
 
   .cart {
-    display: flex;;
+    display: flex;
+    ;
     align-items: center;
     justify-content: center;
     transform: scale(1);
@@ -277,6 +296,7 @@
         margin-block: .5rem;
       }
     }
+
     .header-container {
       padding-block: 0.1rem;
       padding-inline: 2.5rem;
@@ -292,7 +312,7 @@
       button {
         transform: scale(2);
       }
-  }
+    }
   }
 
   @media(min-width: 900px) {
@@ -310,15 +330,18 @@
   @media(min-width: 1300px) {
     .stroke {
       -webkit-text-stroke: 1.5px #000;
-      text-stroke: 2px #000;;
+      text-stroke: 2px #000;
+      ;
     }
+
     .logo {
       h1 {
         display: flex;
       }
-        img {
-          height: 8rem;
-        }
+
+      img {
+        height: 8rem;
+      }
     }
   }
 </style>

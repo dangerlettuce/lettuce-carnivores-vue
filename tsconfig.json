@@ -9,11 +9,14 @@
     }
   ],
   "compilerOptions": {
-    "paths": {},
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "types": [
       "vue3-toastify/global"
     ],
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
+  
 }

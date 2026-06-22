@@ -1,0 +1,4 @@
+onlyBuiltDependencies:
+  - protobufjs
+
+minimumReleaseAge: 10080

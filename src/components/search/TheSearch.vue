@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import { Input } from '@/components/ui/input'
-  import { Search } from 'lucide-vue-next'
+  import { Search } from '@lucide/vue'
   import { onMounted, ref, type Ref } from 'vue';
   import { useDebounceFn } from '@vueuse/core';
   import uFuzzy from '@leeoniya/ufuzzy'
@@ -69,5 +69,6 @@
   .search-input {
     height: 2.6rem;
     font-size: 1.2rem;
+    background-color: white;
   }
 </style>
