@@ -1,14 +1,13 @@
 // @ts-nocheck
-import {PlaceProxyBidRequest} from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/buy_offer_v1_beta_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { PlaceProxyBidRequest } from '../../../../types/index.js';
+import { operations } from '../../../../types/restful/specs/buy_offer_v1_beta_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Api Offer API enables Partners to place proxy bids for a buyer and retrieve the auctions where the buyer is
  * bidding. Client Credentials: https://api.ebay.com/oauth/api_scope/buy.offer.auction
  */
 export default class Offer extends Restful implements OpenApi<operations> {
-
   static id = 'Offer';
 
   get basePath(): string {

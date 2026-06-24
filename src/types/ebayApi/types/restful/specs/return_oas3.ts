@@ -3,135 +3,134 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/return/{returnId}/add_shipping_label": {
+  '/return/{returnId}/add_shipping_label': {
     /** @description Create or update a shipping label provided by the seller */
-    post: operations["addShippingLabelInfo"];
+    post: operations['addShippingLabelInfo'];
   };
-  "/return/{returnId}/cancel": {
+  '/return/{returnId}/cancel': {
     /** @description Cancel a return request */
-    post: operations["cancelReturnRequest"];
+    post: operations['cancelReturnRequest'];
   };
-  "/return/check_eligibility": {
+  '/return/check_eligibility': {
     /** @description Check to see if an item is eligible for a return */
-    post: operations["checkReturnEligibility"];
+    post: operations['checkReturnEligibility'];
   };
-  "/return/{returnId}/check_label_print_eligibility": {
+  '/return/{returnId}/check_label_print_eligibility': {
     /** @description Validate the eligibility of an existing shipping label */
-    get: operations["checkShippingLabelEligibility"];
+    get: operations['checkShippingLabelEligibility'];
   };
-  "/return/draft": {
+  '/return/draft': {
     /** @description Create a return draft */
-    post: operations["createReturnDraft"];
+    post: operations['createReturnDraft'];
   };
-  "/return": {
+  '/return': {
     /** @description Request a return for an item */
-    post: operations["createReturnRequest"];
+    post: operations['createReturnRequest'];
   };
-  "/return/{returnId}/initiate_shipping_label": {
+  '/return/{returnId}/initiate_shipping_label': {
     /** @description Create an eBay shipping label for the buyer */
-    post: operations["createReturnShippingLabel"];
+    post: operations['createReturnShippingLabel'];
   };
-  "/return/draft/{draftId}/file/{fileId}": {
+  '/return/draft/{draftId}/file/{fileId}': {
     /** @description Delete a file associated with a return draft */
-    delete: operations["deleteReturnDraftFile"];
+    delete: operations['deleteReturnDraftFile'];
   };
-  "/return/{returnId}/escalate": {
+  '/return/{returnId}/escalate': {
     /** @description Escalate an existing return to eBay customer support */
-    post: operations["escalateReturn"];
+    post: operations['escalateReturn'];
   };
-  "/return/{returnId}": {
+  '/return/{returnId}': {
     /** @description Retrieve the details of a specific return */
-    get: operations["getReturn"];
+    get: operations['getReturn'];
   };
-  "/return/draft/{draftId}": {
+  '/return/draft/{draftId}': {
     /** @description Retrieve a return draft */
-    get: operations["getReturnDraft"];
+    get: operations['getReturnDraft'];
     /** @description Update an existing return draft */
-    put: operations["updateReturnDraft"];
+    put: operations['updateReturnDraft'];
   };
-  "/return/draft/{draftId}/files": {
+  '/return/draft/{draftId}/files': {
     /** @description Retrieve the files associated with a return draft */
-    get: operations["getReturnDraftFiles"];
+    get: operations['getReturnDraftFiles'];
   };
-  "/return/estimate": {
+  '/return/estimate': {
     /** @description Buyer-facing call to retrieve the estimated refund amount and return shipping costs associated with returning an item. */
-    post: operations["getReturnEstimate"];
+    post: operations['getReturnEstimate'];
   };
-  "/return/{returnId}/files": {
+  '/return/{returnId}/files': {
     /** @description Retrieve the files associated with a return */
-    get: operations["getReturnFiles"];
+    get: operations['getReturnFiles'];
   };
-  "/return/preference": {
+  '/return/preference': {
     /** @description Retrieve seller's return preferences */
-    get: operations["getReturnPreferences"];
+    get: operations['getReturnPreferences'];
     /** @description Set seller's return preferences */
-    post: operations["setReturnPreferences"];
+    post: operations['setReturnPreferences'];
   };
-  "/return/{returnId}/get_shipping_label": {
+  '/return/{returnId}/get_shipping_label': {
     /** @description Retrieve the data for an existing shipping label */
-    get: operations["getReturnShippingLabel"];
+    get: operations['getReturnShippingLabel'];
   };
-  "/return/{returnId}/tracking": {
+  '/return/{returnId}/tracking': {
     /** @description Retrieve shipment tracking activity for a return */
-    get: operations["getShipmentTrackingInfo"];
+    get: operations['getShipmentTrackingInfo'];
   };
-  "/return/{returnId}/issue_refund": {
+  '/return/{returnId}/issue_refund': {
     /** @description Issue a refund */
-    post: operations["issueReturnRefund"];
+    post: operations['issueReturnRefund'];
   };
-  "/return/{returnId}/mark_as_received": {
+  '/return/{returnId}/mark_as_received': {
     /** @description Mark a returned item as received */
-    post: operations["markReturnReceived"];
+    post: operations['markReturnReceived'];
   };
-  "/return/{returnId}/mark_refund_received": {
+  '/return/{returnId}/mark_refund_received': {
     /** @description Mark a refund as received */
-    post: operations["markReturnRefundReceived"];
+    post: operations['markReturnRefundReceived'];
   };
-  "/return/{returnId}/mark_refund_sent": {
+  '/return/{returnId}/mark_refund_sent': {
     /** @description Notify the buyer that a refund has been issued */
-    post: operations["markReturnRefundSent"];
+    post: operations['markReturnRefundSent'];
   };
-  "/return/{returnId}/mark_as_shipped": {
+  '/return/{returnId}/mark_as_shipped': {
     /** @description Mark a return as shipped */
-    post: operations["markReturnShipped"];
+    post: operations['markReturnShipped'];
   };
-  "/return/{returnId}/decide": {
+  '/return/{returnId}/decide': {
     /** @description Perform an action on a return, such as APPROVE */
-    post: operations["processReturnRequest"];
+    post: operations['processReturnRequest'];
   };
-  "/return/search": {
+  '/return/search': {
     /** @description Retrieve details on items being returned */
-    get: operations["search"];
+    get: operations['search'];
   };
-  "/return/{returnId}/send_message": {
+  '/return/{returnId}/send_message': {
     /** @description Send a message to the buyer or seller regarding a return */
-    post: operations["sendReturnMessage"];
+    post: operations['sendReturnMessage'];
   };
-  "/return/{returnId}/send_shipping_label": {
+  '/return/{returnId}/send_shipping_label': {
     /** @description Send a shipping label to an email address */
-    post: operations["sendReturnShippingLabel"];
+    post: operations['sendReturnShippingLabel'];
   };
-  "/return/{returnId}/file/submit": {
+  '/return/{returnId}/file/submit': {
     /** @description Activate the files associated with a return */
-    post: operations["submitReturnFile"];
+    post: operations['submitReturnFile'];
   };
-  "/return/{returnId}/update_tracking": {
+  '/return/{returnId}/update_tracking': {
     /** @description Update shipment tracking information for an item being returned. */
-    put: operations["updateShipmentTrackingInfo"];
+    put: operations['updateShipmentTrackingInfo'];
   };
-  "/return/draft/{draftId}/file/upload": {
+  '/return/draft/{draftId}/file/upload': {
     /** @description Upload the files relating to a return draft */
-    post: operations["uploadReturnDraftFile"];
+    post: operations['uploadReturnDraftFile'];
   };
-  "/return/{returnId}/file/upload": {
+  '/return/{returnId}/file/upload': {
     /** @description Upload the files relating to a return */
-    post: operations["uploadReturnFile"];
+    post: operations['uploadReturnFile'];
   };
-  "/return/{returnId}/void_shipping_label": {
+  '/return/{returnId}/void_shipping_label': {
     /** @description Void a shipping label */
-    post: operations["voidShippingLabel"];
+    post: operations['voidShippingLabel'];
   };
 }
 
@@ -142,7 +141,6 @@ export type components = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description Create or update a shipping label provided by the seller */
   addShippingLabelInfo: {
     parameters: {

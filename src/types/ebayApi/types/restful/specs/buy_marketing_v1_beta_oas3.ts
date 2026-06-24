@@ -3,19 +3,18 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/merchandised_product/get_also_bought_products": {
+  '/merchandised_product/get_also_bought_products': {
     /** @description This call returns products that were also bought when shoppers bought the product specified in the request. Showing 'also bought' products inspires up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria. */
-    get: operations["getAlsoBoughtByProduct"];
+    get: operations['getAlsoBoughtByProduct'];
   };
-  "/merchandised_product/get_also_viewed_products": {
+  '/merchandised_product/get_also_viewed_products': {
     /** @description This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing 'also viewed' products encourages up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria. */
-    get: operations["getAlsoViewedByProduct"];
+    get: operations['getAlsoViewedByProduct'];
   };
-  "/merchandised_product": {
+  '/merchandised_product': {
     /** @description This call returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product ID (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this call in the Browse API search call to retrieve items for this product. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getMerchandisedProducts"];
+    get: operations['getMerchandisedProducts'];
   };
 }
 
@@ -30,20 +29,20 @@ export interface components {
       /** @description The name of the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
        */
       errorId?: number;
       /** @description An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A detailed description of the condition that caused the error or warning, and information on what to do to correct the problem. */
       longMessage?: string;
       /** @description A description of the condition that caused the error or warning. */
       message?: string;
       /** @description An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of warning and error messages that return one or more variables contextual information about the error or warning. This is often the field or value that triggered the error or warning. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description The name of the subdomain in which the error or warning occurred. */
       subdomain?: string;
     };
@@ -64,21 +63,21 @@ export interface components {
     /** @description The type that defines the fields for the best selling product information. */
     BestSellingProductResponse: {
       /** @description An array of containers for the products. */
-      merchandisedProducts?: (components["schemas"]["MerchandisedProduct"])[];
+      merchandisedProducts?: components['schemas']['MerchandisedProduct'][];
       /** @description The container with all the warnings for the input request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description Type the defines the details of an image, such as size and URL. Currently only imageUrl is getting populated. The height and width were added for future use. */
     Image: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       height?: number;
       /** @description The URL of the image. */
       imageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       width?: number;
@@ -88,9 +87,9 @@ export interface components {
       /** @description The name for the condition of the product. For example: NEW */
       conditionGroup?: string;
       /** @description An array of condition identifiers for the product. */
-      conditionIds?: (string)[];
+      conditionIds?: string[];
       /** @description The lowest priced active item for this product on eBay. */
-      estimatedStartPrice?: components["schemas"]["Amount"];
+      estimatedStartPrice?: components['schemas']['Amount'];
     };
     /** @description The type that defines the fields for product information, including price, condition, ratings, etc. */
     MerchandisedProduct: {
@@ -99,18 +98,18 @@ export interface components {
       /** @description The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product. */
       epid?: string;
       /** @description The container for the product image. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description An array of containers for the product market price details, such as condition and market price. */
-      marketPriceDetails?: (components["schemas"]["MarketPriceDetail"])[];
+      marketPriceDetails?: components['schemas']['MarketPriceDetail'][];
       /** @description An array of containers for ratings of the product aspects, such as &quot;Is it a good value&quot;. */
-      ratingAspects?: (components["schemas"]["RatingAspect"])[];
+      ratingAspects?: components['schemas']['RatingAspect'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of eBay users that rated the product.
        */
       ratingCount?: number;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of eBay users that wrote a review for the product.
        */
       reviewCount?: number;
@@ -120,7 +119,7 @@ export interface components {
     /** @description The type that defines the fields for the product aspect ratings. */
     RatingAspect: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of eBay users that rated the product on this aspect.
        */
       count?: number;
@@ -129,12 +128,12 @@ export interface components {
       /** @description The answer or value of the rating aspect. Camping tent examples: Lightweight or Easy to set up */
       name?: string;
       /** @description The container for the details of the aspect rating. The details show the aspect rating value, usually TRUE or FALSE and the user count and percentage. */
-      ratingAspectDistributions?: (components["schemas"]["RatingAspectDistribution"])[];
+      ratingAspectDistributions?: components['schemas']['RatingAspectDistribution'][];
     };
     /** @description The type that defines the field for the aspect rating details, such as the aspect rating value, usually TRUE or FALSE and the user count and percentage. */
     RatingAspectDistribution: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of eBay users that choose this rating aspect value.
        */
       count?: number;
@@ -154,7 +153,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This call returns products that were also bought when shoppers bought the product specified in the request. Showing 'also bought' products inspires up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria. */
   getAlsoBoughtByProduct: {
     parameters: {
@@ -173,7 +171,7 @@ export interface operations {
       /** @description This call returns products that were also bought when shoppers bought the product specified in the request. Showing 'also bought' products inspires up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria. */
       200: {
         content: {
-          "application/json": components["schemas"]["BestSellingProductResponse"];
+          'application/json': components['schemas']['BestSellingProductResponse'];
         };
       };
       /** @description No Content */
@@ -181,24 +179,24 @@ export interface operations {
       /** @description Bad Request */
       400: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
       /** @description Conflict */
       409: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
       /** @description Internal Server Error */
       500: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
@@ -222,7 +220,7 @@ export interface operations {
       /** @description This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing 'also viewed' products encourages up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria. */
       200: {
         content: {
-          "application/json": components["schemas"]["BestSellingProductResponse"];
+          'application/json': components['schemas']['BestSellingProductResponse'];
         };
       };
       /** @description No Content */
@@ -230,24 +228,24 @@ export interface operations {
       /** @description Bad Request */
       400: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
       /** @description Conflict */
       409: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
       /** @description Internal Server Error */
       500: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
@@ -271,22 +269,22 @@ export interface operations {
       /** @description This call returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product ID (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this call in the Browse API search call to retrieve items for this product. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
       200: {
         content: {
-          "application/json": components["schemas"]["BestSellingProductResponse"];
+          'application/json': components['schemas']['BestSellingProductResponse'];
         };
       };
       /** @description Bad Request */
       400: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };
       /** @description Internal Server Error */
       500: {
         content: {
-          "application/json": {
-            errors?: (components["schemas"]["Error"])[];
+          'application/json': {
+            errors?: components['schemas']['Error'][];
           };
         };
       };

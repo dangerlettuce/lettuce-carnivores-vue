@@ -7,7 +7,7 @@ enum calls {
   findItemsIneBayStores,
   getHistograms,
   getSearchKeywordsRecommendation,
-  getVersion
+  getVersion,
 }
 
 export default calls;

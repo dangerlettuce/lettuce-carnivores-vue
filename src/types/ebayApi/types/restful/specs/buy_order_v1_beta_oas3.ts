@@ -3,127 +3,126 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/checkout_session/{checkoutSessionId}/apply_coupon": {
+  '/checkout_session/{checkoutSessionId}/apply_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method adds a coupon to an eBay proxy guest checkout session and applies it to all the eligible items in the order. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions Maximum: One coupon per order For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["applyCoupon"];
+    post: operations['applyCoupon'];
   };
-  "/checkout_session/{checkoutSessionId}": {
+  '/checkout_session/{checkoutSessionId}': {
     /** @description This method returns the details of the specified eBay member checkout session. The checkoutSessionId is passed in as a URI parameter and is required. This method has no request payload. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    get: operations["getCheckoutSession"];
+    get: operations['getCheckoutSession'];
   };
-  "/checkout_session/initiate": {
+  '/checkout_session/initiate': {
     /** @description This method creates a eBay member checkout session, which is the first step in performing a checkout. You use this method to create a checkout session before you can process a checkout. This method assumes (and checks for) payment using PayPal, which is linked to the buyer's eBay account. You can use the updatePaymentInfo method to pay by a credit card. If the address submitted cannot be validated, a warning message will be returned. The method returns a checkoutSessionId that you use as a URI parameter in subsequent checkout methods. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. Tip: To test the entire checkout flow, you might need a &quot;test&quot; credit card. You can generate a credit card number from http://www.getcreditcardnumbers.com. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["initiateCheckoutSession"];
+    post: operations['initiateCheckoutSession'];
   };
-  "/checkout_session/{checkoutSessionId}/place_order": {
+  '/checkout_session/{checkoutSessionId}/place_order': {
     /** @description This method creates the purchase order, pays for the items, and terminates the specified eBay member checkout session. The checkoutSessionId is passed in as a URI parameter and is required. Although there is not a request payload, for this method you must pass in { } in the request body. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. Note: If the credit card is declined, the checkout session is unusable. You will need to create a new checkout session for the order using the initiateCheckoutSession method. */
-    post: operations["placeOrder"];
+    post: operations['placeOrder'];
   };
-  "/checkout_session/{checkoutSessionId}/remove_coupon": {
+  '/checkout_session/{checkoutSessionId}/remove_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method removes a coupon from an eBay member checkout session. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is specified in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["removeCoupon"];
+    post: operations['removeCoupon'];
   };
-  "/checkout_session/{checkoutSessionId}/update_payment_info": {
+  '/checkout_session/{checkoutSessionId}/update_payment_info': {
     /** @description This method changes the payment method information of the specified eBay member checkout session. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updatePaymentInfo"];
+    post: operations['updatePaymentInfo'];
   };
-  "/checkout_session/{checkoutSessionId}/update_quantity": {
+  '/checkout_session/{checkoutSessionId}/update_quantity': {
     /** @description This method changes the quantity of the specified line item in an eBay member checkout session. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateQuantity"];
+    post: operations['updateQuantity'];
   };
-  "/checkout_session/{checkoutSessionId}/update_shipping_address": {
+  '/checkout_session/{checkoutSessionId}/update_shipping_address': {
     /** @description This method changes the shipping address for in an eBay member checkout session. All the line items in an order must be shipped to the same address, but the shipping method can be specific to the line item. Note: If the address submitted cannot be validated, a warning message will be returned. This does not prevent the method from executing, but you may want to verify the address. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateShippingAddress"];
+    post: operations['updateShippingAddress'];
   };
-  "/checkout_session/{checkoutSessionId}/update_shipping_option": {
+  '/checkout_session/{checkoutSessionId}/update_shipping_option': {
     /** @description This method changes the shipping method for the specified line item in an eBay member checkout session. The shipping option can be set for each line item. This gives the shopper the ability choose the cost of shipping for each line item. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateShippingOption"];
+    post: operations['updateShippingOption'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/apply_coupon": {
+  '/guest_checkout_session/{checkoutSessionId}/apply_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method adds a coupon to an eBay guest checkout session and applies it to all the eligible items in the order. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions The PayPal Smart Button eBay guest payment flow does not support using coupons. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["applyGuestCoupon"];
+    post: operations['applyGuestCoupon'];
   };
-  "/guest_checkout_session/{checkoutSessionId}": {
+  '/guest_checkout_session/{checkoutSessionId}': {
     /** @description This method returns the details of the specified guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. This method has no request payload. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    get: operations["getGuestCheckoutSession"];
+    get: operations['getGuestCheckoutSession'];
   };
-  "/guest_checkout_session/initiate": {
+  '/guest_checkout_session/initiate': {
     /** @description This method creates an eBay guest checkout session, which is the first step in performing a checkout. The method returns a checkoutSessionId that you use as a URI parameter in subsequent checkout methods. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. TIP: To test the entire checkout flow, you might need a &quot;test&quot; credit card. You can generate a credit card number from http://www.getcreditcardnumbers.com. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["initiateGuestCheckoutSession"];
+    post: operations['initiateGuestCheckoutSession'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/initiate_payment": {
+  '/guest_checkout_session/{checkoutSessionId}/initiate_payment': {
     /** @description This method is used only in the PayPal Smart Button eBay guest payment flow. It sets the payment to the PayPal Checkout, which enables eBay guests to pay for their items with or without having a PayPal account without leaving your App or site. You can use this payment flow whether you are PCI compliant or not. To pay for items, buyers can either: Sign into their PayPal account and use any payment method associated with that account. Without a PayPal account, they can pay using a credit card or a direct debit from their bank account. For details about this flow, see PayPal Smart Button eBay guest payment flow. Requirement: To use this method you must integrate with PayPal's checkout.js on the client side. API URLs To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions If you want to apply or remove a coupon, you must do that before using this method. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["initiateGuestPayment"];
+    post: operations['initiateGuestPayment'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/place_order": {
+  '/guest_checkout_session/{checkoutSessionId}/place_order': {
     /** @description This method creates the purchase order, pays for the items, and terminates the specified guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. Request headers This method requires specific request headers. For details see, HTTP request headers section. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. Note: If the credit card is declined, the checkout session is unusable. You will need to create a new checkout session for the order using the initiateGuestCheckoutSession method. */
-    post: operations["placeGuestOrder"];
+    post: operations['placeGuestOrder'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/remove_coupon": {
+  '/guest_checkout_session/{checkoutSessionId}/remove_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method removes a coupon from an eBay guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is specified in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions The PayPal Smart Button eBay guest payment flow does not support using coupons. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["removeGuestCoupon"];
+    post: operations['removeGuestCoupon'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/update_payment_info": {
+  '/guest_checkout_session/{checkoutSessionId}/update_payment_info': {
     /** @description This method changes the payment method information of the specified guest checkout session. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateGuestPaymentInfo"];
+    post: operations['updateGuestPaymentInfo'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/update_quantity": {
+  '/guest_checkout_session/{checkoutSessionId}/update_quantity': {
     /** @description This method changes the quantity of the specified line item in an eBay guest checkout session. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateGuestQuantity"];
+    post: operations['updateGuestQuantity'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/update_shipping_address": {
+  '/guest_checkout_session/{checkoutSessionId}/update_shipping_address': {
     /** @description This method changes the shipping address for the order in an eBay guest checkout session. All the line items in an order must be shipped to the same address, but the shipping method can be specific to the line item. Note: If the address submitted cannot be validated, a warning message will be returned. This does not prevent the method from executing, but you may want to verify the address. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateGuestShippingAddress"];
+    post: operations['updateGuestShippingAddress'];
   };
-  "/guest_checkout_session/{checkoutSessionId}/update_shipping_option": {
+  '/guest_checkout_session/{checkoutSessionId}/update_shipping_option': {
     /** @description This method changes the shipping method for the specified line item in an eBay guest checkout session. The shipping option can be set for each line item. This gives the shopper the ability choose the cost of shipping for each line item. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateGuestShippingOption"];
+    post: operations['updateGuestShippingOption'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/apply_coupon": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/apply_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method adds a coupon to an eBay proxy guest checkout session and applies it to all the eligible items in the order. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions Maximum: One coupon per order For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["applyProxyGuestCoupon"];
+    post: operations['applyProxyGuestCoupon'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}': {
     /** @description This method returns the details of the specified eBay proxy guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. This method has no request payload. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    get: operations["getProxyGuestCheckoutSession"];
+    get: operations['getProxyGuestCheckoutSession'];
   };
-  "/proxy_guest_checkout_session/initiate": {
+  '/proxy_guest_checkout_session/initiate': {
     /** @description This method creates an eBay proxy guest checkout session, which is a payment flow that requires integration with a VSP (vault service provider), such as Braintree. The VSP handles only the methods within this flow that contain payment information. This method returns the details of the order and a marketplace specific checkoutSessionId that you use as a URI parameter in subsequent proxy_guest_checkout_session resource checkout methods. For details about the VSP payment flow, see Vault service eBay guest payment flow. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. TIP: To test the entire checkout flow, you might need a &quot;test&quot; credit card. You can generate a credit card number from http://www.getcreditcardnumbers.com. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["initiateProxyGuestCheckoutSession"];
+    post: operations['initiateProxyGuestCheckoutSession'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/place_order": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/place_order': {
     /** @description This method creates the proxy guest purchase order, pays for the items, and terminates the specified guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Also see Negative Testing Using Stubs for information on how to emulate error conditions for this method using stubs. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["placeProxyGuestOrder"];
+    post: operations['placeProxyGuestOrder'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/remove_coupon": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/remove_coupon': {
     /** @description (Limited Release) You must be whitelisted to use this method. This method removes a coupon from an eBay proxy guest checkout session. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is specified in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["removeProxyGuestCoupon"];
+    post: operations['removeProxyGuestCoupon'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/update_payment_info": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/update_payment_info': {
     /** @description This method adds or changes the payment information of the specified proxy guest checkout session. This endpoint is invoked by the VSP (vault service provider) on behalf of the eBay partner. For details about the VSP payment flow, see Vault service eBay guest payment flow. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateProxyGuestPaymentInfo"];
+    post: operations['updateProxyGuestPaymentInfo'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/update_quantity": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/update_quantity': {
     /** @description This method changes the quantity of the specified line item in an eBay proxy guest checkout session. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateProxyGuestQuantity"];
+    post: operations['updateProxyGuestQuantity'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/update_shipping_address": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/update_shipping_address': {
     /** @description This method changes the shipping address for the order in an eBay proxy guest checkout session. All the line items in an order must be shipped to the same address, but the shipping method can be specific to the line item. Note: If the address submitted cannot be validated, a warning message will be returned. This does not prevent the method from executing, but you may want to verify the address. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateProxyGuestShippingAddress"];
+    post: operations['updateProxyGuestShippingAddress'];
   };
-  "/proxy_guest_checkout_session/{checkoutSessionId}/update_shipping_option": {
+  '/proxy_guest_checkout_session/{checkoutSessionId}/update_shipping_option': {
     /** @description This method changes the shipping method for the specified line item in an eBay proxy guest checkout session. The shipping option can be set for each line item. This gives the shopper the ability choose the cost of shipping for each line item. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Note: This method is not available in the eBay API Explorer. Restrictions This method is used only when the eBay partner is using a payment vault service, such as Braintree, to process payments. The Vault service eBay guest payment flow is supported only for the EBAY_US marketplace. For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    post: operations["updateProxyGuestShippingOption"];
+    post: operations['updateProxyGuestShippingOption'];
   };
-  "/guest_purchase_order/{purchaseOrderId}": {
+  '/guest_purchase_order/{purchaseOrderId}': {
     /** @description This method retrieves the details about a specific guest purchase order. It returns the line items, including purchase order status; dates created and modified; item quantity and listing data; payment and shipping information; and prices, taxes, and discounts and credits. The purchaseOrderId is passed in as a URI parameter and is required. This method has no request payload. The placeGuestOrder or method initiates the payment process, which can sometimes take a few minutes. You can use this method to not only get the details of a purchase order but to check the value of the purchaseOrderPaymentStatus field to determine if the order has been paid for. If the order has been paid for, this field will return PAID. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    get: operations["getGuestPurchaseOrder"];
+    get: operations['getGuestPurchaseOrder'];
   };
-  "/purchase_order/{purchaseOrderId}": {
+  '/purchase_order/{purchaseOrderId}': {
     /** @description This method retrieves the details about a specific eBay member purchase order. It returns the line items, including purchase order status; dates created and modified; item quantity and listing data; payment and shipping information; and prices, taxes, and discounts and credits. The purchaseOrderId is passed in as a URI parameter and is required. This method has no request payload. The placeOrder method initiates the payment process, which can sometimes take a few minutes. You can use this method to not only get the details of a purchase order but to check the value of the purchaseOrderPaymentStatus field to determine if the order has been paid for. If the order has been paid for, this field will return PAID. This method also returns the legacyItemId, legacyTransactionId, and legacyOrderId fields. The values in these fields enable eBay partners to use the Post Order API for eBay member checkouts, to process a return or cancellation. For more information, see Post order tasks in the Buy Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
-    get: operations["getPurchaseOrder"];
+    get: operations['getPurchaseOrder'];
   };
 }
 
@@ -134,7 +133,7 @@ export interface components {
     /** @description The type that defines the fields for seller adjustments. An adjustment can be a credit or debit. */
     Adjustment: {
       /** @description The container for the amount and currency of the adjustment. */
-      amount?: components["schemas"]["Amount"];
+      amount?: components['schemas']['Amount'];
       /** @description Text that describes the adjustment. */
       label?: string;
     };
@@ -175,30 +174,30 @@ export interface components {
       /** @description The buyer's last name. */
       contactLastName?: string;
       /** @description The type that defines the fields for a line item in an eBay guest checkout session. Maximum number of line items: 10 */
-      lineItemInputs?: (components["schemas"]["LineItemInput"])[];
+      lineItemInputs?: components['schemas']['LineItemInput'][];
       /** @description The container that returns the shipping address for an eBay guest checkout session. sThe Order API supports only domestic shipping. For example, an item purchased on the EBAY_DE marketplace can be shipped only to an address in Germany. Note: If the address cannot be validated, a warning message is be returned along with the response. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
     };
     /** @description Type that defines the fields for a checkout session. */
     CheckoutSessionResponse: {
       /** @description The container that returns the payment method that can be used to purchase the items. */
-      acceptedPaymentMethods?: (components["schemas"]["PaymentMethod"])[];
+      acceptedPaymentMethods?: components['schemas']['PaymentMethod'][];
       /** @description The container that returns the information for the coupons that were applied in the checkout session. */
-      appliedCoupons?: (components["schemas"]["Coupon"])[];
+      appliedCoupons?: components['schemas']['Coupon'][];
       /** @description The checkoutSessionId submitted in the request. */
       checkoutSessionId?: string;
       /** @description The time the checkout session will end. To purchase the items the order must be placed before this time. */
       expirationDate?: string;
       /** @description An array of line items associated with the checkout session. */
-      lineItems?: (components["schemas"]["LineItem"])[];
+      lineItems?: components['schemas']['LineItem'][];
       /** @description The container that returns the grand total, costs, discounts, seller fees, and adjustments of all the line items. */
-      pricingSummary?: components["schemas"]["PricingSummary"];
+      pricingSummary?: components['schemas']['PricingSummary'];
       /** @description The container that returns the payment methods that can be used for the checkout. This is returned only if you have used the updatePaymentInfo method to change the payment method. */
-      providedPaymentInstrument?: components["schemas"]["ProvidedPaymentInstrument"];
+      providedPaymentInstrument?: components['schemas']['ProvidedPaymentInstrument'];
       /** @description The container that returns the address to which the purchase order will be shipped. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
       /** @description An array of any process errors or warnings that were generated during the method processing. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type the defines the fields for the coupon information. */
     Coupon: {
@@ -219,27 +218,27 @@ export interface components {
       /** @description The buyer's last name. */
       contactLastName?: string;
       /** @description The container that returns the credit card being used to pay for the items. */
-      creditCard?: components["schemas"]["CreditCard"];
+      creditCard?: components['schemas']['CreditCard'];
       /** @description The type that defines the fields for a line item in an eBay guest checkout session. Maximum number of line items: 10 */
-      lineItemInputs?: (components["schemas"]["LineItemInput"])[];
+      lineItemInputs?: components['schemas']['LineItemInput'][];
       /** @description The container that returns the shipping address for an eBay guest checkout session. The Order API supports only domestic shipping. For example, an item purchased on the EBAY_DE marketplace can be shipped only to an address in Germany. Note: If the address cannot be validated, a warning message is be returned along with the response. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
     };
     /** @description The type that defines the fields for creating a eBay member checkout session. */
     CreateSignInCheckoutSessionRequest: {
       /** @description The container that returns the buyer's credit card information. */
-      creditCard?: components["schemas"]["CreditCard"];
+      creditCard?: components['schemas']['CreditCard'];
       /** @description The container for the line item information fields in an eBay member checkout session. Maximum number of line items: 10 */
-      lineItemInputs?: (components["schemas"]["LineItemInput"])[];
+      lineItemInputs?: components['schemas']['LineItemInput'][];
       /** @description The container for the shipping address information in an eBay member checkout session. The Order API supports only domestic shipping. For example, an item purchased on the EBAY_DE marketplace can be shipped only to an address in Germany. Note: If the address cannot be validated, a warning message is be returned along with the response. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
     };
     /** @description The type that defines the fields for the credit card that's used to pay for the items. */
     CreditCard: {
       /** @description The name of the card holder under which the credit card was issued. */
       accountHolderName?: string;
       /** @description The container that returns the billing address of the card holder. Note: If the address cannot be validated, a warning message will be returned. */
-      billingAddress?: components["schemas"]["BillingAddress"];
+      billingAddress?: components['schemas']['BillingAddress'];
       /** @description The type of the credit car, such as Visa or MasterCard. */
       brand?: string;
       /** @description The credit card number on the card. */
@@ -247,12 +246,12 @@ export interface components {
       /** @description The Card Verification Value of the credit card. This value is also known as the card verification code (CVC) or card security code (CSC). This is a three-digit number on VISA, MasterCard, and Discover branded credit and debit cards. On American Express branded cards, this is a four-digit numeric code. Note: This number is not the PIN associated with the card. */
       cvvNumber?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The month the credit card expires.
        */
       expireMonth?: number;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The year the credit card expires.
        */
       expireYear?: number;
@@ -264,20 +263,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -303,39 +302,39 @@ export interface components {
     };
     GuestCheckoutSessionResponse: {
       /** @description The container that returns the payment method that can be used to purchase the items. */
-      acceptedPaymentMethods?: (components["schemas"]["PaymentMethod"])[];
+      acceptedPaymentMethods?: components['schemas']['PaymentMethod'][];
       /** @description The container that returns the information for the coupons that were applied in the checkout session. */
-      appliedCoupons?: (components["schemas"]["Coupon"])[];
+      appliedCoupons?: components['schemas']['Coupon'][];
       /** @description The checkoutSessionId submitted in the request. */
       checkoutSessionId?: string;
       /** @description The time the checkout session will end. To purchase the items the order must be placed before this time. */
       expirationDate?: string;
       /** @description An array of line items associated with the checkout session. */
-      lineItems?: (components["schemas"]["LineItem"])[];
+      lineItems?: components['schemas']['LineItem'][];
       /** @description The container that returns the marketing consent fields. These fields show the legal marketing consent message to be shown to the buyer when they place the order, and the marketing channels, for example email, and marketing types, for example promotions, the buyer can choose to receive. */
-      marketingMessages?: (components["schemas"]["MarketingMessage"])[];
+      marketingMessages?: components['schemas']['MarketingMessage'][];
       /** @description The container that returns the grand total, costs, discounts, seller fees, and adjustments of all the line items. */
-      pricingSummary?: components["schemas"]["PricingSummary"];
+      pricingSummary?: components['schemas']['PricingSummary'];
       /** @description The container that returns the payment methods that can be used for the checkout. This is returned only if you have used the updatePaymentInfo method to change the payment method. */
-      providedPaymentInstrument?: components["schemas"]["ProvidedPaymentInstrument"];
+      providedPaymentInstrument?: components['schemas']['ProvidedPaymentInstrument'];
       /** @description The container that returns the address to which the purchase order will be shipped. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
       /** @description An array of any process errors or warnings that were generated during the method processing. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields that enables the buyer to give or withhold their permission to receive marketing messages. */
     GuestPlaceOrderRequest: {
       /** @description The container for the marketing channels, the types of messages the buyer can choose to receive, and the field to indicate whether the buyer wants to receive marketing materials from eBay. These fields are required for all marketplaces. See Marketing Consent Notice for details. */
-      marketingTerms?: (components["schemas"]["MarketingTerms"])[];
+      marketingTerms?: components['schemas']['MarketingTerms'][];
     };
     /** @description The type that defines the fields for a guest purchase order. */
     GuestPurchaseOrder: {
       /** @description The container that returns the information for the coupons that were applied in the order. */
-      appliedCoupons?: (components["schemas"]["Coupon"])[];
+      appliedCoupons?: components['schemas']['Coupon'][];
       /** @description An array of the line items in the order. */
-      lineItems?: (components["schemas"]["OrderLineItem"])[];
+      lineItems?: components['schemas']['OrderLineItem'][];
       /** @description The container that returns the monetary details of the order. */
-      pricingSummary?: components["schemas"]["PricingSummary"];
+      pricingSummary?: components['schemas']['PricingSummary'];
       /** @description The creation date of the purchase order. */
       purchaseOrderCreationDate?: string;
       /** @description The unique identifier of the purchase order. This value was returned in the purchaseOrderId field by the placeGuestOrder method. */
@@ -345,21 +344,21 @@ export interface components {
       /** @description An enumeration value that indicates the current status of the buyer's payment and any refund that applies to the purchase order. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PurchaseOrderStatusEnum.html'>eBay API documentation</a> */
       purchaseOrderStatus?: string;
       /** @description The total amount of any refunds for the purchase order. */
-      refundedAmount?: components["schemas"]["Amount"];
+      refundedAmount?: components['schemas']['Amount'];
       /** @description The container for any warning messages. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type the defines the fields for the details of an image, such as size and URL. Currently only imageUrl is getting populated. The height and width were added for future use. */
     Image: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       height?: number;
       /** @description The URL of the image. */
       imageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       width?: number;
@@ -383,26 +382,26 @@ export interface components {
     /** @description The container that returns an individual line item in a checkout transaction. */
     LineItem: {
       /** @description The cost of a single item in this line item. This is the starting point for computing the price during checkout session. */
-      baseUnitPrice?: components["schemas"]["Amount"];
+      baseUnitPrice?: components['schemas']['Amount'];
       /** @description An eBay-assigned URL that points to an image of the item. eBay assigns the URL when the seller uploads the image. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description A unique eBay-assigned ID value that identifies the item. */
       itemId?: string;
       /** @description A unique eBay-assigned ID value that identifies the line item in a checkout session. */
       lineItemId?: string;
       /** @description The total cost for the items in this line item taking into account the quantity and applying any seller item discounts, such as Buy 1 Get 1, and any coupon that applies to this item. Note: This also does not include any shipping discounts, shipping costs, fees, or seller adjustments. */
-      netPrice?: components["schemas"]["Amount"];
+      netPrice?: components['schemas']['Amount'];
       /** @description An array of promotions applied with the item of this line item. */
-      promotions?: (components["schemas"]["Promotion"])[];
+      promotions?: components['schemas']['Promotion'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of individual items ordered for this line item, as specified by the buyer.
        */
       quantity?: number;
       /** @description The container that returns the information about the seller, such as their eBay user name. */
-      seller?: components["schemas"]["Seller"];
+      seller?: components['schemas']['Seller'];
       /** @description An array of the shipping methods that are available for the line item. By default, the first one will be selected. */
-      shippingOptions?: (components["schemas"]["ShippingOption"])[];
+      shippingOptions?: components['schemas']['ShippingOption'][];
       /** @description This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.). */
       shortDescription?: string;
       /** @description The seller created title of the item. */
@@ -413,7 +412,7 @@ export interface components {
       /** @description The eBay identifier of an item. This ID is returned by the Browse and Feed API methods. The ID must be in RESTful item ID format. For example: v1|262446562346|561248611424 or v1|112330214619|0. For more information about item ID for RESTful APIs, see the Legacy API compatibility. Each itemId will become a single line item. You can have a maximum of 10 itemId(s) per checkout. Maximum: 10 */
       itemId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items ordered in this line item.
        */
       quantity?: number;
@@ -423,7 +422,7 @@ export interface components {
       /** @description A unique eBay-assigned ID value to identify the line item in a purchase order. */
       lineItemId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of individual items ordered for this line item, as specified by the buyer.
        */
       quantity?: number;
@@ -433,29 +432,29 @@ export interface components {
       /** @description This field returns the following marketing consent legal message. This message is to be shown to the buyer when they place the order. I agree to receive marketing offers, promotions, and surveys from eBay through emails. */
       legalMessage?: string;
       /** @description A list of enumeration values representing the marketing channels, such as email, that the buyer can choose to receive. These are to be shown to the buyer when they place the order. */
-      marketingChannels?: (string)[];
+      marketingChannels?: string[];
       /** @description A list of enumeration values representing the marketing types, such as OFFER, that the buyer can choose to receive. These are to be shown to the buyer when they place the order. */
-      marketingTypes?: (string)[];
+      marketingTypes?: string[];
     };
     /** @description The type that defines the fields used to let the buyer opt-in or opt-out-of receiving marketing messages. And the list of marketing channels and types. */
     MarketingTerms: {
       /** @description An enumeration value representing the available marketing channels, such as EMAIL. Valid Values: EMAIL */
-      marketingChannels?: (string)[];
+      marketingChannels?: string[];
       /** @description A boolean that indicates whether the buyer wants to receive marketing messages. */
       marketingTermsAccepted?: boolean;
       /** @description An enumeration value representing the available types of marketing messages. Valid Values: OFFER PROMOTION SURVEY Required: You must always pass in all these values, even if marketingTermsAccepted is set to false. See the Samples for an example. */
-      marketingTypes?: (string)[];
+      marketingTypes?: string[];
     };
     /** @description The type that defines the fields for line item information in a purchase order. */
     OrderLineItem: {
       /** @description The cost of a single item in this line item. */
-      baseUnitPrice?: components["schemas"]["Amount"];
+      baseUnitPrice?: components['schemas']['Amount'];
       /** @description The URL of the item's image. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The identifier of the item. */
       itemId?: string;
       /** @description The container that returns fields to support using the Post Order API for returns and cancellations. For information about what is returned in these fields and how to use the Post Order API, see Using the Post Order API. Note: The Post Order API can be used only with eBay member checkouts. */
-      legacyReference?: components["schemas"]["LegacyReference"];
+      legacyReference?: components['schemas']['LegacyReference'];
       /** @description The identifier of this line item. This is created by the initiateCheckoutSession for a member and initiateGuestCheckoutSession for a guest calls. */
       lineItemId?: string;
       /** @description An enumeration value that indicates the payment status of this line item. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/LineItemPaymentStatusEnum.html'>eBay API documentation</a> */
@@ -463,27 +462,27 @@ export interface components {
       /** @description An enumeration value that indicates the fulfillment state of this line item. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/LineItemStatusEnum.html'>eBay API documentation</a> */
       lineItemStatus?: string;
       /** @description The total cost for the items in this line item taking into account the quantity and applying any seller item discounts, such as Buy 1 Get 1, and any coupon that applies to this item. Note : This does not include any shipping discounts, shipping costs, or seller adjustments. */
-      netPrice?: components["schemas"]["Amount"];
+      netPrice?: components['schemas']['Amount'];
       /** @description For future use. The unique order ID for this line item. This value is the new eBay unique order ID, which is being rolled out starting in Summer 2019. In the future, this will replace the lineItems.legacyReference fields you use in the Post Order API. For details see, Easier order management with updated order numbers. */
       orderId?: string;
       /** @description An array of promotions applied to the items in this line item. */
-      promotions?: (components["schemas"]["Promotion"])[];
+      promotions?: components['schemas']['Promotion'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of individual items in this line item.
        */
       quantity?: number;
       /** @description The container for information about the seller offering this item, such as the seller's user name. */
-      seller?: components["schemas"]["Seller"];
+      seller?: components['schemas']['Seller'];
       /** @description Information about the shipping provider used for this line item. */
-      shippingDetail?: components["schemas"]["ShippingDetail"];
+      shippingDetail?: components['schemas']['ShippingDetail'];
       /** @description The seller created title of the item. */
       title?: string;
     };
     /** @description The type that defines the fields for the reference information about the payment method. */
     PaymentInstrument: {
       /** @description The name of the credit card company (brand). */
-      brand?: components["schemas"]["PaymentMethodBrand"];
+      brand?: components['schemas']['PaymentMethodBrand'];
       /** @description An enumeration value that indicates the method of payment, such as credit card. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PaymentMethodTypeEnum.html'>eBay API documentation</a> */
       paymentMethodType?: string;
     };
@@ -499,18 +498,18 @@ export interface components {
       /** @description Text indicating the payment type. For example, when paying by credit card, this label will be CC . When paying using PayPal Smart Button eBay guest payment flow the label will be WALLET. */
       label?: string;
       /** @description The URL of the image of the payment method logo. */
-      logoImage?: components["schemas"]["Image"];
+      logoImage?: components['schemas']['Image'];
       /** @description An array of credit card brands that can be used as the payment method. */
-      paymentMethodBrands?: (components["schemas"]["PaymentMethodBrand"])[];
+      paymentMethodBrands?: components['schemas']['PaymentMethodBrand'][];
       /** @description The type that defines the fields for legal messages and buyer consent verification. */
-      paymentMethodMessages?: (components["schemas"]["PaymentMethodMessage"])[];
+      paymentMethodMessages?: components['schemas']['PaymentMethodMessage'][];
       /** @description An enumeration value that indicates the method of payment, such as credit card. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PaymentMethodTypeEnum.html'>eBay API documentation</a> */
       paymentMethodType?: string;
     };
     /** @description The type that defines the fields for the credit card company (brand), which can be used as the payment method. */
     PaymentMethodBrand: {
       /** @description The URL of the image of the credit card company (brand). */
-      logoImage?: components["schemas"]["Image"];
+      logoImage?: components['schemas']['Image'];
       /** @description An enumeration value that indicates the credit card company (brand). For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PaymentMethodBrandEnum.html'>eBay API documentation</a> */
       paymentMethodBrandType?: string;
     };
@@ -528,30 +527,30 @@ export interface components {
     /** @description The type that defines the fields for the costs, discounts, and seller fees and adjustments of all the line items. */
     PricingSummary: {
       /** @description The total amount of the coupon discounts in the purchase order. */
-      additionalSavings?: components["schemas"]["Amount"];
+      additionalSavings?: components['schemas']['Amount'];
       /** @description The total amount of any seller adjustments. An adjustment can be a credit or debit. This is used to catch any monetary changes to the purchase order that are not already captured in one of the other fields. */
-      adjustment?: components["schemas"]["Adjustment"];
+      adjustment?: components['schemas']['Adjustment'];
       /** @description The shipping cost for all the line items before any shipping discounts are applied. Let's say there were 4 line items and the shipping cost for each line item is $5. One of the line items qualifies for free shipping. The deliveryCost value would be $20, which is the total cost for shipping all the line items before any discounts were appiled. */
-      deliveryCost?: components["schemas"]["Amount"];
+      deliveryCost?: components['schemas']['Amount'];
       /** @description The total amount of the order shipping discounts for the all line items, such as free shipping. Let's say there were 4 line items and the shipping cost for each line items is $5. One of the line items qualifies for free shipping. The deliveryDiscounts value would be 5, which is the value of the free shipping discount. Note: This will always be a negative number. */
-      deliveryDiscount?: components["schemas"]["Amount"];
+      deliveryDiscount?: components['schemas']['Amount'];
       /** @description The total amount of any fees for all the line items, such as a recycling fee. */
-      fee?: components["schemas"]["Amount"];
+      fee?: components['schemas']['Amount'];
       /** @description The sum of the Global Shipping Program import charges for all line items. */
-      importCharges?: components["schemas"]["Amount"];
+      importCharges?: components['schemas']['Amount'];
       /** @description The total amount of all the item discounts for all line items, such as Buy 1 Get 1 free. Let's say there were 4 line items. One of the line items qualifies for free shipping, which is $5 and two items qualify for a Buy 1 Get 1 offer, which is a $6 and a $15 discount. The priceDiscount value would be 21, which is the total of the two Buy 1 Get 1 discounts. The shipping discount is not included. It is returned in the deliveryDiscount field. Note: This will always be a negative number. */
-      priceDiscount?: components["schemas"]["Amount"];
+      priceDiscount?: components['schemas']['Amount'];
       /** @description The total amount for all the line items taking into account the item quantity but before adding in taxes and shipping costs, or applying discounts, fees, and adjustments. */
-      priceSubtotal?: components["schemas"]["Amount"];
+      priceSubtotal?: components['schemas']['Amount'];
       /** @description The total amount of the taxes for all the line items. */
-      tax?: components["schemas"]["Amount"];
+      tax?: components['schemas']['Amount'];
       /** @description The total of the purchase order. total = priceSubtotal + baseDeliveryCost + tax + importCharges + deliveryDiscounts + priceDiscount + adjustment. Note: deliveryDiscounts and priceDiscount are negative numbers. */
-      total?: components["schemas"]["Amount"];
+      total?: components['schemas']['Amount'];
     };
     /** @description The type that defines the fields for the details of an item promotion. */
     Promotion: {
       /** @description The discount amount on the applied promotional offer. */
-      discount?: components["schemas"]["Amount"];
+      discount?: components['schemas']['Amount'];
       /** @description Note: This field is not return in the purchase order methods response. */
       discountPercentage?: string;
       /** @description The text for the promotion title, which describes the promotion. For example, Buy 1 Get 1. */
@@ -564,22 +563,22 @@ export interface components {
     /** @description The type that defines the fields for reference information about the payment method. This is returned only if you have used the updatePaymentInfo method to change the payment method. */
     ProvidedPaymentInstrument: {
       /** @description The container that returns the payment reference, such as last four digits of a credit card. */
-      paymentInstrumentReference?: components["schemas"]["PaymentInstrumentReference"];
+      paymentInstrumentReference?: components['schemas']['PaymentInstrumentReference'];
       /** @description The container that returns the name and logo of the payment company (brand), such as Visa. */
-      paymentMethodBrand?: components["schemas"]["PaymentMethodBrand"];
+      paymentMethodBrand?: components['schemas']['PaymentMethodBrand'];
       /** @description An enumeration value that indicates the method of payment, such as CREDIT_CARD. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PaymentMethodTypeEnum.html'>eBay API documentation</a> */
       paymentMethodType?: string;
     };
     /** @description The type that defines the fields for a purchase order, including line items, costs and charges, payment method, and the purchase order status. */
     PurchaseOrder: {
       /** @description The container that returns the information for the coupons that were applied in the order. */
-      appliedCoupons?: (components["schemas"]["Coupon"])[];
+      appliedCoupons?: components['schemas']['Coupon'][];
       /** @description An array of line items in the purchase order. */
-      lineItems?: (components["schemas"]["OrderLineItem"])[];
+      lineItems?: components['schemas']['OrderLineItem'][];
       /** @description The payment method used for the purchase order. */
-      paymentInstrument?: components["schemas"]["PaymentInstrument"];
+      paymentInstrument?: components['schemas']['PaymentInstrument'];
       /** @description The container that returns the monetary details of the order. */
-      pricingSummary?: components["schemas"]["PricingSummary"];
+      pricingSummary?: components['schemas']['PricingSummary'];
       /** @description The timestamp of when the purchase order was created. */
       purchaseOrderCreationDate?: string;
       /** @description The unique identifier of the purchase order. This value was returned in the purchaseOrderId field by the place order guest methods. */
@@ -589,13 +588,13 @@ export interface components {
       /** @description The container for the current status of the buyer's payment and any refund that applies to the purchase order. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PurchaseOrderStatusEnum.html'>eBay API documentation</a> */
       purchaseOrderStatus?: string;
       /** @description The total amount of any refunds for purchase order. */
-      refundedAmount?: components["schemas"]["Amount"];
+      refundedAmount?: components['schemas']['Amount'];
       /** @description The shipping address for the purchase order. */
-      shippingAddress?: components["schemas"]["ShippingAddress"];
+      shippingAddress?: components['schemas']['ShippingAddress'];
       /** @description An array of the shipping providers and the purchase order delivery details. */
-      shippingFulfillments?: (components["schemas"]["ShippingFulfillment"])[];
+      shippingFulfillments?: components['schemas']['ShippingFulfillment'][];
       /** @description An array of warning messages. These type of errors do not prevent the call from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields for the summary of a purchase order. */
     PurchaseOrderSummary: {
@@ -606,14 +605,14 @@ export interface components {
       /** @description An enumeration value that indicates the payment status for the purchase order. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/order/types/PurchaseOrderPaymentStatusEnum.html'>eBay API documentation</a> */
       purchaseOrderPaymentStatus?: string;
       /** @description An array of warning messages. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields for the basic seller information. */
     Seller: {
       /** @description The percentage of the total positive feedback. */
       feedbackPercentage?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
        */
       feedbackScore?: number;
@@ -631,7 +630,7 @@ export interface components {
       /** @description A normalized string for shipment tracking event. For example: OUT_FOR_DELIVERY */
       eventType?: string;
       /** @description Where the shipment tracking event occurred. For example: The city, state, postal code, and country of where the package was delivered. */
-      location?: components["schemas"]["EventLocation"];
+      location?: components['schemas']['EventLocation'];
     };
     /** @description The type that defines the fields for a shipping address. For restrictions, see Shipping restrictions. */
     ShippingAddress: {
@@ -691,13 +690,13 @@ export interface components {
       /** @description The date the purchase order was delivered. */
       actualDeliveryDate?: string;
       /** @description The container the returns the fields for the line item ID and the quantity. */
-      lineItemReferences?: (components["schemas"]["LineItemReference"])[];
+      lineItemReferences?: components['schemas']['LineItemReference'][];
       /** @description The end of the date range in which the purchase order is expected to be delivered to the shipping address. */
       maxEstimatedDeliveryDate?: string;
       /** @description The beginning of the date range in which the purchase order is expected to be delivered to the shipping address. */
       minEstimatedDeliveryDate?: string;
       /** @description The container that returns all the shipment tracking events. */
-      shipmentTrackingEvents?: (components["schemas"]["ShipmentTrackingEvents"])[];
+      shipmentTrackingEvents?: components['schemas']['ShipmentTrackingEvents'][];
       /** @description The shipping provider number associated with the purchase order that can be used to track the package. */
       shipmentTrackingNumber?: string;
       /** @description The URL of the shipping provider's shipment tracking page. */
@@ -712,11 +711,11 @@ export interface components {
     /** @description The type that defines the fields for the shipping options. */
     ShippingOption: {
       /** @description The shipping cost using this shipping option for this line item before any shipping discounts. */
-      baseDeliveryCost?: components["schemas"]["Amount"];
+      baseDeliveryCost?: components['schemas']['Amount'];
       /** @description The monetary value of any delivery discount. */
-      deliveryDiscount?: components["schemas"]["Amount"];
+      deliveryDiscount?: components['schemas']['Amount'];
       /** @description The Global Shipping Program import charges for this line item. */
-      importCharges?: components["schemas"]["Amount"];
+      importCharges?: components['schemas']['Amount'];
       /** @description The end of the date range in which the purchase order is expected to be delivered to the shipping address. */
       maxEstimatedDeliveryDate?: string;
       /** @description The beginning of the date range in which the purchase order is expected to be delivered to the shipping address. */
@@ -733,16 +732,16 @@ export interface components {
     /** @description The type that defines the fields for payment information. */
     UpdatePaymentInformation: {
       /** @description Container for the buyer's credit card information. */
-      creditCard?: components["schemas"]["CreditCard"];
+      creditCard?: components['schemas']['CreditCard'];
       /** @description The container that returns the wallet payment token. Note: Currently, this is supported only for eBay Guest checkouts. Support for eBay Member checkouts will be available in 2019. */
-      wallet?: components["schemas"]["Wallet"];
+      wallet?: components['schemas']['Wallet'];
     };
     /** @description The type that defines the fields used to update the quantity of a line item. */
     UpdateQuantity: {
       /** @description A unique eBay-assigned ID value that identifys a line item in a purchase order. */
       lineItemId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of individual items ordered in this line item, as specified by the buyer.
        */
       quantity?: number;
@@ -770,7 +769,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description (Limited Release) You must be whitelisted to use this method. This method adds a coupon to an eBay proxy guest checkout session and applies it to all the eligible items in the order. The checkoutSessionId is passed in as a URI parameter and is required. The redemption code of the coupon is in the payload and is also required. To meet security requirements for payments, the URLs for this method are: Production URL: https://apix.ebay.com/buy/order/v1 Sandbox URL: https://apix.sandbox.ebay.com/buy/order/v1 Restrictions Maximum: One coupon per order For a list of supported sites and other restrictions, see API Restrictions in the Order API overview. */
   applyCoupon: {
     parameters: {
@@ -782,14 +780,14 @@ export interface operations {
     /** @description The container for the fields used to apply a coupon to a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -816,7 +814,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -836,14 +834,14 @@ export interface operations {
     /** @description The container for the fields used by the initiateCheckoutSession method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CreateSignInCheckoutSessionRequest"];
+        'application/json': components['schemas']['CreateSignInCheckoutSessionRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -866,7 +864,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PurchaseOrderSummary"];
+          'application/json': components['schemas']['PurchaseOrderSummary'];
         };
       };
       /** @description Bad Request */
@@ -892,14 +890,14 @@ export interface operations {
     /** @description The container for the fields used to remove a coupon from a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -925,14 +923,14 @@ export interface operations {
     /** @description The container for the fields used by the updatePaymentInfo method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdatePaymentInformation"];
+        'application/json': components['schemas']['UpdatePaymentInformation'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -958,14 +956,14 @@ export interface operations {
     /** @description The container for the fields used by the updateQuantity method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateQuantity"];
+        'application/json': components['schemas']['UpdateQuantity'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -991,14 +989,14 @@ export interface operations {
     /** @description The container for the fields used by the updateShippingAddress method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["ShippingAddressImpl"];
+        'application/json': components['schemas']['ShippingAddressImpl'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1024,14 +1022,14 @@ export interface operations {
     /** @description The container for the fields used by the updateShippingOption method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateShippingOption"];
+        'application/json': components['schemas']['UpdateShippingOption'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1057,14 +1055,14 @@ export interface operations {
     /** @description The container for the fields used to apply a coupon to a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1091,7 +1089,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1111,14 +1109,14 @@ export interface operations {
     /** @description The container for the fields used by the initiateGuestCheckoutSession method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CreateGuestCheckoutSessionRequest"];
+        'application/json': components['schemas']['CreateGuestCheckoutSessionRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1140,14 +1138,14 @@ export interface operations {
     /** @description The container for the fields used by the initiateGuestPayment method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["InitiatePaymentRequest"];
+        'application/json': components['schemas']['InitiatePaymentRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1173,14 +1171,14 @@ export interface operations {
     /** @description The container for the fields used by the placeGuestOrder method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["GuestPlaceOrderRequest"];
+        'application/json': components['schemas']['GuestPlaceOrderRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PurchaseOrderSummary"];
+          'application/json': components['schemas']['PurchaseOrderSummary'];
         };
       };
       /** @description Bad Request */
@@ -1206,14 +1204,14 @@ export interface operations {
     /** @description The container for the fields used to remove a coupon from a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1239,14 +1237,14 @@ export interface operations {
     /** @description The container for the fields used by the updateGuestPaymentInfo method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdatePaymentInformation"];
+        'application/json': components['schemas']['UpdatePaymentInformation'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1272,14 +1270,14 @@ export interface operations {
     /** @description The container for the fields used by the updateGuestQuantity method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateQuantity"];
+        'application/json': components['schemas']['UpdateQuantity'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1305,14 +1303,14 @@ export interface operations {
     /** @description The container for the fields used by the updateGuestShippingAddress method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["ShippingAddressImpl"];
+        'application/json': components['schemas']['ShippingAddressImpl'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1338,14 +1336,14 @@ export interface operations {
     /** @description The container for the fields used by the updateGuestShippingOption method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateShippingOption"];
+        'application/json': components['schemas']['UpdateShippingOption'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1371,14 +1369,14 @@ export interface operations {
     /** @description The container for the fields used to apply a coupon to a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1405,7 +1403,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1425,14 +1423,14 @@ export interface operations {
     /** @description The container for the fields used by the initiateProxyGuestCheckoutSession method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CheckoutSessionRequestWithoutPayment"];
+        'application/json': components['schemas']['CheckoutSessionRequestWithoutPayment'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1456,14 +1454,14 @@ export interface operations {
     /** @description The container for the fields used by the placeProxyGuestOrder method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["GuestPlaceOrderRequest"];
+        'application/json': components['schemas']['GuestPlaceOrderRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PurchaseOrderSummary"];
+          'application/json': components['schemas']['PurchaseOrderSummary'];
         };
       };
       /** @description Bad Request */
@@ -1489,14 +1487,14 @@ export interface operations {
     /** @description The container for the fields used to remove a coupon from a checkout session. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CouponRequest"];
+        'application/json': components['schemas']['CouponRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckoutSessionResponse"];
+          'application/json': components['schemas']['CheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1518,13 +1516,13 @@ export interface operations {
         /** @description The oAuth token. Note: The eBay partner must include this header in the request. */
         Authorization: string;
         /** @description The UTC timestamp of the request, which is generated and added to the request by the VSP. */
-        "X-EBAY-C-DATE": string;
+        'X-EBAY-C-DATE': string;
         /** @description The eBay marketplace ID. For a list of supported sites, see API Restrictions in the Order API overview. Note: The eBay partner must include this header in the request. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
         /** @description A UUID (a 128-bit universal unique ID), which is generated and added to the request by the VSP. */
-        "X-EBAY-C-REQUEST-NONCE": string;
+        'X-EBAY-C-REQUEST-NONCE': string;
         /** @description The HMAC signature, which is generated and added to the request by the VSP. */
-        "X-EBAY-C-SIGNATURE": string;
+        'X-EBAY-C-SIGNATURE': string;
       };
       path: {
         /** @description The eBay-assigned session ID, for a specific eBay marketplace, that is returned by the initiateProxyGuestCheckoutSession method. Note: When using this ID, the X-EBAY-C-MARKETPLACE-ID value and developer App ID must be the same as what was used when this checkout session was created. See Checkout session restrictions in the Buy Integration Guide. */
@@ -1534,14 +1532,14 @@ export interface operations {
     /** @description The container for the fields used by the updateProxyGuestPaymentInfo method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdatePaymentInformation"];
+        'application/json': components['schemas']['UpdatePaymentInformation'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1567,14 +1565,14 @@ export interface operations {
     /** @description The container for the fields used by the updateProxyGuestQuantity method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateQuantity"];
+        'application/json': components['schemas']['UpdateQuantity'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1600,14 +1598,14 @@ export interface operations {
     /** @description The container for the fields used by the updateProxyGuestShippingAddress method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["ShippingAddressImpl"];
+        'application/json': components['schemas']['ShippingAddressImpl'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1633,14 +1631,14 @@ export interface operations {
     /** @description The container for the fields used by the updateProxyGuestShippingOption method. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateShippingOption"];
+        'application/json': components['schemas']['UpdateShippingOption'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestCheckoutSessionResponse"];
+          'application/json': components['schemas']['GuestCheckoutSessionResponse'];
         };
       };
       /** @description Bad Request */
@@ -1667,7 +1665,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["GuestPurchaseOrder"];
+          'application/json': components['schemas']['GuestPurchaseOrder'];
         };
       };
       /** @description Bad Request */
@@ -1692,7 +1690,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PurchaseOrder"];
+          'application/json': components['schemas']['PurchaseOrder'];
         };
       };
       /** @description Bad Request */

@@ -1,5 +1,5 @@
-import { generateClasses } from '@formkit/themes'
-import { createAutoHeightTextareaPlugin } from '@formkit/addons'
+import { generateClasses } from '@formkit/themes';
+import { createAutoHeightTextareaPlugin } from '@formkit/addons';
 
 const config = {
   plugins: [createAutoHeightTextareaPlugin()],
@@ -11,7 +11,6 @@ const config = {
       //   label: '',
       //   help: '',
       // },
-
       // checkbox: {
       //   outer: '',
       //   label: '',
@@ -23,6 +22,6 @@ const config = {
       // },
     }),
   },
-}
+};
 
-export default config
+export default config;

@@ -3,23 +3,22 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/item": {
+  '/item': {
     /** @description This method lets you download a TSV_GZIP (tab separated value gzip) Item feed file. The feed file contains all the items from all the child categories of the specified category. The first line of the file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. There are two types of item feed files generated: A daily Item feed file containing all the newly listed items for a specific category, date, and marketplace (feed_scope = NEWLY_LISTED) A weekly Item Bootstrap feed file containing all the items in a specific category and marketplace (feed_scope = ALL_ACTIVE) Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Item feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The Content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. In addition to the API, there is an open source Feed SDK written in Java that downloads, combines files into a single file when needed, and unzips the entire feed file. It also lets you specify field filters to curate the items in the file. Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getItemFeed"];
+    get: operations['getItemFeed'];
   };
-  "/item_group": {
+  '/item_group': {
     /** @description This method lets you download a TSV_GZIP (tab separated value gzip) Item Group feed file. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. There are two types of item group feed files generated: A daily Item Group feed file containing the item group variation information associated with items returned in the Item feed file for a specific day, category, and marketplace. (feed_scope = NEWLY_LISTED) A weekly Item Group Bootstrap feed file containing all the item group variation information associated with items returned in the Item Bootstrap feed file for all the items in a specific category. (feed_scope = ALL_ACTIVE) Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. The contents of these feed files are based on the contents of the corresponding daily Item or Item Bootstrap feed file. When a new Item or Item Bootstrap feed file is generated, the service reads the file and if an item in the file has a primaryItemGroupId value, which indicates the item is part of an item group, it uses that value to return the item group (parent item) information for that item in the corresponding Item Group or Item Group Bootstrap feed file. This information includes the name/value pair of the aspects of the items in this group returned in the variesByLocalizedAspects column. For example, if the item was a shirt some of the variation names could be Size, Color, etc. Also the images for the various aspects are returned in the additionalImageUrls column. The first line in any feed file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. Combining the Item Group and Item feed files The Item Group or Item Group Bootstrap feed file contains details about the item group (parent item), including the item group ID itemGroupId. You match the value of itemGroupId from the Item Group feed file with the value of primaryItemGroupId from the corresponding daily Item or Item Bootstrap feed file. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Item Group feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always only a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getItemGroupFeed"];
+    get: operations['getItemGroupFeed'];
   };
-  "/item_snapshot": {
+  '/item_snapshot': {
     /** @description The Hourly Snapshot feed file is generated each hour every day for all categories. This method lets you download an Hourly Snapshot TSV_GZIP (tab separated value gzip) feed file containing the details of all the items that have changed within the specified day and hour for a specific category. This means to generate the 8AM file of items that have changed from 8AM and 8:59AM, the service starts at 9AM. You can retrieve the 8AM snapshot file at 10AM. Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. You can use the response from this method to update the item details of items stored in your database. By comparing the value of itemSnapshotDate for the same item you will be able to tell which information is the latest. Important: When the value of the availability column is UNAVAILABLE, only the itemId and availability columns are populated. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Hourly snapshot feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The Content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getItemSnapshotFeed"];
+    get: operations['getItemSnapshotFeed'];
   };
-  "/product": {
+  '/product': {
     /** @description Each day an Item feed file is generated for every top-level (L1) category. This file contains all the newly listed items for that day that are in the category including all its child categories. Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. The service reads this Item feed file and if an item in the Item feed file has an epid (eBay Product Id) value, the service uses that value to return the product information for that item in the Product feed file for that day and category. This method lets you download the Product TSV_GZIP (tab separated value gzip) feed file containing the product information for items in the Item feed file that were associated with a product. The first line of the file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. To store all the item details provided by the Feed API, you would use the getItemFeed, getItemDescriptionFeed, getItemGroupFeed, and getProductFeed methods using the same parameters. For example: &nbsp;&nbsp;&nbsp; /item?feed_scope=NEWLY_LISTED&amp;category_id=625&amp;date=20170918 &nbsp;&nbsp;&nbsp; /item_description?feed_scope=NEWLY_LISTED&amp;category_id=625&amp;date=20170918 &nbsp;&nbsp;&nbsp; /item-group?feed_scope=NEWLY_LISTED&amp;category_id=625&amp;date=20170918 &nbsp;&nbsp;&nbsp; /product?feed_scope=NEWLY_LISTED&amp;category_id=625&amp;date=20170918 Combining the Product and Item feed files The Product feed file contains details about the product, including the product epid. You match the value of epid from the Product feed file with the value of epid from the Item feed file for the same day and category. Downloading feed files Product feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getProductFeed"];
+    get: operations['getProductFeed'];
   };
 }
 
@@ -34,20 +33,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -112,21 +111,21 @@ export interface components {
       /** @description A boolean that indicates whether the images can be altered. If the value is true, you cannot modify the image. Note: Due to image licensing agreements and other legal concerns, modification (including resizing) of some images is strictly prohibited. These images are for display as-is only. */
       imageAlteringProhibited?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.
        */
       estimatedAvailableQuantity?: number;
       /** @description This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html'>eBay API documentation</a> */
       availabilityThresholdType?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This column has a value only when the seller sets their 'display item quantity' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.
        */
       availabilityThreshold?: number;
       /** @description Indicates whether the seller accepts returns for the item. */
       returnsAccepted?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The amount of time the buyer has to return the item after the purchase date. This can be the number of years, months, or days depending on returnPeriodUnit. For example, if this value is '30', and the returnPeriodUnit value is 'DAY', the return period is 30 days.
        */
       returnPeriodValue?: number;
@@ -171,7 +170,7 @@ export interface components {
       /** @description A pipe separated list of the qualified programs available for the item. Currently, the only qualified program returned is EBAY_PLUS. Note: The EBAY_PLUS program is supported only on the EBAY_DE and EBAY_AU marketplaces. This means the qualifiedPrograms column will be populated only in feed files for these marketplaces. Program Values: EBAY_PLUS */
       qualifiedPrograms?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in a lot. In other words, a lot size is the number of items that are being sold together. A lot is a set of two or more items included in a single listing that must be purchased together in a single order line item. All the items in the lot are the same but there can be multiple items in a single lot, such as the package of batteries shown in the example below. For example: Item Lot Definition Lot Size A package of 24 AA batteries A box of 10 packages 10 A P235/75-15 Goodyear tire 4 tires 4 Fashion Jewelry Rings Package of 100 assorted rings 100 Note: Lots are not supported in all categories.
        */
       lotSize?: number;
@@ -208,12 +207,12 @@ export interface components {
     /** @description The type that defines the array for the items returned in the Item Group feed file. */
     ItemGroupResponse: {
       /** @description The container for the array of items groups returned by the getItemGroupFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values for each item. The header labels match the fields that are described in the Response fields section. */
-      itemGroups?: (components["schemas"]["ItemGroup"])[];
+      itemGroups?: components['schemas']['ItemGroup'][];
     };
     /** @description The type that defines the array for the items returned in the Item feed file. */
     ItemResponse: {
       /** @description The container for the array of items returned by the getItemFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values on each line. The header labels match the fields that are described in the Response fields section. */
-      items?: (components["schemas"]["Item"])[];
+      items?: components['schemas']['Item'][];
     };
     /** @description The type that defines the columns returned in the Hourly Snapshot feed file. Note: When the value of the availability column is UNAVAILABLE, only the itemId and availability columns are populated. */
     ItemSnapshot: {
@@ -270,14 +269,14 @@ export interface components {
       /** @description A boolean that indicates whether the images can be altered. If the value is true, you cannot modify the image. Note: Due to image licensing agreements and other legal concerns, modification (including resizing) of some images is strictly prohibited. These images are for display as-is only. */
       imageAlteringProhibited?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.
        */
       estimatedAvailableQuantity?: number;
       /** @description This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html'>eBay API documentation</a> */
       availabilityThresholdType?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This column has a value only when the seller sets their 'display item quantity' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.
        */
       availabilityThreshold?: number;
@@ -294,7 +293,7 @@ export interface components {
       /** @description Indicates whether the seller accepts returns for the item. */
       returnsAccepted?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The amount of time the buyer has to return the item after the purchase date. This can be the number of years, months, or days depending on returnPeriodUnit. For example, if this value is '30', and the returnPeriodUnit value is 'DAY', the return period is 30 days.
        */
       returnPeriodValue?: number;
@@ -321,7 +320,7 @@ export interface components {
       /** @description A pipe separated list of the qualified programs available for the item, such as EBAY_PLUS */
       qualifiedPrograms?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in a lot. In other words, a lot size is the number of items that are being sold together. A lot is a set of two or more items included in a single listing that must be purchased together in a single order line item. All the items in the lot are the same but there can be multiple items in a single lot, such as the package of batteries shown in the example below. For example: Item Lot Definition Lot Size A package of 24 AA batteries A box of 10 packages 10 A P235/75-15 Goodyear tire 4 tires 4 Fashion Jewelry Rings Package of 100 assorted rings 100 Note: Lots are not supported in all categories.
        */
       lotSize?: number;
@@ -329,7 +328,7 @@ export interface components {
     /** @description The type that defines the array for the items returned in the Hourly Snapshot feed file. */
     ItemSnapshotResponse: {
       /** @description The container for the array of items returned by the getItemSnapshotFeed method. Note: When the value of the availability column is UNAVAILABLE, only the itemId and availability columns are populated. */
-      items?: (components["schemas"]["ItemSnapshot"])[];
+      items?: components['schemas']['ItemSnapshot'][];
     };
     /** @description The type that defines the columns returned in the getProductFeed feed file. */
     Product: {
@@ -349,7 +348,7 @@ export interface components {
     /** @description The type that defines the array for the products returned in the Product feed file. */
     ProductResponse: {
       /** @description The container for the array of products returned by the getProdutFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values on each line. The header labels match the fields that are described in the Response fields section. */
-      products?: (components["schemas"]["Product"])[];
+      products?: components['schemas']['Product'][];
     };
   };
   responses: never;
@@ -362,7 +361,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method lets you download a TSV_GZIP (tab separated value gzip) Item feed file. The feed file contains all the items from all the child categories of the specified category. The first line of the file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. There are two types of item feed files generated: A daily Item feed file containing all the newly listed items for a specific category, date, and marketplace (feed_scope = NEWLY_LISTED) A weekly Item Bootstrap feed file containing all the items in a specific category and marketplace (feed_scope = ALL_ACTIVE) Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Item feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The Content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. In addition to the API, there is an open source Feed SDK written in Java that downloads, combines files into a single file when needed, and unzips the entire feed file. It also lets you specify field filters to curate the items in the file. Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
   getItemFeed: {
     parameters: {
@@ -376,7 +374,7 @@ export interface operations {
       };
       header: {
         /** @description The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
         /** @description This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, the following retrieves the first 10 MBs of the feed file. &nbsp;&nbsp;Range bytes=0-10485760 For more information about using this headers, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox) */
         Range: string;
       };
@@ -385,11 +383,11 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemResponse"];
+          'text/tab-separated-values': components['schemas']['ItemResponse'];
         };
       };
       /** @description No Content <br />This code is returned when there are no items that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details. */
@@ -397,11 +395,11 @@ export interface operations {
       /** @description Partial Content */
       206: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemResponse"];
+          'text/tab-separated-values': components['schemas']['ItemResponse'];
         };
       };
       /** @description Bad request */
@@ -427,7 +425,7 @@ export interface operations {
       };
       header: {
         /** @description The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
         /** @description This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, the following retrieves the first 10 MBs of the feed file. &nbsp;&nbsp;Range bytes=0-10485760 For more information about using this headers, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox) */
         Range?: string;
       };
@@ -436,11 +434,11 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemGroupResponse"];
+          'text/tab-separated-values': components['schemas']['ItemGroupResponse'];
         };
       };
       /** @description No Content <br />This code is returned when there are no items that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details. */
@@ -448,11 +446,11 @@ export interface operations {
       /** @description Partial Content */
       206: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemGroupResponse"];
+          'text/tab-separated-values': components['schemas']['ItemGroupResponse'];
         };
       };
       /** @description Bad request */
@@ -476,7 +474,7 @@ export interface operations {
       };
       header: {
         /** @description The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
         /** @description This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, the following retrieves the first 10 MBs of the feed file. &nbsp;&nbsp;Range bytes=0-10485760 For more information about using this headers, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox) */
         Range: string;
       };
@@ -485,11 +483,11 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemSnapshotResponse"];
+          'text/tab-separated-values': components['schemas']['ItemSnapshotResponse'];
         };
       };
       /** @description No Content <br />This code is returned when there are no items that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details. */
@@ -497,11 +495,11 @@ export interface operations {
       /** @description Partial Content */
       206: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ItemSnapshotResponse"];
+          'text/tab-separated-values': components['schemas']['ItemSnapshotResponse'];
         };
       };
       /** @description Bad request */
@@ -527,7 +525,7 @@ export interface operations {
       };
       header: {
         /** @description The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
         /** @description This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, this retrieves the first 10 MBs of the feed file: bytes=0-10485760 For more information about using this headers, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox) */
         Range: string;
       };
@@ -536,11 +534,11 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ProductResponse"];
+          'text/tab-separated-values': components['schemas']['ProductResponse'];
         };
       };
       /** @description No Content <br />This code is returned when there are no products that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details. */
@@ -548,11 +546,11 @@ export interface operations {
       /** @description Partial Content */
       206: {
         headers: {
-          "Content-range"?: string;
-          "Last-Modified"?: string;
+          'Content-range'?: string;
+          'Last-Modified'?: string;
         };
         content: {
-          "text/tab-separated-values": components["schemas"]["ProductResponse"];
+          'text/tab-separated-values': components['schemas']['ProductResponse'];
         };
       };
       /** @description Bad request */

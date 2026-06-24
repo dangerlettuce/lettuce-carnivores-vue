@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {PaymentsProgramType} from '../../../../enums/index.js';
+import { PaymentsProgramType } from '../../../../enums/index.js';
 import {
   CustomPolicyCreateRequest,
   CustomPolicyRequest,
@@ -9,11 +9,11 @@ import {
   InventoryLocationFull,
   PaymentPolicyRequest,
   ReturnPolicyRequest,
-  SalesTaxBase
+  SalesTaxBase,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_account_v1_oas3.js';
+import { operations } from '../../../../types/restful/specs/sell_account_v1_oas3.js';
 
-import Restful, {OpenApi} from '../../index.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The <b>Account API</b> gives sellers the ability to configure their eBay seller accounts,
@@ -21,7 +21,6 @@ import Restful, {OpenApi} from '../../index.js';
  * opt in and out of eBay seller programs, configure sales tax tables, and get account information.
  */
 export default class Account extends Restful implements OpenApi<operations> {
-
   static id = 'Account';
 
   get basePath(): string {
@@ -35,8 +34,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getCustomPolicies(policyTypes: string) {
     return this.get(`/custom_policy/`, {
       params: {
-        policy_types: policyTypes
-      }
+        policy_types: policyTypes,
+      },
     });
   }
 
@@ -76,8 +75,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getFulfillmentPolicies(marketplaceId: string) {
     return this.get(`/fulfillment_policy`, {
       params: {
-        marketplace_id: marketplaceId
-      }
+        marketplace_id: marketplaceId,
+      },
     });
   }
 
@@ -132,8 +131,8 @@ export default class Account extends Restful implements OpenApi<operations> {
     return this.get(`/fulfillment_policy/get_by_policy_name`, {
       params: {
         marketplace_id: marketplaceId,
-        name
-      }
+        name,
+      },
     });
   }
 
@@ -146,8 +145,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getPaymentPolicies(marketplaceId: string) {
     return this.get(`/payment_policy`, {
       params: {
-        marketplace_id: marketplaceId
-      }
+        marketplace_id: marketplaceId,
+      },
     });
   }
 
@@ -202,8 +201,8 @@ export default class Account extends Restful implements OpenApi<operations> {
     return this.get(`/payment_policy/get_by_policy_name`, {
       params: {
         marketplace_id: marketplaceId,
-        name
-      }
+        name,
+      },
     });
   }
 
@@ -275,8 +274,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getRateTables(countryCode?: string) {
     return this.get(`/rate_table`, {
       params: {
-        country_code: countryCode
-      }
+        country_code: countryCode,
+      },
     });
   }
 
@@ -290,8 +289,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getReturnPolicies(marketplaceId: string) {
     return this.get(`/return_policy`, {
       params: {
-        marketplace_id: marketplaceId
-      }
+        marketplace_id: marketplaceId,
+      },
     });
   }
 
@@ -346,8 +345,8 @@ export default class Account extends Restful implements OpenApi<operations> {
     return this.get(`/return_policy/get_by_policy_name`, {
       params: {
         marketplace_id: marketplaceId,
-        name
-      }
+        name,
+      },
     });
   }
 
@@ -364,7 +363,6 @@ export default class Account extends Restful implements OpenApi<operations> {
     jurisdictionId = encodeURIComponent(jurisdictionId);
     return this.get(`/sales_tax/${countryCode}/${jurisdictionId}`);
   }
-
 
   /**
    * This method creates or updates a sales tax table entry for a jurisdiction.
@@ -404,8 +402,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getSalesTaxes(countryCode: string) {
     return this.get(`/sales_tax`, {
       params: {
-        country_code: countryCode
-      }
+        country_code: countryCode,
+      },
     });
   }
 
@@ -414,12 +412,12 @@ export default class Account extends Restful implements OpenApi<operations> {
    * @param limit This field is for future use.
    * @param continuationToken This field is for future use.
    */
-  public getSubscription({limit, continuationToken}: { limit?: string, continuationToken?: string } = {}) {
+  public getSubscription({ limit, continuationToken }: { limit?: string; continuationToken?: string } = {}) {
     return this.get(`/subscription`, {
       params: {
         limit,
-        continuation_token: continuationToken
-      }
+        continuation_token: continuationToken,
+      },
     });
   }
 
@@ -427,7 +425,7 @@ export default class Account extends Restful implements OpenApi<operations> {
    * his method is used by sellers onboarded for eBay managed payments, or sellers who are currently going through, or who are eligible for onboarding for eBay managed payments.
    */
   public getKYC() {
-    return this.get(`/kyc`,);
+    return this.get(`/kyc`);
   }
 
   /**
@@ -437,8 +435,8 @@ export default class Account extends Restful implements OpenApi<operations> {
   public getAdvertisingEligibility(programTypes?: string) {
     return this.get(`/advertising_eligibility`, {
       params: {
-        program_types: programTypes
-      }
+        program_types: programTypes,
+      },
     });
   }
 
@@ -450,7 +448,6 @@ export default class Account extends Restful implements OpenApi<operations> {
     merchantLocationKey = encodeURIComponent(merchantLocationKey);
     return this.get(`/location/${merchantLocationKey}`);
   }
-
 
   /**
    * <p>Use this call to create a new inventory location.
@@ -494,12 +491,12 @@ export default class Account extends Restful implements OpenApi<operations> {
    * @param limit The value passed in this query parameter sets the maximum number of records to return per page of data.
    * @param offset Specifies the number of locations to skip in the result set before returning the first location in the paginated response.
    */
-  public getInventoryLocations({limit, offset}: { limit?: number, offset?: number } = {}) {
+  public getInventoryLocations({ limit, offset }: { limit?: number; offset?: number } = {}) {
     return this.get(`/location`, {
       params: {
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -521,5 +518,4 @@ export default class Account extends Restful implements OpenApi<operations> {
     countryCode = encodeURIComponent(countryCode);
     return this.get(`/country/${countryCode}/sales_tax_jurisdiction`);
   }
-
 }

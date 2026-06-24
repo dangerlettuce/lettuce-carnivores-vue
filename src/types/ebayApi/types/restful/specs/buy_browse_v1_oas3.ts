@@ -3,51 +3,50 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/item_summary/search": {
+  '/item_summary/search': {
     /** @description <p>This method searches for eBay items by various query parameters and retrieves summaries of the items. You can search by keyword, category, eBay product ID (ePID), or GTIN, charity ID, or a combination of these. </p><p><span class="tablenote"><b> Note: </b>Only FIXED_PRICE (Buy It Now) items are returned by default. However, this method does return items where both FIXED_PRICE and AUCTION are available as a buying option. After a bid has been placed, items become active auction items and are no longer returned by default, but they remain accessible by filtering for the AUCTION buying option.</span></p><p>This method also supports the following:  <ul> <li>Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more.  For the fields supported by this method, see the <a href="#uri.filter">filter</a> parameter.</li> <li>Retrieving the refinements (metadata) of an item , such as item aspects (color, brand), condition, category, etc. using the <a href="#uri.fieldgroups">fieldgroups</a> parameter. </li>  <li>Filtering by item aspects and other refinements using the <a href="#uri.aspect_filter">aspect_filter</a> parameter. </li> <li>Filtering for items that are compatible with a specific product, using the <a href="#uri.compatibility_filter">compatibility_filter</a> parameter. </li><li>Creating aspects histograms, which enables shoppers to drill down in each refinement narrowing the search results.  </li>  </ul></p>  <p>For details and examples of these capabilities, see <a href="/api-docs/buy/static/api-browse.html">Browse API</a> in the Buying Integration Guide.</p>     <h3><b> Pagination and sort controls</b></h3>  <p>There are pagination controls (<b>limit</b> and <b>offset</b> fields) and <b> sort</b> query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about  Best Match, see the eBay help page <a href="https://pages.ebay.com/help/sell/searchstanding.html" target="_blank">Best Match</a>.  </p>    <h3><b>URLs for this method</b></h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item_summary/search?</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?</code></li>           </ul>    </p>             <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.      <h3><b>Restrictions </b></h3> <p>This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p>    <span class="tablenote"><b>eBay Partner Network: </b> In order to receive a commission for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
-    get: operations["search"];
+    get: operations['search'];
   };
-  "/item_summary/search_by_image": {
+  '/item_summary/search_by_image': {
     /** @description <img src="/cms/img/docs/experimental-icon.svg" class="legend-icon experimental-icon" alt="Experimental Release" title="Experimental Release">  This is an <a href="https://developer.ebay.com/api-docs/static/versioning.html#experimental">Experimental</a> method. <p>This method searches for eBay items based on a image and retrieves summaries of the items. You pass in a Base64 image in the request payload and can refine the search by category, or eBay product ID (ePID), or a combination of these using URI parameters.  <br /><br />To get the Base64 image string, you can use sites such as <a href="https://codebeautify.org/image-to-base64-converter" target="_blank">https://codebeautify.org/image-to-base64-converter</a>. </p>      <p>This method also supports the following:  <ul> <li>Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more.  For the fields supported by this method, see the <a href="#uri.filter">filter</a> parameter.</li>   <li>Filtering by item aspects using the <a href="#uri.aspect_filter">aspect_filter</a> parameter. </li>  </ul></p>  <p>For details and examples of these capabilities, see <a href="/api-docs/buy/static/api-browse.html">Browse API</a> in the Buying Integration Guide.</p>     <h3><b>Pagination and sort controls</b></h3>  <p>There are pagination controls (<b>limit</b> and <b>offset</b> fields) and <b> sort</b> query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about  Best Match, see the eBay help page <a href="https://pages.ebay.com/help/sell/searchstanding.html" target="_blank">Best Match</a>.  </p>    <h3><b> URLs for this method</b></h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item_summary/search_by_image?</code></li>            <li><b> Sandbox URL:  </b>Due to the data available, this method is not supported in the eBay Sandbox.  To test your integration, use the Production URL.</li>           </ul>    </p>              <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations.    For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.   <h3><b>URL Encoding for Parameters</b></h3>            <p>Query parameter values need to be URL encoded. For details, see <a href="/api-docs/static/rest-request-components.html#parameters">URL encoding query parameter values</a>.  For readability, code examples in this document have not been URL encoded.</p>  <h3><b>Restrictions </b></h3> <p>This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> <span class="tablenote"><b>eBay Partner Network: </b> In order to receive a commission for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
-    post: operations["searchByImage"];
+    post: operations['searchByImage'];
   };
-  "/item/{item_id}": {
+  '/item/{item_id}': {
     /** @description <p>This method retrieves the details of a specific item, such as description, price, category, all item aspects, condition, return policies, seller feedback and score, shipping options, shipping costs, estimated delivery, and other information the buyer needs to make a purchasing decision.</p><p>The Buy APIs are designed to let you create an eBay shopping experience in your app or website. This means you will need to know when something, such as the availability, quantity, etc., has changed in any eBay item you are offering. You can do this easily by setting the <b> fieldgroups</b> URI parameter. This parameter lets you control what is returned in the response.</p>        <p>Setting <b> fieldgroups</b> to <code>COMPACT</code> reduces the response to only the five fields that you need in order to check if any item detail has changed.  Setting <b> fieldgroups</b> to <code>PRODUCT</code>, adds additional fields to the default response that return information about the product of the item. You can use either <code>COMPACT</code> or <code>PRODUCT</code> but not both. For more information, see <a href="/api-docs/buy/browse/resources/item/methods/getItem#uri.fieldgroups">fieldgroups</a>.</p>      <h3>URLs for this method</h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item/{item_id}</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item/{item_id}</code></li>           </ul>    </p>                   <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations.  For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.     <h3><b> Restrictions </b></h3> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> <span class="tablenote"><b>eBay Partner Network: </b> In order to be commissioned for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
-    get: operations["getItem"];
+    get: operations['getItem'];
   };
-  "/item/get_item_by_legacy_id": {
+  '/item/get_item_by_legacy_id': {
     /** @description   <p>This method is a bridge between the eBay legacy APIs, such as  <b> Shopping</b>, and <b> Finding</b> and the eBay Buy APIs. There are differences between how legacy APIs and RESTful APIs return the identifier of an "item" and what the item ID represents. This method lets you use the legacy item ids retrieve the details of a specific item, such as description, price, and other information the buyer needs to make a purchasing decision. It also returns the RESTful item ID, which you can use with all the Buy API  methods.</p>  <p>For more information about how to use legacy ids with the Buy APIs, see <a href="/api-docs/buy/static/api-browse.html#Legacy">Legacy API compatibility</a> in the Buying Integration guide.</p>  <p>This method returns the item details and requires you to pass in either the item ID of a non-variation item or the item ids of both the parent and child of an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.</p> <p>When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc.</p>    <p>The <b> fieldgroups</b> URI parameter lets you control what is returned in the response. Setting <b> fieldgroups</b> to <code>PRODUCT</code>, adds additional fields to the default response that return information about the product of the item. For more information, see <a href="/api-docs/buy/browse/resources/item/methods/getItemByLegacyItem#uri.fieldgroups">fieldgroups</a>.</p>       <h3>URLs for this method</h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item/get_item_by_legacy_id?</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item/get_item_by_legacy_id?</code></li>           </ul>    </p>              <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations.   For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.    <h3><b> Restrictions </b></h3> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> <span class="tablenote"><b>eBay Partner Network: </b> In order to be commissioned for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
-    get: operations["getItemByLegacyId"];
+    get: operations['getItemByLegacyId'];
   };
-  "/item/": {
+  '/item/': {
     /** @description This method retrieves the details of specific items that the buyer needs to make a purchasing decision.  <br><br><span class="tablenote"> <b>Note:</b> This is a <a href="https://developer.ebay.com/api-docs/static/versioning.html#limited" target="_blank"> <img src="/cms/img/docs/partners-api.svg" class="legend-icon partners-icon" title="Limited Release"  alt="Limited Release" />(Limited Release)</a> available only to select Partners. <br><br>For this method, only the following fields are returned: <code>eligibleForInlineCheckout</code>, <code>estimatedAvailabilities</code>, <code>itemAffiliateWebUrl</code>, <code>itemId</code>, <code>itemWebUrl</code>, <code>legacyItemId</code>, <code>price</code>, <code>sellerItemRevision</code>, <code>taxes</code>, and <code>topRatedBuyingExperience</code>.</span> <h3>URLs for this method</h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item?</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item?</code></li>           </ul>    </p>            <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations.   For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.   <h3><b> Restrictions </b></h3> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> <span class="tablenote"><b>eBay Partner Network:</b> In order to be commissioned for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site. */
-    get: operations["getItems"];
+    get: operations['getItems'];
   };
-  "/item/get_items_by_item_group": {
+  '/item/get_items_by_item_group': {
     /** @description  <p>This method retrieves the details of the individual items in an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. </p>  <p>You pass in the item group ID as a URI parameter. You use this method to show the item details of items with multiple aspects, such as color, size, storage capacity, etc.  </p>  <p>This method returns two main containers;  <b> items</b> and <b> commonDescriptions</b>. The <b> items</b> container has an array of  containers with the details of each item in the group. The <b> commonDescriptions</b> container has an array of containers for a description and the item ids of all the items that have this exact description. Because items within an item group often have the same description, this decreases the size of the response. </p>         <h3>URLs for this method</h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group?</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item/get_items_by_item_group?</code></li>           </ul>    </p>            <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations.   For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.   <h3><b> Restrictions </b></h3> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> <span class="tablenote"><b>eBay Partner Network: </b> In order to be commissioned for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
-    get: operations["getItemsByItemGroup"];
+    get: operations['getItemsByItemGroup'];
   };
-  "/item/{item_id}/check_compatibility": {
+  '/item/{item_id}/check_compatibility': {
     /** @description This method checks if a product is compatible with the specified item. You can use this method to check the compatibility of cars, trucks, and motorcycles with a specific part listed on eBay. <br /><br />For example, to check the compatibility of a part, you pass in the item ID of the part as a URI parameter and specify all the attributes used to define a specific car in the <b> compatibilityProperties</b> container. If the call is successful, the response will be <b> COMPATIBLE</b>, <b> NOT_COMPATIBLE</b>, or <b> UNDETERMINED</b>. See <a href="/api-docs/buy/browse/resources/item/methods/checkCompatibility#response.compatibilityStatus">compatibilityStatus</a> for details.   <br /><br /> <span class="tablenote"><b> Note: </b> The only products supported are cars, trucks, and motorcycles. </span><p>  To find the attributes and values for a specific marketplace, you can use the compatibility methods in the <a href="/api-docs/commerce/taxonomy/resources/methods">Taxonomy API</a>. You can use this data to create menus to help buyers specify the product, such as their car.</p> <p> For more details and a list of the required attributes for the US marketplace that describe motor vehicles, see <a href="/api-docs/buy/static/api-browse.html#Check">Check compatibility</a> in the Buy Integration Guide</a>.</p>   <p>For an example, see the <a href="/api-docs/buy/browse/resources/item/methods/checkCompatibility#h2-samples">Samples</a> section. </p>    <h3>URLs for this method</h3>  <p><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item/{item_id}/check_compatibility</code> </p>         <p><span class="tablenote"><b> Note: </b> This method is supported only on Production. </span></p>         <h3><b> Restrictions </b></h3> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> */
-    post: operations["checkCompatibility"];
+    post: operations['checkCompatibility'];
   };
-  "/shopping_cart/add_item": {
+  '/shopping_cart/add_item': {
     /** @description <span class="tablenote"><b>Note: </b><img src="/cms/img/docs/experimental-icon.svg" class="legend-icon experimental-icon" alt="Experimental Release" title="Experimental Release" alt="Experimental Release" title="Experimental Release" />  This is an <a href="https://developer.ebay.com/api-docs/static/versioning.html#experimental">Experimental</a> method that is available as a <a href="https://developer.ebay.com/api-docs/static/versioning.html#limited" target="_blank"> <img src="/cms/img/docs/partners-api.svg" class="legend-icon partners-icon" title="Limited Release"  alt="Limited Release" />(Limited Release)</a> to select developers approved by business units.</span>  <p>This method creates an eBay cart for the eBay member, if one does not exist, and adds items to that cart. Because a cart never expires, any item added to the cart will remain in the cart until it is removed.  <br /><br />To use this method, you must submit a RESTful item ID and the quantity of the item. If the <b> quantity</b> value is greater than the number of available, the <b> quantity</b> value is changed to the number available and a warning is returned. For example, if there are 15 baseballs available and you set the <b> quantity</b> value to 50, the service automatically changes the value of <b>quantity</b> to 15.    <br /><br />The response returns all the items in the eBay member's cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API.   The quantity and state of an item changes often. If the item becomes "unavailable" such as, when the listing has ended or the item is out of stock, whether it has just been added to the cart or has been in the cart for some time, the item will be returned in the <b> unavailableCartItems</b> container.</p>       <p span class="tablenote"><b>Note: </b>There are differences between how legacy APIs, such as Finding, and RESTful APIs, such as Browse, return the identifier of an "item" and what the item ID represents. If you have an item ID from one of the legacy APIs, you can use the legacy item ID with the <a href="/api-docs/buy/browse/resources/item/methods/getItemByLegacyId"> getItemByLegacyId</a> method to retrieve the RESTful ID for that item. For more information about how to use legacy IDs with the Buy APIs, see <a href="/api-docs/buy/static/api-browse.html#Legacy">Legacy API compatibility</a> in the Buying Integration guide.</p>           <h3><b>URLs for this method</b></h3>           <p><ul>  <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/shopping_cart/add_item</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/add_item</code>  <br /><br /><b>Note: </b>This method is not available in the eBay API Explorer.</li>    </ul>    </p>            <h3><b>Restrictions </b></h3> <ul> <li>This method can be used only for eBay members.</li>  <li>You can add only items with a FIXED_PRICE that accept PayPal as a payment.  </li> </ul> <p>For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> */
-    post: operations["addItem"];
+    post: operations['addItem'];
   };
-  "/shopping_cart/": {
+  '/shopping_cart/': {
     /** @description <span class="tablenote"><b>Note: </b><img src="/cms/img/docs/experimental-icon.svg" class="legend-icon experimental-icon" alt="Experimental Release" title="Experimental Release" />  This is an <a href="https://developer.ebay.com/api-docs/static/versioning.html#experimental">experimental</a> method that is available as a <a href="https://developer.ebay.com/api-docs/static/versioning.html#limited" target="_blank"> <img src="/cms/img/docs/partners-api.svg" class="legend-icon partners-icon" title="Limited Release"  alt="Limited Release" />(Limited Release)</a> to select developers approved by business units.</span>    <p>This method retrieves all the items in the eBay member's cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. There are no URI parameters or request payload.  <br /><br />The response returns the summary details of all the items in the eBay member's cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. If the cart is empty, the response is HTTP 204. </p>   <br /><br /> The quantity and state of an item changes often. If the item becomes "unavailable" such as, when the listing has ended or the item is out of stock, the item will be returned in the <b> unavailableCartItems</b> container.                         <h3><b>URLs for this method</b></h3>           <p><ul>  <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/shopping_cart/</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/</code>  <br /><br /><b>Note: </b>This method is not available in the eBay API Explorer.</li>    </ul>    </p>         <h3><b>Restrictions </b></h3> <p>This method can be used only for eBay members. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> */
-    get: operations["getShoppingCart"];
+    get: operations['getShoppingCart'];
   };
-  "/shopping_cart/remove_item": {
+  '/shopping_cart/remove_item': {
     /** @description <span class="tablenote"><b>Note: </b><img src="/cms/img/docs/experimental-icon.svg" class="legend-icon experimental-icon" alt="Experimental Release" title="Experimental Release" />  This is an <a href="https://developer.ebay.com/api-docs/static/versioning.html#experimental">experimental</a> method that is available as a <a href="https://developer.ebay.com/api-docs/static/versioning.html#limited" target="_blank"> <img src="/cms/img/docs/partners-api.svg" class="legend-icon partners-icon" title="Limited Release"  alt="Limited Release" />(Limited Release)</a> to select developers approved by business units.</span>  <p>This method removes a specific item from the eBay member's cart. You specify the ID of the item in the cart (<b>cartItemId</b>) that you want to remove.   <br /><br />The response returns all the items in the eBay member's cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. If you remove the last item in the cart, the response is HTTP 204.<br /><br />  The quantity and state of an item changes often. If the item becomes "unavailable" such as, when the listing has ended or the item is out of stock, the item will be returned in the <b> unavailableCartItems</b> container.</p>  <p span class="tablenote"><b>Note: </b> The  <b> cartItemId</b> is not the same as the item ID. The <b> cartItemId</b> is the identifier of a specific item <i>in</i> the cart and is generated when the item was added to the cart.</span></p>               <h3><b>URLs for this method</b></h3>           <p><ul>  <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/shopping_cart/remove_item</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/remove_item</code>  <br /><br /><b>Note: </b>This method is not available in the eBay API Explorer.</li>    </ul>    </p>         <h3><b>Restrictions </b></h3> <p>This method can be used only for eBay members. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> */
-    post: operations["removeItem"];
+    post: operations['removeItem'];
   };
-  "/shopping_cart/update_quantity": {
+  '/shopping_cart/update_quantity': {
     /** @description <span class="tablenote"><b>Note: </b><img src="/cms/img/docs/experimental-icon.svg" class="legend-icon experimental-icon" alt="Experimental Release" title="Experimental Release" />  This is an <a href="https://developer.ebay.com/api-docs/static/versioning.html#experimental">experimental</a> method that is available as a <a href="https://developer.ebay.com/api-docs/static/versioning.html#limited" target="_blank"> <img src="/cms/img/docs/partners-api.svg" class="legend-icon partners-icon" title="Limited Release"  alt="Limited Release" />(Limited Release)</a> to select developers approved by business units.</span>  <p>This method updates the quantity value of a specific item in the eBay member's cart. You specify the ID of the item in the cart (<b>cartItemId</b>) and the new value for the quantity. If the <b> quantity</b> value is greater than the number of available, the <b> quantity</b> value is changed to the number available and a warning is returned. For example, if there are 15 baseballs available and you set the <b> quantity</b> value to 50, the service automatically changes the value of <b>quantity</b> to 15.   <br /><br />The response returns all the items in the eBay member's cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API.   The quantity and state of an item changes often. If the item becomes "unavailable" such as, the listing has ended or the item is out of stock, the item will be returned in the <b> unavailableCartItems</b> container.</p>  <p span class="tablenote"><b>Note: </b> The  <b> cartItemId</b> is not the same as the item ID. The <b> cartItemId</b> is the identifier of a specific item <i>in</i> the cart and is generated when the item was added to the cart.</span></p>                 <h3><b>URLs for this method</b></h3>           <p><ul>  <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/shopping_cart/update_quantity</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/update_quantity</code>  <br /><br /><b>Note: </b>This method is not available in the eBay API Explorer.</li>    </ul>    </p>         <h3><b>Restrictions </b></h3> <p>This method can be used only for eBay members. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p> */
-    post: operations["updateQuantity"];
+    post: operations['updateQuantity'];
   };
 }
 
@@ -60,7 +59,7 @@ export interface components {
       /** @description The eBay RESTful identifier of the item you want added to the cart. <br /><br /> <b>RESTful Item ID Format: </b><code>v1</code>|<code><i>#</i></code>|<code><i>#</i></code> <br /><b> For example: </b> <br /><code>v1|2**********2|0</code> <br /><code>v1|1**********2|4**********2</code> <br /><br />For more information about item ID for RESTful APIs, see the <a href="/api-docs/buy/static/api-browse.html#Legacy">Legacy API compatibility</a> section of the <i>Buy APIs Overview</i>.<br /><br /><b> Maximum number of items in a cart: </b> 100 */
       itemId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of this item the buyer wants to purchase. If this value is greater than the number available, the service will change this value to the number available. If this happens, a warning is returned.<br /><br /><b> Maximum: </b> <i>number available</i>
        */
       quantity?: number;
@@ -68,7 +67,7 @@ export interface components {
     /** @description The type that defines the array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request <b> fieldgroups</b> is set to <code>PRODUCT</code>. */
     AdditionalProductIdentity: {
       /** @description An array of the product identifier/value pairs for the product associated with the item. This is returned if the seller has associated the eBay Product Identifier (ePID) with the item and the request has <b> fieldgroups</b> set to <code>PRODUCT</code>. <br /><br />The following table shows what is returned, based on the item information provided by the seller, when the <b> fieldgroups</b> set to <code>PRODUCT</code>.        <br /><br /><div style="overflow-x:auto;"> <table border=1> <tr> <th> ePID Provided </th>  <th> Product&nbsp;ID(s) Provided</th> <th> Response</th> </tr> <tr> <td> No </td>  <td> No </td> <td> The <b> AdditionalProductIdentity</b> container is <i> not</i> returned.</td></tr>   <tr> <td> No </td>  <td> Yes </td>  <td> The <b> AdditionalProductIdentity</b> container is <i> not</i> returned but the product identifiers specified by the seller are returned in the <b> localizedAspects</b> container. </td>  </tr>   <tr> <td> Yes </td>  <td> No </td> <td>  The <b> AdditionalProductIdentity</b> container is returned listing the product identifiers of the product.</td></tr>   <tr> <td> Yes </td>  <td> Yes </td> <td> The <b> AdditionalProductIdentity</b> container is returned listing all the product identifiers of the product and the product identifiers specified by the seller are returned in the <b> localizedAspects</b> container.</td> </tr>   </table> </div> */
-      productIdentity?: (components["schemas"]["ProductIdentity"])[];
+      productIdentity?: components['schemas']['ProductIdentity'][];
     };
     /** @description The type that defines the fields for an address. */
     Address: {
@@ -98,18 +97,18 @@ export interface components {
       /** @description The text representing the name of the aspect for the name/value pair, such as Brand. */
       localizedName?: string;
       /** @description The text representing the value of the aspect for the name/value pair, such as Apple. */
-      localizedValues?: (string)[];
+      localizedValues?: string[];
     };
     /** @description The type that define the fields for the aspect information. Aspects are the variations of an item, such as color, size, etc. */
     AspectDistribution: {
       /** @description An array of containers for the various values of the aspect and the match count and a HATEOAS reference (<b> refinementHref</b>) for this aspect. */
-      aspectValueDistributions?: (components["schemas"]["AspectValueDistribution"])[];
+      aspectValueDistributions?: components['schemas']['AspectValueDistribution'][];
       /** @description The name of an aspect, such as Brand, Color, etc. */
       localizedAspectName?: string;
     };
     AspectGroup: {
       /** @description An array of the name/value pairs for the aspects of the product. For example: BRAND/Apple */
-      aspects?: (components["schemas"]["Aspect"])[];
+      aspects?: components['schemas']['Aspect'][];
       /** @description The name of a group of aspects. <br /><br />In the following example, <b> Product Identifiers</b> and <b> Process</b> are product aspect group names. Under the group name are the product aspect name/value pairs. <p><b> Product Identifiers</b> <br />&nbsp;&nbsp;&nbsp;Brand/Apple <br />&nbsp;&nbsp;&nbsp;Product Family/iMac</p> <p><b> Processor</b><br />&nbsp;&nbsp;&nbsp;Processor Type/Intel <br />&nbsp;&nbsp;&nbsp;Processor Speed/3.10</p> */
       localizedGroupName?: string;
     };
@@ -118,7 +117,7 @@ export interface components {
       /** @description The value of an aspect. For example, Red is a value for the aspect Color. */
       localizedAspectValue?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items with this aspect.
        */
       matchCount?: number;
@@ -152,9 +151,9 @@ export interface components {
     };
     AvailableCoupon: {
       /** @description The limitations or restrictions of the coupon. */
-      constraint?: components["schemas"]["CouponConstraint"];
+      constraint?: components['schemas']['CouponConstraint'];
       /** @description The discount amount after the coupon is applied. */
-      discountAmount?: components["schemas"]["Amount"];
+      discountAmount?: components['schemas']['Amount'];
       /** @description The type of discount that the coupon applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:CouponDiscountType'>eBay API documentation</a> */
       discountType?: string;
       /** @description A description of the coupon.<br /><br /><span class="tablenote"><b> Note: </b> The value returned in the <b>termsWebUrl</b> field should appear for all experiences when displaying coupons. The value in the <b>availableCoupons.message</b> field must also be included, if returned in the API response.</span> */
@@ -169,7 +168,7 @@ export interface components {
       /** @description The container that returns the buying option type. This will be AUCTION or FIXED_PRICE or both. For details, see <a href="/api-docs/buy/browse/resources/item_summary/methods/search#response.itemSummaries.buyingOptions">buyingOptions</a>. */
       buyingOption?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items having this buying option.
        */
       matchCount?: number;
@@ -181,17 +180,17 @@ export interface components {
       /** @description The identifier for the item being added to the cart. This is generated when the item is added to the cart. */
       cartItemId?: string;
       /** @description This is the subtotal of cost of a specific item in the cart. This does not include taxes, shipping costs, discounts, etc. It is <b> price</b> * <b> quantity</b>. */
-      cartItemSubtotal?: components["schemas"]["Amount"];
+      cartItemSubtotal?: components['schemas']['Amount'];
       /** @description The primary image of the item. This is the image that appears on the eBay view item page for this item. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The RESTful identifier of the item. This identifier is generated when the item was listed. <br /><br /> <b>RESTful Item ID Format: </b><code>v1</code>|<code><i>#</i></code>|<code><i>#</i></code> <br /><b> For example: </b><br /> <code>v1|2**********2|0</code> <br /><code>v1|1**********2|4**********2</code> */
       itemId?: string;
       /** @description The URL of the eBay view item page for the item. */
       itemWebUrl?: string;
       /** @description The cost of the item. */
-      price?: components["schemas"]["Price"];
+      price?: components['schemas']['Price'];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of this item the buyer wants to purchase.
        */
       quantity?: number;
@@ -210,7 +209,7 @@ export interface components {
       /** @description The name of the category, such as Baby & Toddler Clothing. */
       categoryName?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in this category.
        */
       matchCount?: number;
@@ -222,12 +221,12 @@ export interface components {
       /** @description The item description that is used by more than one of the item variations. */
       description?: string;
       /** @description A list of item ids that have this description. */
-      itemIds?: (string)[];
+      itemIds?: string[];
     };
     /** @description An array of attribute name/value pairs used to define a specific product. For example: If you wanted to specify a specific car, one of the name/value pairs would be <br /><code>"name" : "Year", <br />"value" : "2019"</code>  <p> For a list of the attributes required for cars and trucks and motorcycles see <a href="/api-docs/buy/static/api-browse.html#Check">Check compatibility</a> in the Buy Integration Guide.</p> */
     CompatibilityPayload: {
       /** @description An array of attribute name/value pairs used to define a specific product. For example: If you wanted to specify a specific car, one of the name/value pairs would be <br /><code>"name" : "Year", <br />"value" : "2019"</code>  <p> For a list of the attributes required for cars and trucks and motorcycles see <a href="/api-docs/buy/static/api-browse.html#Check">Check compatibility</a> in the Buy Integration Guide.</p> */
-      compatibilityProperties?: (components["schemas"]["AttributeNameValue"])[];
+      compatibilityProperties?: components['schemas']['AttributeNameValue'][];
     };
     /** @description This container returns the product attribute name/value pairs that are compatible with the keyword. These attributes are submitted in the  <b>compatibility_filter</b> request field. */
     CompatibilityProperty: {
@@ -243,7 +242,7 @@ export interface components {
       /** @description An enumeration value that tells you if the item is compatible with the product. <br /><br />The values are: <ul>   <li>   <b> COMPATIBLE</b> - Indicates the item is compatible with the product specified in the request.</li>   <li>   <b> NOT_COMPATIBLE</b> - Indicates the item is not compatible with the product specified in the request. Be sure to check all the <b> value</b> fields to ensure they are correct as errors in the value can also cause this response.</li>   <li> <b> UNDETERMINED</b> - Indicates one or more attributes for the specified product are missing so compatibility cannot be determined.  The response returns the attributes that are missing.</li>  </ul>  Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:CompatibilityStatus'>eBay API documentation</a> */
       compatibilityStatus?: string;
       /** @description An array of warning messages. These types of errors do not prevent the method from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The container that defines the fields for the conditions refinements. This container is returned when <b> fieldgroups</b> is set to <code>CONDITION_REFINEMENTS</code> or <code>FULL</code> in the request. */
     ConditionDistribution: {
@@ -252,7 +251,7 @@ export interface components {
       /** @description The identifier of the condition. For example, 1000 is the identifier for NEW.<br /><br /><span class="tablenote"><b> Note: </b>As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the <b>Cell Phones & Smartphones</b> category (category ID 9355) for the following marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and 'Good - Refurbished' (condition ID 2030).</span> */
       conditionId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items having the condition.
        */
       matchCount?: number;
@@ -273,26 +272,26 @@ export interface components {
     /** @description An array of containers with the details for all of the items returned. */
     CoreItem: {
       /** @description An array of containers with the URLs for the images that are in addition to the primary image.  The primary image is returned in the <b> image.imageUrl</b> field. */
-      additionalImages?: (components["schemas"]["Image"])[];
+      additionalImages?: components['schemas']['Image'][];
       /** @description This indicates if the item is for  adults only. For more information about adult-only items on eBay, see <a href="https://pages.ebay.com/help/policies/adult-only.html" target="_blank">Adult items policy</a> for sellers and <a href="https://www.ebay.com/help/terms-conditions/default/searching-adult-items?id=4661" target="_blank">Adult-Only items on eBay</a> for buyers. */
       adultOnly?: boolean;
       /** @description (Primary Item Aspect) The age group for which the product is recommended. For example, newborn, infant, toddler, kids, adult, etc. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       ageGroup?: string;
       /** @description A container for information about whether an item is qualified for the Authenticity Guarantee program.<br /><br />Under the Authenticity Guarantee program, the seller ships a purchased item to a a third-party authenticator who inspects the item and provides an authentication card for it before the item is shipped to the buyer. If the buyer returns the item, the authenticator first verifies that it is the same item in the same condition before returning it to the seller.<br /><br /><span class="tablenote"><b> Note: </b>Refer to the <a href="https://pages.ebay.com/authenticity-guarantee/" target="_blank">Authenticity Guarantee</a> page for more information.</span> */
-      authenticityGuarantee?: components["schemas"]["AuthenticityGuaranteeProgram"];
+      authenticityGuarantee?: components['schemas']['AuthenticityGuaranteeProgram'];
       /** @description A container for information about whether an item is from a verified seller.</span> */
-      authenticityVerification?: components["schemas"]["AuthenticityVerificationProgram"];
+      authenticityVerification?: components['schemas']['AuthenticityVerificationProgram'];
       /** @description A list of available coupons for the item. */
-      availableCoupons?: (components["schemas"]["AvailableCoupon"])[];
+      availableCoupons?: components['schemas']['AvailableCoupon'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the total number of bids that have been placed against an auction item. This field is returned only for auction items.
        */
       bidCount?: number;
       /** @description (Primary Item Aspect) The name brand of the item, such as Nike, Apple, etc.  All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       brand?: string;
       /** @description A comma separated list of all the purchase options available for the item. The values returned are:  <ul> <li><code>FIXED_PRICE</code> - Indicates the buyer can purchase the item for a set price using the Buy It Now button. </li>  <li><code>AUCTION</code> - Indicates the buyer can place a bid for the item. After the first bid is placed, this becomes a live auction item and is the only buying option for this item.</li>  <li><code>BEST_OFFER</code> - Indicates the buyer can send the seller a price they're willing to pay for the item. The seller can accept, reject, or send a counter offer. For more information on how this works, see <a href="https://www.ebay.com/help/buying/buy-now/making-best-offer?id=4019">Making a Best Offer</a>.</li> </ul> Code so that your app gracefully handles any future changes to this list. */
-      buyingOptions?: (string)[];
+      buyingOptions?: string[];
       /** @description The ID of the leaf category for this item. A leaf category is the lowest level in that category and has no children. */
       categoryId?: string;
       /** @description Text that shows the category hierarchy of the item. For example: Computers/Tablets &amp; Networking, Laptops &amp; Netbooks, PC Laptops &amp; Netbooks */
@@ -306,7 +305,7 @@ export interface components {
       /** @description The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see <a href="https://developer.ebay.com/devzone/finding/callref/enums/conditionIdList.html" target="_blank">Item Condition IDs and Names</a>. <br /><br />Code so that your app gracefully handles any future changes to this list. <br /><br /><span class="tablenote"><b> Note: </b>As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the <b>Cell Phones & Smartphones</b> category (category ID 9355) for the following marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and 'Good - Refurbished' (condition ID 2030).</span> */
       conditionId?: string;
       /** @description The container that returns the current highest bid for an auction item. The value (string) field shows the dollar value of the current highest bid, and the currency (3-digit ISO code) field denotes the currency associated with that bid value. This container will only be returned for auction items. */
-      currentBidPrice?: components["schemas"]["ConvertedAmount"];
+      currentBidPrice?: components['schemas']['ConvertedAmount'];
       /** @description The full description of the item that was created by the seller. This can be plain text or rich content and can be very large. */
       description?: string;
       /** @description This field indicates if the item can be purchased using the Buy <a href="/api-docs/buy/order/resources/methods">Order API</a>. <ul> <li>If the value of this field is <code>true</code>, this indicates that the item can be purchased using the <b> Order API</b>. </li>  <li>If the value of this field is <code>false</code>, this indicates that the item cannot be purchased using the <b> Order API</b> and must be purchased on the eBay site.</li> </ul> */
@@ -318,13 +317,13 @@ export interface components {
       /** @description An EPID is the eBay product identifier of a product from the eBay product catalog.  This indicates the product in which the item belongs. */
       epid?: string;
       /** @description The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned. */
-      estimatedAvailabilities?: (components["schemas"]["EstimatedAvailability"])[];
+      estimatedAvailabilities?: components['schemas']['EstimatedAvailability'][];
       /** @description (Primary Item Aspect) The gender for the item. This is used for items that could vary by gender, such as clothing. For example: male, female, or unisex. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       gender?: string;
       /** @description The unique Global Trade Item number of the item as defined by <a href="https://www.gtin.info" target="_blank">https://www.gtin.info</a>. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. */
       gtin?: string;
       /** @description The URL of the primary image of the item. The other images of the item are returned in the <b> additionalImages</b> container. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The ePID (eBay Product ID of a product from the eBay product catalog) for the item, which has been programmatically determined by eBay using the item's title, aspects, and other data. <br /><br />If the seller provided an ePID for the item, the seller's value is returned in the <b> epid</b> field. <br /><br /><span class="tablenote"><b> Note: </b> This field is returned only for authorized Partners.</span> */
       inferredEpid?: string;
       /** @description The URL of the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the eBay partner enables affiliate tracking for the item by including the  <a href="/api-docs/buy/static/api-browse.html#Headers"><code>X-EBAY-C-ENDUSERCTX</code></a> request header in the method.  <br /> <br /><span class="tablenote"><b>Note: </b> eBay Partner Network, in order to be commissioned for your sales, you must use this URL to forward your buyer to the ebay.com site. </span> */
@@ -334,63 +333,63 @@ export interface components {
       /** @description The unique RESTful identifier of the item. */
       itemId?: string;
       /** @description The physical location of the item. */
-      itemLocation?: components["schemas"]["Address"];
+      itemLocation?: components['schemas']['Address'];
       /** @description The URL of the View Item page of the item. This enables you to include a "Report Item on eBay" link that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay. */
       itemWebUrl?: string;
       /** @description The unique identifier of the eBay listing that contains the item. This is the traditional/legacy ID that is often seen in the URL of the listing View Item page. */
       legacyItemId?: string;
       /** @description An array of containers that show the complete list of the aspect name/value pairs that describe the variation of the item. */
-      localizedAspects?: (components["schemas"]["TypedNameValue"])[];
+      localizedAspects?: components['schemas']['TypedNameValue'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in a lot. In other words, a lot size is the number of items that are being sold together.  <br /><br />A lot is a set of two or more items included in a single listing that must be purchased together in a single order line item. All the items in the lot are the same but there can be multiple items in a single lot,  such as the package of batteries shown in the example below.   <br /><br /><table border="1"> <tr> <tr>  <th>Item</th>  <th>Lot Definition</th> <th>Lot Size</th></tr>  <tr>  <td>A package of 24 AA batteries</td>  <td>A box of 10 packages</td>  <td>10  </td> </tr>  <tr>  <td>A P235/75-15 Goodyear tire </td>  <td>4 tires  </td>  <td>4  </td> </tr> <tr> <td>Fashion Jewelry Rings  </td> <td>Package of 100 assorted rings  </td> <td>100 </td> </tr></table>  <br /><br /><span class="tablenote"><b>Note: </b>  Lots are not supported in all categories.  </span>
        */
       lotSize?: number;
       /** @description The original price and the discount amount and percentage. */
-      marketingPrice?: components["schemas"]["MarketingPrice"];
+      marketingPrice?: components['schemas']['MarketingPrice'];
       /** @description (Primary Item Aspect) Text describing what the item is made of. For example, silk. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       material?: string;
       /** @description The minimum price of the next bid, which means to place a bid it must to equal to or greater than this amount. If the auction hasn't received any bids, the minimum bid price is the same as the starting bid. Otherwise, the minimum bid price is equal to the current bid plus the bid increment.  For details about bid increments, see <a href="https://www.ebay.com/help/buying/bidding/automatic-bidding?id=4014">Automatic bidding</a>. */
-      minimumPriceToBid?: components["schemas"]["ConvertedAmount"];
+      minimumPriceToBid?: components['schemas']['ConvertedAmount'];
       /** @description The manufacturer's part number, which is a unique number that identifies a specific product. To identify the product, this is always used along with brand. */
       mpn?: string;
       /** @description (Primary Item Aspect) Text describing the pattern used on the item. For example, paisley. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       pattern?: string;
       /** @description The payment methods for the item, including the payment method types, brands, and instructions for the buyer. */
-      paymentMethods?: (components["schemas"]["PaymentMethod"])[];
+      paymentMethods?: components['schemas']['PaymentMethod'][];
       /** @description The cost of just the item. This amount does not include any adjustments such as discounts or shipping costs.<br /><br /><span class="tablenote"><b> Note: </b>The price does include the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must pass the <a href="/api-docs/static/rest-request-components.html#HTTP"><code>X-EBAY-C-MARKETPLACE-ID</code></a> request header specifying the supported marketplace (such as <code>EBAY_GB</code>) to see the VAT-inclusive pricing. For more information on VAT, refer to <a href="https://www.ebay.co.uk/help/listings/default/vat-obligations-eu?id=4650&st=12&pos=1&query=Your%20VAT%20obligations%20in%20the%20EU&intent=VAT">VAT Obligations in the EU</a>.</span> */
-      price?: components["schemas"]["ConvertedAmount"];
+      price?: components['schemas']['ConvertedAmount'];
       /** @description Indicates when in the buying flow the item's price can appear for minimum advertised price (MAP) items, which is the lowest price a retailer can advertise/show for this item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PriceDisplayConditionEnum'>eBay API documentation</a> */
       priceDisplayCondition?: string;
       /** @description The container that returns details of a primary item group (parent ID of an item group). An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. <br /><br />When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc.<br /><br /><span class="tablenote"><b> Note: </b> This container is returned if the <b> item_id</b> in the request is for an item group (items with variations, such as color and size). This container is also returned on a request for <b> item_group_ids</b>.</span> */
-      primaryItemGroup?: components["schemas"]["ItemGroupSummary"];
+      primaryItemGroup?: components['schemas']['ItemGroupSummary'];
       /** @description The container that returns the product rating details, such as review count, rating histogram, and average rating. */
-      primaryProductReviewRating?: components["schemas"]["ReviewRating"];
+      primaryProductReviewRating?: components['schemas']['ReviewRating'];
       /** @description This field is returned as <code>true</code> if the listing is part of a Promoted Listing campaign. Promoted Listings are available to Above Standard and Top Rated sellers with recent sales activity.<br /><br />For more information, see <a href="https://pages.ebay.com/seller-center/listing-and-marketing/promoted-listings.html" target="_blank">Promoted Listings</a>. */
       priorityListing?: boolean;
       /** @description The container that returns the product information of the item. */
-      product?: components["schemas"]["Product"];
+      product?: components['schemas']['Product'];
       /** @description The URL of a page containing the manufacturer's specification of this item, which helps buyers make a purchasing decision. This information is available only for items that include the European energy efficiency rating (EEK) but is not available for <em> all</em> items with an EEK rating and is returned only if this information is available. The EEK rating of the item is returned in the <b> energyEfficiencyClass</b> field. */
       productFicheWebUrl?: string;
       /** @description An array of the qualified programs available for the item, such as EBAY_PLUS, AUTHENTICITY_GUARANTEE, and AUTHENTICITY_VERIFICATION.<br /><br />eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top-Rated eBay sellers must opt in to eBay Plus to be able to offer the program on qualifying listings. Sellers must commit to next-day delivery of those items.<br /><br /><span class="tablenote"><b>Note: </b> eBay Plus is available only to buyers in Germany, Austria, and Australia marketplaces.</span><br /><br />The eBay <a href="https://pages.ebay.com/authenticity-guarantee/" target="_blank">Authenticity Guarantee</a> program enables third-party authenticators to perform authentication verification inspections on items such as watches and sneakers. */
-      qualifiedPrograms?: (string)[];
+      qualifiedPrograms?: string[];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The maximum number for a specific item that one buyer can purchase.
        */
       quantityLimitPerBuyer?: number;
       /** @description This indicates if the reserve price of the item has been met. A reserve price is set by the seller and is the minimum amount the seller is willing to sell the item for. <p>If the highest bid is not equal to or higher than the reserve price when the auction ends, the listing ends and the item is not sold.</p> <p><b> Note: </b>This is returned only for auctions that have a reserve price.</p> */
       reservePriceMet?: boolean;
       /** @description The container that returns an overview of the seller's return policy. */
-      returnTerms?: components["schemas"]["ItemReturnTerms"];
+      returnTerms?: components['schemas']['ItemReturnTerms'];
       /** @description The container that returns basic and detailed about the seller of the item, such as name, feedback score, and contact information. */
-      seller?: components["schemas"]["SellerDetail"];
+      seller?: components['schemas']['SellerDetail'];
       /** @description An identifier generated/incremented when a seller revises the item. There are two types of item revisions: <ul><li>Seller changes, such as changing the title</li>  <li>eBay system changes, such as changing the quantity when an item is purchased</li></ul> This ID is changed <em> only</em> when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed. */
       sellerItemRevision?: string;
       /** @description An array of shipping options containers that have the details about cost, carrier, etc. of one shipping option. */
-      shippingOptions?: (components["schemas"]["ShippingOption"])[];
+      shippingOptions?: components['schemas']['ShippingOption'][];
       /** @description The container that returns the geographic regions to be included and excluded that define where the item can be shipped. */
-      shipToLocations?: components["schemas"]["ShipToLocations"];
+      shipToLocations?: components['schemas']['ShipToLocations'];
       /** @description This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.). */
       shortDescription?: string;
       /** @description (Primary Item Aspect) The size of the item. For example, '7' for a size 7 shoe. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
@@ -402,7 +401,7 @@ export interface components {
       /** @description A subtitle is optional and allows the seller to provide more information about the product, possibly including keywords that may assist with search results. */
       subtitle?: string;
       /** @description The container for the tax information for the item. */
-      taxes?: (components["schemas"]["Taxes"])[];
+      taxes?: components['schemas']['Taxes'][];
       /** @description The seller-created title of the item. <br><br><b> Maximum Length: </b> 80 characters */
       title?: string;
       /** @description This indicates if the item a top-rated plus item. There are three benefits of a top-rated plus item; a  minimum 30-day money-back return policy, shipping the items in 1 business day with tracking provided, and the added comfort of knowing this item is from experienced sellers with the highest buyer ratings. See the <a href="https://pages.ebay.com/topratedplus/index.html" target="_blank">Top Rated Plus Items </a> and  <a href="https://pages.ebay.com/help/sell/top-rated.html target="_blank">Becoming a Top Rated Seller and qualifying for Top Rated Plus</a> help topics for more information. */
@@ -410,12 +409,12 @@ export interface components {
       /** @description The URL to the image that shows the information on the tyre label. */
       tyreLabelImageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the number of different eBay users who have placed one or more bids on an auction item. This field is only applicable to auction items.
        */
       uniqueBidderCount?: number;
       /** @description This is the price per unit for the item. Some European countries require listings for certain types of products to include the price per unit so buyers can accurately compare prices.   <br /><br />For example: <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
-      unitPrice?: components["schemas"]["ConvertedAmount"];
+      unitPrice?: components['schemas']['ConvertedAmount'];
       /** @description The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item.  This helps buyers compare prices. <br /><br />For example, the following tells the buyer that the item is 7.99 per 100 grams. <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
       unitPricingMeasure?: string;
     };
@@ -431,20 +430,20 @@ export interface components {
       /** @description The name of the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
        */
       errorId?: number;
       /** @description An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A detailed description of the condition that caused the error or warning, and information on what to do to correct the problem. */
       longMessage?: string;
       /** @description A description of the condition that caused the error or warning. */
       message?: string;
       /** @description An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of warning and error messages that return one or more variables contextual information about the error or warning. This is often the field or value that triggered the error or warning. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description The name of the subdomain in which the error or warning occurred. */
       subdomain?: string;
     };
@@ -458,23 +457,23 @@ export interface components {
     /** @description The type that defines the fields for the estimated item availability information. */
     EstimatedAvailability: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description This field is return only when the seller sets their '<a href="#display-item-quantity">display item quantity</a>' preference to <b> Display "More than 10 available" in your listing (if applicable)</b>. The value of this field will be "10", which is the threshold value. <br /><br />Code so that your app gracefully handles any future changes to this value.
        */
       availabilityThreshold?: number;
       /** @description <a name="display-item-quantity"></a> This field is return only when the seller sets their <b> Display Item Quantity</b> preference to <b> Display "More than 10 available" in your listing (if applicable)</b>. The value of this field will be <code> MORE_THAN</code>. This indicates that the seller has more than the 'quantity display preference', which is 10, in stock for this item.    <br /><br /> The following are the display item quantity preferences the seller can set. <br /><ul><li> <b> Display "More than 10 available" in your listing (if applicable) </b><ul> <li>If the seller enables this preference, this field is returned as long as there are more than 10 of this item in inventory.</li>  <li> If the quantity is equal to 10 or drops below 10, this field is not returned and the estimated quantity of the item is returned in the <b> estimatedAvailableQuantity</b> field.</li></ul> </li> <li> <b> Display the exact quantity in your items</b> <br />If the seller enables this preference, the <b> availabilityThresholdType</b> and <b> availabilityThreshold</b> fields are not returned and the estimated quantity of the item is returned in the <b> estimatedAvailableQuantity</b> field.<br /><br /><b> Note: </b> Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. </li></ul>   <br />Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:AvailabilityThresholdEnum'>eBay API documentation</a> */
       availabilityThresholdType?: string;
       /** @description An array of available delivery options. <br><br><b> Valid Values: </b> SHIP_TO_HOME, SELLER_ARRANGED_LOCAL_PICKUP, IN_STORE_PICKUP, PICKUP_DROP_OFF, or DIGITAL_DELIVERY <br /><br />Code so that your app gracefully handles any future changes to this list. */
-      deliveryOptions?: (string)[];
+      deliveryOptions?: string[];
       /** @description An enumeration value representing the inventory status of this item.<br /><br /><span class="tablenote"><b> Note: </b>Be sure to review the <b>itemEndDate</b> field to determine whether the item is available for purchase.</span><br><br><b> Valid Values: </b> IN_STOCK, LIMITED_STOCK, or OUT_OF_STOCK <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:AvailabilityStatusEnum'>eBay API documentation</a> */
       estimatedAvailabilityStatus?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.
        */
       estimatedAvailableQuantity?: number;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The estimated number of this item that have been sold.
        */
       estimatedSoldQuantity?: number;
@@ -482,14 +481,14 @@ export interface components {
     /** @description Type the defines the details of an image, such as size and image URL. Currently,  only <b> imageUrl</b> is  populated. The <b> height</b> and <b> width</b> were added for future use. */
     Image: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       height?: number;
       /** @description The URL of the image. */
       imageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       width?: number;
@@ -497,26 +496,26 @@ export interface components {
     /** @description The details of an item that can be purchased. */
     Item: {
       /** @description An array of containers with the URLs for the images that are in addition to the primary image.  The primary image is returned in the <b> image.imageUrl</b> field. */
-      additionalImages?: (components["schemas"]["Image"])[];
+      additionalImages?: components['schemas']['Image'][];
       /** @description This indicates if the item is for  adults only. For more information about adult-only items on eBay, see <a href="https://pages.ebay.com/help/policies/adult-only.html" target="_blank">Adult items policy</a> for sellers and <a href="https://www.ebay.com/help/terms-conditions/default/searching-adult-items?id=4661" target="_blank">Adult-Only items on eBay</a> for buyers. */
       adultOnly?: boolean;
       /** @description (Primary Item Aspect) The age group for which the product is recommended. For example, newborn, infant, toddler, kids, adult, etc. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       ageGroup?: string;
       /** @description A container for information about whether an item is qualified for the Authenticity Guarantee program.<br /><br />Under the Authenticity Guarantee program, the seller ships a purchased item to a a third-party authenticator who inspects the item and provides an authentication card for it before the item is shipped to the buyer. If the buyer returns the item, the authenticator first verifies that it is the same item in the same condition before returning it to the seller.<br /><br /><span class="tablenote"><b> Note: </b>Refer to the <a href="https://pages.ebay.com/authenticity-guarantee/" target="_blank">Authenticity Guarantee</a> page for more information.</span> */
-      authenticityGuarantee?: components["schemas"]["AuthenticityGuaranteeProgram"];
+      authenticityGuarantee?: components['schemas']['AuthenticityGuaranteeProgram'];
       /** @description A container for information about whether an item is from a verified seller.</span> */
-      authenticityVerification?: components["schemas"]["AuthenticityVerificationProgram"];
+      authenticityVerification?: components['schemas']['AuthenticityVerificationProgram'];
       /** @description A list of available coupons for the item. */
-      availableCoupons?: (components["schemas"]["AvailableCoupon"])[];
+      availableCoupons?: components['schemas']['AvailableCoupon'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the total number of bids that have been placed against an auction item. This field is returned only for auction items.
        */
       bidCount?: number;
       /** @description (Primary Item Aspect) The name brand of the item, such as Nike, Apple, etc.  All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       brand?: string;
       /** @description A comma separated list of all the purchase options available for the item. The values returned are:  <ul> <li><code>FIXED_PRICE</code> - Indicates the buyer can purchase the item for a set price using the Buy It Now button. </li>  <li><code>AUCTION</code> - Indicates the buyer can place a bid for the item. After the first bid is placed, this becomes a live auction item and is the only buying option for this item.</li>  <li><code>BEST_OFFER</code> - Indicates the buyer can send the seller a price they're willing to pay for the item. The seller can accept, reject, or send a counter offer. For more information on how this works, see <a href="https://www.ebay.com/help/buying/buy-now/making-best-offer?id=4019">Making a Best Offer</a>.</li> </ul> Code so that your app gracefully handles any future changes to this list. */
-      buyingOptions?: (string)[];
+      buyingOptions?: string[];
       /** @description The ID of the leaf category for this item. A leaf category is the lowest level in that category and has no children. */
       categoryId?: string;
       /** @description Text that shows the category hierarchy of the item. For example: Computers/Tablets &amp; Networking, Laptops &amp; Netbooks, PC Laptops &amp; Netbooks */
@@ -530,7 +529,7 @@ export interface components {
       /** @description The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see <a href="https://developer.ebay.com/devzone/finding/callref/enums/conditionIdList.html" target="_blank">Item Condition IDs and Names</a>. <br /><br />Code so that your app gracefully handles any future changes to this list. <br /><br /><span class="tablenote"><b> Note: </b>As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the <b>Cell Phones & Smartphones</b> category (category ID 9355) for the following marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and 'Good - Refurbished' (condition ID 2030).</span> */
       conditionId?: string;
       /** @description The container that returns the current highest bid for an auction item. The value (string) field shows the dollar value of the current highest bid, and the currency (3-digit ISO code) field denotes the currency associated with that bid value. This container will only be returned for auction items. */
-      currentBidPrice?: components["schemas"]["ConvertedAmount"];
+      currentBidPrice?: components['schemas']['ConvertedAmount'];
       /** @description The full description of the item that was created by the seller. This can be plain text or rich content and can be very large. */
       description?: string;
       /** @description This field indicates if the item can be purchased using the Buy <a href="/api-docs/buy/order/resources/methods">Order API</a>. <ul> <li>If the value of this field is <code>true</code>, this indicates that the item can be purchased using the <b> Order API</b>. </li>  <li>If the value of this field is <code>false</code>, this indicates that the item cannot be purchased using the <b> Order API</b> and must be purchased on the eBay site.</li> </ul> */
@@ -542,13 +541,13 @@ export interface components {
       /** @description An EPID is the eBay product identifier of a product from the eBay product catalog.  This indicates the product in which the item belongs. */
       epid?: string;
       /** @description The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned. */
-      estimatedAvailabilities?: (components["schemas"]["EstimatedAvailability"])[];
+      estimatedAvailabilities?: components['schemas']['EstimatedAvailability'][];
       /** @description (Primary Item Aspect) The gender for the item. This is used for items that could vary by gender, such as clothing. For example: male, female, or unisex. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       gender?: string;
       /** @description The unique Global Trade Item number of the item as defined by <a href="https://www.gtin.info" target="_blank">https://www.gtin.info</a>. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. */
       gtin?: string;
       /** @description The URL of the primary image of the item. The other images of the item are returned in the <b> additionalImages</b> container. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The ePID (eBay Product ID of a product from the eBay product catalog) for the item, which has been programmatically determined by eBay using the item's title, aspects, and other data. <br /><br />If the seller provided an ePID for the item, the seller's value is returned in the <b> epid</b> field. <br /><br /><span class="tablenote"><b> Note: </b> This field is returned only for authorized Partners.</span> */
       inferredEpid?: string;
       /** @description The URL of the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the eBay partner enables affiliate tracking for the item by including the  <a href="/api-docs/buy/static/api-browse.html#Headers"><code>X-EBAY-C-ENDUSERCTX</code></a> request header in the method.  <br /> <br /><span class="tablenote"><b>Note: </b> eBay Partner Network, in order to be commissioned for your sales, you must use this URL to forward your buyer to the ebay.com site. </span> */
@@ -558,63 +557,63 @@ export interface components {
       /** @description The unique RESTful identifier of the item. */
       itemId?: string;
       /** @description The physical location of the item. */
-      itemLocation?: components["schemas"]["Address"];
+      itemLocation?: components['schemas']['Address'];
       /** @description The URL of the View Item page of the item. This enables you to include a "Report Item on eBay" link that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay. */
       itemWebUrl?: string;
       /** @description The unique identifier of the eBay listing that contains the item. This is the traditional/legacy ID that is often seen in the URL of the listing View Item page. */
       legacyItemId?: string;
       /** @description An array of containers that show the complete list of the aspect name/value pairs that describe the variation of the item. */
-      localizedAspects?: (components["schemas"]["TypedNameValue"])[];
+      localizedAspects?: components['schemas']['TypedNameValue'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in a lot. In other words, a lot size is the number of items that are being sold together.  <br /><br />A lot is a set of two or more items included in a single listing that must be purchased together in a single order line item. All the items in the lot are the same but there can be multiple items in a single lot,  such as the package of batteries shown in the example below.   <br /><br /><table border="1"> <tr> <tr>  <th>Item</th>  <th>Lot Definition</th> <th>Lot Size</th></tr>  <tr>  <td>A package of 24 AA batteries</td>  <td>A box of 10 packages</td>  <td>10  </td> </tr>  <tr>  <td>A P235/75-15 Goodyear tire </td>  <td>4 tires  </td>  <td>4  </td> </tr> <tr> <td>Fashion Jewelry Rings  </td> <td>Package of 100 assorted rings  </td> <td>100 </td> </tr></table>  <br /><br /><span class="tablenote"><b>Note: </b>  Lots are not supported in all categories.  </span>
        */
       lotSize?: number;
       /** @description The original price and the discount amount and percentage. */
-      marketingPrice?: components["schemas"]["MarketingPrice"];
+      marketingPrice?: components['schemas']['MarketingPrice'];
       /** @description (Primary Item Aspect) Text describing what the item is made of. For example, silk. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       material?: string;
       /** @description The minimum price of the next bid, which means to place a bid it must to equal to or greater than this amount. If the auction hasn't received any bids, the minimum bid price is the same as the starting bid. Otherwise, the minimum bid price is equal to the current bid plus the bid increment.  For details about bid increments, see <a href="https://www.ebay.com/help/buying/bidding/automatic-bidding?id=4014">Automatic bidding</a>. */
-      minimumPriceToBid?: components["schemas"]["ConvertedAmount"];
+      minimumPriceToBid?: components['schemas']['ConvertedAmount'];
       /** @description The manufacturer's part number, which is a unique number that identifies a specific product. To identify the product, this is always used along with brand. */
       mpn?: string;
       /** @description (Primary Item Aspect) Text describing the pattern used on the item. For example, paisley. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
       pattern?: string;
       /** @description The payment methods for the item, including the payment method types, brands, and instructions for the buyer. */
-      paymentMethods?: (components["schemas"]["PaymentMethod"])[];
+      paymentMethods?: components['schemas']['PaymentMethod'][];
       /** @description The cost of just the item. This amount does not include any adjustments such as discounts or shipping costs.<br /><br /><span class="tablenote"><b> Note: </b>The price does include the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must pass the <a href="/api-docs/static/rest-request-components.html#HTTP"><code>X-EBAY-C-MARKETPLACE-ID</code></a> request header specifying the supported marketplace (such as <code>EBAY_GB</code>) to see the VAT-inclusive pricing. For more information on VAT, refer to <a href="https://www.ebay.co.uk/help/listings/default/vat-obligations-eu?id=4650&st=12&pos=1&query=Your%20VAT%20obligations%20in%20the%20EU&intent=VAT">VAT Obligations in the EU</a>.</span> */
-      price?: components["schemas"]["ConvertedAmount"];
+      price?: components['schemas']['ConvertedAmount'];
       /** @description Indicates when in the buying flow the item's price can appear for minimum advertised price (MAP) items, which is the lowest price a retailer can advertise/show for this item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PriceDisplayConditionEnum'>eBay API documentation</a> */
       priceDisplayCondition?: string;
       /** @description The container that returns details of a primary item group (parent ID of an item group). An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. <br /><br />When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc.<br /><br /><span class="tablenote"><b> Note: </b> This container is returned only if the <b> item_id</b> in the request is for an item group (items with variations, such as color and size).</span> */
-      primaryItemGroup?: components["schemas"]["ItemGroupSummary"];
+      primaryItemGroup?: components['schemas']['ItemGroupSummary'];
       /** @description The container that returns the product rating details, such as review count, rating histogram, and average rating. */
-      primaryProductReviewRating?: components["schemas"]["ReviewRating"];
+      primaryProductReviewRating?: components['schemas']['ReviewRating'];
       /** @description This field is returned as <code>true</code> if the listing is part of a Promoted Listing campaign. Promoted Listings are available to Above Standard and Top Rated sellers with recent sales activity.<br /><br />For more information, see <a href="https://pages.ebay.com/seller-center/listing-and-marketing/promoted-listings.html" target="_blank">Promoted Listings</a>. */
       priorityListing?: boolean;
       /** @description The container that returns the product information of the item. */
-      product?: components["schemas"]["Product"];
+      product?: components['schemas']['Product'];
       /** @description The URL of a page containing the manufacturer's specification of this item, which helps buyers make a purchasing decision. This information is available only for items that include the European energy efficiency rating (EEK) but is not available for <em> all</em> items with an EEK rating and is returned only if this information is available. The EEK rating of the item is returned in the <b> energyEfficiencyClass</b> field. */
       productFicheWebUrl?: string;
       /** @description An array of the qualified programs available for the item, such as EBAY_PLUS, AUTHENTICITY_GUARANTEE, and AUTHENTICITY_VERIFICATION.<br /><br /><span class="tablenote"><b>Note: </b> This container is only returned when the filters <b>deliveryCountry</b> and <b>deliveryPostalCode</b> are included in the request.</span><br /><br />eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top-Rated eBay sellers must opt in to eBay Plus to be able to offer the program on qualifying listings. Sellers must commit to next-day delivery of those items.<br /><br /><span class="tablenote"><b>Note: </b> eBay Plus is available only to buyers in Germany, Austria, and Australia marketplaces.</span><br /><br />The eBay <a href="https://pages.ebay.com/authenticity-guarantee/" target="_blank">Authenticity Guarantee</a> program enables third-party authenticators to perform authentication verification inspections on items such as watches and sneakers. */
-      qualifiedPrograms?: (string)[];
+      qualifiedPrograms?: string[];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The maximum number for a specific item that one buyer can purchase.
        */
       quantityLimitPerBuyer?: number;
       /** @description This indicates if the reserve price of the item has been met. A reserve price is set by the seller and is the minimum amount the seller is willing to sell the item for. <p>If the highest bid is not equal to or higher than the reserve price when the auction ends, the listing ends and the item is not sold.</p> <p><b> Note: </b>This is returned only for auctions that have a reserve price.</p> */
       reservePriceMet?: boolean;
       /** @description The container that returns an overview of the seller's return policy. */
-      returnTerms?: components["schemas"]["ItemReturnTerms"];
+      returnTerms?: components['schemas']['ItemReturnTerms'];
       /** @description The container that returns basic and detailed about the seller of the item, such as name, feedback score, and contact information. */
-      seller?: components["schemas"]["SellerDetail"];
+      seller?: components['schemas']['SellerDetail'];
       /** @description An identifier generated/incremented when a seller revises the item. There are two types of item revisions: <ul><li>Seller changes, such as changing the title</li>  <li>eBay system changes, such as changing the quantity when an item is purchased</li></ul> This ID is changed <em> only</em> when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed. */
       sellerItemRevision?: string;
       /** @description An array of shipping options containers that have the details about cost, carrier, etc. of one shipping option. */
-      shippingOptions?: (components["schemas"]["ShippingOption"])[];
+      shippingOptions?: components['schemas']['ShippingOption'][];
       /** @description The container that returns the geographic regions to be included and excluded that define where the item can be shipped. */
-      shipToLocations?: components["schemas"]["ShipToLocations"];
+      shipToLocations?: components['schemas']['ShipToLocations'];
       /** @description This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.). */
       shortDescription?: string;
       /** @description (Primary Item Aspect) The size of the item. For example, '7' for a size 7 shoe. All the item aspects, including this aspect, are returned in the <b> localizedAspects</b> container. */
@@ -626,7 +625,7 @@ export interface components {
       /** @description A subtitle is optional and allows the seller to provide more information about the product, possibly including keywords that may assist with search results. */
       subtitle?: string;
       /** @description The container for the tax information for the item. */
-      taxes?: (components["schemas"]["Taxes"])[];
+      taxes?: components['schemas']['Taxes'][];
       /** @description The seller-created title of the item. <br><br><b> Maximum Length: </b> 80 characters */
       title?: string;
       /** @description This indicates if the item a top-rated plus item. There are three benefits of a top-rated plus item; a  minimum 30-day money-back return policy, shipping the items in 1 business day with tracking provided, and the added comfort of knowing this item is from experienced sellers with the highest buyer ratings. See the <a href="https://pages.ebay.com/topratedplus/index.html" target="_blank">Top Rated Plus Items </a> and  <a href="https://pages.ebay.com/help/sell/top-rated.html target="_blank">Becoming a Top Rated Seller and qualifying for Top Rated Plus</a> help topics for more information. */
@@ -634,18 +633,18 @@ export interface components {
       /** @description The URL to the image that shows the information on the tyre label. */
       tyreLabelImageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the number of different eBay users who have placed one or more bids on an auction item. This field is only applicable to auction items.
        */
       uniqueBidderCount?: number;
       /** @description This is the price per unit for the item. Some European countries require listings for certain types of products to include the price per unit so buyers can accurately compare prices.   <br /><br />For example: <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
-      unitPrice?: components["schemas"]["ConvertedAmount"];
+      unitPrice?: components['schemas']['ConvertedAmount'];
       /** @description The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item.  This helps buyers compare prices. <br /><br />For example, the following tells the buyer that the item is 7.99 per 100 grams. <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
       unitPricingMeasure?: string;
       /** @description An array of warning messages. These types of errors do not prevent the method from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of users that have added the item to their watch list.<br /><br /><span class="tablenote"> <strong>Note:</strong> This field is restricted to applications that have been granted permission to access this feature. You must submit an <a href="https://developer.ebay.com/my/support/tickets?tab=app-check">App Check ticket</a> to request this access. In the App Check form, add a note to the <b>Application Title/Summary</b> and/or <b>Application Details</b> fields that you want access to Watch Count data in the Browse API.</span>
        */
       watchCount?: number;
@@ -653,22 +652,22 @@ export interface components {
     /** @description The type that defines the fields for the item details. */
     ItemGroup: {
       /** @description An array of containers for a description and the item IDs of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, a description that is shared by at least one other item is returned in this container. If the description is unique, it is returned in the <b> items.description</b> field. */
-      commonDescriptions?: (components["schemas"]["CommonDescriptions"])[];
+      commonDescriptions?: components['schemas']['CommonDescriptions'][];
       /** @description An array of containers for all the item variation details, excluding the description. */
-      items?: (components["schemas"]["Item"])[];
+      items?: components['schemas']['Item'][];
       /** @description An array of warning messages. These types of errors do not prevent the method from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields for the details of each item in an item group. An item group is  an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. <br /><br /><span class="tablenote"><b> Note: </b> This container is returned only if the <b> item_id</b> in the request is an item group (parent ID of an item with variations).</span> */
     ItemGroupSummary: {
       /** @description An array of containers with the URLs for images that are in addition to the primary image of the item group.  The primary image is returned in the <b> itemGroupImage</b> field. */
-      itemGroupAdditionalImages?: (components["schemas"]["Image"])[];
+      itemGroupAdditionalImages?: components['schemas']['Image'][];
       /** @description The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. */
       itemGroupHref?: string;
       /** @description The unique identifier for the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. */
       itemGroupId?: string;
       /** @description The URL of the primary image of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. */
-      itemGroupImage?: components["schemas"]["Image"];
+      itemGroupImage?: components['schemas']['Image'];
       /** @description The title of the item that appears on the item group page. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. */
       itemGroupTitle?: string;
       /** @description An enumeration value that indicates the type of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:ItemGroupTypeEnum'>eBay API documentation</a> */
@@ -704,7 +703,7 @@ export interface components {
       /** @description An enumeration value that indicates the alternative methods for a full refund when an item is returned. This field is returned if the seller offers the buyer an item replacement or exchange instead of a monetary refund. <br><br><b> Valid Values: </b>  <ul><li><b> REPLACEMENT</b> -  Indicates that the buyer has the option of receiving money back for the returned item, or they can choose to have the seller replace the item with an identical item.</li>  <li><b> EXCHANGE</b> - Indicates that the buyer has the option of receiving money back for the returned item, or they can exchange the item for another similar item.</li></ul>  Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:ReturnMethodEnum'>eBay API documentation</a> */
       returnMethod?: string;
       /** @description The amount of time the buyer has to return the item after the purchase date. */
-      returnPeriod?: components["schemas"]["TimeDuration"];
+      returnPeriod?: components['schemas']['TimeDuration'];
       /** @description Indicates whether the seller accepts returns for the item. */
       returnsAccepted?: boolean;
       /** @description This enumeration value indicates whether the buyer or seller is responsible for return shipping costs when an item is returned. <br><br><b> Valid Values: </b> <ul><li><b> SELLER</b> - Indicates the seller will pay for the shipping costs to return the item.</li>  <li><b> BUYER</b> - Indicates the buyer will pay for the shipping costs to return the item.</li>  </ul>  Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:ReturnShippingCostPayerEnum'>eBay API documentation</a> */
@@ -713,38 +712,38 @@ export interface components {
     /** @description The type that defines the fields for the details of a specific item. */
     ItemSummary: {
       /** @description An array of containers with the URLs for the images that are in addition to the primary image.  The primary image is returned in the <b> image.imageUrl</b> field. */
-      additionalImages?: (components["schemas"]["Image"])[];
+      additionalImages?: components['schemas']['Image'][];
       /** @description This indicates if the item is for adults only. For more information about adult-only items on eBay, see <a href="https://pages.ebay.com/help/policies/adult-only.html" target="_blank">Adult items policy</a> for sellers and <a href="https://www.ebay.com/help/terms-conditions/default/searching-adult-items?id=4661" target="_blank">Adult-Only items on eBay</a> for buyers. */
       adultOnly?: boolean;
       /** @description This boolean attribute indicates if coupons are available for the item. */
       availableCoupons?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the total number of bids that have been placed for an auction item. This field is only returned for auction items.
        */
       bidCount?: number;
       /** @description A comma separated list of all the purchase options available for the item. <br><br><b> Values Returned: </b>   <ul> <li><b>FIXED_PRICE</b> - Indicates the buyer can purchase the item for a set price using the Buy It Now button. </li>  <li><b> AUCTION</b> - Indicates the buyer can place a bid for the item. After the first bid is placed, this becomes a live auction item and is the only buying option for this item.</li>  <li><b> BEST_OFFER</b> - Items where the buyer can send the seller a price they're willing to pay for the item. The seller can accept, reject, or send a counter offer. For details about Best Offer, see <a href="https://www.ebay.com/help/selling/listings/selling-buy-now/adding-best-offer-listing?id=4144" target="_blank">Best Offer</a>.  </li></ul> Code so that your app gracefully handles any future changes to this list. */
-      buyingOptions?: (string)[];
+      buyingOptions?: string[];
       /** @description This container returns the primary category ID of the item (as well as the secondary category if the item was listed in two categories). */
-      categories?: (components["schemas"]["Category"])[];
+      categories?: components['schemas']['Category'][];
       /** @description This indicates how well the item matches the <b>compatibility_filter</b> product attributes.  <br><br><b> Valid Values: </b> EXACT or POSSIBLE <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:CompatibilityMatchEnum'>eBay API documentation</a> */
       compatibilityMatch?: string;
       /** @description This container returns only the product attributes that are compatible with the item. These attributes were specified in the <b>compatibility_filter</b> in the request. This means that if you passed in 5 attributes and only 4 are compatible, only those 4 are returned. If none of the attributes are compatible, this container is not returned. */
-      compatibilityProperties?: (components["schemas"]["CompatibilityProperty"])[];
+      compatibilityProperties?: components['schemas']['CompatibilityProperty'][];
       /** @description The text describing the condition of the item, such as New or Used. For a list of condition names, see <a href="https://developer.ebay.com/devzone/finding/callref/enums/conditionIdList.html" target="_blank">Item Condition IDs and Names</a>.  <br /><br />Code so that your app gracefully handles any future changes to this list. <br /><br /><span class="tablenote"><b> Note: </b>As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the <b>Cell Phones & Smartphones</b> category (category ID 9355) for the following marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and 'Good - Refurbished' (condition ID 2030).</span> */
       condition?: string;
       /** @description The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see <a https://developer.ebay.com/devzone/finding/callref/enums/conditionIdList.html" target="_blank">Item Condition IDs and Names</a>. <br /><br />Code so that your app gracefully handles any future changes to this list.<br /><br /><span class="tablenote"><b> Note: </b>As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the <b>Cell Phones & Smartphones</b> category (category ID 9355) for the following marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and 'Good - Refurbished' (condition ID 2030).</span> */
       conditionId?: string;
       /** @description This container returns the current highest bid for an auction item. The <b> value</b> field shows the dollar value of the current highest bid, and the <b> currency</b> field (3-digit ISO code) denotes the currency associated with that bid value. This field is only returned for auction items. */
-      currentBidPrice?: components["schemas"]["ConvertedAmount"];
+      currentBidPrice?: components['schemas']['ConvertedAmount'];
       /** @description This container returns the distance away that the item is from the <b>  pickupPostalCode</b>  value that was supplied in the method request. This container is only returned if the 'local pickup' filter fields are used in the request. */
-      distanceFromPickupLocation?: components["schemas"]["TargetLocation"];
+      distanceFromPickupLocation?: components['schemas']['TargetLocation'];
       /** @description This indicates the <a href="https://en.wikipedia.org/wiki/European_Union_energy_label">European energy efficiency</a> rating (EEK) of the item.  Energy efficiency ratings apply to products listed by commercial vendors in electronics categories only. <br /><br />Currently, this field is only applicable for the Germany site, and  is only returned if the seller specified the energy efficiency rating through item specifics at listing time. Rating values include <code>A+++</code>, <code>A++</code>, <code>A+</code>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>E</code>, <code>F</code>, and <code>G</code>. */
       energyEfficiencyClass?: string;
       /** @description An ePID is the eBay product identifier of a product from the eBay product catalog.  This indicates the product in which the item belongs. */
       epid?: string;
       /** @description The URL to the primary image of the item. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The URL to the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the seller enables affiliate tracking for the item by including the <code><a href="/api-docs/buy/static/api-browse.html#Headers">X-EBAY-C-ENDUSERCTX</a></code> request header in the method.  <br /> <br /><span class="tablenote"><b>Note: </b> eBay Partner Network, in order to receive a commission for your sales, you must use this URL to forward your buyer to the ebay.com site. </span> */
       itemAffiliateWebUrl?: string;
       /** @description The date and time up to which the item can be purchased.  This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer.<br /><br /><span class="tablenote"><b> Note: </b>This field is not returned for Good 'Til Cancelled (GTC) listings.</span> */
@@ -758,31 +757,31 @@ export interface components {
       /** @description The unique RESTful identifier of the item. */
       itemId?: string;
       /** @description This container returns the location of the item. This container consists of fields you typically see for an address, including postal code, county, state/province, street address, city, and country (2-digit ISO code). */
-      itemLocation?: components["schemas"]["ItemLocationImpl"];
+      itemLocation?: components['schemas']['ItemLocationImpl'];
       /** @description The URL to the View Item page of the item.  This enables you to include a "Report Item on eBay" hyperlink that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay. */
       itemWebUrl?: string;
       /** @description The unique identifier of the eBay listing that contains the item. This is the traditional/legacy ID that is often seen in the URL of the listing View Item page. */
       legacyItemId?: string;
       /** @description This container is returned if the item is eligible for a seller discount and contains the item's original price, and the seller discount amount and percentage. */
-      marketingPrice?: components["schemas"]["MarketingPrice"];
+      marketingPrice?: components['schemas']['MarketingPrice'];
       /** @description This container returns the local pickup options available to the buyer. This container is only returned if the user is searching for local pickup items and set the local pickup filters in the method request. */
-      pickupOptions?: (components["schemas"]["PickupOptionSummary"])[];
+      pickupOptions?: components['schemas']['PickupOptionSummary'][];
       /** @description The price of the item after it has been converted into another currency.<br /><br />The price includes the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must do one or more of the following to see VAT-inclusive pricing:<ul><li>Pass the <a href="/api-docs/static/rest-request-components.html#HTTP"><code>X-EBAY-C-MARKETPLACE-ID</code></a> request header specifying the supported marketplace (such as <code>EBAY_GB</code>)</li><li>Pass the <code>contextualLocation</code> values for the supported marketplace in the <a href="/api-docs/buy/static/api-browse.html#Headers"><code>X-EBAY-C-ENDUSERCTX</code></a> request header</li><li>Specify the supported marketplace using the <a href="/api-docs/buy/static/ref-buy-browse-filters.html#deliveryCountry"><code>deliveryCountry</code></a> <b>filter</b> URI parameter (such as <code>filter=deliveryCountry:GB</code>)</li></ul><span class="tablenote"><b> Note: </b>For more information on VAT, refer to <a href="https://www.ebay.co.uk/help/listings/default/vat-obligations-eu?id=4650&st=12&pos=1&query=Your%20VAT%20obligations%20in%20the%20EU&intent=VAT">VAT Obligations in the EU</a>.</span> */
-      price?: components["schemas"]["ConvertedAmount"];
+      price?: components['schemas']['ConvertedAmount'];
       /** @description Indicates when in the buying flow the item's price can appear for minimum advertised price (MAP) items, which is the lowest price a retailer can advertise/show for this item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PriceDisplayConditionEnum'>eBay API documentation</a> */
       priceDisplayCondition?: string;
       /** @description This field is returned as <code>true</code> if the listing is part of a Promoted Listing campaign. Promoted Listings are available to Above Standard and Top Rated sellers with recent sales activity.<br /><br/>For more information, see <a href="https://pages.ebay.com/seller-center/listing-and-marketing/promoted-listings.html"target="_blank">Promoted Listings</a>. */
       priorityListing?: boolean;
       /** @description An array of the qualified programs available for the item, such as EBAY_PLUS, AUTHENTICITY_GUARANTEE, and AUTHENTICITY_VERIFICATION.<br /><br /><span class="tablenote"><b>Note: </b> This container is only returned when the filters <b>deliveryCountry</b> and <b>deliveryPostalCode</b> are included in the request.</span><br /><br />eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top-Rated eBay sellers must opt in to eBay Plus to be able to offer the program on qualifying listings. Sellers must commit to next-day delivery of those items.<br /><br /><span class="tablenote"><b>Note: </b> eBay Plus is available only to buyers in Germany, Austria, and Australia marketplaces.</span><br /><br />The eBay <a href="https://pages.ebay.com/authenticity-guarantee/" target="_blank">Authenticity Guarantee</a> program enables third-party authenticators to perform authentication verification inspections on items such as watches and sneakers. */
-      qualifiedPrograms?: (string)[];
+      qualifiedPrograms?: string[];
       /** @description This container returns basic information about the seller of the item, such as name, feedback score, etc. */
-      seller?: components["schemas"]["Seller"];
+      seller?: components['schemas']['Seller'];
       /** @description This container returns the shipping options available to ship the item. */
-      shippingOptions?: (components["schemas"]["ShippingOptionSummary"])[];
+      shippingOptions?: components['schemas']['ShippingOptionSummary'][];
       /** @description This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.). Sometimes the title doesn't give enough information but the description is too big. Surfacing the <b>shortDescription</b> can often provide buyers with the additional information that could help them make a buying decision.  <br /><br />For example: <br /><br />    <code>   "<b> title</b>": "Petrel U42W FPV Drone RC Quadcopter w/HD Camera Live Video One Key Off / Landing", <br />"<b>shortDescription</b>": "1 U42W Quadcopter. Syma X5SW-V3 Wifi FPV RC Drone Quadcopter 2.4Ghz 6-Axis Gyro with Headless Mode. Syma X20 Pocket Drone 2.4Ghz Mini RC Quadcopter Headless Mode Altitude Hold. One Key Take Off / Landing function: allow beginner to easy to fly the drone without any skill.",</code>       <br /><br /><b>Restriction: </b> This field is returned by the <b> search</b> method only when <b> fieldgroups</b> = <code>EXTENDED</code>. */
       shortDescription?: string;
       /** @description An array of thumbnail images for the item. */
-      thumbnailImages?: (components["schemas"]["Image"])[];
+      thumbnailImages?: components['schemas']['Image'][];
       /** @description The seller-created title of the item. <br><br><b>Maximum Length: </b> 80 characters */
       title?: string;
       /** @description This indicates if the item is a top-rated plus item. There are three benefits of a top-rated plus item: a  minimum 30-day money-back return policy, shipping the item in 1 business day with tracking provided, and the added comfort of knowing that this item is from an experienced seller with the highest buyer ratings. See the <a href="https://pages.ebay.com/topratedplus/index.html" target="_blank">Top Rated Plus Items </a> and  <a href="https://pages.ebay.com/help/sell/top-rated.html" target="_blank">Becoming a Top Rated Seller and qualifying for Top Rated Plus</a> help topics for more information. */
@@ -790,11 +789,11 @@ export interface components {
       /** @description The URL to the image that shows the information on the tyre label. */
       tyreLabelImageUrl?: string;
       /** @description The price per unit for the item. Some European countries require listings for certain types of products to include the price per unit so buyers can accurately compare prices. <br /><br />For example: <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
-      unitPrice?: components["schemas"]["ConvertedAmount"];
+      unitPrice?: components['schemas']['ConvertedAmount'];
       /** @description The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item. This helps buyers compare prices. <br /><br />For example, the following tells the buyer that the item is 7.99 per 100 grams. <br /><br /><code>"unitPricingMeasure": "100g",<br /> "unitPrice": {<br />&nbsp;&nbsp;"value": "7.99",<br />&nbsp;&nbsp;"currency": "GBP"</code> */
       unitPricingMeasure?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of users that have added the item to their watch list.<br /><br /><span class="tablenote"> <strong>Note:</strong> This field is restricted to applications that have been granted permission to access this feature. You must submit an <a href="https://developer.ebay.com/my/support/tickets?tab=app-check">App Check ticket</a> to request this access. In the App Check form, add a note to the <b>Application Title/Summary</b> and/or <b>Application Details</b> fields that you want access to Watch Count data in the Browse API.</span>
        */
       watchCount?: number;
@@ -802,14 +801,14 @@ export interface components {
     /** @description Container for a list of items. */
     Items: {
       /** @description An arraylist of all the items. */
-      items?: (components["schemas"]["CoreItem"])[];
+      items?: components['schemas']['CoreItem'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of items retrieved.
        */
       total?: number;
       /** @description An array of warning messages. These types of errors do not prevent the method from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description Type that defines the fields for the seller's address. */
     LegalAddress: {
@@ -833,11 +832,11 @@ export interface components {
     /** @description The type that defines the fields that describe a seller discount. */
     MarketingPrice: {
       /** @description This container returns the monetary amount of the seller discount. */
-      discountAmount?: components["schemas"]["ConvertedAmount"];
+      discountAmount?: components['schemas']['ConvertedAmount'];
       /** @description This field expresses the percentage of the seller discount based on the value in the <b>  originalPrice</b> container. */
       discountPercentage?: string;
       /** @description This container returns the monetary amount of the item without the discount. */
-      originalPrice?: components["schemas"]["ConvertedAmount"];
+      originalPrice?: components['schemas']['ConvertedAmount'];
       /** @description Indicates the pricing treatment (discount) that was applied to the price of the item. <br /><br /><span class="tablenote"><b>Note: </b> The pricing treatment affects the way and where the discounted price can be displayed.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PriceTreatmentEnum'>eBay API documentation</a> */
       priceTreatment?: string;
     };
@@ -845,17 +844,17 @@ export interface components {
       /** @description The payment method type, such as credit card or cash. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PaymentMethodTypeEnum'>eBay API documentation</a> */
       paymentMethodType?: string;
       /** @description The payment method brands, including the payment method brand type and logo image. */
-      paymentMethodBrands?: (components["schemas"]["PaymentMethodBrand"])[];
+      paymentMethodBrands?: components['schemas']['PaymentMethodBrand'][];
       /** @description The payment instructions for the buyer, such as <i>cash in person</i> or <i>contact seller</i>. */
-      paymentInstructions?: (string)[];
+      paymentInstructions?: string[];
       /** @description The seller instructions to the buyer, such as <i>accepts credit cards</i> or <i>see description</i>. */
-      sellerInstructions?: (string)[];
+      sellerInstructions?: string[];
     };
     PaymentMethodBrand: {
       /** @description The payment method brand, such as Visa or PayPal. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:PaymentMethodBrandEnum'>eBay API documentation</a> */
       paymentMethodBrandType?: string;
       /** @description The details of the logo image, such as the size and URL.<br /><br /><span class="tablenote"> <b> Note: </b> Currently, only the <b>imageUrl</b> is populated.</span> */
-      logoImage?: components["schemas"]["Image"];
+      logoImage?: components['schemas']['Image'];
     };
     /** @description The type that defines the fields for the local pickup options that are available for the item. It is used by the <b>  pickupOptions</b>  container. */
     PickupOptionSummary: {
@@ -876,21 +875,21 @@ export interface components {
     /** @description The type that defines the fields for the product information of the item. */
     Product: {
       /** @description An array of containers with the URLs for the product images that are in addition to the primary image. */
-      additionalImages?: (components["schemas"]["Image"])[];
+      additionalImages?: components['schemas']['Image'][];
       /** @description An array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request <b> fieldgroups</b> is set to <code>PRODUCT</code>. */
-      additionalProductIdentities?: (components["schemas"]["AdditionalProductIdentity"])[];
+      additionalProductIdentities?: components['schemas']['AdditionalProductIdentity'][];
       /** @description An array of containers for the product aspects. Each group contains the aspect group name and the aspect name/value pairs. */
-      aspectGroups?: (components["schemas"]["AspectGroup"])[];
+      aspectGroups?: components['schemas']['AspectGroup'][];
       /** @description The brand associated with product. To identify the product, this is always used along with MPN (manufacturer part number). */
       brand?: string;
       /** @description The rich description of an eBay product, which might contain HTML. */
       description?: string;
       /** @description An array of all the possible GTINs values associated with the product. A GTIN is a unique Global Trade Item number of the item as defined by <a href="https://www.gtin.info" target="_blank">https://www.gtin.info</a>. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. */
-      gtins?: (string)[];
+      gtins?: string[];
       /** @description The primary image of the product. This is often a stock photo. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description An array of all possible MPN values associated with the product. A MPNs is manufacturer part number of the product. To identify the product, this is always used along with brand. */
-      mpns?: (string)[];
+      mpns?: string[];
       /** @description The title of the product. */
       title?: string;
     };
@@ -904,7 +903,7 @@ export interface components {
     /** @description The type that defines the fields for product ratings. Only products that are in the eBay product catalog can be reviewed and rated. */
     RatingHistogram: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of user ratings that the product has received.
        */
       count?: number;
@@ -914,13 +913,13 @@ export interface components {
     /** @description This type defines the fields for the various refinements of an item. You can use the information in this container to create histograms, which help shoppers choose exactly what they want. */
     Refinement: {
       /** @description An array of containers for the all the aspect refinements. */
-      aspectDistributions?: (components["schemas"]["AspectDistribution"])[];
+      aspectDistributions?: components['schemas']['AspectDistribution'][];
       /** @description An array of containers for the all the buying option refinements. */
-      buyingOptionDistributions?: (components["schemas"]["BuyingOptionDistribution"])[];
+      buyingOptionDistributions?: components['schemas']['BuyingOptionDistribution'][];
       /** @description An array of containers for the all the category refinements. */
-      categoryDistributions?: (components["schemas"]["CategoryDistribution"])[];
+      categoryDistributions?: components['schemas']['CategoryDistribution'][];
       /** @description An array of containers for the all the condition refinements. */
-      conditionDistributions?: (components["schemas"]["ConditionDistribution"])[];
+      conditionDistributions?: components['schemas']['ConditionDistribution'][];
       /** @description The identifier of the category that most of the items are part of. */
       dominantCategoryId?: string;
     };
@@ -934,15 +933,15 @@ export interface components {
     /** @description The type that defines the fields and containers for the member's eBay cart information. */
     RemoteShopcartResponse: {
       /** @description An array of the items in the member's eBay cart. */
-      cartItems?: (components["schemas"]["CartItem"])[];
+      cartItems?: components['schemas']['CartItem'][];
       /** @description This is the cost of all the items in the member's eBay cart. This does not include taxes, shipping costs, discounts, etc. It is the sum of each item's <b> price</b> * <b> quantity</b>. */
-      cartSubtotal?: components["schemas"]["Amount"];
+      cartSubtotal?: components['schemas']['Amount'];
       /** @description The URL of the member's eBay cart. */
       cartWebUrl?: string;
       /** @description An array of items in the cart that are unavailable. This can be for a variety of reasons such as, when the listing has ended or the item is out of stock. Because a cart never expires, these items will remain in the cart until they are removed. */
-      unavailableCartItems?: (components["schemas"]["CartItem"])[];
+      unavailableCartItems?: components['schemas']['CartItem'][];
       /** @description An array of warning messages. These type of errors do not prevent the call from executing but should be checked. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields for the <b>removeItem</b> request. */
     RemoveCartItemInput: {
@@ -954,9 +953,9 @@ export interface components {
       /** @description The average rating given to a product based on customer reviews. */
       averageRating?: string;
       /** @description An array of containers for the product rating histograms that shows the review counts and the product rating. */
-      ratingHistograms?: (components["schemas"]["RatingHistogram"])[];
+      ratingHistograms?: components['schemas']['RatingHistogram'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of reviews for the item.
        */
       reviewCount?: number;
@@ -969,41 +968,41 @@ export interface components {
     /** @description The type that defines the fields for a paginated result set. The response consists of 0 or more sequenced <em> pages</em> where each page has 0 or more items. */
     SearchPagedCollection: {
       /** @description The auto-corrected inputs. */
-      autoCorrections?: components["schemas"]["AutoCorrections"];
+      autoCorrections?: components['schemas']['AutoCorrections'];
       /** @description The URI of the current page of results. <br /><br />The following example of the <b> search</b> method returns items 1 thru 5 from the list of items found. <br /><br /><code>https://api.ebay.com/buy/v1/item_summary/search?q=shirt&limit=5&offset=0</code>. */
       href?: string;
       /** @description An array of the items on this page. The items are sorted according to the sorting method specified in the request. */
-      itemSummaries?: (components["schemas"]["ItemSummary"])[];
+      itemSummaries?: components['schemas']['ItemSummary'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <b>limit</b> parameter submitted in the request, which is the maximum number of items to return on a page, from the result set. A result set is the complete set of items returned by the method.
        */
       limit?: number;
       /** @description The URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. <br /><br />The following example of the <b> search</b> method returns items 5 thru 10 from the list of items found.<br /> <br /><code>https://api.ebay.com/buy/v1/item_summary/search?query=t-shirts&limit=5&offset=10 </code> */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This value indicates the <b>offset</b> used for current page of items being returned. Assume the initial request used an <b>offset</b> of <code>0</code> and a <b>limit</b> of <code>3</code>. Then in the first page of results, this value would be <code>0</code>, and items 1-3 are returned. For the second page, this value is <code>3</code> and so on.
        */
       offset?: number;
       /** @description The URI for the previous page of results. This is returned if there is a previous page of results from the result set. <br /><br />The following example of the <b> search</b> method returns items 1 thru 5 from the list of items found, which would be the first set of items returned.<br /> <br /><code>https://api.ebay.com/buy/v1/item_summary/search?query=t-shirts&limit=5&offset=0</code> */
       prev?: string;
       /** @description The container for all the search refinements. */
-      refinement?: components["schemas"]["Refinement"];
+      refinement?: components['schemas']['Refinement'];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of items that match the input criteria.
        */
       total?: number;
       /** @description The container with all the warnings for the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description The type that defines the fields for basic information about the seller of the item returned by the <b> item_summary</b> resource. */
     Seller: {
       /** @description The percentage of the total positive feedback. */
       feedbackPercentage?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
        */
       feedbackScore?: number;
@@ -1017,14 +1016,14 @@ export interface components {
       /** @description The percentage of the total positive feedback. */
       feedbackPercentage?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
        */
       feedbackScore?: number;
       /** @description This indicates if the seller is a business or an individual. This is determined when the seller registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in the following countries:  <br /><br /> This field is returned only on the following sites. <br /><br />EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL <br /><br /><b> Valid Values:</b> BUSINESS or INDIVIDUAL <br /><br />Code so that your app gracefully handles any future changes to this list. */
       sellerAccountType?: string;
       /** @description The container with the seller's contact info and fields that are required by law. */
-      sellerLegalInfo?: components["schemas"]["SellerLegalInfo"];
+      sellerLegalInfo?: components['schemas']['SellerLegalInfo'];
       /** @description The user name created by the seller for use on eBay. */
       username?: string;
     };
@@ -1047,11 +1046,11 @@ export interface components {
       /** @description The seller's registration number. This is information used by some countries. */
       registrationNumber?: string;
       /** @description The container that returns the seller's address to be used to contact them. */
-      sellerProvidedLegalAddress?: components["schemas"]["LegalAddress"];
+      sellerProvidedLegalAddress?: components['schemas']['LegalAddress'];
       /** @description This is a free-form string created by the seller. This is the seller's terms or condition, which is in addition to the seller's return policies. */
       termsOfService?: string;
       /** @description An array of the seller's VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries. */
-      vatDetails?: (components["schemas"]["VatDetail"])[];
+      vatDetails?: components['schemas']['VatDetail'][];
     };
     /** @description The type that defines the fields for the country and postal code of where an item is to be shipped. */
     ShipToLocation: {
@@ -1063,9 +1062,9 @@ export interface components {
     /** @description The type that defines the fields that include and exclude geographic regions affecting where the item can be shipped. The seller defines these regions when listing the item. */
     ShipToLocations: {
       /** @description An array of containers that express the large geographical regions, countries, state/provinces, or special locations within a country where the seller is not willing to ship to. */
-      regionExcluded?: (components["schemas"]["ShipToRegion"])[];
+      regionExcluded?: components['schemas']['ShipToRegion'][];
       /** @description An array of containers that express the large geographical regions, countries, or state/provinces within a country where the seller is willing to ship to. Prospective buyers must look at the shipping regions under this container, as well as the shipping regions that are under the <b>regionExcluded</b> to see where the seller is willing to ship items. Sellers can specify that they ship 'Worldwide', but then add several large geographical regions (e.g. Asia, Oceania, Middle East) to the exclusion list, or sellers can specify that they ship to Europe and Africa, but then add several individual countries to the exclusion list. */
-      regionIncluded?: (components["schemas"]["ShipToRegion"])[];
+      regionIncluded?: components['schemas']['ShipToRegion'][];
     };
     /** @description This type is used provide details about included and excluded shipping regions. */
     ShipToRegion: {
@@ -1079,7 +1078,7 @@ export interface components {
     /** @description The type that defines the fields for the details of a shipping provider. */
     ShippingOption: {
       /** @description Any per item additional shipping costs for a multi-item purchase. For example, let's say the shipping cost for a power cord is $3. But for an additional cord, the shipping cost is only $1. So if you bought 3 cords, the <b> shippingCost</b> would be $3 and this value would be $2 ($1 for each additional item). */
-      additionalShippingCostPerUnit?: components["schemas"]["ConvertedAmount"];
+      additionalShippingCostPerUnit?: components['schemas']['ConvertedAmount'];
       /** @description The deadline date that the item must be purchased by in order to be received by the buyer within the delivery window (<b> maxEstimatedDeliveryDate</b> and  <b> minEstimatedDeliveryDate</b> fields). This field is returned only for items that are eligible for 'Same Day Handling'. For these items, the value of this field is what is displayed in the <b> Delivery</b> line on the View Item page.  <br /><br />This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. */
       cutOffDateUsedForEstimate?: string;
       /** @description If the item is being shipped by eBay's <a href="https://pages.ebay.com/seller-center/shipping/global-shipping-program.html">Global Shipping Program</a>, this field returns <code>GLOBAL_SHIPPING</code>. Otherwise this field is null. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:FulfilledThroughEnum'>eBay API documentation</a> */
@@ -1087,26 +1086,26 @@ export interface components {
       /** @description Indicates if the seller has committed to shipping the item with eBay Guaranteed Delivery. With eBay Guaranteed Delivery, the  seller is committed to getting the line item to the buyer within 4 business days or less. See the <a href="https://www.ebay.com/help/buying/shipping-delivery/buying-items-ebay-guaranteed-delivery?id=4641">Buying items with eBay Guaranteed Delivery</a> help topic for more details about eBay Guaranteed Delivery. */
       guaranteedDelivery?: boolean;
       /** @description The <a href="https://pages.ebay.com/seller-center/shipping/global-shipping-program.html">Global Shipping Program</a> import charges for this item. */
-      importCharges?: components["schemas"]["ConvertedAmount"];
+      importCharges?: components['schemas']['ConvertedAmount'];
       /** @description The end date of the delivery window (latest projected delivery date).  This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. <br /> <br /> <span class="tablenote"> <b> Note: </b> For the best accuracy, always include the location of where the item is be shipped in the <code> contextualLocation</code> values of the <a href="/api-docs/buy/static/api-browse.html#Headers"> <code>X-EBAY-C-ENDUSERCTX</code></a> request header.</span> */
       maxEstimatedDeliveryDate?: string;
       /** @description The start date of the delivery window (earliest projected delivery date). This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. <br /> <br /><span class="tablenote"> <b> Note: </b> For the best accuracy, always include the location of where the item is be shipped in the <code> contextualLocation</code> values of the <a href="/api-docs/buy/static/api-browse.html#Headers"> <code>X-EBAY-C-ENDUSERCTX</code></a> request header.</span> */
       minEstimatedDeliveryDate?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items used when calculating the estimation information.
        */
       quantityUsedForEstimate?: number;
       /** @description The name of the shipping provider, such as FedEx, or USPS. */
       shippingCarrierCode?: string;
       /** @description The final shipping cost for all the items after all discounts are applied.<br /><br /><span class="tablenote"><b> Note: </b>The cost does include the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must pass the <a href="/api-docs/static/rest-request-components.html#HTTP"><code>X-EBAY-C-MARKETPLACE-ID</code></a> request header specifying the supported marketplace (such as <code>EBAY_GB</code>) to see the VAT-inclusive cost. For more information on VAT, refer to <a href="https://www.ebay.co.uk/help/listings/default/vat-obligations-eu?id=4650&st=12&pos=1&query=Your%20VAT%20obligations%20in%20the%20EU&intent=VAT">VAT Obligations in the EU</a>.</span> */
-      shippingCost?: components["schemas"]["ConvertedAmount"];
+      shippingCost?: components['schemas']['ConvertedAmount'];
       /** @description Indicates the class of the shipping cost. <br /><br /><b> Valid Values: </b> FIXED or CALCULATED <br /><br />Code so that your app gracefully handles any future changes to this list. */
       shippingCostType?: string;
       /** @description The type of shipping service. For example, USPS First Class. */
       shippingServiceCode?: string;
       /** @description The container that returns the country and postal code of where the item is to be shipped. These values come from the <code>contextualLocation</code> values in the  <a href="/api-docs/buy/static/api-browse.html#Headers"> <code>X-EBAY-C-ENDUSERCTX</code></a> request header. If the header is not submitted, marketplace is used. */
-      shipToLocationUsedForEstimate?: components["schemas"]["ShipToLocation"];
+      shipToLocationUsedForEstimate?: components['schemas']['ShipToLocation'];
       /** @description Any trademark symbol, such as &#8482; or &reg;, that needs to be shown in superscript next to the shipping service name. */
       trademarkSymbol?: string;
       /** @description The type of a shipping option, such as EXPEDITED, ONE_DAY, STANDARD, ECONOMY, PICKUP, etc. */
@@ -1121,7 +1120,7 @@ export interface components {
       /** @description The start date of the delivery window (earliest projected delivery date).  This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. <br /> <br /><span class="tablenote"> <b> Note: </b> For the best accuracy, always include the <code> contextualLocation</code> values in the <a href="/api-docs/buy/static/api-browse.html#Headers"> <code>X-EBAY-C-ENDUSERCTX</code></a> request header.</span> */
       minEstimatedDeliveryDate?: string;
       /** @description This is the estimated price to ship the item.<br /><br />The price includes the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must do one or more of the following to see VAT-inclusive pricing:<ul><li>Pass the <a href="/api-docs/static/rest-request-components.html#HTTP"><code>X-EBAY-C-MARKETPLACE-ID</code></a> request header specifying the supported marketplace (such as <code>EBAY_GB</code>)</li><li>Pass the <code>contextualLocation</code> values for the supported marketplace in the <a href="/api-docs/buy/static/api-browse.html#Headers"><code>X-EBAY-C-ENDUSERCTX</code></a> request header</li><li>Specify the supported marketplace using the <a href="/api-docs/buy/static/ref-buy-browse-filters.html#deliveryCountry"><code>deliveryCountry</code></a> <b>filter</b> URI parameter (such as <code>filter=deliveryCountry:GB</code>)</li></ul><span class="tablenote"><b> Note: </b>For more information on VAT, refer to <a href="https://www.ebay.co.uk/help/listings/default/vat-obligations-eu?id=4650&st=12&pos=1&query=Your%20VAT%20obligations%20in%20the%20EU&intent=VAT">VAT Obligations in the EU</a>.</span> */
-      shippingCost?: components["schemas"]["ConvertedAmount"];
+      shippingCost?: components['schemas']['ConvertedAmount'];
       /** @description Indicates the type of shipping used to ship the item. Possible values are <code> FIXED</code> (flat-rate shipping) and <code> CALCULATED</code> (shipping cost calculated based on item and buyer location). */
       shippingCostType?: string;
     };
@@ -1135,7 +1134,7 @@ export interface components {
     /** @description The type that defines the fields for the tax jurisdiction details. */
     TaxJurisdiction: {
       /** @description The region of the tax jurisdiction. */
-      region?: components["schemas"]["Region"];
+      region?: components['schemas']['Region'];
       /** @description The identifier of the tax jurisdiction. */
       taxJurisdictionId?: string;
     };
@@ -1148,7 +1147,7 @@ export interface components {
       /** @description This indicates if tax is applied for the shipping cost. */
       shippingAndHandlingTaxed?: boolean;
       /** @description The container that returns the tax jurisdiction. */
-      taxJurisdiction?: components["schemas"]["TaxJurisdiction"];
+      taxJurisdiction?: components['schemas']['TaxJurisdiction'];
       /** @description The percentage of tax. */
       taxPercentage?: string;
       /** @description This field indicates the type of tax that may be collected for the item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/gct:TaxType'>eBay API documentation</a> */
@@ -1159,7 +1158,7 @@ export interface components {
       /** @description An enumeration value that indicates the units (such as hours) of the time span. The enumeration value in this field defines the period of time being used to measure the duration. <br><br><b> Valid Values: </b> YEAR, MONTH, DAY, HOUR, CALENDAR_DAY, BUSINESS_DAY, MINUTE, SECOND, or MILLISECOND <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/browse/types/ba:TimeDurationUnitEnum'>eBay API documentation</a> */
       unit?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description Retrieves the duration of the time span (no units).The value in this field indicates the number of years, months, days, hours, or minutes in the defined period.
        */
       value?: number;
@@ -1178,7 +1177,7 @@ export interface components {
       /** @description The identifier of the item in the cart to be updated. This ID is generated when the item was added to the cart. */
       cartItemId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The new quantity for the item that is being updated.
        */
       quantity?: number;
@@ -1201,7 +1200,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description <p>This method searches for eBay items by various query parameters and retrieves summaries of the items. You can search by keyword, category, eBay product ID (ePID), or GTIN, charity ID, or a combination of these. </p><p><span class="tablenote"><b> Note: </b>Only FIXED_PRICE (Buy It Now) items are returned by default. However, this method does return items where both FIXED_PRICE and AUCTION are available as a buying option. After a bid has been placed, items become active auction items and are no longer returned by default, but they remain accessible by filtering for the AUCTION buying option.</span></p><p>This method also supports the following:  <ul> <li>Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more.  For the fields supported by this method, see the <a href="#uri.filter">filter</a> parameter.</li> <li>Retrieving the refinements (metadata) of an item , such as item aspects (color, brand), condition, category, etc. using the <a href="#uri.fieldgroups">fieldgroups</a> parameter. </li>  <li>Filtering by item aspects and other refinements using the <a href="#uri.aspect_filter">aspect_filter</a> parameter. </li> <li>Filtering for items that are compatible with a specific product, using the <a href="#uri.compatibility_filter">compatibility_filter</a> parameter. </li><li>Creating aspects histograms, which enables shoppers to drill down in each refinement narrowing the search results.  </li>  </ul></p>  <p>For details and examples of these capabilities, see <a href="/api-docs/buy/static/api-browse.html">Browse API</a> in the Buying Integration Guide.</p>     <h3><b> Pagination and sort controls</b></h3>  <p>There are pagination controls (<b>limit</b> and <b>offset</b> fields) and <b> sort</b> query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about  Best Match, see the eBay help page <a href="https://pages.ebay.com/help/sell/searchstanding.html" target="_blank">Best Match</a>.  </p>    <h3><b>URLs for this method</b></h3>           <p><ul>            <li><b> Production URL: </b> <code>https://api.ebay.com/buy/browse/v1/item_summary/search?</code></li>            <li><b> Sandbox URL:  </b><code>https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?</code></li>           </ul>    </p>             <h3><b> Request headers</b></h3> This method uses the  <b>X-EBAY-C-ENDUSERCTX</b> request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, <a href="/api-docs/buy/static/api-browse.html#Headers">Request headers</a> in the Buying Integration Guide.      <h3><b>Restrictions </b></h3> <p>This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>.</p>    <span class="tablenote"><b>eBay Partner Network: </b> In order to receive a commission for your sales, you must use the URL returned in the <code>itemAffiliateWebUrl</code> field to forward your buyer to the ebay.com site. </span> */
   search: {
     parameters: {
@@ -1238,7 +1236,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchPagedCollection"];
+          'application/json': components['schemas']['SearchPagedCollection'];
         };
       };
       /** @description Bad Request */
@@ -1274,14 +1272,14 @@ export interface operations {
     /** @description The container for the image information fields. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["SearchByImageRequest"];
+        'application/json': components['schemas']['SearchByImageRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchPagedCollection"];
+          'application/json': components['schemas']['SearchPagedCollection'];
         };
       };
       /** @description Bad Request */
@@ -1308,7 +1306,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["Item"];
+          'application/json': components['schemas']['Item'];
         };
       };
       /** @description Bad Request */
@@ -1339,7 +1337,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Item"];
+          'application/json': components['schemas']['Item'];
         };
       };
       /** @description Bad Request */
@@ -1366,7 +1364,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["Items"];
+          'application/json': components['schemas']['Items'];
         };
       };
       /** @description Bad Request */
@@ -1391,7 +1389,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["ItemGroup"];
+          'application/json': components['schemas']['ItemGroup'];
         };
       };
       /** @description Bad Request */
@@ -1409,7 +1407,7 @@ export interface operations {
     parameters: {
       header: {
         /** @description The ID of the eBay marketplace you want to use. <b> Note: </b> This value is case sensitive.<br /><br />For example: <br />&nbsp;&nbsp;<code>X-EBAY-C-MARKETPLACE-ID = EBAY_US</code>  <br /><br /> For a list of supported sites see, <a href="/api-docs/buy/browse/overview.html#API">API Restrictions</a>. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
       path: {
         /** @description The eBay RESTful identifier of an item (such as a part you want to check). This ID is returned by the <b> Browse</b> and <b> Feed</b> API methods.  <br /><br /> <b> RESTful Item ID Format: </b><code>v1</code>|<code><i>#</i></code>|<code><i>#</i></code> <br />For example: <code>v1|2**********2|0</code> or <code>v1|1**********2|4**********2</code> <br /><br />For more information about item ID for RESTful APIs, see the <a href="/api-docs/buy/static/api-browse.html#Legacy">Legacy API compatibility</a> section of the <i>Buy APIs Overview</i>. */
@@ -1418,14 +1416,14 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CompatibilityPayload"];
+        'application/json': components['schemas']['CompatibilityPayload'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CompatibilityResponse"];
+          'application/json': components['schemas']['CompatibilityResponse'];
         };
       };
       /** @description Bad Request */
@@ -1442,14 +1440,14 @@ export interface operations {
   addItem: {
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["AddCartItemInput"];
+        'application/json': components['schemas']['AddCartItemInput'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["RemoteShopcartResponse"];
+          'application/json': components['schemas']['RemoteShopcartResponse'];
         };
       };
       /** @description No Content */
@@ -1470,7 +1468,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["RemoteShopcartResponse"];
+          'application/json': components['schemas']['RemoteShopcartResponse'];
         };
       };
       /** @description No Content */
@@ -1489,14 +1487,14 @@ export interface operations {
   removeItem: {
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["RemoveCartItemInput"];
+        'application/json': components['schemas']['RemoveCartItemInput'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["RemoteShopcartResponse"];
+          'application/json': components['schemas']['RemoteShopcartResponse'];
         };
       };
       /** @description No Content */
@@ -1515,14 +1513,14 @@ export interface operations {
   updateQuantity: {
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateCartItemInput"];
+        'application/json': components['schemas']['UpdateCartItemInput'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["RemoteShopcartResponse"];
+          'application/json': components['schemas']['RemoteShopcartResponse'];
         };
       };
       /** @description Bad Request */

@@ -1,8 +1,8 @@
-import type { Order } from "../../../types/Orders";
+import type { Order } from '../../../types/Orders';
 
 function getStatusMessage(data: Order) {
- let statusMessage = '';
-  switch(data.orderStatus.status.toLocaleLowerCase()) {
+  let statusMessage = '';
+  switch (data.orderStatus.status.toLocaleLowerCase()) {
     case 'shipped':
       statusMessage = 'has shipped!';
       break;
@@ -10,14 +10,14 @@ function getStatusMessage(data: Order) {
       statusMessage = 'is complete!';
       break;
     default:
-      console.error(`Invalid status ${data.orderStatus.status}. Unable to generate email template`)
+      console.error(`Invalid status ${data.orderStatus.status}. Unable to generate email template`);
       return null;
-}
+  }
   return statusMessage;
 }
 
 function getTrackingUrl(data: Order) {
-  return `https://dangerlettuce.com/order-tracking/${data.orderStatus.trackingNumber}?carrier=${data.orderStatus.carrier.toLocaleLowerCase()}`
+  return `https://dangerlettuce.com/order-tracking/${data.orderStatus.trackingNumber}?carrier=${data.orderStatus.carrier.toLocaleLowerCase()}`;
 }
 
 export function getTrackingStatusTemplate(data: Order) {
@@ -30,5 +30,5 @@ export function getTrackingStatusTemplate(data: Order) {
       <mj-divider border-color="#69b91d" padding-top="24px"></mj-divider>
     </mj-column>  
   </mj-section>   
-`
+`;
 }

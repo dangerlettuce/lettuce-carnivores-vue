@@ -1,10 +1,10 @@
 // @ts-nocheck
 import debug from 'debug';
-import {X2jOptions, XMLBuilder, XmlBuilderOptions, XMLParser} from 'fast-xml-parser';
-import {checkEBayTraditionalResponse, EBayNoCallError} from '../../errors/index.js';
-import {IEBayApiRequest} from '../../request.js';
-import {ApiRequestConfig, Headers} from '../../types/index.js';
-import {Fields} from './fields.js';
+import { X2jOptions, XMLBuilder, XmlBuilderOptions, XMLParser } from 'fast-xml-parser';
+import { checkEBayTraditionalResponse, EBayNoCallError } from '../../errors/index.js';
+import { IEBayApiRequest } from '../../request.js';
+import { ApiRequestConfig, Headers } from '../../types/index.js';
+import { Fields } from './fields.js';
 
 const log = debug('ebay:xml:request');
 
@@ -17,7 +17,7 @@ export const defaultXmlBuilderOptions = {
   format: false,
   indentBy: '  ',
   suppressEmptyNode: false,
-  cdataPropName: '__cdata'
+  cdataPropName: '__cdata',
 };
 
 export const defaultXML2JSONParseOptions = {
@@ -28,33 +28,33 @@ export const defaultXML2JSONParseOptions = {
   parseNodeValue: true,
   numberParseOptions: {
     hex: false,
-    leadingZeros: false
+    leadingZeros: false,
   },
   removeNSPrefix: true,
   isArray: (name: string, jpath: string) => {
     return /Array$/.test(jpath.slice(0, -name.length - 1));
-  }
+  },
 };
 
 export type BodyHeaders = {
-  body: any,
-  headers: Headers
-}
+  body: any;
+  headers: Headers;
+};
 
 export type TraditionalApiConfig = {
-  raw?: boolean,
-  parseOptions?: X2jOptions,
-  xmlBuilderOptions?: XmlBuilderOptions,
-  useIaf?: boolean,
-  sign?: boolean,
-  hook?: (xml: string) => BodyHeaders
+  raw?: boolean;
+  parseOptions?: X2jOptions;
+  xmlBuilderOptions?: XmlBuilderOptions;
+  useIaf?: boolean;
+  sign?: boolean;
+  hook?: (xml: string) => BodyHeaders;
 } & ApiRequestConfig;
 
 export type XMLReqConfig = TraditionalApiConfig & {
-  endpoint: string
-  xmlns: string
-  eBayAuthToken?: string | null
-  digitalSignatureHeaders?: (payload: any) => Headers
+  endpoint: string;
+  xmlns: string;
+  eBayAuthToken?: string | null;
+  digitalSignatureHeaders?: (payload: any) => Headers;
 };
 
 export const defaultApiConfig: Required<Omit<TraditionalApiConfig, 'hook'>> = {
@@ -64,11 +64,11 @@ export const defaultApiConfig: Required<Omit<TraditionalApiConfig, 'hook'>> = {
   useIaf: true,
   sign: false,
   headers: {},
-  returnResponse: false
+  returnResponse: false,
 };
 
 export const defaultHeaders = {
-  'Content-Type': 'text/xml'
+  'Content-Type': 'text/xml',
 };
 
 /**
@@ -80,7 +80,7 @@ export default class XMLRequest {
   private readonly config: XMLReqConfig;
   private readonly req: IEBayApiRequest;
 
-  public readonly  j2x;
+  public readonly j2x;
 
   /**
    * Creates the new Request object
@@ -96,8 +96,8 @@ export default class XMLRequest {
       throw new EBayNoCallError();
     }
 
-    this.config = {...defaultApiConfig, ...config};
-    this.j2x = new XMLBuilder({...defaultXmlBuilderOptions, ...this.config.xmlBuilderOptions });
+    this.config = { ...defaultApiConfig, ...config };
+    this.j2x = new XMLBuilder({ ...defaultXmlBuilderOptions, ...this.config.xmlBuilderOptions });
     this.callName = callName;
     this.fields = fields || {};
 
@@ -121,17 +121,19 @@ export default class XMLRequest {
    * @return     {Object}  the RequesterCredentials
    */
   private getCredentials() {
-    return this.config.eBayAuthToken ? {
-      RequesterCredentials: {
-        eBayAuthToken: this.config.eBayAuthToken
-      }
-    } : {};
+    return this.config.eBayAuthToken
+      ? {
+          RequesterCredentials: {
+            eBayAuthToken: this.config.eBayAuthToken,
+          },
+        }
+      : {};
   }
 
-  private getParseOptions() : X2jOptions {
+  private getParseOptions(): X2jOptions {
     return {
       ...defaultXML2JSONParseOptions,
-      ...this.config.parseOptions
+      ...this.config.parseOptions,
     };
   }
 
@@ -163,13 +165,16 @@ export default class XMLRequest {
    */
   public toXML(fields: Fields) {
     const HEADING = '<?xml version="1.0" encoding="utf-8"?>';
-    return HEADING + this.j2x.build({
-      [this.callName + 'Request']: {
-        '@_xmlns': this.config.xmlns,
-        ...this.getCredentials(),
-        ...fields
-      }
-    });
+    return (
+      HEADING +
+      this.j2x.build({
+        [this.callName + 'Request']: {
+          '@_xmlns': this.config.xmlns,
+          ...this.getCredentials(),
+          ...fields,
+        },
+      })
+    );
   }
 
   /**
@@ -184,14 +189,14 @@ export default class XMLRequest {
     log('xml', xml);
 
     try {
-      const {body, headers = {}} = this.config.hook?.(xml) ?? {body: xml};
+      const { body, headers = {} } = this.config.hook?.(xml) ?? { body: xml };
 
       const config = {
         headers: {
           ...this.getHeaders(),
-          ...this.config.digitalSignatureHeaders ? this.config.digitalSignatureHeaders(body) : {},
-          ...(headers ? headers : {})
-        }
+          ...(this.config.digitalSignatureHeaders ? this.config.digitalSignatureHeaders(body) : {}),
+          ...(headers ? headers : {}),
+        },
       };
       log('config', config);
       const response = await this.req.post(this.config.endpoint, body, config);
@@ -202,7 +207,7 @@ export default class XMLRequest {
         return response;
       }
 
-      const {data} = response;
+      const { data } = response;
 
       // return raw XML
       if (this.config.raw) {

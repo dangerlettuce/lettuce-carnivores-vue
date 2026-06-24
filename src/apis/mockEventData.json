@@ -1,18 +1,18 @@
 [
-    {
+  {
     "eventType": "Pest/Disease Control",
     "eventDate": "05/06/2023",
     "eventDescription": "Treated plants for normal prevention.  ",
     "product": "Bonide Infuse Systemic Disease Control, 16 oz Concentrated Solution for Plant Disease Control, Long Lasting & Waterproof",
     "effectedPlants": "All",
     "notes": "1/4tsp plus a few drops in 45oz water.  Next time, make a full sprayer, at least 60 oz. N. edwardsiana still showing some signs of fungus but much better."
-    },
-    {
+  },
+  {
     "eventType": "Fertilizer",
     "eventDate": "04/29/2023",
     "eventDescription": "Normal fertilization",
     "product": "Maxsea",
     "effectedPlants": "All",
     "notes": "1/4tsp plus a bit in a full sprayer of water."
-    }
+  }
 ]

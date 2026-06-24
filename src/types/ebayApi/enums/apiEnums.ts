@@ -20,7 +20,7 @@ export enum SiteId {
   EBAY_FRCA = 210,
   EBAY_PH = 211,
   EBAY_PL = 212,
-  EBAY_SG = 216
+  EBAY_SG = 216,
 }
 
 export enum MarketplaceId {
@@ -46,5 +46,5 @@ export enum MarketplaceId {
   EBAY_TH = 'EBAY_TH',
   EBAY_TW = 'EBAY_TW',
   EBAY_VN = 'EBAY_VN',
-  EBAY_MOTORS_US = 'EBAY_MOTORS_US'
+  EBAY_MOTORS_US = 'EBAY_MOTORS_US',
 }

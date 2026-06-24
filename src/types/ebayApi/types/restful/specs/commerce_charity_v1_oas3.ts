@@ -3,19 +3,18 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/charity_org/{charity_org_id}": {
+  '/charity_org/{charity_org_id}': {
     /** @description This call is used to retrieve detailed information about supported charitable organizations. It allows users to retrieve the details for a specific charitable organization using its charity organization ID.<br /><br />The call returns the full details for the charitable organization that matches the specified ID. */
-    get: operations["getCharityOrg"];
+    get: operations['getCharityOrg'];
   };
-  "/charity_org": {
+  '/charity_org': {
     /** @description This call is used to search for supported charitable organizations. It allows users to search for a specific charitable organization, or for multiple charitable organizations, from a particular charitable domain and/or geographical region, or by using search criteria.<br /><br />The call returns paginated search results containing the charitable organizations that match the specified criteria. */
-    get: operations["getCharityOrgs"];
+    get: operations['getCharityOrgs'];
   };
-  "/charity_org/get_charity_org_by_legacy_id": {
+  '/charity_org/get_charity_org_by_legacy_id': {
     /** @description This call allows users to retrieve the details for a specific charitable organization using its legacy charity ID, which has also been referred to as the charity number, external ID, and PayPal Giving Fund ID. The legacy charity ID is separate from eBay’s generic charity ID. */
-    get: operations["getCharityOrgByLegacyId"];
+    get: operations['getCharityOrgByLegacyId'];
   };
 }
 
@@ -41,9 +40,9 @@ export interface components {
       /** @description The description of the charitable organization. */
       description?: string;
       /** @description The location details of the charitable organization. */
-      location?: components["schemas"]["Location"];
+      location?: components['schemas']['Location'];
       /** @description The logo of the charitable organization. */
-      logoImage?: components["schemas"]["Image"];
+      logoImage?: components['schemas']['Image'];
       /** @description The mission statement of the charitable organization. */
       missionStatement?: string;
       /** @description The name of the charitable organization. */
@@ -56,25 +55,25 @@ export interface components {
     /** @description A single set of search results, with information for accessing other sets. */
     CharitySearchResponse: {
       /** @description The list of charitable organizations that match the search criteria. */
-      charityOrgs?: (components["schemas"]["CharityOrg"])[];
+      charityOrgs?: components['schemas']['CharityOrg'][];
       /** @description The relative path to the current set of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items, from the result set, returned in a single page.<br /><br /><b>Valid Values:</b> <code>1-100</code><br /><br /><b>Default:</b> <code>20</code>
        */
       limit?: number;
       /** @description The relative path to the next set of results. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items that will be skipped in the result set. This is used with the <b>limit</b> field to control the pagination of the output.<br /><br />For example, if the <b>offset</b> is set to <code>0</code> and the <b>limit</b> is set to <code>10</code>, the method will retrieve items 1 through 10 from the list of items returned. If the <b>offset</b> is set to <code>10</code> and the <b>limit</b> is set to <code>10</code>, the method will retrieve items 11 through 20 from the list of items returned.<br /><br /><b>Valid Values:</b> <code>0-10,000</code><br /><br /><b>Default:</b> <code>0</code>
        */
       offset?: number;
       /** @description The relative path to the previous set of results. */
       prev?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of matches for the search criteria.
        */
       total?: number;
@@ -86,20 +85,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -127,9 +126,9 @@ export interface components {
     };
     Location: {
       /** @description The address of the charitable organization. */
-      address?: components["schemas"]["Address"];
+      address?: components['schemas']['Address'];
       /** @description The geo-coordinates of the charitable organization. */
-      geoCoordinates?: components["schemas"]["GeoCoordinates"];
+      geoCoordinates?: components['schemas']['GeoCoordinates'];
     };
   };
   responses: never;
@@ -142,13 +141,12 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This call is used to retrieve detailed information about supported charitable organizations. It allows users to retrieve the details for a specific charitable organization using its charity organization ID.<br /><br />The call returns the full details for the charitable organization that matches the specified ID. */
   getCharityOrg: {
     parameters: {
       header: {
         /** @description A header used to specify the eBay marketplace ID.<br /><br /><b>Valid Values:</b> <code>EBAY_GB</code> and <code>EBAY_US</code> */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
       path: {
         /** @description The unique ID of the charitable organization. */
@@ -159,7 +157,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CharityOrg"];
+          'application/json': components['schemas']['CharityOrg'];
         };
       };
       /** @description Bad Request */
@@ -185,14 +183,14 @@ export interface operations {
       };
       header: {
         /** @description A header used to specify the eBay marketplace ID.<br /><br /><b>Valid Values:</b> <code>EBAY_GB</code> and <code>EBAY_US</code> */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CharitySearchResponse"];
+          'application/json': components['schemas']['CharitySearchResponse'];
         };
       };
       /** @description Bad Request */
@@ -210,14 +208,14 @@ export interface operations {
       };
       header: {
         /** @description A header used to specify the eBay marketplace ID.<br /><br /><b>Valid Values:</b> <code>EBAY_GB</code> and <code>EBAY_US</code> */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CharityOrg"];
+          'application/json': components['schemas']['CharityOrg'];
         };
       };
       /** @description Bad Request */

@@ -7,21 +7,21 @@
 </template>
 
 <style scoped>
+footer {
+  display: flex;
+  justify-content: center;
+  height: 0;
+  margin: 2rem 0;
+  gap: 1.5rem;
+}
+
+a {
+  font-size: 0.75rem;
+}
+
+@media print {
   footer {
-    display: flex;
-    justify-content: center;
-    height: 0;
-    margin: 2rem 0;
-    gap: 1.5rem;
+    display: none;
   }
-
-  a {
-    font-size: .75rem;
-  }
-
-  @media print {
-    footer {
-        display: none;
-    }
-  }
+}
 </style>

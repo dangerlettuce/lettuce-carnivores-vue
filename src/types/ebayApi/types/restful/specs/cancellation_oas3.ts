@@ -3,35 +3,34 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/cancellation/{cancelId}/approve": {
+  '/cancellation/{cancelId}/approve': {
     /** @description Seller approves a cancellation request */
-    post: operations["approveCancellationRequest"];
+    post: operations['approveCancellationRequest'];
   };
-  "/cancellation/check_eligibility": {
+  '/cancellation/check_eligibility': {
     /** @description Check the eligibility of an order cancellation */
-    post: operations["checkCancellationEligibility"];
+    post: operations['checkCancellationEligibility'];
   };
-  "/cancellation/{cancelId}/confirm": {
+  '/cancellation/{cancelId}/confirm': {
     /** @description Buyer confirms the refund from a cancellation was received */
-    post: operations["confirmRefundReceived"];
+    post: operations['confirmRefundReceived'];
   };
-  "/cancellation": {
+  '/cancellation': {
     /** @description Request or perform an order cancellation */
-    post: operations["createCancellation"];
+    post: operations['createCancellation'];
   };
-  "/cancellation/{cancelId}": {
+  '/cancellation/{cancelId}': {
     /** @description Request or perform an order cancellation */
-    get: operations["getCancellation"];
+    get: operations['getCancellation'];
   };
-  "/cancellation/{cancelId}/reject": {
+  '/cancellation/{cancelId}/reject': {
     /** @description Seller rejects a cancellation request */
-    post: operations["rejectCancellationRequest"];
+    post: operations['rejectCancellationRequest'];
   };
-  "/cancellation/search": {
+  '/cancellation/search': {
     /** @description Search for cancellations */
-    get: operations["search"];
+    get: operations['search'];
   };
 }
 
@@ -42,7 +41,6 @@ export type components = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description Seller approves a cancellation request */
   approveCancellationRequest: {
     parameters: {

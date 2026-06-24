@@ -1,5 +1,5 @@
-import { configure } from 'vue-gtag'
+import { configure } from 'vue-gtag';
 
 configure({
-  tagId: ''
-})
+  tagId: '',
+});

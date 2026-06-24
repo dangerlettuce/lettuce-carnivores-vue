@@ -1,12 +1,11 @@
 // @ts-nocheck
-import {operations} from '../../../../types/restful/specs/buy_deal_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/buy_deal_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * This API allows third-party developers to search for and retrieve details about eBay deals and events, as well as the items associated with those deals and events.
  */
 export default class Deal extends Restful implements OpenApi<operations> {
-
   static id = 'Deal';
 
   get basePath(): string {
@@ -23,17 +22,17 @@ export default class Deal extends Restful implements OpenApi<operations> {
    * @param offset The number of items that will be skipped in the result set.
    */
   public getDealItems({
-                        categoryIds,
-                        commissionable,
-                        deliveryCountry,
-                        limit,
-                        offset
-                      }: {
-    categoryIds?: string,
-    commissionable?: string,
-    deliveryCountry?: string,
-    limit?: string,
-    offset?: string
+    categoryIds,
+    commissionable,
+    deliveryCountry,
+    limit,
+    offset,
+  }: {
+    categoryIds?: string;
+    commissionable?: string;
+    deliveryCountry?: string;
+    limit?: string;
+    offset?: string;
   }) {
     return this.get(`/deal_item`, {
       params: {
@@ -41,8 +40,8 @@ export default class Deal extends Restful implements OpenApi<operations> {
         commissionable,
         delivery_country: deliveryCountry,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -62,12 +61,12 @@ export default class Deal extends Restful implements OpenApi<operations> {
    * @param limit The maximum number of items, from the current result set, returned on a single page. Default: 20 Maximum Value: 100
    * @param offset The number of items that will be skipped in the result set.
    */
-  public getEvents({limit, offset}: { limit?: string, offset?: string, }) {
+  public getEvents({ limit, offset }: { limit?: string; offset?: string }) {
     return this.get(`/event`, {
       params: {
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -80,20 +79,23 @@ export default class Deal extends Restful implements OpenApi<operations> {
    * @param limit The maximum number of items, from the current result set, returned on a single page. Default: 20 Maximum Value: 100
    * @param offset The number of items that will be skipped in the result set.
    */
-  public getEventItems(eventIds: string, {
-    categoryIds,
-    deliveryCountry,
-    limit,
-    offset
-  }: { categoryIds?: string, deliveryCountry?: string, limit?: string, offset?: string, } = {}) {
+  public getEventItems(
+    eventIds: string,
+    {
+      categoryIds,
+      deliveryCountry,
+      limit,
+      offset,
+    }: { categoryIds?: string; deliveryCountry?: string; limit?: string; offset?: string } = {},
+  ) {
     return this.get(`/event_item`, {
       params: {
         event_ids: eventIds,
         limit,
         offset,
         category_ids: categoryIds,
-        delivery_country: deliveryCountry
-      }
+        delivery_country: deliveryCountry,
+      },
     });
   }
 }

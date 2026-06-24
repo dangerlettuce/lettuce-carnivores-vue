@@ -3,11 +3,10 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/item_sales/search": {
+  '/item_sales/search': {
     /** @description (Limited Release) This method searches for sold eBay items by various URI query parameters and retrieves the sales history of the items for the last 90 days. You can search by keyword, category, eBay product ID (ePID), or GTIN, or a combination of these. This method also supports the following: Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more. For the fields supported by this method, see the filter parameter. Retrieving the refinements (metadata) of an item , such as item aspects (color, brand), condition, category, etc. using the fieldgroups parameter. Filtering by item aspects and other refinements using the aspect_filter parameter. Creating aspects histograms, which enables shoppers to drill down in each refinement narrowing the search results. For details and examples of these capabilities, see Browse API in the Buying Integration Guide. Pagination and sort controls There are pagination controls (limit and offset fields) and sort query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. URLs for this method Production URL: https://api.ebay.com/buy/marketplace_insights/v1_beta/item_sales/ Sandbox URL: https://api.sandbox.ebay.com/buy/marketplace_insights/v1_beta/item_sales/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site . For details see, Request headers in the Buy APIs Overview. URL Encoding for Parameters Query parameter values need to be URL encoded. For details, see URL encoding query parameter values. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["search"];
+    get: operations['search'];
   };
 }
 
@@ -18,7 +17,7 @@ export interface components {
     /** @description The type that define the fields for the aspect information. Aspects are the variations of an item, such as color, size, etc. */
     AspectDistribution: {
       /** @description An array of containers for the various values of the aspect and the match count and a HATEOAS reference ( refinementHref) for this aspect. */
-      aspectValueDistributions?: (components["schemas"]["AspectValueDistribution"])[];
+      aspectValueDistributions?: components['schemas']['AspectValueDistribution'][];
       /** @description Name of an aspect, such as Brand, Color, etc. */
       localizedAspectName?: string;
     };
@@ -27,7 +26,7 @@ export interface components {
       /** @description The value of an aspect. For example, Red is a value for the aspect Color. */
       localizedAspectValue?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items with this aspect.
        */
       matchCount?: number;
@@ -38,7 +37,7 @@ export interface components {
     BuyingOptionDistribution: {
       buyingOption?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items having this buying option.
        */
       matchCount?: number;
@@ -57,7 +56,7 @@ export interface components {
       /** @description The name of the category, such as Baby &amp; Toddler Clothing. */
       categoryName?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items in this category.
        */
       matchCount?: number;
@@ -71,7 +70,7 @@ export interface components {
       /** @description The identifier of the condition. For example, 1000 is the identifier for NEW. */
       conditionId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items having the condition.
        */
       matchCount?: number;
@@ -95,20 +94,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -121,14 +120,14 @@ export interface components {
     /** @description Type the defines the details of an image, such as size and image URL. Currently only imageUrl is populated. The height and width were added for future use. */
     Image: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       height?: number;
       /** @description The URL of the image. */
       imageUrl?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description Reserved for future use.
        */
       width?: number;
@@ -153,18 +152,18 @@ export interface components {
     /** @description This type defines the fields for the sold items sales history information. */
     ItemSales: {
       /** @description An array of containers with the URLs for the images that are in addition to the primary image. The primary image is returned in the image.imageUrl field. */
-      additionalImages?: (components["schemas"]["Image"])[];
+      additionalImages?: components['schemas']['Image'][];
       /** @description This indicates if the item is for adults only. For more information about adult-only items on eBay, see Adult items policy for sellers and Adult-Only items on eBay for buyers. */
       adultOnly?: boolean;
       /**
-       * Format: int32 
+       * Format: int32
        * @description This integer value indicates the total number of bids that have been placed for an auction item. This field is only returned for auction items.
        */
       bidCount?: number;
       /** @description A comma separated list of the purchase options available for the item, such as FIXED_PRICE, AUCTION. FIXED_PRICE - Returned for fixed-price items (non-auction) AUCTION - Returned for auction items without Buy It Now feature FIXED_PRICE and AUCTION - Returned for auction items enabled with the Buy It Now feature Code so that your app gracefully handles any future changes to this list. */
-      buyingOptions?: (string)[];
+      buyingOptions?: string[];
       /** @description This container returns the primary category ID of the item, as well as the secondary category if the item was listed in two categories. */
-      categories?: (components["schemas"]["Category"])[];
+      categories?: components['schemas']['Category'][];
       /** @description The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. */
       condition?: string;
       /** @description The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. */
@@ -172,7 +171,7 @@ export interface components {
       /** @description An ePID is the eBay product identifier of a product from the eBay product catalog. This indicates the product in which the item belongs. */
       epid?: string;
       /** @description The URL to the primary image of the item. */
-      image?: components["schemas"]["Image"];
+      image?: components['schemas']['Image'];
       /** @description The URL to the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the eBay partner enables affiliate tracking for the item by including the X-EBAY-C-ENDUSERCTX request header in the method. */
       itemAffiliateWebUrl?: string;
       /** @description The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. Note: This field is returned only for item groups. */
@@ -184,21 +183,21 @@ export interface components {
       /** @description The unique RESTful identifier of the item. */
       itemId?: string;
       /** @description This container returns the postal code and country of the location of the item. */
-      itemLocation?: components["schemas"]["ItemLocation"];
+      itemLocation?: components['schemas']['ItemLocation'];
       /** @description The URL to the View Item page of the item. */
       itemWebUrl?: string;
       /** @description The date the last item was purchased within the last 90 days. The totalSoldQuantity returns the total number of items that were sold. This field returns the date the last item in that group was sold. */
       lastSoldDate?: string;
       /** @description The sold price of the last item purchased within the last 90 days. The totalSoldQuantity returns the total number of items that were sold. This field returns the date the last item in that group was sold.. */
-      lastSoldPrice?: components["schemas"]["ConvertedAmount"];
+      lastSoldPrice?: components['schemas']['ConvertedAmount'];
       /** @description This container returns basic information about the seller of the item, such as name, feedback score, etc. */
-      seller?: components["schemas"]["Seller"];
+      seller?: components['schemas']['Seller'];
       /** @description An array of thumbnail images for the item. */
-      thumbnailImages?: (components["schemas"]["Image"])[];
+      thumbnailImages?: components['schemas']['Image'][];
       /** @description The seller-created title of the item. Maximum Length: 80 characters */
       title?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of this item that have been sold.
        */
       totalSoldQuantity?: number;
@@ -206,13 +205,13 @@ export interface components {
     /** @description This type defines the fields for the various refinements of an item. You can use the information in this container to create histograms, which help shoppers choose exactly what they want. */
     Refinement: {
       /** @description A array of containers for the all the aspect refinements. */
-      aspectDistributions?: (components["schemas"]["AspectDistribution"])[];
+      aspectDistributions?: components['schemas']['AspectDistribution'][];
       /** @description A array of containers for the all the buying option refinements. */
-      buyingOptionDistributions?: (components["schemas"]["BuyingOptionDistribution"])[];
+      buyingOptionDistributions?: components['schemas']['BuyingOptionDistribution'][];
       /** @description A array of containers for the all the category refinements. */
-      categoryDistributions?: (components["schemas"]["CategoryDistribution"])[];
+      categoryDistributions?: components['schemas']['CategoryDistribution'][];
       /** @description A array of containers for the all the condition refinements. */
-      conditionDistributions?: (components["schemas"]["ConditionDistribution"])[];
+      conditionDistributions?: components['schemas']['ConditionDistribution'][];
       /** @description The identifier of the category that most of the items are part of. */
       dominantCategoryId?: string;
     };
@@ -220,25 +219,25 @@ export interface components {
       /** @description The URI of the current page of results from the result set. The following example returns items 1 thru 5 from the list of items found. https://api.ebay.com/buy/marketplace_insights/v1_beta/item_sales/search?q=shirt&amp;&amp;limit=5&amp;offset=0 */
       href?: string;
       /** @description The type that defines the fields for a paginated result set of the sold items. The response consists of 0 or more sequenced result sets where each result sets has 0 or more items. Note: For items with multiple quantities that might result in multiple transactions, and items with the SELLER_DEFINED_VARIATIONS group type that might result in multiple transactions, only one deduped transaction is returned in the search results. */
-      itemSales?: (components["schemas"]["ItemSales"])[];
+      itemSales?: components['schemas']['ItemSales'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of items returned on a single page from the result set. This value can be set in the request with the limit query parameter.
        */
       limit?: number;
       /** @description The URI for the following page of results. This value is returned only if there is an additional page of results to display from the result set. Max length: 2048 */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the offset query parameter.
        */
       offset?: number;
       /** @description The URI for the preceding page of results. This value is returned only if there is a previous page of results to display from the result set. Max length: 2048 */
       prev?: string;
       /** @description The container for all the search refinements. */
-      refinement?: components["schemas"]["Refinement"];
+      refinement?: components['schemas']['Refinement'];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of items retrieved in the result set. If no items are found, this field is returned with a value of 0.
        */
       total?: number;
@@ -248,7 +247,7 @@ export interface components {
       /** @description The percentage of the total positive feedback. */
       feedbackPercentage?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
        */
       feedbackScore?: number;
@@ -266,7 +265,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description (Limited Release) This method searches for sold eBay items by various URI query parameters and retrieves the sales history of the items for the last 90 days. You can search by keyword, category, eBay product ID (ePID), or GTIN, or a combination of these. This method also supports the following: Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more. For the fields supported by this method, see the filter parameter. Retrieving the refinements (metadata) of an item , such as item aspects (color, brand), condition, category, etc. using the fieldgroups parameter. Filtering by item aspects and other refinements using the aspect_filter parameter. Creating aspects histograms, which enables shoppers to drill down in each refinement narrowing the search results. For details and examples of these capabilities, see Browse API in the Buying Integration Guide. Pagination and sort controls There are pagination controls (limit and offset fields) and sort query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. URLs for this method Production URL: https://api.ebay.com/buy/marketplace_insights/v1_beta/item_sales/ Sandbox URL: https://api.sandbox.ebay.com/buy/marketplace_insights/v1_beta/item_sales/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. If you are an eBay Network Partner you must use affiliateCampaignId=ePNCampaignId,affiliateReferenceId=referenceId in the header in order to be paid for selling eBay items on your site . For details see, Request headers in the Buy APIs Overview. URL Encoding for Parameters Query parameter values need to be URL encoded. For details, see URL encoding query parameter values. Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
   search: {
     parameters: {
@@ -297,7 +295,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["SalesHistoryPagedCollection"];
+          'application/json': components['schemas']['SalesHistoryPagedCollection'];
         };
       };
       /** @description Bad Request */

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {FilePurpose, GetReturnFieldGroupEnum} from '../../../../enums/index.js';
+import { FilePurpose, GetReturnFieldGroupEnum } from '../../../../enums/index.js';
 import {
   CheckEligibilityRequest,
   CloseReturnRequest,
@@ -18,7 +18,7 @@ import {
   SetReturnCreationSessionRequest,
   UpdateTrackingRequest,
   UploadFileRequest,
-  VoidLabelRequest
+  VoidLabelRequest,
 } from '../../../../types/index.js';
 import Restful from '../../index.js';
 
@@ -26,7 +26,6 @@ import Restful from '../../index.js';
  * Post-Order Return API
  */
 export default class Return extends Restful {
-
   static id = 'Return';
 
   get basePath(): string {
@@ -99,8 +98,8 @@ export default class Return extends Restful {
   public createReturnRequest(payload: CreateReturnRequest, fieldGroups?: GetReturnFieldGroupEnum | `${GetReturnFieldGroupEnum}`) {
     return this.post(`/return`, payload, {
       params: {
-        fieldgroups: fieldGroups
-      }
+        fieldgroups: fieldGroups,
+      },
     });
   }
 
@@ -148,8 +147,8 @@ export default class Return extends Restful {
     returnId = encodeURIComponent(returnId);
     return this.get(`/return/${returnId}`, {
       params: {
-        fieldgroups: fieldGroups
-      }
+        fieldgroups: fieldGroups,
+      },
     });
   }
 
@@ -221,8 +220,8 @@ export default class Return extends Restful {
     return this.get(`/return/${returnId}/tracking`, {
       params: {
         carrier_used: carrierUsed,
-        tracking_number: trackingNumber
-      }
+        tracking_number: trackingNumber,
+      },
     });
   }
 
@@ -298,7 +297,7 @@ export default class Return extends Restful {
    */
   public search(params: SearchReturnParams) {
     return this.get(`/return/search`, {
-      params
+      params,
     });
   }
 
@@ -321,11 +320,15 @@ export default class Return extends Restful {
    */
   public sendReturnShippingLabel(returnId: string, toEmailAddress?: string) {
     returnId = encodeURIComponent(returnId);
-    return this.post(`/return/${returnId}/send_shipping_label`, {}, {
-      params: {
-        to_email_address: toEmailAddress
-      }
-    });
+    return this.post(
+      `/return/${returnId}/send_shipping_label`,
+      {},
+      {
+        params: {
+          to_email_address: toEmailAddress,
+        },
+      },
+    );
   }
 
   /**
@@ -336,7 +339,7 @@ export default class Return extends Restful {
    */
   public setReturnPreferences(rmaRequired: boolean) {
     return this.post(`/return/preference`, {
-      rmaRequired
+      rmaRequired,
     });
   }
 
@@ -351,7 +354,7 @@ export default class Return extends Restful {
   public submitReturnFile(returnId: string, filePurpose?: FilePurpose | keyof typeof FilePurpose) {
     returnId = encodeURIComponent(returnId);
     return this.post(`/return/${returnId}/file/submit`, {
-      filePurpose
+      filePurpose,
     });
   }
 
@@ -364,7 +367,7 @@ export default class Return extends Restful {
   public updateReturnDraft(draftId: string, returnRequest: ReturnRequestType) {
     draftId = encodeURIComponent(draftId);
     return this.put(`/return/draft/${draftId}`, {
-      returnRequest
+      returnRequest,
     });
   }
 

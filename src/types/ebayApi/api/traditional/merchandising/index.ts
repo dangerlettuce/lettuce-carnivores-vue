@@ -2,7 +2,7 @@ enum calls {
   getMostWatchedItems,
   getRelatedCategoryItems,
   getSimilarItems,
-  getVersion
+  getVersion,
 }
 
 export default calls;

@@ -8,8 +8,14 @@ import { generateEmailHead } from './segments/emailHead';
 import { generateOrderItemsTable } from './segments/orderItemsTable';
 
 export function generateOrderStatusUpdate(data: Order) {
-  if (data.lineItems.length === 0 || !data.orderStatus.status || !data.id || !data.orderStatus.carrier || !data.orderStatus.trackingNumber ) {
-    console.error(`Missing or invalid data. Unable to generate email template`)
+  if (
+    data.lineItems.length === 0 ||
+    !data.orderStatus.status ||
+    !data.id ||
+    !data.orderStatus.carrier ||
+    !data.orderStatus.trackingNumber
+  ) {
+    console.error(`Missing or invalid data. Unable to generate email template`);
     console.log(data);
     return null;
   }
@@ -21,7 +27,7 @@ export function generateOrderStatusUpdate(data: Order) {
     <mjml>
       ${generateEmailHead(headTitle, emailPreview)}
       <mj-body>
-  `
+  `;
   mjmlTemplate = mjmlTemplate + logoHeader;
   mjmlTemplate = mjmlTemplate + getTrackingStatusTemplate(data);
 
@@ -30,10 +36,12 @@ export function generateOrderStatusUpdate(data: Order) {
   // Add footer
   mjmlTemplate = mjmlTemplate + getOrderFeedbackTemplate(data);
   mjmlTemplate = mjmlTemplate + contactUsTemplate;
-  mjmlTemplate = mjmlTemplate + `
+  mjmlTemplate =
+    mjmlTemplate +
+    `
       </mj-body>
     </mjml>
-  `
+  `;
 
   return mjml2html(mjmlTemplate).html;
 }

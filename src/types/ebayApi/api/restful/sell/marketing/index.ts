@@ -31,11 +31,10 @@ import {
   UpdateCampaignIdentificationRequest,
   UpdateCampaignRequest,
   UpdateKeywordRequest,
-  UpdateNegativeKeywordRequest
+  UpdateNegativeKeywordRequest,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_marketing_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
-
+import { operations } from '../../../../types/restful/specs/sell_marketing_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * <p>The <i>Marketing API </i> offers two platforms that sellers can use to promote and advertise their products:
@@ -44,7 +43,6 @@ import Restful, {OpenApi} from '../../index.js';
  * marketing modules as <b>SPONSORED</b> listings.
  */
 export default class Marketing extends Restful implements OpenApi<operations> {
-
   static id = 'Marketing';
 
   get basePath(): string {
@@ -180,15 +178,14 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param offset Specifies the number of ads to skip in the result set before returning the first ad in the
    *     paginated response.
    */
-  public getAds(campaignId: string, {limit, listingIds, offset}:
-    { limit?: number, listingIds?: number, offset?: number } = {}) {
+  public getAds(campaignId: string, { limit, listingIds, offset }: { limit?: number; listingIds?: number; offset?: number } = {}) {
     campaignId = encodeURIComponent(campaignId);
     return this.get(`/ad_campaign/${campaignId}/ad`, {
       params: {
         limit,
         listing_ids: listingIds,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -265,14 +262,13 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param inventoryReferenceType The type of the inventory reference ID. Set this value to either INVENTORY_ITEM (a
    *     single listing) or INVENTORY_ITEM_GROUP (a multi-variation listing).
    */
-  public getAdsByInventoryReference(campaignId: string, inventoryReferenceId: string,
-                                    inventoryReferenceType: string) {
+  public getAdsByInventoryReference(campaignId: string, inventoryReferenceId: string, inventoryReferenceType: string) {
     campaignId = encodeURIComponent(campaignId);
     return this.get(`/ad_campaign/${campaignId}/get_ads_by_inventory_reference`, {
       params: {
         inventory_reference_id: inventoryReferenceId,
-        inventory_reference_type: inventoryReferenceType
-      }
+        inventory_reference_type: inventoryReferenceType,
+      },
     });
   }
 
@@ -299,18 +295,17 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param limit The number of results, from the current result set, to be returned in a single page.
    * @param offset The number of results that will be skipped in the result set.
    */
-  public getAdGroups(campaignId: string, {
-    adGroupStatus,
-    limit,
-    offset
-  }: { adGroupStatus?: string, limit?: number, offset?: number } = {}) {
+  public getAdGroups(
+    campaignId: string,
+    { adGroupStatus, limit, offset }: { adGroupStatus?: string; limit?: number; offset?: number } = {},
+  ) {
     campaignId = encodeURIComponent(campaignId);
     return this.get(`/ad_campaign/${campaignId}/ad_group`, {
       params: {
         ad_group_status: adGroupStatus,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -376,7 +371,6 @@ export default class Marketing extends Restful implements OpenApi<operations> {
     return this.post(`/ad_campaign/${campaignId}/ad_group/${adGroupId}/suggest_keywords`, body);
   }
 
-
   /**
    * This method clones (makes a copy of) the specified campaign.
    *
@@ -405,11 +399,21 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    *     the paginated response.
    * @param startDateRange Specifies the range of a campaign's start date in which to filter the results.
    */
-  public getCampaigns({campaignName, campaignStatus, endDateRange, limit, offset, startDateRange}:
-                        {
-                          campaignName?: string, campaignStatus?: string, endDateRange?: string, limit?: number,
-                          offset?: number, startDateRange?: string
-                        } = {}) {
+  public getCampaigns({
+    campaignName,
+    campaignStatus,
+    endDateRange,
+    limit,
+    offset,
+    startDateRange,
+  }: {
+    campaignName?: string;
+    campaignStatus?: string;
+    endDateRange?: string;
+    limit?: number;
+    offset?: number;
+    startDateRange?: string;
+  } = {}) {
     return this.get(`/ad_campaign`, {
       params: {
         campaign_name: campaignName,
@@ -417,8 +421,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
         end_date_range: endDateRange,
         limit,
         offset,
-        start_date_range: startDateRange
-      }
+        start_date_range: startDateRange,
+      },
     });
   }
 
@@ -475,17 +479,21 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    *     items.
    * @param listingId Identifier of the eBay listing associated with the ad.
    */
-  public findCampaignByAdReference({inventoryReferenceId, inventoryReferenceType, listingId}: {
-    inventoryReferenceId?: string,
-    inventoryReferenceType?: string,
-    listingId?: string
+  public findCampaignByAdReference({
+    inventoryReferenceId,
+    inventoryReferenceType,
+    listingId,
+  }: {
+    inventoryReferenceId?: string;
+    inventoryReferenceType?: string;
+    listingId?: string;
   } = {}) {
     return this.get(`/ad_campaign/find_campaign_by_ad_reference`, {
       params: {
         inventory_reference_id: inventoryReferenceId,
         inventory_reference_type: inventoryReferenceType,
-        listing_id: listingId
-      }
+        listing_id: listingId,
+      },
     });
   }
 
@@ -497,8 +505,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
   public getCampaignByName(campaignName: string) {
     return this.get(`/ad_campaign/get_campaign_by_name`, {
       params: {
-        campaign_name: campaignName
-      }
+        campaign_name: campaignName,
+      },
     });
   }
 
@@ -532,18 +540,14 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param limit Specifies the maximum number of campaigns to return on a page in the paginated response.
    * @param offset Specifies the number of campaigns to skip in the result set before returning the first report in the paginated response.
    */
-  public suggestItems(campaignId: string, {
-    categoryIds,
-    limit,
-    offset
-  }: { categoryIds?: string, limit?: number, offset?: number } = {}) {
+  public suggestItems(campaignId: string, { categoryIds, limit, offset }: { categoryIds?: string; limit?: number; offset?: number } = {}) {
     campaignId = encodeURIComponent(campaignId);
     return this.get(`/ad_campaign/${campaignId}/suggest_items`, {
       params: {
         category_ids: categoryIds,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -610,20 +614,18 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param limit Specifies the maximum number of results to return on a page in the paginated response.
    * @param offset Specifies the number of results to skip in the result set before returning the first report in the paginated response.
    */
-  public getKeywords(campaignId: string, {
-    adGroupIds,
-    keywordStatus,
-    limit,
-    offset
-  }: { adGroupIds?: string, keywordStatus?: string, limit?: number, offset?: number } = {}) {
+  public getKeywords(
+    campaignId: string,
+    { adGroupIds, keywordStatus, limit, offset }: { adGroupIds?: string; keywordStatus?: string; limit?: number; offset?: number } = {},
+  ) {
     campaignId = encodeURIComponent(campaignId);
     return this.get(`/ad_campaign/${campaignId}/keyword`, {
       params: {
         ad_group_ids: adGroupIds,
         keyword_status: keywordStatus,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -637,7 +639,6 @@ export default class Marketing extends Restful implements OpenApi<operations> {
     campaignId = encodeURIComponent(campaignId);
     return this.post(`/ad_campaign/${campaignId}/keyword`, body);
   }
-
 
   /**
    *
@@ -689,24 +690,26 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param offset The number of results that will be skipped in the result set.
    */
   public getNegativeKeywords({
-                               adGroupIds,
-                               campaignIds,
-                               limit,
-                               negativeKeywordStatus,
-                               offset
-                             }: {
-    adGroupIds?: string,
-    campaignIds?: string,
-    limit?: number,
-    negativeKeywordStatus?: string,
-    offset?: number
+    adGroupIds,
+    campaignIds,
+    limit,
+    negativeKeywordStatus,
+    offset,
+  }: {
+    adGroupIds?: string;
+    campaignIds?: string;
+    limit?: number;
+    negativeKeywordStatus?: string;
+    offset?: number;
   } = {}) {
     return this.get(`/negative_keyword`, {
       params: {
         ad_group_ids: adGroupIds,
-        campaign_ids: campaignIds, limit,
-        negative_keyword_status: negativeKeywordStatus, offset
-      }
+        campaign_ids: campaignIds,
+        limit,
+        negative_keyword_status: negativeKeywordStatus,
+        offset,
+      },
     });
   }
 
@@ -776,14 +779,13 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param reportTaskStatuses This parameter filters the returned report tasks by their status. Supply a
    *     comma-separated list of the report statuses you want returned.
    */
-  public getReportTasks({limit, offset, reportTaskStatuses}:
-                          { limit?: number, offset?: number, reportTaskStatuses?: string } = {}) {
+  public getReportTasks({ limit, offset, reportTaskStatuses }: { limit?: number; offset?: number; reportTaskStatuses?: string } = {}) {
     return this.get(`/ad_report_task`, {
       params: {
         limit,
         offset,
-        report_task_statuses: reportTaskStatuses
-      }
+        report_task_statuses: reportTaskStatuses,
+      },
     });
   }
 
@@ -920,11 +922,22 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param sort Specifies the order in which to sort the associated listings in the response.
    * @param status This query parameter applies only to markdown promotions.
    */
-  public getListingSet(promotionId: string,
-                       {limit, offset, q, sort, status}: {
-                         limit?: number, offset?: number, q?: string,
-                         sort?: string, status?: string
-                       } = {}) {
+  public getListingSet(
+    promotionId: string,
+    {
+      limit,
+      offset,
+      q,
+      sort,
+      status,
+    }: {
+      limit?: number;
+      offset?: number;
+      q?: string;
+      sort?: string;
+      status?: string;
+    } = {},
+  ) {
     promotionId = encodeURIComponent(promotionId);
     return this.get(`/promotion/${promotionId}/get_listing_set`, {
       params: {
@@ -932,8 +945,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
         offset,
         q,
         sort,
-        status
-      }
+        status,
+      },
     });
   }
 
@@ -950,12 +963,24 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param q A string consisting of one or more keywords.
    * @param sort Specifies the order for how to sort the response.
    */
-  public getPromotions(marketplaceId: string,
-                       {limit, offset, promotionStatus, promotionType, q, sort}:
-                         {
-                           limit?: number, offset?: number, promotionStatus?: string, promotionType?: string,
-                           q?: string, sort?: string
-                         } = {}) {
+  public getPromotions(
+    marketplaceId: string,
+    {
+      limit,
+      offset,
+      promotionStatus,
+      promotionType,
+      q,
+      sort,
+    }: {
+      limit?: number;
+      offset?: number;
+      promotionStatus?: string;
+      promotionType?: string;
+      q?: string;
+      sort?: string;
+    } = {},
+  ) {
     return this.get(`/promotion`, {
       params: {
         marketplace_id: marketplaceId,
@@ -964,8 +989,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
         promotion_status: promotionStatus,
         promotion_type: promotionType,
         q,
-        sort
-      }
+        sort,
+      },
     });
   }
 
@@ -1007,8 +1032,16 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    * @param q A string consisting of one or more keywords. eBay filters the response by returning only the promotions
    *     that contain the supplied keywords in the promotion title.
    */
-  public getPromotionReports(marketplaceId: string, {limit, offset, promotionStatus, promotionType, q}:
-    { limit?: number, offset?: number, promotionStatus?: string, promotionType?: string, q?: string } = {}) {
+  public getPromotionReports(
+    marketplaceId: string,
+    {
+      limit,
+      offset,
+      promotionStatus,
+      promotionType,
+      q,
+    }: { limit?: number; offset?: number; promotionStatus?: string; promotionType?: string; q?: string } = {},
+  ) {
     return this.get(`/promotion_report`, {
       params: {
         marketplace_id: marketplaceId,
@@ -1016,8 +1049,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
         offset,
         promotion_status: promotionStatus,
         promotion_type: promotionType,
-        q
-      }
+        q,
+      },
     });
   }
 
@@ -1029,8 +1062,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
   public getPromotionSummaryReport(marketplaceId: string) {
     return this.get(`/promotion_summary_report`, {
       params: {
-        marketplace_id: marketplaceId
-      }
+        marketplace_id: marketplaceId,
+      },
     });
   }
 
@@ -1045,15 +1078,14 @@ export default class Marketing extends Restful implements OpenApi<operations> {
   /**
    * This method retrieves a list of email campaigns from a seller's eBay store.
    */
-  public getEmailCampaigns({limit, q, offset, sort}:
-                             { limit?: number, q?: string, offset?: number, sort?: string } = {}) {
+  public getEmailCampaigns({ limit, q, offset, sort }: { limit?: number; q?: string; offset?: number; sort?: string } = {}) {
     return this.get(`/email_campaign`, {
       params: {
         limit,
         offset,
         q,
-        sort
-      }
+        sort,
+      },
     });
   }
 
@@ -1098,7 +1130,7 @@ export default class Marketing extends Restful implements OpenApi<operations> {
    */
   public getAudiences() {
     return this.get(`/email_campaign/audience`);
-  };
+  }
 
   /**
    * This method returns the seller's email campaign performance report for a time period specified by the <b>startDate</b> and <b>endDate</b> path parameters.
@@ -1109,9 +1141,8 @@ export default class Marketing extends Restful implements OpenApi<operations> {
     return this.get(`/email_campaign/report`, {
       params: {
         startDate,
-        endDate
-      }
+        endDate,
+      },
     });
   }
-
 }

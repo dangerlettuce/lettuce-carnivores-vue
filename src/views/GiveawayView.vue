@@ -1,5 +1,5 @@
 <template>
-    <GiveawayPage />
+  <GiveawayPage />
 </template>
 
 <script setup lang="ts">

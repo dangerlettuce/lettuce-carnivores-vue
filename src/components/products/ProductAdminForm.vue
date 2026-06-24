@@ -7,8 +7,7 @@
         </CollapsibleTrigger>
         <div class="action-container">
           <BaseButton @click="addNewPlantCategory(1)" size="small">+ Plant Category</BaseButton>
-          <BaseButton @click="addNewProductCategory(1)" size="small" type="info" color="">+ Product Category
-          </BaseButton>
+          <BaseButton @click="addNewProductCategory(1)" size="small" type="info" color="">+ Product Category </BaseButton>
         </div>
       </header>
       <CollapsibleContent>
@@ -19,40 +18,37 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, type Ref } from 'vue';
-  import ProductAdminGrid from '@/components/ProductCategoryAdminGrid.vue';
-  import Collapsible from '@/components/ui/collapsible/Collapsible.vue';
-  import CollapsibleContent from '@/components/ui/collapsible/CollapsibleContent.vue';
-  import CollapsibleTrigger from '@/components/ui/collapsible/CollapsibleTrigger.vue';
-  import { useProductStore } from '@/stores/productStore'
+import { ref, type Ref } from 'vue';
+import ProductAdminGrid from '@/components/ProductCategoryAdminGrid.vue';
+import Collapsible from '@/components/ui/collapsible/Collapsible.vue';
+import CollapsibleContent from '@/components/ui/collapsible/CollapsibleContent.vue';
+import CollapsibleTrigger from '@/components/ui/collapsible/CollapsibleTrigger.vue';
+import { useProductStore } from '@/stores/productStore';
 
-  const categoryOpen = ref(true)
-  const { addNewPlantCategory, addNewProductCategory } = useProductStore();
+const categoryOpen = ref(true);
+const { addNewPlantCategory, addNewProductCategory } = useProductStore();
 
-
-  //batch writes https://firebase.google.com/docs/firestore/manage-data/transactions#batched-writes
-
+//batch writes https://firebase.google.com/docs/firestore/manage-data/transactions#batched-writes
 </script>
 
 <style scoped>
-  h2 {
-    font-size: 1.5rem;
-  }
+h2 {
+  font-size: 1.5rem;
+}
 
-  header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-block: .5rem;
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-block: 0.5rem;
+}
 
-  }
+section {
+  width: 80dvw;
+}
 
-  section {
-    width: 80dvw;
-  }
-
-  .action-container {
-    display: flex;
-    gap: 1rem;
-  }
+.action-container {
+  display: flex;
+  gap: 1rem;
+}
 </style>

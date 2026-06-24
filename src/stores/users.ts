@@ -1,5 +1,5 @@
-import type { User as fbUser } from "firebase/auth";
-import { defineStore } from "pinia";
+import type { User as fbUser } from 'firebase/auth';
+import { defineStore } from 'pinia';
 import {
   fbAuthStateListener,
   fbCreateAccount,
@@ -9,8 +9,8 @@ import {
   requestPasswordResetEmail,
   fbSignInAnonymously,
   fbSignInWithGoogle,
-} from "@/apis/firebaseAuth";
-import {findDocById} from '@/apis/dataServices'
+} from '@/apis/firebaseAuth';
+import { findDocById } from '@/apis/dataServices';
 import type { Profile } from '@/types/Users';
 
 interface State {
@@ -42,8 +42,8 @@ export const useUserStore = defineStore('user', {
       return new Promise((resolve) => {
         fbAuthStateListener(async (user: any) => {
           this.user = user ? user : null;
-          if(user) {
-            this.fetchUserDetails(user.uid)
+          if (user) {
+            this.fetchUserDetails(user.uid);
           }
           resolve(true);
         });
@@ -51,36 +51,36 @@ export const useUserStore = defineStore('user', {
     },
     async createAccount(email: string, password: string) {
       try {
-          const user = await fbCreateAccount(email, password);
-          this.user = user ? user : null;
-          this.error = null;
-          return true;
+        const user = await fbCreateAccount(email, password);
+        this.user = user ? user : null;
+        this.error = null;
+        return true;
       } catch (e: any) {
-          this.user = null;
-          this.error = e;
-          console.log(e)
-          return false;
-      } 
+        this.user = null;
+        this.error = e;
+        console.log(e);
+        return false;
+      }
     },
     async setUserProfile(userProfile: Profile) {
       try {
-        await fbSetUserProfile({profile: userProfile});
+        await fbSetUserProfile({ profile: userProfile });
         this.profile = userProfile ? userProfile : null;
         this.error = null;
         return true;
-    } catch (e: any) {
+      } catch (e: any) {
         this.profile = null;
         this.error = e;
-        console.log(e)
+        console.log(e);
         return false;
-    } 
+      }
     },
     async logInUser(email: string, password: string) {
-      this.isUserLoading = true
+      this.isUserLoading = true;
       try {
         const response = await fbSignIn(email, password);
         this.user = response.user ? response.user : null;
-        this.fetchUserDetails(response.user.uid)
+        this.fetchUserDetails(response.user.uid);
         this.error = null;
         return true;
       } catch (e: any) {
@@ -89,40 +89,40 @@ export const useUserStore = defineStore('user', {
         this.error = e;
         return false;
       } finally {
-        this.isUserLoading = false
+        this.isUserLoading = false;
       }
     },
     async loginWithGoogle() {
-      this.isUserLoading = true
+      this.isUserLoading = true;
       try {
-        const res = await fbSignInWithGoogle()
+        const res = await fbSignInWithGoogle();
         this.user = res.user ? res.user : null;
-        return res
+        return res;
       } catch (e: any) {
-        console.error(e)
-        return {success: false, error: true, message: 'Unable to sign in'}
+        console.error(e);
+        return { success: false, error: true, message: 'Unable to sign in' };
       } finally {
-        this.isUserLoading = false
+        this.isUserLoading = false;
       }
     },
-    async loginAnonymously(){
-      this.isUserLoading = true
+    async loginAnonymously() {
+      this.isUserLoading = true;
       try {
-        const res = await fbSignInAnonymously()
+        const res = await fbSignInAnonymously();
         this.user = res.user ? res.user : null;
-        return res
+        return res;
       } catch (e: any) {
-        console.error(e)
-        return {success: false, error: true, message: e.message}
+        console.error(e);
+        return { success: false, error: true, message: e.message };
       } finally {
-        this.isUserLoading = false
+        this.isUserLoading = false;
       }
     },
 
     async requestPasswordReset(email: string) {
-      const res = await requestPasswordResetEmail(email)
-      if(res) {
-        return res
+      const res = await requestPasswordResetEmail(email);
+      if (res) {
+        return res;
       }
     },
 
@@ -130,7 +130,7 @@ export const useUserStore = defineStore('user', {
       try {
         await fbSignOut();
         this.user = null;
-        this.userRoles = null
+        this.userRoles = null;
         this.profile = null;
         this.error = null;
         return true;
@@ -140,18 +140,17 @@ export const useUserStore = defineStore('user', {
       }
     },
     async fetchUserDetails(userId: string) {
-      if(!userId) return
+      if (!userId) return;
       try {
-        const res = await findDocById<{ profile: Profile, roles: { (key: string): boolean }[] }>('users', userId)
-        if(res) {
-            this.userRoles = res.roles
-            this.profile = res.profile
+        const res = await findDocById<{ profile: Profile; roles: { (key: string): boolean }[] }>('users', userId);
+        if (res) {
+          this.userRoles = res.roles;
+          this.profile = res.profile;
         }
-      } catch(e) {
-        console.log(e)
-        return
+      } catch (e) {
+        console.log(e);
+        return;
       }
-      
     },
   },
 });

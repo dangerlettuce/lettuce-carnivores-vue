@@ -9,17 +9,16 @@ import {
   ShippingAddressImpl,
   UpdatePaymentInformation,
   UpdateQuantity,
-  UpdateShippingOption
+  UpdateShippingOption,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/buy_order_v1_beta_oas3.js';
-import Api, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/buy_order_v1_beta_oas3.js';
+import Api, { OpenApi } from '../../index.js';
 
 /**
  * The Order API provides interfaces that lets shoppers pay for items (for both eBay guest and eBay member buyers).
  * Client Credentials: https://api.ebay.com/oauth/api_scope/buy.order
  */
 export default class Order extends Api implements OpenApi<operations> {
-
   static id = 'Order';
 
   get basePath(): string {
@@ -344,16 +343,16 @@ export default class Order extends Api implements OpenApi<operations> {
     date: string,
     requestNonce: string,
     signature: string,
-    body?: UpdatePaymentInformation
+    body?: UpdatePaymentInformation,
   ) {
     checkoutSessionId = encodeURIComponent(checkoutSessionId);
     return this.post(`/proxy_guest_checkout_session/${checkoutSessionId}/update_payment_info`, body, {
       headers: {
-        'Authorization': authorization,
+        Authorization: authorization,
         'X-EBAY-C-DATE': date,
         'X-EBAY-C-REQUEST-NONCE': requestNonce,
-        'X-EBAY-C-SIGNATURE': signature
-      }
+        'X-EBAY-C-SIGNATURE': signature,
+      },
     });
   }
 

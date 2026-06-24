@@ -1,4 +1,4 @@
-import {db, auth} from '@/apis/firebase'
+import { db, auth } from '@/apis/firebase';
 
 import {
   getDoc,
@@ -7,7 +7,7 @@ import {
   getDocs,
   collection,
   // onSnapshot,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   signOut,
   signInWithEmailAndPassword,
@@ -16,20 +16,17 @@ import {
   sendPasswordResetEmail,
   signInAnonymously,
   GoogleAuthProvider,
-  signInWithPopup
-} from "firebase/auth";
+  signInWithPopup,
+} from 'firebase/auth';
 
-export const fbCreateAccount = async (
-  email: string,
-  password: string
-) => {
+export const fbCreateAccount = async (email: string, password: string) => {
   const response = await createUserWithEmailAndPassword(auth, email, password);
   if (response) {
-    return response.user
+    return response.user;
   } else {
-    return null
+    return null;
   }
-}
+};
 //   await fbSetUserProfile(profileDetails);
 //   const profileResponse = await fbGetUserProfile();
 //   if(!profileResponse) {
@@ -49,13 +46,13 @@ export const fbSignIn = async (email: string, password: string) => {
   return response;
 };
 export async function fbSignInAnonymously() {
-  const response = await signInAnonymously(auth)
-  return response
-} 
+  const response = await signInAnonymously(auth);
+  return response;
+}
 export async function fbSignInWithGoogle() {
-  const provider = new GoogleAuthProvider()
-  const response = await signInWithPopup(auth, provider)
-  return response
+  const provider = new GoogleAuthProvider();
+  const response = await signInWithPopup(auth, provider);
+  return response;
 }
 export const fbSignOut = async () => {
   await signOut(auth);
@@ -74,15 +71,15 @@ export const fbAuthStateListener = (callback: any) => {
 
 export const fbSetUserProfile = async (profileDetails: object) => {
   const user = auth.currentUser;
-  const ref = doc(db, "users", user?.uid as string);
-  if(ref && user ) {
+  const ref = doc(db, 'users', user?.uid as string);
+  if (ref && user) {
     await setDoc(
       ref,
       {
         uid: user?.uid,
         ...profileDetails,
       },
-      { merge: true }
+      { merge: true },
     );
   }
   return true;
@@ -90,7 +87,7 @@ export const fbSetUserProfile = async (profileDetails: object) => {
 
 export const fbGetUserProfile = async () => {
   const user = auth.currentUser;
-  const ref = doc(db, "users", user?.uid as string);
+  const ref = doc(db, 'users', user?.uid as string);
   const docSnap = await getDoc(ref);
   if (docSnap.exists()) {
     return {
@@ -99,25 +96,21 @@ export const fbGetUserProfile = async () => {
     };
   } else {
     // doc.data() will be undefined in this case
-    console.log("No such document!", user?.uid);
+    console.log('No such document!', user?.uid);
     return null;
   }
 };
 
 export async function requestPasswordResetEmail(email: string) {
   try {
-    await sendPasswordResetEmail(auth, email)
-      return {success: true, error: false, message: 'Password reset email sent!'}
+    await sendPasswordResetEmail(auth, email);
+    return { success: true, error: false, message: 'Password reset email sent!' };
   } catch (e) {
-    return {success: true, error: false, message: 'Password reset email sent!'} 
+    return { success: true, error: false, message: 'Password reset email sent!' };
   }
 }
 
-export const queryObjectCollection = async ({
-  collectionName,
-}: {
-  collectionName: string;
-}) => {
+export const queryObjectCollection = async ({ collectionName }: { collectionName: string }) => {
   const querySnapshot = await getDocs(collection(db, collectionName));
   const results: any[] = [];
 

@@ -7,7 +7,7 @@ enum calls {
   GetMultipleItems,
   GetShippingCosts,
   GetSingleItem,
-  GetUserProfile
+  GetUserProfile,
 }
 
 export default calls;

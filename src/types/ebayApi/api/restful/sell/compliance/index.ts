@@ -1,13 +1,12 @@
 // @ts-nocheck
-import {SuppressViolationRequest} from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_compliance_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { SuppressViolationRequest } from '../../../../types/index.js';
+import { operations } from '../../../../types/restful/specs/sell_compliance_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * Service for providing the compliance violations of seller account/listings
  */
 export default class Compliance extends Restful implements OpenApi<operations> {
-
   static id = 'Compliance';
 
   get basePath(): string {
@@ -22,8 +21,8 @@ export default class Compliance extends Restful implements OpenApi<operations> {
   public getListingViolationsSummary(complianceType?: string) {
     return this.get(`/listing_violation_summary`, {
       params: {
-        compliance_type: complianceType
-      }
+        compliance_type: complianceType,
+      },
     });
   }
 
@@ -37,15 +36,19 @@ export default class Compliance extends Restful implements OpenApi<operations> {
    * @param limit This query parameter is used if the user wants to set a limit on the number of listing violations
    *     that are returned in the current result set.
    */
-  public getListingViolations({complianceType, offset, listingId, limit}:
-                                { complianceType?: string, offset?: number, listingId?: string, limit?: number } = {}) {
+  public getListingViolations({
+    complianceType,
+    offset,
+    listingId,
+    limit,
+  }: { complianceType?: string; offset?: number; listingId?: string; limit?: number } = {}) {
     return this.get(`/listing_violation`, {
       params: {
         compliance_type: complianceType,
         offset,
         listing_id: listingId,
-        limit
-      }
+        limit,
+      },
     });
   }
 

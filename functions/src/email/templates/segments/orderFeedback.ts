@@ -1,4 +1,4 @@
-import type { Order } from "../../../types/Orders";
+import type { Order } from '../../../types/Orders';
 
 export function getOrderFeedbackTemplate(data: Order) {
   return `
@@ -17,5 +17,5 @@ export function getOrderFeedbackTemplate(data: Order) {
             <mj-button width="200px" href="https://dangerlettuce.com/feedback/${data.id}?email=${data.shippingInfo.email}" background-color="#d64d21" color="white">It could have been better</mj-button>
         </mj-column>
       </mj-section>
-  `
+  `;
 }

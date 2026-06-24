@@ -1,11 +1,10 @@
-import type {operations} from '../../../../types/restful/specs/commerce_identity_v1_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import type { operations } from '../../../../types/restful/specs/commerce_identity_v1_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * Retrieves the authenticated user's account profile information.
  */
 export default class Identity extends Restful implements OpenApi<operations> {
-
   static id = 'Identity';
 
   get basePath(): string {

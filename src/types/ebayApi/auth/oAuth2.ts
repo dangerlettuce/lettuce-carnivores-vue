@@ -1,23 +1,23 @@
 // @ts-nocheck
 import debug from 'debug';
 import Base from '../api/base.js';
-import {createNanoEvents, EventCallback} from '../nanoevents.js';
-import {IEBayApiRequest} from '../request.js';
-import {AppConfig, Scope} from '../types/index.js';
+import { createNanoEvents, EventCallback } from '../nanoevents.js';
+import { IEBayApiRequest } from '../request.js';
+import { AppConfig, Scope } from '../types/index.js';
 
 const log = debug('ebay:oauth2');
 
 export type Token = {
-  access_token: string,
-  expires_in?: number, // default 2 hours (7200)
-  token_type?: string // "User Access Token"
+  access_token: string;
+  expires_in?: number; // default 2 hours (7200)
+  token_type?: string; // "User Access Token"
 };
 
 export type ClientToken = Token;
 
 export type AuthToken = Token & {
-  refresh_token: string,
-  refresh_token_expires_in?: number // 47304000
+  refresh_token: string;
+  refresh_token_expires_in?: number; // 47304000
 };
 
 /**
@@ -30,12 +30,12 @@ export default class OAuth2 extends Base {
   // If all the calls in our application require just an Application access token we can use this endpoint
   public static readonly IDENTITY_ENDPOINT: Record<string, string> = {
     production: 'https://api.ebay.com/identity/v1/oauth2/token',
-    sandbox: 'https://api.sandbox.ebay.com/identity/v1/oauth2/token'
+    sandbox: 'https://api.sandbox.ebay.com/identity/v1/oauth2/token',
   };
 
   public static readonly AUTHORIZE_ENDPOINT: Record<string, string> = {
     production: 'https://auth.ebay.com/oauth2/authorize',
-    sandbox: 'https://auth.sandbox.ebay.com/oauth2/authorize'
+    sandbox: 'https://auth.sandbox.ebay.com/oauth2/authorize',
   };
 
   public static readonly defaultScopes: Scope = ['https://api.ebay.com/oauth/api_scope'];
@@ -59,20 +59,18 @@ export default class OAuth2 extends Base {
     return this.config.sandbox ? OAuth2.IDENTITY_ENDPOINT.sandbox : OAuth2.IDENTITY_ENDPOINT.production;
   }
 
-  public static generateAuthUrl(
-    sandbox: boolean,
-    appId: string,
-    ruName: string,
-    scope: string[],
-    state = ''
-  ): string {
+  public static generateAuthUrl(sandbox: boolean, appId: string, ruName: string, scope: string[], state = ''): string {
     return [
       sandbox ? OAuth2.AUTHORIZE_ENDPOINT.sandbox : OAuth2.AUTHORIZE_ENDPOINT.production,
-      '?client_id=', encodeURIComponent(appId),
-      '&redirect_uri=', encodeURIComponent(ruName),
+      '?client_id=',
+      encodeURIComponent(appId),
+      '&redirect_uri=',
+      encodeURIComponent(ruName),
       '&response_type=code',
-      '&state=', encodeURIComponent(state),
-      '&scope=', encodeURIComponent(scope.join(' '))
+      '&state=',
+      encodeURIComponent(state),
+      '&scope=',
+      encodeURIComponent(scope.join(' ')),
     ].join('');
   }
 
@@ -144,15 +142,19 @@ export default class OAuth2 extends Base {
     }
 
     try {
-      const response = await this.req.postForm(this.identityEndpoint, {
-        scope: this.scope.join(' '),
-        grant_type: 'client_credentials',
-      }, {
-        auth: {
-          username: this.config.appId,
-          password: this.config.certId
-        }
-      });
+      const response = await this.req.postForm(
+        this.identityEndpoint,
+        {
+          scope: this.scope.join(' '),
+          grant_type: 'client_credentials',
+        },
+        {
+          auth: {
+            username: this.config.appId,
+            password: this.config.certId,
+          },
+        },
+      );
 
       return response.data;
     } catch (error) {
@@ -200,16 +202,20 @@ export default class OAuth2 extends Base {
     }
 
     try {
-      const response = await this.req.postForm(this.identityEndpoint, {
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: ruName
-      }, {
-        auth: {
-          username: this.config.appId,
-          password: this.config.certId
-        }
-      });
+      const response = await this.req.postForm(
+        this.identityEndpoint,
+        {
+          grant_type: 'authorization_code',
+          code,
+          redirect_uri: ruName,
+        },
+        {
+          auth: {
+            username: this.config.appId,
+            password: this.config.certId,
+          },
+        },
+      );
 
       const token = response.data;
 
@@ -243,23 +249,27 @@ export default class OAuth2 extends Base {
     }
 
     try {
-      const response = await this.req.postForm(this.identityEndpoint, {
-        grant_type: 'refresh_token',
-        refresh_token: this._authToken.refresh_token,
-        scope: this.scope.join(' ')
-      }, {
-        auth: {
-          username: this.config.appId,
-          password: this.config.certId
-        }
-      });
+      const response = await this.req.postForm(
+        this.identityEndpoint,
+        {
+          grant_type: 'refresh_token',
+          refresh_token: this._authToken.refresh_token,
+          scope: this.scope.join(' '),
+        },
+        {
+          auth: {
+            username: this.config.appId,
+            password: this.config.certId,
+          },
+        },
+      );
 
       const token = response.data;
       log('Successfully refreshed token', token);
 
       const refreshedToken = {
         ...this._authToken,
-        ...token
+        ...token,
       };
 
       this.setCredentials(refreshedToken);
@@ -290,11 +300,11 @@ export default class OAuth2 extends Base {
   public getCredentials(): AuthToken | ClientToken | null {
     if (this._authToken) {
       return {
-        ...this._authToken
+        ...this._authToken,
       };
     } else if (this._clientToken) {
       return {
-        ...this._clientToken
+        ...this._clientToken,
       };
     }
 
@@ -313,7 +323,7 @@ export default class OAuth2 extends Base {
         expires_in: 7200,
         refresh_token_expires_in: 47304000,
         token_type: 'User Access Token',
-        access_token: authToken
+        access_token: authToken,
       };
     } else {
       this._authToken = authToken;

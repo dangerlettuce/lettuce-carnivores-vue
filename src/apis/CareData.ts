@@ -21,7 +21,7 @@ export const careData = {
       tempRange: '67-80F day or night.',
     },
   },
-}
+};
 export const guideData = {
   general: {
     fertilizer:
@@ -41,7 +41,7 @@ export const guideData = {
       temperature:
         'Heliamphora do not need a nigh-time temperature drop but are very sensitive to warm temperatures. If regularly kept above 82°F, a fungus can develop which causes plant death. The exception is with H. ciliata which is known as a "true lowland" species and can be grown in warmer conditions.',
       media:
-        "In general, heliamphora are not picky about their potting media. They will do well in most mixes with a combination of coco (chips or coir), peat, pumice, peat, long-fiber sphagnum, Fluval Stratum We use a mixture of roughly equal parts coco chips and pumice plus a small percentage of biochar and organic fertilizer. This is an extremely high draining mix which works well for daily top watering. If you choose to top-water, you will need to amend the mix with something to wick water, such as 20-30% long-fibered sphagnum moss.",
+        'In general, heliamphora are not picky about their potting media. They will do well in most mixes with a combination of coco (chips or coir), peat, pumice, peat, long-fiber sphagnum, Fluval Stratum We use a mixture of roughly equal parts coco chips and pumice plus a small percentage of biochar and organic fertilizer. This is an extremely high draining mix which works well for daily top watering. If you choose to top-water, you will need to amend the mix with something to wick water, such as 20-30% long-fibered sphagnum moss.',
       light:
         'Heliamphora will take as much light as you can give them. When given enough light, most species will have beautiful red coloration.',
       fertilization:
@@ -84,4 +84,4 @@ export const guideData = {
       referencePhotoPath: 'referencePhotos/Cephalotus H. Giant.jpg',
     },
   },
-}
+};

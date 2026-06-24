@@ -1,19 +1,19 @@
 import ApiFactory from './api/apiFactory.js';
 import Api from './api/index.js';
-import type {Buy} from './api/restful/buy/index.js';
-import type {Commerce} from './api/restful/commerce/index.js';
-import type {Developer} from './api/restful/developer/index.js';
-import type {PostOrder} from './api/restful/postOrder/index.js';
-import type {Sell} from './api/restful/sell/index.js';
+import type { Buy } from './api/restful/buy/index.js';
+import type { Commerce } from './api/restful/commerce/index.js';
+import type { Developer } from './api/restful/developer/index.js';
+import type { PostOrder } from './api/restful/postOrder/index.js';
+import type { Sell } from './api/restful/sell/index.js';
 import AuthNAuth from './auth/authNAuth.js';
 import OAuth2 from './auth/oAuth2.js';
 import * as enums from './enums/index.js';
-import {ContentLanguage, Locale, MarketplaceId, SiteId} from './enums/index.js';
+import { ContentLanguage, Locale, MarketplaceId, SiteId } from './enums/index.js';
 import * as errors from './errors/index.js';
-import {ApiEnvError} from './errors/index.js';
-import type {IEBayApiRequest} from './request.js';
+import { ApiEnvError } from './errors/index.js';
+import type { IEBayApiRequest } from './request.js';
 import * as types from './types/index.js';
-import type {AppConfig, ClientAlerts, Finding, Keyset, Merchandising, Shopping, Signature, Trading} from './types/index.js';
+import type { AppConfig, ClientAlerts, Finding, Keyset, Merchandising, Shopping, Signature, Trading } from './types/index.js';
 
 const defaultConfig: Omit<AppConfig, keyof Keyset> = {
   sandbox: false,
@@ -21,7 +21,7 @@ const defaultConfig: Omit<AppConfig, keyof Keyset> = {
   siteId: SiteId.EBAY_US,
   marketplaceId: MarketplaceId.EBAY_US,
   acceptLanguage: Locale.en_US,
-  contentLanguage: ContentLanguage.en_US
+  contentLanguage: ContentLanguage.en_US,
 };
 
 // tslint:disable-next-line:class-name
@@ -98,7 +98,7 @@ export default class eBayApi extends Api {
    * @param {IEBayApiRequest} req the request
    */
   constructor(config: AppConfig, req?: IEBayApiRequest) {
-    super({...defaultConfig, ...config}, req);
+    super({ ...defaultConfig, ...config }, req);
 
     this.factory = new ApiFactory(this.config, this.req, this.auth);
 
@@ -154,13 +154,4 @@ export default class eBayApi extends Api {
   }
 }
 
-export {
-  eBayApi,
-  SiteId,
-  MarketplaceId,
-  ContentLanguage,
-  Locale,
-  enums,
-  errors,
-  types
-};
+export { eBayApi, SiteId, MarketplaceId, ContentLanguage, Locale, enums, errors, types };

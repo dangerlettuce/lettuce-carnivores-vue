@@ -3,51 +3,50 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/inquiry/check_eligibility": {
+  '/inquiry/check_eligibility': {
     /** @description Check if a buyer is eligible to open an inquiry on an order */
-    post: operations["checkInquiryEligibility"];
+    post: operations['checkInquiryEligibility'];
   };
-  "/inquiry/{inquiryId}/close": {
+  '/inquiry/{inquiryId}/close': {
     /** @description Close an inquiry for the buyer */
-    post: operations["closeInquiry"];
+    post: operations['closeInquiry'];
   };
-  "/inquiry/{inquiryId}/confirm_refund": {
+  '/inquiry/{inquiryId}/confirm_refund': {
     /** @description Buyer confirms the refund from an inquiry was received */
-    post: operations["confirmInquiryRefund"];
+    post: operations['confirmInquiryRefund'];
   };
-  "/inquiry": {
+  '/inquiry': {
     /** @description Buyer confirms the refund from an inquiry was received */
-    post: operations["createInquiry"];
+    post: operations['createInquiry'];
   };
-  "/inquiry/{inquiryId}/escalate": {
+  '/inquiry/{inquiryId}/escalate': {
     /** @description Escalate an inquiry to an INR case */
-    post: operations["escalateInquiry"];
+    post: operations['escalateInquiry'];
   };
-  "/inquiry/{inquiryId}": {
+  '/inquiry/{inquiryId}': {
     /** @description Retrieve the history and details related to a specific inquiry */
-    get: operations["getInquiry"];
+    get: operations['getInquiry'];
   };
-  "/inquiry/{inquiryId}/issue_refund": {
+  '/inquiry/{inquiryId}/issue_refund': {
     /** @description Issue a refund for an inquiry */
-    post: operations["issueInquiryRefund"];
+    post: operations['issueInquiryRefund'];
   };
-  "/inquiry/{inquiryId}/provide_refund_info": {
+  '/inquiry/{inquiryId}/provide_refund_info': {
     /** @description Provide refund information about an inquiry to the buyer */
-    post: operations["provideInquiryRefundInfo"];
+    post: operations['provideInquiryRefundInfo'];
   };
-  "/inquiry/{inquiryId}/provide_shipment_info": {
+  '/inquiry/{inquiryId}/provide_shipment_info': {
     /** @description Provide shipment information for an inquiry */
-    post: operations["provideInquiryShipmentInfo"];
+    post: operations['provideInquiryShipmentInfo'];
   };
-  "/inquiry/search": {
+  '/inquiry/search': {
     /** @description This call is used to search for inquiries using multiple filter types. */
-    get: operations["search"];
+    get: operations['search'];
   };
-  "/inquiry/{inquiryId}/send_message": {
+  '/inquiry/{inquiryId}/send_message': {
     /** @description Contact the buyer or seller about an inquiry */
-    post: operations["sendInquiryMessage"];
+    post: operations['sendInquiryMessage'];
   };
 }
 
@@ -58,7 +57,6 @@ export type components = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description Check if a buyer is eligible to open an inquiry on an order */
   checkInquiryEligibility: {
     responses: {

@@ -4,16 +4,15 @@ import {
   CreateSubscriptionRequest,
   DestinationRequest,
   NotificationParams,
-  UpdateSubscriptionRequest
+  UpdateSubscriptionRequest,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/commerce_notification_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/commerce_notification_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The eBay  Notification API allows third-party developers and applications to process eBay notifications and verify the integrity of the notification message payload.
  */
 export default class Notification extends Restful implements OpenApi<operations> {
-
   static id = 'Notification';
 
   get basePath(): string {
@@ -46,12 +45,12 @@ export default class Notification extends Restful implements OpenApi<operations>
    * @param limit The maximum number of items to return per page from the result set.
    * @param continuationToken The token used to access the next set of results.
    */
-  public getTopics({limit, continuationToken: continuation_token}: NotificationParams) {
+  public getTopics({ limit, continuationToken: continuation_token }: NotificationParams) {
     return this.get(`/topic`, {
       params: {
         limit,
-        continuation_token
-      }
+        continuation_token,
+      },
     });
   }
 
@@ -61,12 +60,12 @@ export default class Notification extends Restful implements OpenApi<operations>
    * @param limit The number of items, from the result set, returned in a single page.
    * @param continuation_token The continuation token for the next set of results.
    */
-  public getSubscriptions({limit, continuationToken: continuation_token}: NotificationParams) {
+  public getSubscriptions({ limit, continuationToken: continuation_token }: NotificationParams) {
     return this.get(`/subscription`, {
       params: {
         limit,
-        continuation_token
-      }
+        continuation_token,
+      },
     });
   }
 
@@ -143,12 +142,12 @@ export default class Notification extends Restful implements OpenApi<operations>
    * This method allows applications to retrieve a paginated collection of destination resources and related details.
    * @param subscriptionId The unique identifier for the subscription.
    */
-  public getDestinations({limit, continuationToken: continuation_token}: NotificationParams) {
+  public getDestinations({ limit, continuationToken: continuation_token }: NotificationParams) {
     return this.get(`/destination`, {
       params: {
         limit,
-        continuation_token
-      }
+        continuation_token,
+      },
     });
   }
 

@@ -1,12 +1,11 @@
-import {Metric} from '../../../../enums/index.js';
-import type {operations} from '../../../../types/restful/specs/sell_analytics_v1_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import { Metric } from '../../../../enums/index.js';
+import type { operations } from '../../../../types/restful/specs/sell_analytics_v1_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * The Analytics API provides information about a seller's business performance.
  */
 export default class Analytics extends Restful implements OpenApi<operations> {
-
   static id = 'Analytics';
 
   get basePath(): string {
@@ -40,15 +39,19 @@ export default class Analytics extends Restful implements OpenApi<operations> {
    * @param metric Specifies a comma separated list of the metrics you want included in the report.
    * @param sort Specifies a single metric to be sorted and whether you want to sort in ascending or descending order.
    */
-  public getTrafficReport({dimension, filter, metric, sort}:
-                            { dimension?: string, filter?: string, metric?: string | Metric | `${Metric}`, sort?: string } = {}) {
+  public getTrafficReport({
+    dimension,
+    filter,
+    metric,
+    sort,
+  }: { dimension?: string; filter?: string; metric?: string | Metric | `${Metric}`; sort?: string } = {}) {
     return this.get(`/traffic_report`, {
       params: {
         dimension,
         filter,
         metric,
-        sort
-      }
+        sort,
+      },
     });
   }
 

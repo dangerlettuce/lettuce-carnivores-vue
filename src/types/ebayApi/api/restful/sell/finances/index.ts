@@ -1,5 +1,5 @@
-import type {operations} from '../../../../types/restful/specs/sell_finances_v1_oas3.js';
-import Restful, { type OpenApi} from '../../index.js';
+import type { operations } from '../../../../types/restful/specs/sell_finances_v1_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * The Finances API is used by sellers in eBay's managed payments program to retrieve seller payout information.
@@ -8,7 +8,6 @@ import Restful, { type OpenApi} from '../../index.js';
  *
  */
 export default class Finances extends Restful implements OpenApi<operations> {
-
   static id = 'Finances';
 
   get basePath(): string {
@@ -41,11 +40,11 @@ export default class Finances extends Restful implements OpenApi<operations> {
    * @param sort Allows sorting by payouts date in descending order with '-payoutDate' (default) and ascending with 'payoutDate'
    */
   public getPayouts({
-                      filter,
-                      limit,
-                      offset,
-                      sort,
-                    }: {
+    filter,
+    limit,
+    offset,
+    sort,
+  }: {
     filter?: string;
     limit?: number;
     offset?: number;
@@ -68,11 +67,11 @@ export default class Finances extends Restful implements OpenApi<operations> {
    *     call.
    */
   public getPayoutSummary({
-                            filter,
-                          }: {
+    filter,
+  }: {
     filter?: string;
   } = {}) {
-    return this.get(`/payout_summary`, {params: {filter}});
+    return this.get(`/payout_summary`, { params: { filter } });
   }
 
   /**
@@ -85,15 +84,15 @@ export default class Finances extends Restful implements OpenApi<operations> {
    * @param sort Allows sorting by transaction date in descending order with '-transactionDate' (default) and ascending with 'transactionDate'
    */
   public getTransactions({
-                           filter,
-                           limit,
-                           offset,
-                           sort
-                         }: {
+    filter,
+    limit,
+    offset,
+    sort,
+  }: {
     filter?: string;
     limit?: number;
     offset?: number;
-    sort?: 'transactionDate' | '-transactionDate',
+    sort?: 'transactionDate' | '-transactionDate';
   } = {}) {
     return this.get(`/transaction`, {
       params: {
@@ -112,8 +111,8 @@ export default class Finances extends Restful implements OpenApi<operations> {
    * @param limit The number of transaction to return per page of the result set.
    */
   public getTransactionSummary({
-                                 filter,
-                               }: {
+    filter,
+  }: {
     filter?: string;
   } = {}) {
     return this.get(`/transaction_summary`, {

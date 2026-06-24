@@ -137,7 +137,7 @@ enum calls {
   VerifyAddItem,
   VerifyAddSecondChanceItem,
   VerifyRelistItem,
-  VeROReportItems
+  VeROReportItems,
 }
 
 export default calls;

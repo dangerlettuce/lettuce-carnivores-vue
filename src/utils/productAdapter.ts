@@ -1,5 +1,5 @@
-import type { Plant as OldPlant, PlantCategory as OldPlantCategory } from '@/types/Plant'
-import type { Product, ProductCategory, PlantCategory, Plant } from '@/types/Product'
+import type { Plant as OldPlant, PlantCategory as OldPlantCategory } from '@/types/Plant';
+import type { Product, ProductCategory, PlantCategory, Plant } from '@/types/Product';
 
 export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory) {
   const product = {
@@ -13,7 +13,7 @@ export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory)
     isDiscountable: null,
     createdDate: plant.dateListedForSale || new Date(),
     updatedDate: new Date(),
-  } as Product
+  } as Product;
 
   const productCategory = {
     id: plantCategory.id,
@@ -27,7 +27,7 @@ export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory)
     createdDate: getOldestDate(plantCategory),
     dateUpdated: new Date(),
     description: plantCategory.description,
-  } as ProductCategory
+  } as ProductCategory;
 
   const newPlantCategory = {
     ...productCategory,
@@ -36,7 +36,7 @@ export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory)
     source: '',
     genus: plantCategory.genus,
     clone: plantCategory.clone,
-  } as PlantCategory
+  } as PlantCategory;
 
   const newPlant = {
     ...product,
@@ -47,24 +47,23 @@ export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory)
       ageGroup: 'Adult',
       isSpecimen: false,
       shelfLocation: plant.shelfLocation,
-    }
-  } as Plant
+    },
+  } as Plant;
 
   return {
     product,
     productCategory,
-    plantCategory: newPlantCategory, 
-    plant: newPlant
-  }
-  
+    plantCategory: newPlantCategory,
+    plant: newPlant,
+  };
 }
 
 function getOldestDate(plantCategory: OldPlantCategory) {
   return plantCategory.plants.reduce((oldestDate, plant) => {
-    if(!plant.dateListedForSale) return oldestDate;
-    const date = new Date(plant.dateListedForSale)
-    return oldestDate < date ? oldestDate : date
-  }, new Date())
+    if (!plant.dateListedForSale) return oldestDate;
+    const date = new Date(plant.dateListedForSale);
+    return oldestDate < date ? oldestDate : date;
+  }, new Date());
 }
 
 function getCategoryStatus(status: OldPlantCategory['status']) {
@@ -75,8 +74,8 @@ function getCategoryStatus(status: OldPlantCategory['status']) {
     ['Hidden', 'hidden'],
     ['Sold', 'inactive'],
     ['Delete', 'archived'],
-  ])
-  return statusMap.get(status)
+  ]);
+  return statusMap.get(status);
 }
 
 function getProductStatus(status: OldPlant['status']) {
@@ -87,6 +86,6 @@ function getProductStatus(status: OldPlant['status']) {
     ['Hidden', 'hidden'],
     ['Sold', 'sold'],
     ['Delete', 'archived'],
-  ])
-  return statusMap.get(status)
+  ]);
+  return statusMap.get(status);
 }

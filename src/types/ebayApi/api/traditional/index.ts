@@ -1,21 +1,21 @@
 // @ts-nocheck
-import {stringify} from 'qs';
+import { stringify } from 'qs';
 import {
   EBayAuthTokenIsHardExpired,
   EBayAuthTokenIsInvalid,
   EBayIAFTokenExpired,
   EBayIAFTokenInvalid,
-  handleEBayError
+  handleEBayError,
 } from '../../errors/index.js';
-import {ClientAlerts, Finding, Merchandising, Shopping, Trading, TraditionalApi} from '../../types/index.js';
+import { ClientAlerts, Finding, Merchandising, Shopping, Trading, TraditionalApi } from '../../types/index.js';
 import Api from '../index.js';
 import ClientAlertsCalls from './clientAlerts/index.js';
-import {Fields} from './fields.js';
+import { Fields } from './fields.js';
 import FindingCalls from './finding/index.js';
 import MerchandisingCalls from './merchandising/index.js';
 import ShoppingCalls from './shopping/index.js';
 import TradingCalls from './trading/index.js';
-import XMLRequest, {defaultApiConfig, TraditionalApiConfig, XMLReqConfig} from './XMLRequest.js';
+import XMLRequest, { defaultApiConfig, TraditionalApiConfig, XMLReqConfig } from './XMLRequest.js';
 
 /**
  * Traditional eBay API.
@@ -29,7 +29,7 @@ export default class Traditional extends Api {
     return this.createTraditionalXMLApi<Trading>({
       endpoint: {
         production: 'api.ebay.com',
-        sandbox: 'api.sandbox.ebay.com'
+        sandbox: 'api.sandbox.ebay.com',
       },
       path: '/ws/api.dll',
       calls: TradingCalls,
@@ -41,8 +41,8 @@ export default class Traditional extends Api {
         'X-EBAY-API-DEV-NAME': this.config.devId,
         'X-EBAY-API-SITEID': this.config.siteId,
         'X-EBAY-API-COMPATIBILITY-LEVEL': 967,
-        ...(accessToken && {'X-EBAY-API-IAF-TOKEN': accessToken})
-      })
+        ...(accessToken && { 'X-EBAY-API-IAF-TOKEN': accessToken }),
+      }),
     });
   }
 
@@ -53,7 +53,7 @@ export default class Traditional extends Api {
     return this.createTraditionalXMLApi<Shopping>({
       endpoint: {
         production: 'open.api.ebay.com',
-        sandbox: 'open.api.sandbox.ebay.com'
+        sandbox: 'open.api.sandbox.ebay.com',
       },
       path: '/shopping',
       xmlns: 'urn:ebay:apis:eBLBaseComponents',
@@ -64,8 +64,8 @@ export default class Traditional extends Api {
         'X-EBAY-API-SITE-ID': this.config.siteId,
         'X-EBAY-API-VERSION': 863,
         'X-EBAY-API-REQUEST-ENCODING': 'xml',
-        ...(accessToken && {'X-EBAY-API-IAF-TOKEN': accessToken})
-      })
+        ...(accessToken && { 'X-EBAY-API-IAF-TOKEN': accessToken }),
+      }),
     });
   }
 
@@ -73,15 +73,15 @@ export default class Traditional extends Api {
     return this.createTraditionalXMLApi<Finding>({
       endpoint: {
         production: 'svcs.ebay.com',
-        sandbox: 'svcs.sandbox.ebay.com'
+        sandbox: 'svcs.sandbox.ebay.com',
       },
       path: '/services/search/FindingService/v1',
       xmlns: 'http://www.ebay.com/marketplace/search/v1/services',
       calls: FindingCalls,
       headers: (callName: string) => ({
         'X-EBAY-SOA-SECURITY-APPNAME': this.config.appId,
-        'X-EBAY-SOA-OPERATION-NAME': callName
-      })
+        'X-EBAY-SOA-OPERATION-NAME': callName,
+      }),
     });
   }
 
@@ -92,23 +92,21 @@ export default class Traditional extends Api {
     const api = {
       endpoint: {
         production: 'clientalerts.ebay.com',
-        sandbox: 'clientalerts.sandbox.ebay.com'
+        sandbox: 'clientalerts.sandbox.ebay.com',
       },
       path: '/ws/ecasvc/ClientAlerts',
-      calls: ClientAlertsCalls
+      calls: ClientAlertsCalls,
     };
 
     const endpoint = api.endpoint[this.config.sandbox ? 'sandbox' : 'production'];
     const paramsSerializer = (args: object) => {
-      return stringify(args, {allowDots: true})
-        .replace(/%5B/gi, '(')
-        .replace(/%5D/gi, ')');
+      return stringify(args, { allowDots: true }).replace(/%5B/gi, '(').replace(/%5D/gi, ')');
     };
 
     const params = {
       appid: this.config.appId,
       siteid: this.config.siteId,
-      version: 643
+      version: 643,
     };
 
     const service: any = {};
@@ -116,13 +114,13 @@ export default class Traditional extends Api {
       service[callName] = async (fields: Fields) => {
         return this.req.get(endpoint, {
           paramsSerializer: {
-            serialize: paramsSerializer
+            serialize: paramsSerializer,
           },
           params: {
             ...params,
             ...fields,
-            callname: callName
-          }
+            callname: callName,
+          },
         });
       };
     });
@@ -134,24 +132,26 @@ export default class Traditional extends Api {
     return this.createTraditionalXMLApi<Merchandising>({
       endpoint: {
         production: 'svcs.ebay.com',
-        sandbox: 'svcs.sandbox.ebay.com'
+        sandbox: 'svcs.sandbox.ebay.com',
       },
       path: '/MerchandisingService',
       xmlns: 'http://www.ebay.com/marketplace/services',
       calls: MerchandisingCalls,
       headers: (callName: string) => ({
         'EBAY-SOA-CONSUMER-ID': this.config.appId,
-        'X-EBAY-SOA-OPERATION-NAME': callName
-      })
+        'X-EBAY-SOA-OPERATION-NAME': callName,
+      }),
     });
   }
 
   public createBusinessPolicyManagementApi() {
-    throw new Error('Important! This API is deprecated and will be decommissioned on January 31, 2022. We recommend that you migrate to the fulfillment_policy, payment_policy, and return_policy resources of the Account API to set up and manage all of your fulfillment, payment, and return business policies.');
+    throw new Error(
+      'Important! This API is deprecated and will be decommissioned on January 31, 2022. We recommend that you migrate to the fulfillment_policy, payment_policy, and return_policy resources of the Account API to set up and manage all of your fulfillment, payment, and return business policies.',
+    );
   }
 
   private createXMLRequest = (callName: string, api: TraditionalApi) => async (fields: Fields, opts: TraditionalApiConfig) => {
-    const apiConfig = {...defaultApiConfig, ...opts};
+    const apiConfig = { ...defaultApiConfig, ...opts };
 
     try {
       return await this.request(apiConfig, api, callName, fields);
@@ -170,13 +170,21 @@ export default class Traditional extends Api {
       return false;
     }
 
-    return error.name === EBayIAFTokenExpired.name
-      || error.name === EBayIAFTokenInvalid.name
-      || error.name === EBayAuthTokenIsHardExpired.name
-      || error.name === EBayAuthTokenIsInvalid.name;
+    return (
+      error.name === EBayIAFTokenExpired.name ||
+      error.name === EBayIAFTokenInvalid.name ||
+      error.name === EBayAuthTokenIsHardExpired.name ||
+      error.name === EBayAuthTokenIsInvalid.name
+    );
   }
 
-  private async request(apiConfig: TraditionalApiConfig, api: TraditionalApi, callName: string, fields: Fields | null, refreshToken = false) {
+  private async request(
+    apiConfig: TraditionalApiConfig,
+    api: TraditionalApi,
+    callName: string,
+    fields: Fields | null,
+    refreshToken = false,
+  ) {
     try {
       if (refreshToken) {
         await this.auth.OAuth2.refreshToken();
@@ -193,10 +201,9 @@ export default class Traditional extends Api {
 
   private async getConfig(api: TraditionalApi, callName: string, apiConfig: TraditionalApiConfig): Promise<XMLReqConfig> {
     const eBayAuthToken = this.auth.authNAuth.eBayAuthToken;
-    const accessToken = !eBayAuthToken && apiConfig.useIaf ? (await this.auth.OAuth2.getAccessToken()) : null;
+    const accessToken = !eBayAuthToken && apiConfig.useIaf ? await this.auth.OAuth2.getAccessToken() : null;
     const useIaf = !eBayAuthToken && accessToken;
     const host = this.config.sandbox ? api.endpoint.sandbox : api.endpoint.production;
-
 
     return {
       ...apiConfig,
@@ -204,18 +211,21 @@ export default class Traditional extends Api {
       endpoint: `https://${host}${api.path}`, // always use https
       headers: {
         ...api.headers(callName, useIaf ? accessToken : null),
-        ...apiConfig.headers
+        ...apiConfig.headers,
       },
-      digitalSignatureHeaders: payload => {
-        return apiConfig.sign ? this.getDigitalSignatureHeaders({
-            method: 'POST', // it's always post
-            authority: host,
-            path: api.path
-          },
-          payload
-        ) : {};
+      digitalSignatureHeaders: (payload) => {
+        return apiConfig.sign
+          ? this.getDigitalSignatureHeaders(
+              {
+                method: 'POST', // it's always post
+                authority: host,
+                path: api.path,
+              },
+              payload,
+            )
+          : {};
       },
-      ...(!useIaf ? {eBayAuthToken} : {})
+      ...(!useIaf ? { eBayAuthToken } : {}),
     };
   }
 

@@ -1,15 +1,13 @@
 // @ts-nocheck
-import {FindListingRecommendationRequest} from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_recommendation_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
-
+import { FindListingRecommendationRequest } from '../../../../types/index.js';
+import { operations } from '../../../../types/restful/specs/sell_recommendation_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The <b>Recommendation API</b> returns information that sellers can use to optimize the configuration of their
  * listings on eBay.
  */
 export default class Recommendation extends Restful implements OpenApi<operations> {
-
   static id = 'Recommendation';
 
   get basePath(): string {
@@ -27,16 +25,17 @@ export default class Recommendation extends Restful implements OpenApi<operation
    *     paginated response.
    * @param body FindListingRecommendationRequest
    */
-  public findListingRecommendations({filter, limit, offset}: { filter?: string, limit?: number, offset?: number } = {},
-                                    body?: FindListingRecommendationRequest
+  public findListingRecommendations(
+    { filter, limit, offset }: { filter?: string; limit?: number; offset?: number } = {},
+    body?: FindListingRecommendationRequest,
   ) {
     return this.post(`/find`, {
       data: body,
       params: {
         filter,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 }

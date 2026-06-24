@@ -1,17 +1,11 @@
 // @ts-nocheck
 import Restful from '../../index.js';
-import {
-  CancellationSearchParams,
-  ConfirmRefundRequest,
-  CreateCancelRequest,
-  RejectCancelRequest
-} from '../../../../types/index.js';
+import { CancellationSearchParams, ConfirmRefundRequest, CreateCancelRequest, RejectCancelRequest } from '../../../../types/index.js';
 
 /**
  * Post-Order Cancellation API
  */
 export default class Cancellation extends Restful {
-
   static id = 'Cancellation';
 
   get basePath(): string {
@@ -39,7 +33,7 @@ export default class Cancellation extends Restful {
    */
   public checkCancellationEligibility(legacyOrderId: string) {
     return this.post(`/cancellation/check_eligibility`, {
-      legacyOrderId
+      legacyOrderId,
     });
   }
 
@@ -75,8 +69,8 @@ export default class Cancellation extends Restful {
     cancelId = encodeURIComponent(cancelId);
     return this.get(`/cancellation/${cancelId}`, {
       params: {
-        fieldgroups: fieldGroups
-      }
+        fieldgroups: fieldGroups,
+      },
     });
   }
 
@@ -98,7 +92,7 @@ export default class Cancellation extends Restful {
    */
   public search(params: CancellationSearchParams) {
     return this.get(`/cancellation/search`, {
-      params
+      params,
     });
   }
 }

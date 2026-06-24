@@ -13,19 +13,19 @@ import Negotiation from './negotiation/index.js';
 import Listing from './listing/index.js';
 
 export type Sell = {
-  account: Account
-  analytics: Analytics,
-  compliance: Compliance,
-  fulfillment: Fulfillment,
-  inventory: Inventory,
-  marketing: Marketing,
-  metadata: Metadata,
-  recommendation: Recommendation,
-  finances: Finances
-  feed: Feed,
-  logistics: Logistics,
-  negotiation: Negotiation,
-  listing: Listing
+  account: Account;
+  analytics: Analytics;
+  compliance: Compliance;
+  fulfillment: Fulfillment;
+  inventory: Inventory;
+  marketing: Marketing;
+  metadata: Metadata;
+  recommendation: Recommendation;
+  finances: Finances;
+  feed: Feed;
+  logistics: Logistics;
+  negotiation: Negotiation;
+  listing: Listing;
 };
 
 export {
@@ -41,5 +41,5 @@ export {
   Feed,
   Logistics,
   Negotiation,
-  Listing
+  Listing,
 };

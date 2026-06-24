@@ -25,9 +25,7 @@
     "source": "Unknown",
     "isForSale": true,
     "quantity": 1,
-     "images": [
-
-     ]
+    "images": []
   },
   {
     "name": "Nepenthes (ventricosa x sibyanensis) × (talangensis × aristolochioides)",
@@ -57,22 +55,22 @@
     "quantity": 1
   },
   {
-  "name": "Nepenthes maxima x [(stenophylla x lowii) x (Rokko x veitchii)]",
-  "price": 145,
-  "genus": "Nepenthes",
-  "propagationMethod": "Stem Cutting",
-  "source": "Florae",
-  "isForSale": true,
-  "quantity": 1
+    "name": "Nepenthes maxima x [(stenophylla x lowii) x (Rokko x veitchii)]",
+    "price": 145,
+    "genus": "Nepenthes",
+    "propagationMethod": "Stem Cutting",
+    "source": "Florae",
+    "isForSale": true,
+    "quantity": 1
   },
   {
-  "name": "Nepenthes (talangensis x mirabilis var. globosa)",
-  "clone": "BE-3973",
-  "price": 25,
-  "genus": "Nepenthes",
-  "propagationMethod": "Basal Division",
-  "source": "Borneo Exotics",
-  "isForSale": true,
-  "quantity": 1
+    "name": "Nepenthes (talangensis x mirabilis var. globosa)",
+    "clone": "BE-3973",
+    "price": 25,
+    "genus": "Nepenthes",
+    "propagationMethod": "Basal Division",
+    "source": "Borneo Exotics",
+    "isForSale": true,
+    "quantity": 1
   }
 ]

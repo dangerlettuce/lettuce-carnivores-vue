@@ -1,5 +1,5 @@
 // https://github.com/ai/nanoevents
-export type EventCallback = (...args: any) => void
+export type EventCallback = (...args: any) => void;
 
 export let createNanoEvents = () => ({
   events: {} as Record<string, EventCallback[]>,
@@ -16,7 +16,7 @@ export let createNanoEvents = () => ({
       this.events[event] = [cb];
     }
     return () => {
-      this.events[event] = this.events[event]?.filter(i => cb !== i);
+      this.events[event] = this.events[event]?.filter((i) => cb !== i);
     };
-  }
+  },
 });

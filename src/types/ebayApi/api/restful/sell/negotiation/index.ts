@@ -1,12 +1,11 @@
 // @ts-nocheck
-import {operations} from '../../../../types/restful/specs/sell_negotiation_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/sell_negotiation_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The <b>Negotiations API</b> gives sellers the ability to proactively send discount offers to buyers who have shown an "interest" in their listings.
  */
 export default class Negotiation extends Restful implements OpenApi<operations> {
-
   static id = 'Negotiation';
 
   get basePath(): string {
@@ -19,12 +18,12 @@ export default class Negotiation extends Restful implements OpenApi<operations> 
    * @param limit This query parameter specifies the maximum number of items to return from the result set on a page in the paginated response.
    * @param offset This query parameter specifies the number of results to skip in the result set before returning the first result in the paginated response.
    */
-  public findEligibleItems({limit, offset}: { limit?: string, offset?: string } = {}) {
+  public findEligibleItems({ limit, offset }: { limit?: string; offset?: string } = {}) {
     return this.get(`/find_eligible_items`, {
       params: {
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 

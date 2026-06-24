@@ -1,11 +1,11 @@
 export enum UserRoleFilter {
   BUYER = 'BUYER',
-  SELLER = 'SELLER'
+  SELLER = 'SELLER',
 }
 
 export enum InquirySearchFieldGroup {
   DEFAULT = 'DEFAULT',
-  SUMMARY = 'SUMMARY'
+  SUMMARY = 'SUMMARY',
 }
 
 export enum CaseStatusFilter {
@@ -16,12 +16,12 @@ export enum CaseStatusFilter {
   OTHER = 'OTHER',
   REFUND_AGREED_BUT_FAILED = 'REFUND_AGREED_BUT_FAILED',
   WAITING_CS = 'WAITING_CS',
-  WAITING_DELIVERY = 'WAITING_DELIVERY'
+  WAITING_DELIVERY = 'WAITING_DELIVERY',
 }
 
 export enum CaseSearchFieldGroup {
   DEFAULT = 'DEFAULT',
-  SUMMARY = 'SUMMARY'
+  SUMMARY = 'SUMMARY',
 }
 
 export enum InquiryStatusFilter {
@@ -32,7 +32,7 @@ export enum InquiryStatusFilter {
   OTHER = 'OTHER',
   PENDING = 'PENDING',
   WAITING_BUYER_RESPONSE = 'WAITING_BUYER_RESPONSE',
-  WAITING_SELLER_RESPONSE = 'WAITING_SELLER_RESPONSE'
+  WAITING_SELLER_RESPONSE = 'WAITING_SELLER_RESPONSE',
 }
 
 export enum ShippingCarrier {
@@ -57,7 +57,7 @@ export enum ShippingCarrier {
   SEUR = 'SEUR',
   UNKNOWN = 'UNKNOWN',
   UPS = 'UPS',
-  USPS = 'USPS'
+  USPS = 'USPS',
 }
 
 export enum ReturnReason {
@@ -85,26 +85,26 @@ export enum ReturnReason {
   RETURNING_GIFT = 'RETURNING_GIFT',
   VALET_DELIVERY_ISSUES = 'VALET_DELIVERY_ISSUES',
   VALET_UNAVAILABLE = 'VALET_UNAVAILABLE',
-  WRONG_SIZE = 'WRONG_SIZE'
+  WRONG_SIZE = 'WRONG_SIZE',
 }
 
 export enum RequestType {
   CREATE = 'CREATE',
   REQUEST = 'REQUEST',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum ReturnType {
   EXCHANGE = 'EXCHANGE',
   MONEY_BACK = 'MONEY_BACK',
   REPLACEMENT = 'REPLACEMENT',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum GetReturnFieldGroupEnum {
   FULL = 'FULL',
   NONE = 'NONE',
-  SUMMARY = 'SUMMARY'
+  SUMMARY = 'SUMMARY',
 }
 
 export enum EscalateReason {
@@ -120,7 +120,7 @@ export enum EscalateReason {
   RECEIVED_WRONG_ITEM = 'RECEIVED_WRONG_ITEM',
   SELLER_NO_RESPONSE = 'SELLER_NO_RESPONSE',
   TROUBLE_COMMUNICATION_WITH_BUYER = 'TROUBLE_COMMUNICATION_WITH_BUYER',
-  TROUBLE_COMMUNICATION_WITH_SELLER = 'TROUBLE_COMMUNICATION_WITH_SELLER'
+  TROUBLE_COMMUNICATION_WITH_SELLER = 'TROUBLE_COMMUNICATION_WITH_SELLER',
 }
 
 export enum Decision {
@@ -136,12 +136,12 @@ export enum Decision {
   OFFER_RETURN = 'OFFER_RETURN',
   OFFER_RETURN_WITHOUT_LABEL = 'OFFER_RETURN_WITHOUT_LABEL',
   PROVIDE_RMA = 'PROVIDE_RMA',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum CategoryType {
   MOTORS_VEHICLES = 'MOTORS_VEHICLES',
-  ALL_EXCLUDING_MOTORS_VEHICLES = 'ALL_EXCLUDING_MOTORS_VEHICLES'
+  ALL_EXCLUDING_MOTORS_VEHICLES = 'ALL_EXCLUDING_MOTORS_VEHICLES',
 }
 
 export enum ReturnCountFilter {
@@ -156,7 +156,7 @@ export enum ReturnCountFilter {
   SELLER_ACTION_DUE = 'SELLER_ACTION_DUE',
   SELLER_ACTION_OVERDUE = 'SELLER_ACTION_OVERDUE',
   SELLER_NO_ACTION = 'SELLER_NO_ACTION',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum ReturnState {
@@ -202,14 +202,14 @@ export enum ReturnState {
   RETURN_REQUEST_TIMEOUT = 'RETURN_REQUEST_TIMEOUT',
   RETURN_REQUESTED = 'RETURN_REQUESTED',
   RMA_PENDING = 'RMA_PENDING',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum FilePurpose {
   ITEM_RELATED = 'ITEM_RELATED',
   LABEL_RELATED = 'LABEL_RELATED',
   REFUND_RELATED = 'REFUND_RELATED',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum RefundFeeType {
@@ -225,7 +225,7 @@ export enum RefundFeeType {
   REFUND_FROM_PAYPAL = 'REFUND_FROM_PAYPAL',
   RETURN_SHIPPING = 'RETURN_SHIPPING',
   SHIPPING_IMPORT_TAX = 'SHIPPING_IMPORT_TAX',
-  SHIPPING_TAX = 'SHIPPING_TAX'
+  SHIPPING_TAX = 'SHIPPING_TAX',
 }
 
 export enum ActivityOption {
@@ -321,7 +321,7 @@ export enum ActivityOption {
 
 export enum StoreType {
   STORE = 'STORE',
-  WAREHOUSE = 'WAREHOUSE'
+  WAREHOUSE = 'WAREHOUSE',
 }
 
 export enum TimeDurationUnit {
@@ -333,27 +333,27 @@ export enum TimeDurationUnit {
   BUSINESS_DAY = 'BUSINESS_DAY',
   MINUTE = 'MINUTE',
   SECOND = 'SECOND',
-  MILLISECOND = 'MILLISECOND'
+  MILLISECOND = 'MILLISECOND',
 }
 
 export enum ShippingOptionType {
   DOMESTIC = 'DOMESTIC',
-  INTERNATIONAL = 'INTERNATIONAL'
+  INTERNATIONAL = 'INTERNATIONAL',
 }
 
 export enum ShippingCostType {
   CALCULATED = 'CALCULATED',
   FLAT_RATE = 'FLAT_RATE',
-  NOT_SPECIFIED = 'NOT_SPECIFIED'
+  NOT_SPECIFIED = 'NOT_SPECIFIED',
 }
 
 export enum PaymentsProgramType {
-  EBAY_PAYMENTS = 'EBAY_PAYMENTS'
+  EBAY_PAYMENTS = 'EBAY_PAYMENTS',
 }
 
 export enum PaymentsProgramStatus {
   OPTED_IN = 'OPTED_IN',
-  NOT_OPTED_IN = 'NOT_OPTED_IN'
+  NOT_OPTED_IN = 'NOT_OPTED_IN',
 }
 
 export enum PaymentMethodType {
@@ -371,11 +371,11 @@ export enum PaymentMethodType {
   PAISA_PAY_ESCROW_EMI = 'PAISA_PAY_ESCROW_EMI',
   PAYPAL = 'PAYPAL',
   PERSONAL_CHECK = 'PERSONAL_CHECK',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
 }
 
 export enum RecipientAccountReferenceType {
-  PAYPAL_EMAIL = 'PAYPAL_EMAIL'
+  PAYPAL_EMAIL = 'PAYPAL_EMAIL',
 }
 
 export enum CountryCode {
@@ -627,7 +627,7 @@ export enum CountryCode {
   YT = 'YT',
   ZA = 'ZA',
   ZM = 'ZM',
-  ZW = 'ZW'
+  ZW = 'ZW',
 }
 
 export enum CurrencyCode {
@@ -785,7 +785,7 @@ export enum CurrencyCode {
   YER = 'YER',
   ZAR = 'ZAR',
   ZMW = 'ZMW',
-  ZWL = 'ZWL'
+  ZWL = 'ZWL',
 }
 
 export enum Locale {
@@ -811,9 +811,7 @@ export enum Locale {
   zh_TW = 'zh-TW',
 }
 
-export {
-  Locale as ContentLanguage
-}
+export { Locale as ContentLanguage };
 
 export enum Condition {
   NEW = 'NEW',
@@ -826,7 +824,7 @@ export enum Condition {
   USED_VERY_GOOD = 'USED_VERY_GOOD',
   USED_GOOD = 'USED_GOOD',
   USED_ACCEPTABLE = 'USED_ACCEPTABLE',
-  FOR_PARTS_OR_NOT_WORKING = 'FOR_PARTS_OR_NOT_WORKING'
+  FOR_PARTS_OR_NOT_WORKING = 'FOR_PARTS_OR_NOT_WORKING',
 }
 
 /**
@@ -859,9 +857,8 @@ export enum LocaleEnum {
   ru_RU = 'ru_RU',
   en_SG = 'en_SG',
   en_IE = 'en_IE',
-  en_MY = 'en_MY'
+  en_MY = 'en_MY',
 }
-
 
 export enum Marketplace {
   EBAY_US = 'EBAY_US',
@@ -903,12 +900,12 @@ export enum Marketplace {
   EBAY_VN = 'EBAY_VN',
   EBAY_CN = 'EBAY_CN',
   EBAY_PE = 'EBAY_PE',
-  EBAY_JP = 'EBAY_JP'
+  EBAY_JP = 'EBAY_JP',
 }
 
 export enum FormatType {
   AUCTION = 'AUCTION',
-  FIXED_PRICE = 'FIXED_PRICE'
+  FIXED_PRICE = 'FIXED_PRICE',
 }
 
 export enum Metric {
@@ -924,22 +921,22 @@ export enum Metric {
   LISTING_VIEWS_TOTAL = 'LISTING_VIEWS_TOTAL',
   SALES_CONVERSION_RATE = 'SALES_CONVERSION_RATE',
   TOTAL_IMPRESSION_TOTAL = 'TOTAL_IMPRESSION_TOTAL',
-  TRANSACTION = 'TRANSACTION'
+  TRANSACTION = 'TRANSACTION',
 }
 
 export enum RefundMethod {
   MERCHANDISE_CREDIT = 'MERCHANDISE_CREDIT',
-  MONEY_BACK = 'MONEY_BACK'
+  MONEY_BACK = 'MONEY_BACK',
 }
 
 export enum ReturnMethod {
   EXCHANGE = 'EXCHANGE',
-  REPLACEMENT = 'REPLACEMENT'
+  REPLACEMENT = 'REPLACEMENT',
 }
 
 export enum ReturnShippingCostPayer {
   BUYER = 'BUYER',
-  SELLER = 'SELLER'
+  SELLER = 'SELLER',
 }
 
 export enum RegionType {
@@ -947,7 +944,7 @@ export enum RegionType {
   COUNTRY_REGION = 'COUNTRY_REGION',
   STATE_OR_PROVINCE = 'STATE_OR_PROVINCE',
   WORLD_REGION = 'WORLD_REGION',
-  WORLDWIDE = 'WORLDWIDE'
+  WORLDWIDE = 'WORLDWIDE',
 }
 
 export enum ReasonForRefund {
@@ -957,7 +954,7 @@ export enum ReasonForRefund {
   BUYER_RETURN = 'BUYER_RETURN',
   ITEM_NOT_AS_DESCRIBED = 'ITEM_NOT_AS_DESCRIBED',
   OTHER_ADJUSTMENT = 'OTHER_ADJUSTMENT',
-  SHIPPING_DISCOUNT = 'SHIPPING_DISCOUNT'
+  SHIPPING_DISCOUNT = 'SHIPPING_DISCOUNT',
 }
 
 export enum CancelReason {
@@ -974,21 +971,21 @@ export enum CancelReason {
   WONT_ARRIVE_IN_TIME = 'WONT_ARRIVE_IN_TIME',
   WRONG_PAYMENT_METHOD = 'WRONG_PAYMENT_METHOD',
   WRONG_SHIPPING_ADDRESS = 'WRONG_SHIPPING_ADDRESS',
-  WRONG_SHIPPING_METHOD = 'WRONG_SHIPPING_METHOD'
+  WRONG_SHIPPING_METHOD = 'WRONG_SHIPPING_METHOD',
 }
 
 export enum LengthUnitOfMeasure {
   INCH = 'INCH',
   FEET = 'FEET',
   CENTIMETER = 'CENTIMETER',
-  METER = 'METER'
+  METER = 'METER',
 }
 
 export enum WeightUnitOfMeasure {
   POUND = 'POUND',
   KILOGRAM = 'KILOGRAM',
   OUNCE = 'OUNCE',
-  GRAM = 'GRAM'
+  GRAM = 'GRAM',
 }
 
 export enum PackageType {

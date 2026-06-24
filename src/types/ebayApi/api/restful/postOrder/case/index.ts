@@ -1,18 +1,11 @@
 // @ts-nocheck
-import {
-  AppealRequest,
-  BuyerCloseCaseRequest,
-  CaseSearchParams,
-  ReturnAddressRequest,
-  Text
-} from '../../../../types/index.js';
+import { AppealRequest, BuyerCloseCaseRequest, CaseSearchParams, ReturnAddressRequest, Text } from '../../../../types/index.js';
 import Restful from '../../index.js';
 
 /**
  * Post-Order Case Management API
  */
 export default class Case extends Restful {
-
   static id = 'Case';
 
   get basePath(): string {
@@ -75,12 +68,14 @@ export default class Case extends Restful {
    *     'USPS'.
    * @param trackingNumber The tracking number assigned by the shipping carrier to the item shipment.
    */
-  public provideReturnShipmentInfo(caseId: string, {shippingCarrierName, trackingNumber}:
-    { shippingCarrierName: string, trackingNumber: string }) {
+  public provideReturnShipmentInfo(
+    caseId: string,
+    { shippingCarrierName, trackingNumber }: { shippingCarrierName: string; trackingNumber: string },
+  ) {
     const id = encodeURIComponent(caseId);
     return this.post(`/casemanagement/${id}/provide_shipment_info`, {
       shippingCarrierName,
-      trackingNumber
+      trackingNumber,
     });
   }
 
@@ -102,7 +97,7 @@ export default class Case extends Restful {
    */
   public search(params: CaseSearchParams) {
     return this.get(`/casemanagement/search`, {
-      params
+      params,
     });
   }
 }

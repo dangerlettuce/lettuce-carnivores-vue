@@ -8,10 +8,10 @@ import {
   CompatibilityPayload,
   RemoveCartItemInput,
   SearchByImageRequest,
-  UpdateCartItemInput
+  UpdateCartItemInput,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/buy_browse_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/buy_browse_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Browse API has the following resources: item_summary: Lets shoppers search for specific items by keyword, GTIN,
@@ -19,7 +19,6 @@ import Restful, {OpenApi} from '../../index.js';
  * and fields values.
  */
 export default class Browse extends Restful implements OpenApi<operations> {
-
   static id = 'Browse';
 
   get basePath() {
@@ -38,7 +37,7 @@ export default class Browse extends Restful implements OpenApi<operations> {
    */
   public search(params: BuyBrowseSearchParams) {
     return this.get(`/item_summary/search`, {
-      params
+      params,
     });
   }
 
@@ -51,7 +50,7 @@ export default class Browse extends Restful implements OpenApi<operations> {
    */
   public searchByImage(params: BuyBrowseSearchByImageParams, body?: SearchByImageRequest) {
     return this.post(`/item_summary/search_by_image`, body, {
-      params
+      params,
     });
   }
 
@@ -62,7 +61,7 @@ export default class Browse extends Restful implements OpenApi<operations> {
    */
   public getItems(params: BuyBrowseGetItemsParams) {
     return this.get(`/item/`, {
-      params
+      params,
     });
   }
 
@@ -78,8 +77,8 @@ export default class Browse extends Restful implements OpenApi<operations> {
     const id = encodeURIComponent(itemId);
     return this.get(`/item/${id}`, {
       params: {
-        fieldgroups
-      }
+        fieldgroups,
+      },
     });
   }
 
@@ -90,7 +89,7 @@ export default class Browse extends Restful implements OpenApi<operations> {
    */
   public getItemByLegacyId(params: BuyBrowseItemByLegacyIdParams) {
     return this.get(`/item/get_item_by_legacy_id`, {
-      params
+      params,
     });
   }
 
@@ -102,8 +101,8 @@ export default class Browse extends Restful implements OpenApi<operations> {
   public getItemsByItemGroup(itemGroupId: string) {
     return this.get(`/item/get_items_by_item_group`, {
       params: {
-        item_group_id: itemGroupId
-      }
+        item_group_id: itemGroupId,
+      },
     });
   }
 

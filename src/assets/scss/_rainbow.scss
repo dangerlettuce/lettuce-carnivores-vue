@@ -4,14 +4,20 @@ $animation-duration: 6s;
 $background-colour: #383838;
 $rainbow-filter: hue-rotate(-15deg) contrast(95%);
 $rainbow-opacity: 1;
-$rainbow-colours:   
-  #FF0000, // red
-  #FF7F00, // orange
-  #FFFF00, // yellow
-  #00FF00, // green
-  #0000FF, // blue
-  #4B0082, // indigo
-  #9400D3; // violet
+$rainbow-colours:
+  #ff0000,
+  // red
+  #ff7f00,
+  // orange
+  #ffff00,
+  // yellow
+  #00ff00,
+  // green
+  #0000ff,
+  // blue
+  #4b0082,
+  // indigo
+  #9400d3; // violet
 
 /* Leave these alone */
 $rainbow-radius: calc($rainbow-diameter / 2);
@@ -19,43 +25,41 @@ $colour-band-width: calc($rainbow-thickness / length($rainbow-colours));
 
 // Generate a rainbow gradient
 @mixin rainbowGradient($type) {
-  
   // Base gradient
-  $rainbow-gradient: 
+  $rainbow-gradient:
     circle at center,
     transparent,
     transparent $rainbow-radius - $rainbow-thickness,
     nth($rainbow-colours, -1) $rainbow-radius - $rainbow-thickness;
-  
+
   // Generate banded or smooth radial gradient
   @for $i from 1 through length($rainbow-colours) {
-    
     // Next colour
     $colour: nth($rainbow-colours, -$i);
-    
+
     // Start of band
     $rainbow-gradient: append(
       $rainbow-gradient,
-      $colour $rainbow-radius - ($rainbow-thickness - 
-        if(
-          $type == "smooth",
-          // Smooth: Offset the band start by half a band for better blending
-          calc($colour-band-width + ($colour-band-width / (length($rainbow-colours)))),
-          // Bands: Do not offset the band
-          $colour-band-width
-        ) * ($i - 1)
-      )
+      $colour
+        $rainbow-radius -
+        (
+          $rainbow-thickness - if(
+              $type == 'smooth',
+              // Smooth: Offset the band start by half a band for better blending
+              calc($colour-band-width + ($colour-band-width / (length($rainbow-colours)))),
+              // Bands: Do not offset the band
+              $colour-band-width
+            ) *
+            ($i - 1)
+        )
     );
 
     // End of band (only use this for type == band)
-    @if($type == "bands") {
-      $rainbow-gradient: append(
-        $rainbow-gradient,
-        $colour $rainbow-radius - ($rainbow-thickness - $colour-band-width * $i)
-      );
+    @if ($type == 'bands') {
+      $rainbow-gradient: append($rainbow-gradient, $colour $rainbow-radius - ($rainbow-thickness - $colour-band-width * $i));
     }
   }
-  
+
   background: radial-gradient($rainbow-gradient);
 }
 
@@ -82,9 +86,13 @@ $colour-band-width: calc($rainbow-thickness / length($rainbow-colours));
   overflow: hidden;
 
   // Rainbow classes
-  &.bands { @include rainbow("bands"); }
-  &.smooth { @include rainbow("smooth"); }
-  
+  &.bands {
+    @include rainbow('bands');
+  }
+  &.smooth {
+    @include rainbow('smooth');
+  }
+
   // Animation element
   &::after {
     content: '';
@@ -99,14 +107,25 @@ $colour-band-width: calc($rainbow-thickness / length($rainbow-colours));
 
 // Wipe animation
 @keyframes wipe {
-  0% { transform: rotate(0deg); }
-  20% { transform: rotate(180deg); }
-  70% { transform: rotate(180deg); }
-  90% { transform: rotate(360deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(180deg);
+  }
+  70% {
+    transform: rotate(180deg);
+  }
+  90% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-html, body {
+html,
+body {
   margin: 0px;
   height: 100%;
 }

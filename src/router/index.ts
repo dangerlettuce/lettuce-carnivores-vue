@@ -1,23 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/users'
-import ProductsView from '@/views/ProductsView.vue'
-import ProductDetailView from '@/views/ProductDetailView.vue'
-import FeedbackView from '@/views/FeedbackView.vue'
-import TrackOrderView from '@/views/TrackOrderView.vue'
-const ShoppingCart = () => import('@/views/ShoppingCartView.vue')
-const CheckoutComplete = () => import('@/views/CheckoutComplete.vue')
-const AboutView = () => import('@/views/AboutView.vue')
-const CareGuideView = () => import('@/views/CareGuideView.vue')
-const LoginView = () => import('@/views/LoginView.vue')
-const ResetPasswordView = () => import('@/views/ResetPasswordView.vue')
-const EasterEggView = () => import('@/views/EasterEggView.vue')
-const AccountView = () => import('@/views/AccountView.vue')
-const GiveawayView = () => import('@/views/GiveawayView.vue')
-const EbayLoginSuccess = () => import('@/views/EbayLoginSuccess.vue')
-const AdminPanel = () => import('@/views/AdminPanelView.vue')
+import { createRouter, createWebHistory, type RouteLocation } from 'vue-router';
+import { useUserStore } from '@/stores/users';
+import ProductsView from '@/views/ProductsView.vue';
+import ProductDetailView from '@/views/ProductDetailView.vue';
+import FeedbackView from '@/views/FeedbackView.vue';
+import TrackOrderView from '@/views/TrackOrderView.vue';
+const ShoppingCart = () => import('@/views/ShoppingCartView.vue');
+const CheckoutComplete = () => import('@/views/CheckoutComplete.vue');
+const AboutView = () => import('@/views/AboutView.vue');
+const CareGuideView = () => import('@/views/CareGuideView.vue');
+const LoginView = () => import('@/views/LoginView.vue');
+const ResetPasswordView = () => import('@/views/ResetPasswordView.vue');
+const EasterEggView = () => import('@/views/EasterEggView.vue');
+const AccountView = () => import('@/views/AccountView.vue');
+const GiveawayView = () => import('@/views/GiveawayView.vue');
+const EbayLoginSuccess = () => import('@/views/EbayLoginSuccess.vue');
+const AdminPanel = () => import('@/views/AdminPanelView.vue');
 const routeData = [
   {
-    path: "/",
+    path: '/',
     name: 'home',
     label: 'Home',
     component: ProductsView,
@@ -26,10 +26,10 @@ const routeData = [
       requiresLogin: false,
       requiresAdmin: false,
       hideHeader: false,
-    }
+    },
   },
   {
-    path: "/products",
+    path: '/products',
     name: 'products',
     label: 'Shop',
     component: ProductsView,
@@ -37,23 +37,37 @@ const routeData = [
       showInNav: true,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/plants/:id/:sku?",
+    path: '/plants/:id/hidden/:password?',
     name: 'productDetails',
     label: 'Products Details',
     key: '$route.params.id',
     component: ProductDetailView,
-    props: (route: any) => ({ query: route.query.showHidden }),
+    props: (route: RouteLocation) => ({ showHidden: true, password: route.params.password }),
     meta: {
       showInNav: false,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/cart",
+    path: '/plants/:id/:sku?',
+    name: 'productDetails',
+    label: 'Products Details',
+    key: '$route.params.id',
+    component: ProductDetailView,
+    props: (route: RouteLocation) => ({ query: route.query.showHidden }),
+    meta: {
+      showInNav: false,
+      requiresLogin: false,
+      requiresAdmin: false,
+    },
+  },
+
+  {
+    path: '/cart',
     name: 'shoppingCart',
     label: 'Shopping Cart',
     component: ShoppingCart,
@@ -61,10 +75,10 @@ const routeData = [
       showInNav: false,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/care",
+    path: '/care',
     name: 'care',
     label: 'Care',
     component: CareGuideView,
@@ -72,10 +86,10 @@ const routeData = [
       showInNav: true,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/about",
+    path: '/about',
     name: 'about',
     label: 'About',
     component: AboutView,
@@ -83,10 +97,10 @@ const routeData = [
       showInNav: true,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/order-tracking/:id",
+    path: '/order-tracking/:id',
     name: 'tracking',
     label: 'Tracking',
     component: TrackOrderView,
@@ -94,21 +108,21 @@ const routeData = [
       showInNav: false,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/feedback/:id/:great?",
+    path: '/feedback/:id/:great?',
     name: 'feedback',
     label: 'Feedback',
     component: FeedbackView,
     meta: {
       showInNav: false,
       requiresLogin: false,
-      requiresAdmin: false
-    }
+      requiresAdmin: false,
+    },
   },
   {
-    path: "/secret",
+    path: '/secret',
     name: 'secret',
     label: 'Secret',
     component: EasterEggView,
@@ -117,10 +131,10 @@ const routeData = [
       requiresLogin: true,
       requiresAdmin: false,
       requiresFamily: true,
-    }
+    },
   },
   {
-    path: "/account",
+    path: '/account',
     name: 'account',
     label: 'Orders',
     component: AccountView,
@@ -128,7 +142,7 @@ const routeData = [
       showInNav: true,
       requiresLogin: true,
       requiresAdmin: false,
-    }
+    },
   },
   // {
   //   path: "/giveaway",
@@ -142,7 +156,7 @@ const routeData = [
   //   }
   // },
   {
-    path: "/adminPanel",
+    path: '/adminPanel',
     name: 'Admin Panel',
     label: 'Admin Panel',
     component: AdminPanel,
@@ -150,7 +164,7 @@ const routeData = [
       showInNav: true,
       requiresLogin: true,
       requiresAdmin: true,
-    }
+    },
   },
   // {
   //   path: "/orderAdmin",
@@ -175,7 +189,7 @@ const routeData = [
   //   }
   // },
   {
-    path: "/login",
+    path: '/login',
     name: 'login',
     label: 'Login',
     component: LoginView,
@@ -183,10 +197,10 @@ const routeData = [
       showInNav: false,
       requiresLogin: true,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/resetpassword",
+    path: '/resetpassword',
     name: 'resetPassword',
     label: 'Reset Password',
     component: ResetPasswordView,
@@ -194,11 +208,11 @@ const routeData = [
       showInNav: false,
       requiresLogin: false,
       requiresAdmin: false,
-    }
+    },
   },
   {
-    path: "/checkoutComplete",
-    name: "checkoutComplete",
+    path: '/checkoutComplete',
+    name: 'checkoutComplete',
     label: 'Checkout Complete',
     component: CheckoutComplete,
     meta: {
@@ -206,7 +220,7 @@ const routeData = [
       requiresLogin: false,
       requiresLoginOrAnon: true,
       requiresAdmin: false,
-    }
+    },
   },
   {
     path: '/ebayLoginSuccess',
@@ -218,27 +232,27 @@ const routeData = [
       requiresLogin: false,
       requiresLoginOrAnon: false,
       requiresAdmin: true,
-    }
+    },
   },
-]
+];
 
 //Ignore ES Lint barfing an unused variable error, this line is specifically to exclude that variable from the exported object
-export const navData = routeData.map(({ component, ...rest }) => rest) //eslint-disable-line @typescript-eslint/no-unused-vars
+export const navData = routeData.map(({ component, ...rest }) => rest); //eslint-disable-line @typescript-eslint/no-unused-vars
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routeData,
-})
+});
 
 router.beforeEach((to) => {
-  const userStore = useUserStore()
+  const userStore = useUserStore();
   if (to.meta.requiresAdmin) {
-    return userStore.isAdmin
+    return userStore.isAdmin;
   }
 
   if (to.meta.requiresLogin && !userStore.isLoggedIn && to.name !== 'home' && to.name !== 'login') {
-    return { name: 'home' }
+    return { name: 'home' };
   }
   if (to.meta.requiresLoginOrAnon && !userStore.isLoggedInOrAnonymous && to.name !== 'home' && to.name !== 'login') {
-    return { name: 'home' }
+    return { name: 'home' };
   }
-})
+});

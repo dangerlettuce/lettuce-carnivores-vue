@@ -8,20 +8,12 @@ import Translation from './translation/index.js';
 
 export type Commerce = {
   catalog: Catalog;
-  charity: Charity,
+  charity: Charity;
   identity: Identity;
-  notification: Notification
+  notification: Notification;
   taxonomy: Taxonomy;
   translation: Translation;
   media: Media;
 };
 
-export {
-  Catalog,
-  Charity,
-  Identity,
-  Notification,
-  Taxonomy,
-  Translation,
-  Media
-};
+export { Catalog, Charity, Identity, Notification, Taxonomy, Translation, Media };

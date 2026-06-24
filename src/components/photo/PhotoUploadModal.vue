@@ -8,8 +8,14 @@
       </header>
       <div class="modal-body photo-items-grid">
         <template v-for="(photo, index) of photos" :key="photo.name">
-          <PhotoPreviewItem :photo :index :isLast="index === photos.length" @move-up="move" @move-down="move"
-            @remove-photo="(i) => removePhoto(i, photo)" />
+          <PhotoPreviewItem
+            :photo
+            :index
+            :isLast="index === photos.length"
+            @move-up="move"
+            @move-down="move"
+            @remove-photo="(i) => removePhoto(i, photo)"
+          />
         </template>
       </div>
       <DragUpload @files-dropped="filesDropped" #default="{ dropZoneActive }">
@@ -26,20 +32,14 @@
       </DragUpload>
       <footer class="bg-dark">
         <div class="">
-          <div v-if="selectedFiles.length !== 0" class="d-inline-block mx-3 text-light">{{ selectedFiles.length }} files
-            selected</div>
+          <div v-if="selectedFiles.length !== 0" class="d-inline-block mx-3 text-light">{{ selectedFiles.length }} files selected</div>
         </div>
         <div class="flex flex-row gap-2">
-          <BaseButton type="button" @click="upload" :disabled="selectedFiles.length === 0 || isSaving"
-            :loading="isSaving">
+          <BaseButton type="button" @click="upload" :disabled="selectedFiles.length === 0 || isSaving" :loading="isSaving">
             Upload <span v-if="isSaving" class="spinner-border"></span>
           </BaseButton>
-          <BaseButton @click="reloadImages" data-bs-dismiss="modal" :disabled="isSaving || photos.length === 0">
-            Reload Images
-          </BaseButton>
-          <BaseButton @click="toggleModal" data-bs-dismiss="modal" :disabled="selectedFiles.length !== 0">
-            Close
-          </BaseButton>
+          <BaseButton @click="reloadImages" data-bs-dismiss="modal" :disabled="isSaving || photos.length === 0"> Reload Images </BaseButton>
+          <BaseButton @click="toggleModal" data-bs-dismiss="modal" :disabled="selectedFiles.length !== 0"> Close </BaseButton>
         </div>
       </footer>
     </div>
@@ -47,54 +47,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType, toRefs, onBeforeUnmount } from 'vue'
-import type { PhotoItem } from '@/types/Product'
-import BaseDialog from '@/components/ui/BaseDialog.vue'
-import DragUpload from '@/components/photo/DragUpload.vue'
-import PhotoPreviewItem from './PhotoPreviewItem.vue'
-import { arrayMove } from '@/utils/utils'
-import { usePhotoManager, type SelectedFile } from './usePhotoManager'
+import { ref, type PropType, toRefs, onBeforeUnmount } from 'vue';
+import type { PhotoItem } from '@/types/Product';
+import BaseDialog from '@/components/ui/BaseDialog.vue';
+import DragUpload from '@/components/photo/DragUpload.vue';
+import PhotoPreviewItem from './PhotoPreviewItem.vue';
+import { arrayMove } from '@/utils/utils';
+import { usePhotoManager, type SelectedFile } from './usePhotoManager';
 
-const emit = defineEmits(['triggerSave'])
-const props = defineProps<{ storageFolder: string }>()
-defineExpose({ toggleModal })
+const emit = defineEmits(['triggerSave']);
+const props = defineProps<{ storageFolder: string }>();
+defineExpose({ toggleModal });
 const { selectedFiles, isSaving, uploadFiles, resetSelectedFiles, reloadImages, deleteAllPhotos, onFilesSelected, onFilesDropped } =
-  usePhotoManager()
+  usePhotoManager();
 
 onBeforeUnmount(() => {
-  resetSelectedFiles()
-})
+  resetSelectedFiles();
+});
 
-const open = ref(false)
+const open = ref(false);
 function toggleModal() {
-  open.value = !open.value
+  open.value = !open.value;
 }
 
-const photos = defineModel('photos', { type: Object as PropType<PhotoItem[]>, required: true })
+const photos = defineModel('photos', { type: Object as PropType<PhotoItem[]>, required: true });
 
 function removePhoto(index: number, photo: SelectedFile | PhotoItem) {
   if (index !== -1) {
-    photos.value.splice(index, 1)
+    photos.value.splice(index, 1);
     if (photo.hasOwnProperty('folder')) {
-      deleteAllPhotos(photo as PhotoItem)
+      deleteAllPhotos(photo as PhotoItem);
     }
-    emit('triggerSave')
+    emit('triggerSave');
   }
 }
 
 function move(index: number, newPosition: number) {
-  arrayMove(photos.value, index, newPosition)
-  emit('triggerSave')
+  arrayMove(photos.value, index, newPosition);
+  emit('triggerSave');
 }
 
 async function filesDropped(e: DragEvent) {
-  onFilesDropped(e)
-  await upload()
+  onFilesDropped(e);
+  await upload();
 }
 async function upload() {
-  await uploadFiles(props.storageFolder, photos)
-  emit('triggerSave')
-  setTimeout(reloadImages, 4250)
+  await uploadFiles(props.storageFolder, photos);
+  emit('triggerSave');
+  setTimeout(reloadImages, 4250);
 }
 </script>
 

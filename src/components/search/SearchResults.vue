@@ -12,81 +12,80 @@
 </template>
 
 <script setup lang="ts">
-  import { router } from '@/router';
-  import type { PlantCategory } from '@/types/Plant';
+import { router } from '@/router';
+import type { PlantCategory } from '@/types/Plant';
 
-  const emit = defineEmits(['navigate'])
+const emit = defineEmits(['navigate']);
 
-  defineProps<{
-    searchResults: PlantCategory[],
-    searchTerm: string,
-  }>()
+defineProps<{
+  searchResults: PlantCategory[];
+  searchTerm: string;
+}>();
 
-  function navigate(id: string) {
-    emit('navigate')
-    router.push({ name: 'productDetails', params: { id } })
-  }
+function navigate(id: string) {
+  emit('navigate');
+  router.push({ name: 'productDetails', params: { id } });
+}
 </script>
 
 <style scoped lang="scss">
+.search-container {
+  background-color: $accent-orange;
+  border: 3px solid black;
+  border-radius: 0.5rem;
+  min-width: 60dvw;
+  right: 0;
+}
 
+li:hover {
+  background-color: $yellow-color;
+}
+
+li,
+.no-results {
+  padding: 0.6rem;
+}
+
+li {
+  cursor: pointer;
+}
+
+@media (min-width: 50rem) {
   .search-container {
-    background-color: $accent-orange;
-    border: 3px solid black;
-    border-radius: .5rem;
-    min-width: 60dvw;
-    right: 0;
+    position: absolute;
+    min-width: 30rem;
   }
+}
 
-  li:hover {
-    background-color: $yellow-color;
+@media (min-width: 80rem) {
+  .search-container {
+    min-width: 40rem;
   }
+}
 
-  li,
-  .no-results {
-    padding: .6rem;
-  }
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
 
-  li {
-    cursor: pointer;
-  }
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 
-  @media(min-width: 50rem) {
-    .search-container {
-      position: absolute;
-      min-width: 30rem;
-    }
-  }
+.list-move {
+  transition: transform 0.3s ease;
+}
 
-  @media(min-width: 80rem) {
-    .search-container {
-      min-width: 40rem;
-    }
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
 
-  .list-enter-active,
-  .list-leave-active {
-    transition: all .3s ease;
-  }
-
-  .list-enter-from,
-  .list-leave-to {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-
-  .list-move {
-    transition: transform .3s ease;
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
-  }
-
-  .fade-enter,
-  .fade-appear,
-  .fade-leave-to {
-    opacity: 0;
-  }
+.fade-enter,
+.fade-appear,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

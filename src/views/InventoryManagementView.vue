@@ -1,7 +1,7 @@
 <template>
-    <InventoryManagement />
+  <InventoryManagement />
 </template>
 
 <script setup lang="ts">
-import InventoryManagement from '@/components/InventoryManagement.vue'
+import InventoryManagement from '@/components/InventoryManagement.vue';
 </script>

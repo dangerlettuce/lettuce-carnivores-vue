@@ -12,7 +12,7 @@
         <h2>{{ `Order Date: ${formatDate(order.orderDate)}` }}</h2>
       </div>
       <div>
-        <p style="font-weight: 600;">{{ `${getShippingType(order)} Shipping:` }}</p>
+        <p style="font-weight: 600">{{ `${getShippingType(order)} Shipping:` }}</p>
         <div class="ship-to">
           <p>{{ order.shippingInfo.name }}</p>
           <p>{{ order.shippingInfo.address.line1 }}</p>
@@ -24,12 +24,11 @@
       </div>
     </div>
 
-
-
     <ul class="black-text">
       <li v-for="item in order.lineItems" :key="item.price_data.product_data.metadata.sku" class="order-item">
-        <span
-          class="square" />{{ `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.name} - ${item.price_data.product_data.metadata.size}` }}
+        <span class="square" />{{
+          `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.name} - ${item.price_data.product_data.metadata.size}`
+        }}
       </li>
     </ul>
     <br />
@@ -43,181 +42,170 @@
 </template>
 
 <script setup lang="ts">
-  import type { Order } from '@/types/Orders';
-  import { formatDate } from '@/utils/utils';
-  import { computed, type PropType } from 'vue';
+import type { Order } from '@/types/Orders';
+import { formatDate } from '@/utils/utils';
+import { computed, type PropType } from 'vue';
 
+const props = defineProps({ orders: { type: Array as PropType<Order[]>, required: true } });
 
-  const props = defineProps({ orders: { type: Array as PropType<Order[]>, required: true } })
+const ordersToProcess = computed(() => {
+  const orders = props.orders.filter((order) => order.orderStatus.status === 'Processing');
 
-  const ordersToProcess = computed(() => {
-    const orders = props.orders.filter(order => order.orderStatus.status === 'Processing')
+  return orders;
+});
 
-
-    return orders;
-  })
-
-  const pickList = computed(() => {
-    const list: string[] = [];
-    ordersToProcess.value.forEach(order => {
-      order.lineItems.forEach(item => {
-        const itemString = `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.metadata.size} - ${item.price_data.product_data.name}`;
-        list.push(itemString);
-      });
+const pickList = computed(() => {
+  const list: string[] = [];
+  ordersToProcess.value.forEach((order) => {
+    order.lineItems.forEach((item) => {
+      const itemString = `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.metadata.size} - ${item.price_data.product_data.name}`;
+      list.push(itemString);
     });
-    return list.sort((a, b) => a.localeCompare(b));
   });
+  return list.sort((a, b) => a.localeCompare(b));
+});
 
-  // TEMP: Stripe is all fucked up because you forgot the break so now you gotta leave this shit here until those flow through dumbass.
-  const standardShippingId = 'shr_1PhcE1HlHApXEku9jEjOnRY5'
-  const expeditedShippingId = 'shr_1PhcIRHlHApXEku9VDJcMwh1'
-  const discountedStandardShippingId = 'shr_1PhcE6HlHApXEku9pLjd8otH'
-  const discountedExpeditedShippingId = 'shr_1R2cEFHlHApXEku99i2HiYTx'
-  const coldWeatherShippingId = 'shr_1QgwacHlHApXEku9NOmO8GBA'
-  const discountedColdWeatherShippingId = 'shr_1Qgwb2HlHApXEku9geKIWtCT'
-  const mossShippingId = 'shr_1R4ZfVHlHApXEku9ZqnKMqC2'
+// TEMP: Stripe is all fucked up because you forgot the break so now you gotta leave this shit here until those flow through dumbass.
+const standardShippingId = 'shr_1PhcE1HlHApXEku9jEjOnRY5';
+const expeditedShippingId = 'shr_1PhcIRHlHApXEku9VDJcMwh1';
+const discountedStandardShippingId = 'shr_1PhcE6HlHApXEku9pLjd8otH';
+const discountedExpeditedShippingId = 'shr_1R2cEFHlHApXEku99i2HiYTx';
+const coldWeatherShippingId = 'shr_1QgwacHlHApXEku9NOmO8GBA';
+const discountedColdWeatherShippingId = 'shr_1Qgwb2HlHApXEku9geKIWtCT';
+const mossShippingId = 'shr_1R4ZfVHlHApXEku9ZqnKMqC2';
 
-  function getShippingType(shippingCost: any | string) {
-    let shippingId = null;
-    if (typeof shippingCost === 'string' && shippingCost.length > 20) {
-      shippingId = shippingCost;
-    }
-    if (shippingCost && typeof shippingCost === 'object' && 'shipping_rate' in shippingCost) {
-      shippingId = shippingCost.shipping_rate;
-    }
-    if (shippingId === null && 'fullResponse' in shippingCost) {
-      shippingId = shippingCost.fullResponse.shipping_cost.shipping_rate;
-    }
-    if (shippingId === null) {
-      console.error(`Unable to parse shippingId from checkout data ${shippingCost}`)
-    }
-    let shippingType = null;
-    switch (shippingId) {
-      case coldWeatherShippingId:
-      case discountedColdWeatherShippingId:
-        shippingType = 'Cold Weather'
-        break;
-      case expeditedShippingId:
-      case discountedExpeditedShippingId:
-        shippingType = 'Expedited'
-        break;
-      case standardShippingId:
-      case discountedStandardShippingId:
-      case mossShippingId:
-        shippingType = 'Standard'
-        break;
-      default:
-        console.error(`Unknown shipping ID ${shippingId}`)
-        shippingType = 'Unknown';
-    }
-    return shippingType;
-
+function getShippingType(shippingCost: any | string) {
+  let shippingId = null;
+  if (typeof shippingCost === 'string' && shippingCost.length > 20) {
+    shippingId = shippingCost;
   }
-
+  if (shippingCost && typeof shippingCost === 'object' && 'shipping_rate' in shippingCost) {
+    shippingId = shippingCost.shipping_rate;
+  }
+  if (shippingId === null && 'fullResponse' in shippingCost) {
+    shippingId = shippingCost.fullResponse.shipping_cost.shipping_rate;
+  }
+  if (shippingId === null) {
+    console.error(`Unable to parse shippingId from checkout data ${shippingCost}`);
+  }
+  let shippingType = null;
+  switch (shippingId) {
+    case coldWeatherShippingId:
+    case discountedColdWeatherShippingId:
+      shippingType = 'Cold Weather';
+      break;
+    case expeditedShippingId:
+    case discountedExpeditedShippingId:
+      shippingType = 'Expedited';
+      break;
+    case standardShippingId:
+    case discountedStandardShippingId:
+    case mossShippingId:
+      shippingType = 'Standard';
+      break;
+    default:
+      console.error(`Unknown shipping ID ${shippingId}`);
+      shippingType = 'Unknown';
+  }
+  return shippingType;
+}
 </script>
 
 <style scoped lang="css">
-  h2 {
-    font-weight: 600;
+h2 {
+  font-weight: 600;
+}
+
+.packing-slip-logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  img {
+    height: 4rem;
+    padding-inline: 0.5rem;
   }
+}
 
-  .packing-slip-logo-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.shipping {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-block: 1rem;
+}
 
-    img {
-      height: 4rem;
-      padding-inline: .5rem;
-    }
-  }
+.order-picklist-header {
+  margin-bottom: 1.2rem;
+}
 
-  .shipping {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-block: 1rem;
-  }
+.order-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1.2rem;
+}
 
-  .order-picklist-header {
-    margin-bottom: 1.2rem;
-  }
+.order-item {
+  padding: 0.5rem 0;
+}
 
-  .order-info {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 1.2rem;
-  }
+.packing-slip {
+  margin-top: 2rem;
+}
 
+.square {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  background-color: #ffffff;
+  border: 2px solid black;
+  margin: auto 2ch;
+}
 
-  .order-item {
-    padding: .5rem 0;
-  }
+.black-text {
+  color: black;
+}
 
-  .packing-slip {
-    margin-top: 2rem;
-  }
+ul,
+li {
+  font-size: 1.2rem;
+  text-align: left;
+}
 
-  .square {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    background-color: #ffffff;
-    border: 2px solid black;
-    margin: auto 2ch;
-  }
-
-  .black-text {
-    color: black;
-
-  }
-
-  ul,
-  li {
-    font-size: 1.2rem;
-    text-align: left;
-  }
-
-  ol {
-    text-align: left;
-  }
-
-
+ol {
+  text-align: left;
+}
 </style>
 
 <style>
-
-  /* Styles not scoped so that print media query can hide other crap */
-  @media print {
-
-    .page,
-    .page-break {
-      break-after: page;
-    }
-
-    .order {
-      margin-block-start: 3rem;
-      border-top: none;
-    }
-
-    /* Doesn't seem to work... TODO */
-    header,
-    footer {
-      display: none;
-
-    }
-
-    .__vue-devtools-container__ {
-      display: none;
-    }
-
-    .button-container {
-      display: none;
-    }
-
-    .order-container {
-      display: none;
-    }
+/* Styles not scoped so that print media query can hide other crap */
+@media print {
+  .page,
+  .page-break {
+    break-after: page;
   }
+
+  .order {
+    margin-block-start: 3rem;
+    border-top: none;
+  }
+
+  /* Doesn't seem to work... TODO */
+  header,
+  footer {
+    display: none;
+  }
+
+  .__vue-devtools-container__ {
+    display: none;
+  }
+
+  .button-container {
+    display: none;
+  }
+
+  .order-container {
+    display: none;
+  }
+}
 </style>

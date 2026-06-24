@@ -1,14 +1,12 @@
 // @ts-nocheck
-import {CreateVideoRequest, InputStream} from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/commerce_media_v1_beta_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { CreateVideoRequest, InputStream } from '../../../../types/index.js';
+import { operations } from '../../../../types/restful/specs/commerce_media_v1_beta_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Media API allows sellers to create, upload, and fetch videos.
  */
 export default class Media extends Restful implements OpenApi<operations> {
-
-
   static id = 'Media';
 
   get basePath(): string {
@@ -34,7 +32,7 @@ export default class Media extends Restful implements OpenApi<operations> {
   async getVideo(videoId: string) {
     videoId = encodeURIComponent(videoId);
     return this.get(`/video/${videoId}`);
-  };
+  }
 
   /**
    * This method associates the specified file with the specified <b>video ID</b> and uploads the input file.

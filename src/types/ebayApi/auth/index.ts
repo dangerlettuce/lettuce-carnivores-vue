@@ -1,6 +1,6 @@
 import Base from '../api/base.js';
-import type {IEBayApiRequest} from '../request.js';
-import type {AppConfig} from '../types/index.js';
+import type { IEBayApiRequest } from '../request.js';
+import type { AppConfig } from '../types/index.js';
 import AuthNAuth from './authNAuth.js';
 import OAuth2 from './oAuth2.js';
 
@@ -23,13 +23,13 @@ export default class Auth extends Base {
   public async getHeaderAuthorization(useIaf: boolean) {
     if (this.authNAuth.eBayAuthToken) {
       return {
-        Authorization: 'Token ' + this.authNAuth.eBayAuthToken
-      }
+        Authorization: 'Token ' + this.authNAuth.eBayAuthToken,
+      };
     }
 
     const accessToken = await this.OAuth2.getAccessToken();
     return {
-      Authorization: (useIaf ? 'IAF ' : 'Bearer ') + accessToken
-    }
+      Authorization: (useIaf ? 'IAF ' : 'Bearer ') + accessToken,
+    };
   }
 }

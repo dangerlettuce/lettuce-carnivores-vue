@@ -1,13 +1,12 @@
 // @ts-nocheck
-import {operations} from '../../../../types/restful/specs/commerce_taxonomy_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/commerce_taxonomy_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * Use the Taxonomy API to discover the most appropriate eBay categories under which sellers can offer inventory items
  * for sale, and the most likely categories under which buyers can browse or search for items to purchase.
  */
 export default class Taxonomy extends Restful implements OpenApi<operations> {
-
   static id = 'Taxonomy';
 
   get basePath(): string {
@@ -23,8 +22,8 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
   public getDefaultCategoryTreeId(marketplaceId: string) {
     return this.get(`/get_default_category_tree_id`, {
       params: {
-        marketplace_id: marketplaceId
-      }
+        marketplace_id: marketplaceId,
+      },
     });
   }
 
@@ -50,8 +49,8 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
     categoryTreeId = encodeURIComponent(categoryTreeId);
     return this.get(`/category_tree/${categoryTreeId}/get_category_subtree`, {
       params: {
-        category_id: categoryId
-      }
+        category_id: categoryId,
+      },
     });
   }
 
@@ -66,8 +65,8 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
   public getCategorySuggestions(categoryTreeId: string, q: string) {
     return this.get(`/category_tree/${categoryTreeId}/get_category_suggestions`, {
       params: {
-        q
-      }
+        q,
+      },
     });
   }
 
@@ -83,8 +82,8 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
     categoryTreeId = encodeURIComponent(categoryTreeId);
     return this.get(`/category_tree/${categoryTreeId}/get_item_aspects_for_category`, {
       params: {
-        category_id: categoryId
-      }
+        category_id: categoryId,
+      },
     });
   }
 
@@ -101,8 +100,8 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
     categoryTreeId = encodeURIComponent(categoryTreeId);
     return this.get(`/category_tree/${categoryTreeId}/get_compatibility_properties`, {
       params: {
-        category_id: categoryId
-      }
+        category_id: categoryId,
+      },
     });
   }
 
@@ -115,17 +114,13 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
    * @param compatibilityProperty One compatible vehicle property applicable to the specified eBay marketplace and
    *     eBay category is specified in this required filter.
    */
-  public getCompatibilityPropertyValues(
-    categoryTreeId: string,
-    categoryId: string,
-    compatibilityProperty: string
-  ) {
+  public getCompatibilityPropertyValues(categoryTreeId: string, categoryId: string, compatibilityProperty: string) {
     categoryTreeId = encodeURIComponent(categoryTreeId);
     return this.get(`/category_tree/${categoryTreeId}/get_compatibility_property_values`, {
       params: {
         category_id: categoryId,
-        compatibility_property: compatibilityProperty
-      }
+        compatibility_property: compatibilityProperty,
+      },
     });
   }
 
@@ -139,7 +134,7 @@ export default class Taxonomy extends Restful implements OpenApi<operations> {
   public fetchItemAspects(categoryTreeId: string): Promise<Buffer> {
     categoryTreeId = encodeURIComponent(categoryTreeId);
     return this.get(`/category_tree/${categoryTreeId}/fetch_item_aspects`, {
-      responseType: 'arraybuffer'
+      responseType: 'arraybuffer',
     });
   }
 }

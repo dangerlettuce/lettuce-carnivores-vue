@@ -1,29 +1,11 @@
 // @ts-nocheck
-import {ClientAlerts, Finding, Merchandising, Shopping, Trading} from '../types/index.js';
+import { ClientAlerts, Finding, Merchandising, Shopping, Trading } from '../types/index.js';
 import Api from './index.js';
-import {
-  Browse,
-  Buy,
-  Deal,
-  Feed,
-  Marketing as BuyMarketing,
-  MarketplaceInsights,
-  Offer,
-  Order
-} from './restful/buy/index.js';
-import {
-  Catalog,
-  Charity,
-  Commerce,
-  Identity,
-  Media,
-  Notification,
-  Taxonomy,
-  Translation
-} from './restful/commerce/index.js';
-import {Analytics as DeveloperAnalytics, Developer, KeyManagement} from './restful/developer/index.js';
-import RestfulApi, {IRestful} from './restful/index.js';
-import {Cancellation, Case, Inquiry, PostOrder, Return,} from './restful/postOrder/index.js';
+import { Browse, Buy, Deal, Feed, Marketing as BuyMarketing, MarketplaceInsights, Offer, Order } from './restful/buy/index.js';
+import { Catalog, Charity, Commerce, Identity, Media, Notification, Taxonomy, Translation } from './restful/commerce/index.js';
+import { Analytics as DeveloperAnalytics, Developer, KeyManagement } from './restful/developer/index.js';
+import RestfulApi, { IRestful } from './restful/index.js';
+import { Cancellation, Case, Inquiry, PostOrder, Return } from './restful/postOrder/index.js';
 import {
   Account,
   Analytics as SellAnalytics,
@@ -38,7 +20,7 @@ import {
   Metadata,
   Negotiation,
   Recommendation,
-  Sell
+  Sell,
 } from './restful/sell/index.js';
 import Traditional from './traditional/index.js';
 
@@ -57,7 +39,7 @@ export default class ApiFactory extends Api {
       offer: this.createRestfulApi(Offer),
       order: this.createRestfulApi(Order),
       deal: this.createRestfulApi(Deal),
-      marketplaceInsights:  this.createRestfulApi(MarketplaceInsights),
+      marketplaceInsights: this.createRestfulApi(MarketplaceInsights),
     };
   }
 
@@ -138,8 +120,6 @@ export default class ApiFactory extends Api {
   // tslint:disable-next-line:variable-name
   private createRestfulApi<T extends RestfulApi>(RestfulApiClass: IRestful): T {
     const id = RestfulApiClass.id;
-    return (
-      this._restful[id] || (this._restful[id] = new RestfulApiClass(this.config, this.req, this.auth))
-    );
+    return this._restful[id] || (this._restful[id] = new RestfulApiClass(this.config, this.req, this.auth));
   }
 }

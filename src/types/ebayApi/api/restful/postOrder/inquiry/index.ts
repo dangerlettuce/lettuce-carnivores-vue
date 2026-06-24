@@ -9,14 +9,13 @@ import {
   InquiryVoluntaryRefundRequest,
   SellerProvideRefundInfoRequest,
   SendMessageRequest,
-  ShipmentInfoRequest
+  ShipmentInfoRequest,
 } from '../../../../types/index.js';
 
 /**
  * Post-Order Inquiry API
  */
 export default class Inquiry extends Restful {
-
   static id = 'Inquiry';
 
   get basePath(): string {
@@ -134,7 +133,7 @@ export default class Inquiry extends Restful {
    */
   public search(params?: InquirySearchParams) {
     return this.get(`/inquiry/search`, {
-      params
+      params,
     });
   }
 

@@ -14,17 +14,16 @@ import {
   InventoryLocationFull,
   OfferKeysWithId,
   PublishByInventoryItemGroupRequest,
-  WithdrawByInventoryItemGroupRequest
+  WithdrawByInventoryItemGroupRequest,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_inventory_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/sell_inventory_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Inventory API is used to create and manage inventory, and then to publish and manage this inventory on an eBay
  * marketplace.
  */
 export default class Inventory extends Restful implements OpenApi<operations> {
-
   static id = 'Inventory';
 
   get basePath(): string {
@@ -71,10 +70,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    *     data.
    * @param offset The value passed in this query parameter sets the page number to retrieve.
    */
-  public getInventoryLocations({
-                                 limit,
-                                 offset,
-                               }: { limit?: number; offset?: number } = {}) {
+  public getInventoryLocations({ limit, offset }: { limit?: number; offset?: number } = {}) {
     return this.get(`/location`, {
       params: {
         limit,
@@ -89,10 +85,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    * @param merchantLocationKey A unique merchant-defined key (ID) for an inventory location.
    * @param body Inventory Location details
    */
-  public createInventoryLocation(
-    merchantLocationKey: string,
-    body: InventoryLocationFull
-  ) {
+  public createInventoryLocation(merchantLocationKey: string, body: InventoryLocationFull) {
     const key = encodeURIComponent(merchantLocationKey);
     return this.post(`/location/${key}`, body);
   }
@@ -114,10 +107,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    * @param merchantLocationKey A unique merchant-defined key (ID) for an inventory location.
    * @param body The inventory location details to be updated (other than the address and geo co-ordinates).
    */
-  public updateInventoryLocation(
-    merchantLocationKey: string,
-    body?: InventoryLocation
-  ) {
+  public updateInventoryLocation(merchantLocationKey: string, body?: InventoryLocation) {
     const key = encodeURIComponent(merchantLocationKey);
     return this.post(`/location/${key}/update_location_details`, body);
   }
@@ -163,10 +153,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    *     data.
    * @param offset The value passed in this query parameter sets the page number to retrieve.
    */
-  public getInventoryItems({
-                             limit,
-                             offset,
-                           }: { limit?: number; offset?: number } = {}) {
+  public getInventoryItems({ limit, offset }: { limit?: number; offset?: number } = {}) {
     return this.get(`/inventory_item`, {
       params: {
         limit,
@@ -248,12 +235,12 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    * @param offset The value passed in this query parameter sets the page number to retrieve.
    */
   public getOffers({
-                     sku,
-                     marketplaceId,
-                     format,
-                     limit,
-                     offset,
-                   }: {
+    sku,
+    marketplaceId,
+    format,
+    limit,
+    offset,
+  }: {
     sku?: string;
     marketplaceId?: string;
     format?: string;
@@ -326,9 +313,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    *
    * @param body PublishByInventoryItemGroupRequest
    */
-  public publishOfferByInventoryItemGroup(
-    body: PublishByInventoryItemGroupRequest
-  ) {
+  public publishOfferByInventoryItemGroup(body: PublishByInventoryItemGroupRequest) {
     return this.post(`/offer/publish_by_inventory_item_group/`, body);
   }
 
@@ -338,9 +323,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    *
    * @param body WithdrawByInventoryItemGroupRequest
    */
-  public withdrawOfferByInventoryItemGroup(
-    body: WithdrawByInventoryItemGroupRequest
-  ) {
+  public withdrawOfferByInventoryItemGroup(body: WithdrawByInventoryItemGroupRequest) {
     return this.post(`/offer/withdraw_by_inventory_item_group`, body);
   }
 
@@ -397,10 +380,7 @@ export default class Inventory extends Restful implements OpenApi<operations> {
    * @param inventoryItemGroupKey Unique identifier of the inventory item group.
    * @param body Details of the inventory Item Group
    */
-  public createOrReplaceInventoryItemGroup(
-    inventoryItemGroupKey: string,
-    body: InventoryItemGroup
-  ) {
+  public createOrReplaceInventoryItemGroup(inventoryItemGroupKey: string, body: InventoryItemGroup) {
     inventoryItemGroupKey = encodeURIComponent(inventoryItemGroupKey);
     return this.put(`/inventory_item_group/${inventoryItemGroupKey}`, body);
   }

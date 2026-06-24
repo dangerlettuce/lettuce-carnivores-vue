@@ -1,7 +1,7 @@
 // @ts-nocheck
-import {createHash, sign} from 'crypto';
-import {EBayError} from '../errors/index.js';
-import {Cipher, Headers} from '../types/index.js';
+import { createHash, sign } from 'crypto';
+import { EBayError } from '../errors/index.js';
+import { Cipher, Headers } from '../types/index.js';
 
 const beginPrivateKey = '-----BEGIN PRIVATE KEY-----';
 const endPrivateKey = '-----END PRIVATE KEY-----';
@@ -16,14 +16,17 @@ const endPrivateKey = '-----END PRIVATE KEY-----';
 export const getUnixTimestamp = (): number => Math.floor(Date.now() / 1000);
 
 const getSignatureParams = (payload: any) => [
-  ...payload ? ['content-digest'] : [],
+  ...(payload ? ['content-digest'] : []),
   'x-ebay-signature-key',
   '@method',
   '@path',
-  '@authority'
+  '@authority',
 ];
 
-const getSignatureParamsValue = (payload: any) => getSignatureParams(payload).map(param => `"${param}"`).join(' ');
+const getSignatureParamsValue = (payload: any) =>
+  getSignatureParams(payload)
+    .map((param) => `"${param}"`)
+    .join(' ');
 
 /**
  * Generates the 'Content-Digest' header value for the input payload.
@@ -41,10 +44,10 @@ export const generateContentDigestValue = (payload: unknown, cipher: Cipher = 's
 };
 
 export type SignatureComponents = {
-  method: string
-  authority: string // the host
-  path: string
-}
+  method: string;
+  authority: string; // the host
+  path: string;
+};
 
 /**
  * Generates the base string.
@@ -55,12 +58,17 @@ export type SignatureComponents = {
  * @param {number} timestamp The timestamp.
  * @returns {string} payload The base string.
  */
-export function generateBaseString(headers: Headers, signatureComponents: SignatureComponents, payload: any, timestamp = getUnixTimestamp()): string {
+export function generateBaseString(
+  headers: Headers,
+  signatureComponents: SignatureComponents,
+  payload: any,
+  timestamp = getUnixTimestamp(),
+): string {
   try {
     let baseString: string = '';
     const signatureParams: string[] = getSignatureParams(payload);
 
-    signatureParams.forEach(param => {
+    signatureParams.forEach((param) => {
       baseString += `"${param.toLowerCase()}": `;
 
       if (param.startsWith('@')) {
@@ -102,7 +110,8 @@ export function generateBaseString(headers: Headers, signatureComponents: Signat
  * @param {number} timestamp The timestamp.
  * @returns {string} the 'Signature-Input' header value.
  */
-export const generateSignatureInput = (payload: any, timestamp = getUnixTimestamp()): string => `sig1=(${getSignatureParamsValue(payload)});created=${timestamp}`;
+export const generateSignatureInput = (payload: any, timestamp = getUnixTimestamp()): string =>
+  `sig1=(${getSignatureParamsValue(payload)});created=${timestamp}`;
 
 /**
  * Generates the 'Signature' header.
@@ -119,7 +128,7 @@ export function generateSignature(
   privateKey: string,
   signatureComponents: SignatureComponents,
   payload: any,
-  timestamp = getUnixTimestamp()
+  timestamp = getUnixTimestamp(),
 ): string {
   const baseString = generateBaseString(headers, signatureComponents, payload, timestamp);
 
@@ -131,7 +140,7 @@ export function generateSignature(
   const signatureBuffer = sign(
     undefined, // If algorithm is undefined, then it is dependent upon the private key type.
     Buffer.from(baseString),
-    privateKey
+    privateKey,
   );
 
   const signature = signatureBuffer.toString('base64');

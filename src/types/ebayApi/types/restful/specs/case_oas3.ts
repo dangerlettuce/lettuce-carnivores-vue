@@ -3,35 +3,34 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/casemanagement/{caseId}/appeal": {
+  '/casemanagement/{caseId}/appeal': {
     /** @description Buyer or seller appeals a case decision */
-    post: operations["appealCaseDecision"];
+    post: operations['appealCaseDecision'];
   };
-  "/casemanagement/{caseId}/close": {
+  '/casemanagement/{caseId}/close': {
     /** @description Buyer closes a case */
-    post: operations["closeCase"];
+    post: operations['closeCase'];
   };
-  "/casemanagement/{caseId}": {
+  '/casemanagement/{caseId}': {
     /** @description Retrieve the details related to a specific case */
-    get: operations["getCase"];
+    get: operations['getCase'];
   };
-  "/casemanagement/{caseId}/issue_refund": {
+  '/casemanagement/{caseId}/issue_refund': {
     /** @description Seller issues a refund for a case */
-    post: operations["issueCaseRefund"];
+    post: operations['issueCaseRefund'];
   };
-  "/casemanagement/{caseId}/provide_shipment_info": {
+  '/casemanagement/{caseId}/provide_shipment_info': {
     /** @description Buyer provides return shipment information */
-    post: operations["provideReturnShipmentInfo"];
+    post: operations['provideReturnShipmentInfo'];
   };
-  "/casemanagement/{caseId}/provide_return_address": {
+  '/casemanagement/{caseId}/provide_return_address': {
     /** @description Seller provides a return address to the buyer */
-    post: operations["providesReturnAddress"];
+    post: operations['providesReturnAddress'];
   };
-  "/casemanagement/search": {
+  '/casemanagement/search': {
     /** @description This call is used to search for cases using multiple filter types. */
-    get: operations["search"];
+    get: operations['search'];
   };
 }
 
@@ -42,7 +41,6 @@ export type components = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description Buyer or seller appeals a case decision */
   appealCaseDecision: {
     parameters: {

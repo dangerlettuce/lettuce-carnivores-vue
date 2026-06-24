@@ -4,15 +4,10 @@ import Inquiry from './inquiry/index.js';
 import Return from './return/index.js';
 
 export type PostOrder = {
-  cancellation: Cancellation,
-  case: Case,
-  inquiry: Inquiry,
-  return: Return
+  cancellation: Cancellation;
+  case: Case;
+  inquiry: Inquiry;
+  return: Return;
 };
 
-export {
-  Cancellation,
-  Case,
-  Inquiry,
-  Return
-};
+export { Cancellation, Case, Inquiry, Return };

@@ -13,33 +13,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { getEbayAccessToken, getUserConsent } from '@/composables/useEbayUtils'
-import { toast } from 'vue3-toastify'
-import { useInventoryStore } from '@/stores/inventory'
-import { storeToRefs } from 'pinia'
-import InventoryGrid from './InventoryGrid.vue'
+import { ref } from 'vue';
+import { getEbayAccessToken, getUserConsent } from '@/composables/useEbayUtils';
+import { toast } from 'vue3-toastify';
+import { useInventoryStore } from '@/stores/inventory';
+import { storeToRefs } from 'pinia';
+import InventoryGrid from './InventoryGrid.vue';
 
-let environment = 'PRODUCTION'
-const { ebayTokenData } = storeToRefs(useInventoryStore())
+let environment = 'PRODUCTION';
+const { ebayTokenData } = storeToRefs(useInventoryStore());
 
 async function accessToken() {
   const res = await getEbayAccessToken().catch((e) => {
-    console.error(e)
-    return
-  })
+    console.error(e);
+    return;
+  });
 }
 
 async function ebayLogin() {
-  const res = await getUserConsent()
+  const res = await getUserConsent();
   if (res.success && res.data) {
-    window.open(res.data)
+    window.open(res.data);
   } else {
-    toast.error('Something went wrong')
+    toast.error('Something went wrong');
   }
 }
 
-const ebaySkuInput = ref('')
+const ebaySkuInput = ref('');
 </script>
 <style scoped>
 .actions {

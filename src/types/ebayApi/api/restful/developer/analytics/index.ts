@@ -1,11 +1,10 @@
-import type {operations} from '../../../../types/restful/specs/developer_analytics_v1_beta_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import type { operations } from '../../../../types/restful/specs/developer_analytics_v1_beta_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * This method retrieves the call limit and utilization data for an application.
  */
 export default class Analytics extends Restful implements OpenApi<operations> {
-
   static id = 'Analytics';
 
   get basePath(): string {
@@ -22,8 +21,8 @@ export default class Analytics extends Restful implements OpenApi<operations> {
     return this.get(`/rate_limit/`, {
       params: {
         api_context: apiContext,
-        api_name: apiName
-      }
+        api_name: apiName,
+      },
     });
   }
 
@@ -37,8 +36,8 @@ export default class Analytics extends Restful implements OpenApi<operations> {
     return this.get(`/user_rate_limit/`, {
       params: {
         api_context: apiContext,
-        api_name: apiName
-      }
+        api_name: apiName,
+      },
     });
   }
 }

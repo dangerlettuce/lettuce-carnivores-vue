@@ -1,12 +1,11 @@
-import type {CommerceCatalogSearchParams} from '../../../../types/index.js';
-import type {operations} from '../../../../types/restful/specs/commerce_catalog_v1_beta_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import type { CommerceCatalogSearchParams } from '../../../../types/index.js';
+import type { operations } from '../../../../types/restful/specs/commerce_catalog_v1_beta_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * Use the Catalog API to search the eBay catalog for products on which to base a seller's item listing;
  */
 export default class Catalog extends Restful implements OpenApi<Omit<operations, 'createChangeRequest'>> {
-
   static id = 'Catalog';
 
   get basePath(): string {
@@ -34,13 +33,13 @@ export default class Catalog extends Restful implements OpenApi<Omit<operations,
    * @param offset The first change request to return based on its position in the returned collection of change
    *     requests.
    */
-  public getChangeRequests({filter, limit, offset}: { filter?: string, limit?: number, offset?: number } = {}) {
+  public getChangeRequests({ filter, limit, offset }: { filter?: string; limit?: number; offset?: number } = {}) {
     return this.get(`/change_request`, {
       params: {
         filter,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -63,7 +62,7 @@ export default class Catalog extends Restful implements OpenApi<Omit<operations,
    */
   public search(params?: CommerceCatalogSearchParams) {
     return this.get(`/product_summary/search`, {
-      params
+      params,
     });
   }
 
@@ -81,17 +80,22 @@ export default class Catalog extends Restful implements OpenApi<Omit<operations,
    *     category.
    * @param marketplaceId Use this header to specify the eBay marketplace identifier.
    */
-  public getProductMetadata(epid: string,
-                            {otherApplicableCategoryIds, primaryCategoryId}: {
-                              otherApplicableCategoryIds?: string,
-                              primaryCategoryId?: string,
-                            } = {}) {
+  public getProductMetadata(
+    epid: string,
+    {
+      otherApplicableCategoryIds,
+      primaryCategoryId,
+    }: {
+      otherApplicableCategoryIds?: string;
+      primaryCategoryId?: string;
+    } = {},
+  ) {
     return this.get(`/get_product_metadata`, {
       params: {
         epid,
         other_applicable_category_ids: otherApplicableCategoryIds,
-        primary_category_id: primaryCategoryId
-      }
+        primary_category_id: primaryCategoryId,
+      },
     });
   }
 
@@ -107,8 +111,8 @@ export default class Catalog extends Restful implements OpenApi<Omit<operations,
     return this.get(`/get_product_metadata_for_categories`, {
       params: {
         primary_category_id: primaryCategoryId,
-        other_applicable_category_ids: otherApplicableCategoryIds
-      }
+        other_applicable_category_ids: otherApplicableCategoryIds,
+      },
     });
   }
 }

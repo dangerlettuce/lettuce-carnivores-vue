@@ -2,36 +2,37 @@
 import debug from 'debug';
 import Base from '../api/base.js';
 import XMLRequest from '../api/traditional/XMLRequest.js';
-import {IEBayApiRequest} from '../request.js';
-import {AppConfig} from '../types/index.js';
+import { IEBayApiRequest } from '../request.js';
+import { AppConfig } from '../types/index.js';
 
 const log = debug('ebay:authNAuth');
 
 export type AuthToken = {
-  eBayAuthToken: string,
-  Timestamp?: string,
-  HardExpirationTime?: string
+  eBayAuthToken: string;
+  Timestamp?: string;
+  HardExpirationTime?: string;
 };
 
 export default class AuthNAuth extends Base {
-
   public static readonly SIGNIN_ENDPOINT = {
     sandbox: 'https://signin.sandbox.ebay.com/ws/eBayISAPI.dll',
-    production: 'https://signin.ebay.com/ws/eBayISAPI.dll'
+    production: 'https://signin.ebay.com/ws/eBayISAPI.dll',
   };
 
   public static readonly API_ENDPOINT = {
     production: 'https://api.ebay.com/ws/api.dll',
-    sandbox: 'https://api.sandbox.ebay.com/ws/api.dll'
+    sandbox: 'https://api.sandbox.ebay.com/ws/api.dll',
   };
 
   public static generateAuthUrl(sandbox: boolean, ruName: string, sessionId: string, prompt = false) {
     return [
       sandbox ? AuthNAuth.SIGNIN_ENDPOINT.sandbox : AuthNAuth.SIGNIN_ENDPOINT.production,
       '?SignIn',
-      '&RuName=', encodeURIComponent(ruName),
-      '&SessID=', encodeURIComponent(sessionId),
-      prompt ? '&prompt=login' : ''
+      '&RuName=',
+      encodeURIComponent(ruName),
+      '&SessID=',
+      encodeURIComponent(sessionId),
+      prompt ? '&prompt=login' : '',
     ].join('');
   }
 
@@ -64,9 +65,14 @@ export default class AuthNAuth extends Base {
       throw new Error('RuName is required.');
     }
 
-    const xmlApi = new XMLRequest('GetSessionID', {
-      RuName: ruName
-    }, this.getRequestConfig('GetSessionID'), this.req);
+    const xmlApi = new XMLRequest(
+      'GetSessionID',
+      {
+        RuName: ruName,
+      },
+      this.getRequestConfig('GetSessionID'),
+      this.req,
+    );
 
     const data = await xmlApi.request();
 
@@ -74,7 +80,7 @@ export default class AuthNAuth extends Base {
 
     return {
       sessionId: data.SessionID,
-      url: AuthNAuth.generateAuthUrl(this.config.sandbox, ruName, data.SessionID)
+      url: AuthNAuth.generateAuthUrl(this.config.sandbox, ruName, data.SessionID),
     };
   }
 
@@ -83,9 +89,14 @@ export default class AuthNAuth extends Base {
       throw new Error('DevId is required.');
     }
 
-    const xmlApi = new XMLRequest('FetchToken', {
-      SessionID: sessionId
-    }, this.getRequestConfig('FetchToken'), this.req);
+    const xmlApi = new XMLRequest(
+      'FetchToken',
+      {
+        SessionID: sessionId,
+      },
+      this.getRequestConfig('FetchToken'),
+      this.req,
+    );
 
     try {
       return await xmlApi.request();
@@ -97,7 +108,7 @@ export default class AuthNAuth extends Base {
 
   public async obtainToken(sessionId: string) {
     const token = await this.mintToken(sessionId);
-    log('Obtain auth token', token)
+    log('Obtain auth token', token);
     this.setAuthToken(token);
 
     return token;
@@ -106,7 +117,7 @@ export default class AuthNAuth extends Base {
   public setAuthToken(authToken: AuthToken | string | null) {
     if (typeof authToken === 'string') {
       this.authToken = {
-        eBayAuthToken: authToken
+        eBayAuthToken: authToken,
       };
     } else {
       this.authToken = authToken;
@@ -119,7 +130,7 @@ export default class AuthNAuth extends Base {
     }
 
     return {
-      ...this.authToken
+      ...this.authToken,
     };
   }
 
@@ -142,8 +153,8 @@ export default class AuthNAuth extends Base {
         'X-EBAY-API-APP-NAME': this.config.appId,
         'X-EBAY-API-DEV-NAME': this.config.devId,
         'X-EBAY-API-SITEID': this.config.siteId,
-        'X-EBAY-API-COMPATIBILITY-LEVEL': 967
-      }
+        'X-EBAY-API-COMPATIBILITY-LEVEL': 967,
+      },
     };
   }
 }

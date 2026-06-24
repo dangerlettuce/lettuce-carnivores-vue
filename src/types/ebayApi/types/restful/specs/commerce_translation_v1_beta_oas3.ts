@@ -3,11 +3,10 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/translate": {
+  '/translate': {
     /** @description This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the table in the API Overview page. */
-    post: operations["translate"];
+    post: operations['translate'];
   };
 }
 
@@ -22,20 +21,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -50,7 +49,7 @@ export interface components {
       /** @description The language of the input text to be translated. Not all LanguageEnum values are supported in this field. For a full list of supported language translations, see the table in the API Overview page. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a> */
       from?: string;
       /** @description The input text to translate. For ITEM_DESCRIPTION translations, HTML/CSS markup and links can be included, but will count toward max character limit. Max Length: 1,000 characters for ITEM_TITLE 100,000 characters for ITEM_DESCRIPTION, including markup/tagsMax Occurrence: 1. Only one continuous text string currently supported. */
-      text?: (string)[];
+      text?: string[];
       /** @description The target language for the translation of the input text. Not all LanguageEnum values are supported in this field. For a full list of supported language translations, see the table in the API Overview page. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a> */
       to?: string;
       /** @description Input the listing entity to be translated. Valid Values: ITEM_TITLE and ITEM_DESCRIPTION For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:TranslationContextEnum'>eBay API documentation</a> */
@@ -63,7 +62,7 @@ export interface components {
       /** @description The enumeration value indicates the language of the translated text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a> */
       to?: string;
       /** @description An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future. */
-      translations?: (components["schemas"]["Translation"])[];
+      translations?: components['schemas']['Translation'][];
     };
     /** @description This type is used by the translations array, which shows the original text supplied by the user in the request payload, and the text translated by eBay. Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future. */
     Translation: {
@@ -83,19 +82,18 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the table in the API Overview page. */
   translate: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["TranslateRequest"];
+        'application/json': components['schemas']['TranslateRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["TranslateResponse"];
+          'application/json': components['schemas']['TranslateResponse'];
         };
       };
       /** @description Bad Request */

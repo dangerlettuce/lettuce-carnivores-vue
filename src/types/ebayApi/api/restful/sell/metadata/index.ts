@@ -1,12 +1,11 @@
 // @ts-nocheck
-import {operations} from '../../../../types/restful/specs/sell_metadata_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/sell_metadata_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Metadata API has operations that retrieve configuration details pertaining to the different eBay marketplaces.
  */
 export default class Metadata extends Restful implements OpenApi<operations> {
-
   static id = 'Metadata';
 
   get basePath(): string {
@@ -38,8 +37,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_automotive_parts_compatibility_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -56,8 +55,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_extended_producer_responsibility_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -74,8 +73,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_item_condition_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -92,8 +91,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_listing_structure_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -110,8 +109,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_negotiated_price_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -128,8 +127,8 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_product_adoption_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
 
@@ -147,11 +146,10 @@ export default class Metadata extends Restful implements OpenApi<operations> {
     marketplaceId = encodeURIComponent(marketplaceId);
     return this.get(`/marketplace/${marketplaceId}/get_return_policies`, {
       params: {
-        filter
-      }
+        filter,
+      },
     });
   }
-
 
   /**
    * This method returns hazardous materials label information for the specified eBay marketplace. The information

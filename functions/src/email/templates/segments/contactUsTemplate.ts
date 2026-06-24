@@ -6,4 +6,4 @@ export const contactUsTemplate = `
         <mj-text align="center" padding="0"><p>or simply reply to this email.</p></mj-text>
     </mj-column>
   </mj-section>
-`
+`;

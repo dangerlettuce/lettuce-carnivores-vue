@@ -1940,11 +1940,11 @@ enum fields {
   WonCount,
   WonDurationInDays,
   WonList,
-  ZeroFeedbackScore
+  ZeroFeedbackScore,
 }
 
 export type Fields = {
-  [key in typeof fields[number]]: Fields | Fields[] | number | number[] | string | string[] | boolean | boolean[]
+  [key in (typeof fields)[number]]: Fields | Fields[] | number | number[] | string | string[] | boolean | boolean[];
 };
 
 export default fields;

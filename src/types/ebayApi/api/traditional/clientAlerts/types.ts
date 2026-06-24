@@ -26,7 +26,7 @@ enum EventType {
   OutBid = 'OutBid',
   PriceChange = 'PriceChange',
   SecondChanceOffer = 'SecondChanceOffer',
-  WatchedItemEndingSoon = 'WatchedItemEndingSoon'
+  WatchedItemEndingSoon = 'WatchedItemEndingSoon',
 }
 
-export {EventType};
+export { EventType };

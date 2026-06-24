@@ -1,12 +1,11 @@
 // @ts-nocheck
-import {operations} from '../../../../types/restful/specs/commerce_charity_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/commerce_charity_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * The Charity API allows third-party developers to search for and access details on supported charitable organizations.
  */
 export default class Charity extends Restful implements OpenApi<operations> {
-
   static id = 'Charity';
 
   get basePath(): string {
@@ -31,19 +30,14 @@ export default class Charity extends Restful implements OpenApi<operations> {
    * @param q A query string that matches the keywords in name, mission statement, or description.
    * @param registrationIds A comma-separated list of charitable organization registration IDs.
    */
-  public getCharityOrgs({
-                          limit,
-                          offset,
-                          q,
-                          registrationIds
-                        }: { limit?: string, offset?: string, q?: string, registrationIds?: string }) {
+  public getCharityOrgs({ limit, offset, q, registrationIds }: { limit?: string; offset?: string; q?: string; registrationIds?: string }) {
     return this.get(`/charity_org`, {
       params: {
         limit,
         offset,
         q,
-        registration_ids: registrationIds
-      }
+        registration_ids: registrationIds,
+      },
     });
   }
 
@@ -55,8 +49,8 @@ export default class Charity extends Restful implements OpenApi<operations> {
   public getCharityOrgByLegacyId(legacyCharityOrgId: string) {
     return this.get(`/charity_org/get_charity_org_by_legacy_id`, {
       params: {
-        legacy_charity_org_id: legacyCharityOrgId
-      }
+        legacy_charity_org_id: legacyCharityOrgId,
+      },
     });
   }
 }

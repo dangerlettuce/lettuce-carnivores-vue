@@ -6,4 +6,4 @@ export const orderExpectations = `
       <mj-divider border-color="#69b91d" padding-top="24px"></mj-divider>
     </mj-column>  
   </mj-section>   
-`
+`;

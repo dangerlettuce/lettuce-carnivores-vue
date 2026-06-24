@@ -17,7 +17,6 @@
       </div>
 
       <div class="flex flex-row justify-end">
-
         <div class="flex flex-row align-center gap-4">
           <router-link to="/login" v-if="!userStore.isLoggedIn">
             <Button variant="default" @click="closeMobileMenu" class="loginButton">Login</Button>
@@ -28,15 +27,16 @@
               <router-link to="/cart">
                 <ShoppingCartIcon />
                 <span
-                  class="absolute -top-1 -right-2 translate-middle w-5 h-5 leading-normal rounded-full flex justify-center items-center rounded-full bg-red-600 text-white">{{ cartItemCount }}</span>
+                  class="absolute -top-1 -right-2 translate-middle w-5 h-5 leading-normal rounded-full flex justify-center items-center rounded-full bg-red-600 text-white"
+                  >{{ cartItemCount }}</span
+                >
               </router-link>
             </div>
           </div>
         </div>
         <nav class="justify-start items-center gap-4">
           <Sheet v-model:open="isOpen" class="scrollbar-hidden">
-            <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none overflow-y-auto"
-              @openAutoFocus.prevent>
+            <SheetContent side="left" class="mobile-menu-sheet p-0 bg-primary border-none overflow-y-auto" @openAutoFocus.prevent>
               <div class="mobile-menu">
                 <div class="logo mobile-logo">
                   <router-link to="/">
@@ -69,279 +69,277 @@
   </header>
 </template>
 
-<script setup lang='ts'>
-  import { onMounted, type Ref } from 'vue'
-  import {
-    Sheet,
-    SheetContent,
-  } from "@/components/ui/sheet"
-  import { Button } from '@/components/ui/button'
-  import { computed } from 'vue';
-  import { navData } from '@/router/index'
-  import { useUserStore } from '@/stores/users';
-  import { useOrderStore } from '@/stores/order';
-  import HamburgerButton from './HamburgerButton.vue'
-  import TheSearch from '@/components/search/TheSearch.vue';
-  import ShoppingCartIcon from '@/assets/icons/ShoppingCartIcon.vue'
-  import TheBanner from '@/components/TheBanner.vue';
-  import { storeToRefs } from 'pinia';
+<script setup lang="ts">
+import { onMounted, type Ref } from 'vue';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { computed } from 'vue';
+import { navData } from '@/router/index';
+import { useUserStore } from '@/stores/users';
+import { useOrderStore } from '@/stores/order';
+import HamburgerButton from './HamburgerButton.vue';
+import TheSearch from '@/components/search/TheSearch.vue';
+import ShoppingCartIcon from '@/assets/icons/ShoppingCartIcon.vue';
+import TheBanner from '@/components/TheBanner.vue';
+import { storeToRefs } from 'pinia';
 
-  const userStore = useUserStore()
-  const { cartItemCount } = storeToRefs(useOrderStore())
-  const allowedNavLinks = computed(() => {
-    let allowedNavData = navData.filter((ele) => { return ele.meta.showInNav })
-    if (!userStore.isFamily) {
-      allowedNavData = allowedNavData.filter((ele) => { return !ele.meta.requiresFamily })
-    }
-    if (!userStore.isAdmin) {
-      allowedNavData = allowedNavData.filter((ele) => { return !ele.meta.requiresAdmin })
-    }
-    if (!userStore.isLoggedIn) {
-      allowedNavData = allowedNavData.filter((ele) => { return !ele.meta.requiresLogin })
-    }
-    return allowedNavData
-  })
-
-
-  const isOpen: Ref<boolean> = defineModel({ default: false })
-  function toggleMobileMenu() {
-    isOpen.value = !isOpen.value
+const userStore = useUserStore();
+const { cartItemCount } = storeToRefs(useOrderStore());
+const allowedNavLinks = computed(() => {
+  let allowedNavData = navData.filter((ele) => {
+    return ele.meta.showInNav;
+  });
+  if (!userStore.isFamily) {
+    allowedNavData = allowedNavData.filter((ele) => {
+      return !ele.meta.requiresFamily;
+    });
   }
-  function closeMobileMenu() {
-    isOpen.value = false
+  if (!userStore.isAdmin) {
+    allowedNavData = allowedNavData.filter((ele) => {
+      return !ele.meta.requiresAdmin;
+    });
   }
-  function handleLogout() {
-    userStore.logoutUser()
-    isOpen.value = false
+  if (!userStore.isLoggedIn) {
+    allowedNavData = allowedNavData.filter((ele) => {
+      return !ele.meta.requiresLogin;
+    });
   }
+  return allowedNavData;
+});
 
+const isOpen: Ref<boolean> = defineModel({ default: false });
+function toggleMobileMenu() {
+  isOpen.value = !isOpen.value;
+}
+function closeMobileMenu() {
+  isOpen.value = false;
+}
+function handleLogout() {
+  userStore.logoutUser();
+  isOpen.value = false;
+}
 </script>
 
-<style scoped lang='scss'>
-  header {
-    width: 100%;
-    min-height: 4rem;
+<style scoped lang="scss">
+header {
+  width: 100%;
+  min-height: 4rem;
+}
+
+.header-search {
+  display: none;
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 1rem;
+  padding-block: 0.3rem;
+  padding-inline: 1.25rem;
+  margin: auto;
+  align-items: center;
+  background: $navbar-bg;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 4rem;
+    margin-block: 0.2rem;
+  }
+}
+
+h1 {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  line-height: 0.8;
+  margin-inline-start: 25%;
+  margin-inline-end: 25%;
+
+  .danger {
+    font-family: 'Whitelion', sans-serif;
+    color: $logoTextDanger;
+    font-size: clamp(2.5rem, 4vw, 4.25rem);
   }
 
-  .header-search {
-    display: none;
+  .lettuce {
+    font-family: 'Blokletters', sans-serif;
+    color: $logoTextLettuce;
+    font-size: clamp(1.6rem, 2.3vw, 2.6rem);
+    font-weight: bold;
+    transform: translate(25%, 0);
   }
+}
 
-  .header-container {
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 2px solid black;
-    border-radius: 1rem;
-    padding-block: .3rem;
-    padding-inline: 1.25rem;
-    margin: auto;
-    align-items: center;
-    background: $navbar-bg;
-  }
+.stroke {
+  -webkit-text-stroke: 1px #000;
+  text-stroke: 2px #000;
+}
 
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      height: 4rem;
-      margin-block: .2rem;
-    }
-  }
-
+.mobile-logo {
   h1 {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    line-height: .8;
-    margin-inline-start: 25%;
-    margin-inline-end: 25%;
+    display: flex;
+    margin-inline-start: 0;
 
     .danger {
-      font-family: 'Whitelion', sans-serif;
-      color: $logoTextDanger;
-      font-size: clamp(2.5rem, 4vw, 4.25rem);
+      font-size: clamp(2rem, 3vw, 3rem);
     }
 
     .lettuce {
-      font-family: 'Blokletters', sans-serif;
-      color: $logoTextLettuce;
-      font-size: clamp(1.6rem, 2.3vw, 2.6rem);
-      font-weight: bold;
-      transform: translate(25%, 0);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
     }
   }
+}
 
-  .stroke {
-    -webkit-text-stroke: 1px #000;
-    text-stroke: 2px #000;
-    ;
-  }
+.logo-link {
+  text-decoration: none;
+  cursor: pointer;
+}
 
-  .mobile-logo {
-    h1 {
-      display: flex;
-      margin-inline-start: 0;
+.right-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 
-      .danger {
-        font-size: clamp(2rem, 3vw, 3rem);
-      }
+.nav-menu {
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
-      .lettuce {
-        font-size: clamp(1.25rem, 2vw, 1.75rem);
-      }
-    }
-  }
+.loginButton {
+  display: none;
+}
 
-  .logo-link {
-    text-decoration: none;
-    cursor: pointer;
-  }
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
 
-  .right-container {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-  }
+.mobile-menu-sheet {
+  background-color: $primary;
+  min-width: 30rem;
+}
 
-  .nav-menu {
-    display: none;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
+.mobile-menu:first-child {
+  margin-top: 2rem;
+}
 
-  .loginButton {
-    display: none;
-  }
+.mobile-menu > * {
+  margin-block: 0.5rem;
+}
 
-  .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    margin-bottom: 1rem;
-  }
+.mobile-menu-search {
+  margin: 0.5rem auto;
+}
 
-  .mobile-menu-sheet {
-    background-color: $primary;
-    min-width: 30rem;
-  }
+.mobile-nav-link {
+  font-size: 1.5rem;
+}
 
-  .mobile-menu:first-child {
-    margin-top: 2rem;
-  }
+.hamburger-icon-container {
+  display: block;
+  background: transparent;
 
-  .mobile-menu>* {
-    margin-block: .5rem;
-  }
-
-  .mobile-menu-search {
-    margin: .5rem auto;
-  }
-
-  .mobile-nav-link {
-    font-size: 1.5rem;
-  }
-
-  .hamburger-icon-container {
-    display: block;
+  &:hover {
     background: transparent;
+    filter: brightness(1.5);
+  }
 
-    &:hover {
-      background: transparent;
-      filter: brightness(1.5);
-    }
+  button {
+    transform: scale(1.5);
+  }
+}
 
-    button {
-      transform: scale(1.5);
+.shop-button {
+  display: none;
+}
+
+.router-link-exact-active.nav-link {
+  border-radius: 0.4rem;
+  text-decoration-color: #9fdb50 !important;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-thickness: 0.3rem;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+}
+
+@media (min-width: 400px) {
+  .header-container {
+    padding-block: 0.1rem;
+    padding-inline: 1rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .logo {
+    img {
+      height: 5.5rem;
+      margin-block: 0.5rem;
     }
   }
 
-  .shop-button {
-    display: none;
-  }
-
-  .router-link-exact-active.nav-link {
-    border-radius: 0.4rem;
-    text-decoration-color: #9fdb50 !important;
-    text-decoration: underline;
-    text-underline-offset: .5rem;
-    text-decoration-thickness: .3rem;
+  .header-container {
+    padding-block: 0.1rem;
+    padding-inline: 2.5rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    border-radius: 1.5rem;
   }
 
   .cart {
-    display: flex;
-    ;
-    align-items: center;
-    justify-content: center;
-    transform: scale(1);
+    transform: scale(1.3);
   }
 
-  @media(min-width: 400px) {
-    .header-container {
-      padding-block: .1rem;
-      padding-inline: 1rem;
+  .hamburger-icon-container {
+    button {
+      transform: scale(2);
     }
   }
+}
 
-  @media(min-width: 600px) {
-
-    .logo {
-      img {
-        height: 5.5rem;
-        margin-block: .5rem;
-      }
-    }
-
-    .header-container {
-      padding-block: 0.1rem;
-      padding-inline: 2.5rem;
-      grid-template-columns: 1fr 2fr 1fr;
-      border-radius: 1.5rem;
-    }
-
-    .cart {
-      transform: scale(1.3);
-    }
-
-    .hamburger-icon-container {
-      button {
-        transform: scale(2);
-      }
-    }
+@media (min-width: 900px) {
+  .header-search {
+    display: block;
+    margin-right: 1rem;
   }
 
-  @media(min-width: 900px) {
+  .mobile-menu-search {
+    display: none;
+  }
+}
 
-    .header-search {
-      display: block;
-      margin-right: 1rem
-    }
-
-    .mobile-menu-search {
-      display: none;
-    }
+@media (min-width: 1300px) {
+  .stroke {
+    -webkit-text-stroke: 1.5px #000;
+    text-stroke: 2px #000;
   }
 
-  @media(min-width: 1300px) {
-    .stroke {
-      -webkit-text-stroke: 1.5px #000;
-      text-stroke: 2px #000;
-      ;
+  .logo {
+    h1 {
+      display: flex;
     }
 
-    .logo {
-      h1 {
-        display: flex;
-      }
-
-      img {
-        height: 8rem;
-      }
+    img {
+      height: 8rem;
     }
   }
+}
 </style>

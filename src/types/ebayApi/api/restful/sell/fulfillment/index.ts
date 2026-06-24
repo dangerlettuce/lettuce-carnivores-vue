@@ -1,15 +1,15 @@
 // @ts-nocheck
-import {multipartHeader} from '../../../../request.js';
+import { multipartHeader } from '../../../../request.js';
 import {
   AddEvidencePaymentDisputeRequest,
   ContestPaymentDisputeRequest,
   IssueRefundRequest,
   PaymentParams,
   ShippingFulfillmentDetails,
-  UpdateEvidencePaymentDisputeRequest
+  UpdateEvidencePaymentDisputeRequest,
 } from '../../../../types/index.js';
-import {operations} from '../../../../types/restful/specs/sell_fulfillment_v1_oas3.js';
-import Restful, {OpenApi} from '../../index.js';
+import { operations } from '../../../../types/restful/specs/sell_fulfillment_v1_oas3.js';
+import Restful, { OpenApi } from '../../index.js';
 
 /**
  * Use the Fulfillment API to complete the process of packaging, addressing, handling, and shipping each order on
@@ -20,7 +20,6 @@ import Restful, {OpenApi} from '../../index.js';
  *
  */
 export default class Fulfillment extends Restful implements OpenApi<operations> {
-
   static id = 'Fulfillment';
 
   get basePath(): string {
@@ -33,11 +32,11 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
    * @param orderId The unique identifier of the order.
    * @param fieldGroups The response type associated with the order. The only presently supported value is <code>TAX_BREAKDOWN</code>.
    */
-  public getOrder(orderId: string, {fieldGroups}: { fieldGroups?: string[] } = {}) {
+  public getOrder(orderId: string, { fieldGroups }: { fieldGroups?: string[] } = {}) {
     return this.get(`/order/${orderId}`, {
       params: {
-        fieldGroups
-      }
+        fieldGroups,
+      },
     });
   }
 
@@ -54,17 +53,17 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
    * @param orderIds A comma-separated list of the unique identifiers of the orders to retrieve (maximum 50).
    */
   public getOrders({
-                     filter,
-                     limit,
-                     offset,
-                     orderIds,
-                     fieldGroups,
-                   }: {
-    filter?: string,
-    limit?: number,
-    offset?: number,
-    orderIds?: string | string[],
-    fieldGroups?: string[]
+    filter,
+    limit,
+    offset,
+    orderIds,
+    fieldGroups,
+  }: {
+    filter?: string;
+    limit?: number;
+    offset?: number;
+    orderIds?: string | string[];
+    fieldGroups?: string[];
   } = {}) {
     return this.get(`/order`, {
       params: {
@@ -72,7 +71,7 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
         limit,
         offset,
         orderIds: Array.isArray(orderIds) ? orderIds.join() : orderIds,
-        fieldGroups
+        fieldGroups,
       },
     });
   }
@@ -107,10 +106,7 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
    * @param orderId The unique identifier of the order.
    * @param body fulfillment payload
    */
-  public createShippingFulfillment(
-    orderId: string,
-    body: ShippingFulfillmentDetails,
-  ) {
+  public createShippingFulfillment(orderId: string, body: ShippingFulfillmentDetails) {
     orderId = encodeURIComponent(orderId);
     return this.post(`/order/${orderId}/shipping_fulfillment`, body);
   }
@@ -155,7 +151,6 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
     return this.get(`/payment_dispute/${paymentDisputeId}/activity`);
   }
 
-
   /**
    * This method is used retrieve one or more payment disputes filed against the seller.
    *
@@ -168,14 +163,14 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
    * @param offset This field is used to specify the number of records to skip in the result set before returning the first payment dispute in the paginated response.
    */
   public getPaymentDisputeSummaries({
-                                      orderId: order_id,
-                                      buyerUsername: buyer_username,
-                                      openDateFrom: open_date_from,
-                                      openDateTo: open_date_to,
-                                      paymentDisputeStatus: payment_dispute_status,
-                                      limit,
-                                      offset
-                                    }: PaymentParams) {
+    orderId: order_id,
+    buyerUsername: buyer_username,
+    openDateFrom: open_date_from,
+    openDateTo: open_date_to,
+    paymentDisputeStatus: payment_dispute_status,
+    limit,
+    offset,
+  }: PaymentParams) {
     return this.get(`/payment_dispute_summary`, {
       params: {
         order_id,
@@ -184,8 +179,8 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
         open_date_to,
         payment_dispute_status,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -217,8 +212,8 @@ export default class Fulfillment extends Restful implements OpenApi<operations> 
   public uploadEvidenceFile(paymentDisputeId: string, data: any) {
     return this.post(`/payment_dispute/${paymentDisputeId}/upload_evidence_file`, data, {
       headers: {
-        ...multipartHeader
-      }
+        ...multipartHeader,
+      },
     });
   }
 

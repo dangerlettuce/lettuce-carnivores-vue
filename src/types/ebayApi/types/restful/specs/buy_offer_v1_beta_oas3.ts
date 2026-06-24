@@ -3,15 +3,14 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/bidding/{item_id}": {
+  '/bidding/{item_id}': {
     /** @description This method retrieves the bidding details that are specific to the buyer of the specified auction. This must be an auction where the buyer has already placed a bid. To retrieve the bidding information you use a user access token and pass in the item ID of the auction. You can also retrieve general bidding details about the auction, such as start price, minimum bid price, and the count of unique bidders, using the Browse API getItem method. URLs for this method Production URL: https://api.ebay.com/buy/offer/v1_beta/bidding/ Sandbox URL: https://api.sandbox.ebay.com/buy/offer/v1_beta/bidding/ Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    get: operations["getBidding"];
+    get: operations['getBidding'];
   };
-  "/bidding/{item_id}/place_proxy_bid": {
+  '/bidding/{item_id}/place_proxy_bid': {
     /** @description This method uses a user access token to place a proxy bid for the buyer on a specific auction item. The item must offer AUCTION as one of the buyingOptions. To place a bid, you pass in the item ID of the auction as a URI parameter and the buyer's maximum bid amount (maxAmount ) in the payload. By placing a proxy bid, the buyer is agreeing to purchase the item if they win the auction. After this bid is placed, if someone else outbids the buyer a bid, eBay automatically bids again for the buyer up to the amount of their maximum bid. When the bid exceeds the buyer's maximum bid, eBay will notify them that they have been outbid. To find auctions, you can use the Browse API to search for items and use a filter to return only auction items. For example: /buy/browse/v1/item_summary/search?q=iphone&amp;filter=buyingOptions:{AUCTION} URLs for this method Production URL: https://api.ebay.com/buy/offer/v1_beta/bidding/ Sandbox URL: https://api.sandbox.ebay.com/buy/offer/v1_beta/bidding/ Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
-    post: operations["placeProxyBid"];
+    post: operations['placeProxyBid'];
   };
 }
 
@@ -33,14 +32,14 @@ export interface components {
       /** @description An enumeration value that represents the current state of the auction, such as ENDED or LIVE. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/offer/types/AuctionStatusEnum.html'>eBay API documentation</a> */
       auctionStatus?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of proxy bids that have been placed for the auction.
        */
       bidCount?: number;
       /** @description The amount of the highest bid, which is the current price of the item. */
-      currentPrice?: components["schemas"]["Amount"];
+      currentPrice?: components['schemas']['Amount'];
       /** @description The buyer's proxy bid, which is the maxAmount specified in the request. */
-      currentProxyBid?: components["schemas"]["ProxyBid"];
+      currentProxyBid?: components['schemas']['ProxyBid'];
       /** @description Indicates if the buyer is the highest bidder. */
       highBidder?: boolean;
       /** @description The eBay RESTful identifier of an item being bid on, which was submitted in the request. */
@@ -48,7 +47,7 @@ export interface components {
       /** @description This indicates if the reserve price of the item has been met. A reserve price is set by the seller and is the minimum amount the seller is willing to sell the item for. If the highest bid is not equal to or higher than the reserve price when the auction ends, the listing ends and the item is not sold. Note: This is returned only for auctions that have a reserve price. */
       reservePriceMet?: boolean;
       /** @description The suggested bid amount for the next bid. Note: These are generated suggestions and do not guarantee the buyer will win the bid. This means these suggestions do not take into account the max bid amount of other bidders. The buyer can be outbid even if they submit the highest suggested bid. */
-      suggestedBidAmounts?: (components["schemas"]["Amount"])[];
+      suggestedBidAmounts?: components['schemas']['Amount'][];
     };
     /** @description This type defines the fields that can be returned in an error. */
     Error: {
@@ -57,20 +56,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -83,9 +82,9 @@ export interface components {
     /** @description The type that defines the fields for placing a proxy bid. */
     PlaceProxyBidRequest: {
       /** @description The amount of the proxy bid to be placed. This is the maximum amount the buyer is willing to pay for the item. Note: Currency for the bid must be the currency specified by the seller when listing the item. If the currency has been converted, the seller's currency will be returned in the convertedFromCurrency field. VAT (value added tax) does not need to be added to the proxy bid amount even if VAT applies. */
-      maxAmount?: components["schemas"]["Amount"];
+      maxAmount?: components['schemas']['Amount'];
       /** @description Specifics whether buyer wants to give their consent to bid on adult-only items. For a buyer to bid on an adult-only item, you must collect their consent using this field and they must agree to the Terms of Use. For more information about adult-only items on eBay, see Adult-Only items on eBay. Default: false */
-      userConsent?: components["schemas"]["UserConsent"];
+      userConsent?: components['schemas']['UserConsent'];
     };
     /** @description The type that defines the fields for the place proxy bid response. */
     PlaceProxyBidResponse: {
@@ -95,7 +94,7 @@ export interface components {
     /** @description The type the defines the fields for the proxy bid information. */
     ProxyBid: {
       /** @description The maximum amount the buyer is willing to pay for the item. */
-      maxAmount?: components["schemas"]["Amount"];
+      maxAmount?: components['schemas']['Amount'];
       /** @description Identifier of a specific proxy bid. */
       proxyBidId?: string;
     };
@@ -115,13 +114,12 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method retrieves the bidding details that are specific to the buyer of the specified auction. This must be an auction where the buyer has already placed a bid. To retrieve the bidding information you use a user access token and pass in the item ID of the auction. You can also retrieve general bidding details about the auction, such as start price, minimum bid price, and the count of unique bidders, using the Browse API getItem method. URLs for this method Production URL: https://api.ebay.com/buy/offer/v1_beta/bidding/ Sandbox URL: https://api.sandbox.ebay.com/buy/offer/v1_beta/bidding/ Restrictions For a list of supported sites and other restrictions, see API Restrictions. */
   getBidding: {
     parameters: {
       header: {
         /** @description The ID of the eBay marketplace where the buyer is based. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
       path: {
         /** @description The eBay RESTful identifier of an item that you want the buyer's bidding information. This ID is returned by the Browse and Feed API methods. RESTful Item ID example: v1|272394640372|0 For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview. Restriction: The buyer must have placed a bid for this item. */
@@ -132,7 +130,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Bidding"];
+          'application/json': components['schemas']['Bidding'];
         };
       };
       /** @description Bad Request */
@@ -148,7 +146,7 @@ export interface operations {
     parameters: {
       header: {
         /** @description The ID of the eBay marketplace where the buyer is based. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions. */
-        "X-EBAY-C-MARKETPLACE-ID": string;
+        'X-EBAY-C-MARKETPLACE-ID': string;
       };
       path: {
         /** @description The eBay RESTful identifier of an item you want to bid on. This ID is returned by the Browse and Feed API methods. RESTful Item ID Example: v1|272394640372|0 For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview. */
@@ -157,14 +155,14 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["PlaceProxyBidRequest"];
+        'application/json': components['schemas']['PlaceProxyBidRequest'];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PlaceProxyBidResponse"];
+          'application/json': components['schemas']['PlaceProxyBidResponse'];
         };
       };
       /** @description Bad request */

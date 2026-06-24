@@ -3,39 +3,38 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/marketplace/{marketplace_id}/get_automotive_parts_compatibility_policies": {
+  '/marketplace/{marketplace_id}/get_automotive_parts_compatibility_policies': {
     /** @description This method returns the eBay policies that define how to list automotive parts compatibility items in the categories of the specified marketplace.  <br><br>By default, this method returns all categories that support parts compatibility. You can limit the size of the result set by using the <b>filter</b> query parameter to specify only the category IDs you want to review.<br><br><span class="tablenote"><b>Note: </b>To return policy information for the eBay US marketplace, specify <code>EBAY_MOTORS_US</code> as the path parameter for <b>marketplace_id</b>.</span><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span><br>If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a <b>204 No content</b> status code is returned with an empty response body. */
-    get: operations["getAutomotivePartsCompatibilityPolicies"];
+    get: operations['getAutomotivePartsCompatibilityPolicies'];
   };
-  "/marketplace/{marketplace_id}/get_extended_producer_responsibility_policies": {
+  '/marketplace/{marketplace_id}/get_extended_producer_responsibility_policies': {
     /** @description This method returns the Extended Producer Responsibility policies for one, multiple, or all eBay categories in an eBay marketplace.<br><br>The identifier of the eBay marketplace is passed in as a path parameter, and unless one or more eBay category IDs are passed in through the filter query parameter, this method will return metadata on every applicable category for the specified marketplace.<br><br><span class="tablenote"><span style="color:#004680"><strong>Note:</strong></span> Currently, the Extended Producer Responsibility policies are only applicable to a limited number of categories.</span><br><span class="tablenote"><span style="color:#004680"><strong>Note: </strong></span>Extended Producer Responsibility IDs are no longer set at the listing level so category-level metadata is no longer returned. Instead, sellers will provide/manage these IDs at the account level by going to <a href="https://accountsettings.ebay.fr/epr-fr " target="_blank">Account Settings</a>.</span><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span> */
-    get: operations["getExtendedProducerResponsibilityPolicies"];
+    get: operations['getExtendedProducerResponsibilityPolicies'];
   };
-  "/marketplace/{marketplace_id}/get_hazardous_materials_labels": {
+  '/marketplace/{marketplace_id}/get_hazardous_materials_labels': {
     /** @description This method returns hazardous materials label information for the specified eBay marketplace. The information includes IDs, descriptions, and URLs (as applicable) for the available signal words, statements, and pictograms. The returned statements are localized for the default langauge of the marketplace. If a marketplace does not support hazardous materials label information, an error is returned.<p>This information is used by the seller to add hazardous materials label related information to their listings (see <a href='/api-docs/sell/static/metadata/feature-regulatorhazmatcontainer.html'>Specifying hazardous material related information</a>).</p> */
-    get: operations["getHazardousMaterialsLabels"];
+    get: operations['getHazardousMaterialsLabels'];
   };
-  "/marketplace/{marketplace_id}/get_item_condition_policies": {
+  '/marketplace/{marketplace_id}/get_item_condition_policies': {
     /** @description This method returns item condition metadata on one, multiple, or all eBay categories on an eBay marketplace. This metadata consists of the different item conditions (with IDs) that an eBay category supports, and a boolean to indicate if an eBay category requires an item condition. <br><br>If applicable, this metadata also shows the different condition descriptors (with IDs) that an eBay category supports.<br><br><span class="tablenote"><b>Note:</b> Currently, condition grading is only applicable to the following trading card categories: <ul><li>Non-Sport Trading Card Singles</li><li>CCG Individual Cards</li><li>Sports Trading Cards Singles</li></ul></span><br>The identifier of the eBay marketplace is passed in as a path parameter, and unless one or more eBay category IDs are passed in through the <b>filter</b> query parameter, this method will return metadata on every single category for the specified marketplace. If you only want to view item condition metadata for one eBay category or a select group of eBay categories, you can pass in up to 50 eBay category ID through the <b>filter</b> query parameter.<br><br><span class="tablenote"><span style="color:#FF0000"><strong>Important:</strong></span> <b>Certified - Refurbished</b>-eligible sellers, and sellers who are eligible to list with the new values (EXCELLENT_REFURBISHED, VERY_GOOD_REFURBISHED, and GOOD_REFURBISHED) must use an OAuth token created with the <a href="/api-docs/static/oauth-authorization-code-grant.html" target="_blank">authorization code grant flow</a> and <b>https://api.ebay.com/oauth/api_scope/sell.inventory</b> scope in order to retrieve the refurbished conditions for the relevant categories.<br/><br/>See the <a href="/api-docs/sell/static/metadata/condition-id-values.html#Category " target="_blank">eBay Refurbished Program - Category and marketplace support</a> topic for the categories and marketplaces that support these refurbished conditions<br/><br/>These restricted item conditions will not be returned if an OAuth token created with the <a href="/api-docs/static/oauth-client-credentials-grant.html" target="_blank">client credentials grant flow</a> and <b>https://api.ebay.com/oauth/api_scope</b> scope is used, or if any seller is not eligible to list with that item condition. <br/><br/> See the <a href="/api-docs/static/oauth-scopes.html" target="_blank">Specifying OAuth scopes</a> topic for more information about specifying scopes.</span><br><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span> */
-    get: operations["getItemConditionPolicies"];
+    get: operations['getItemConditionPolicies'];
   };
-  "/marketplace/{marketplace_id}/get_listing_structure_policies": {
+  '/marketplace/{marketplace_id}/get_listing_structure_policies': {
     /** @description This method returns the eBay policies that define the allowed listing structures for the categories of a specific marketplace. The listing-structure policies currently pertain to whether or not you can list items with variations.  <br><br>By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the <b>filter</b> query parameter to specify only the category IDs you want to review.<br><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span> */
-    get: operations["getListingStructurePolicies"];
+    get: operations['getListingStructurePolicies'];
   };
-  "/marketplace/{marketplace_id}/get_negotiated_price_policies": {
+  '/marketplace/{marketplace_id}/get_negotiated_price_policies': {
     /** @description This method returns the eBay policies that define the supported negotiated price features (like "best offer") for the categories of a specific marketplace.  <br><br>By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the <b>filter</b> query parameter to specify only the category IDs you want to review.<br><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span> */
-    get: operations["getNegotiatedPricePolicies"];
+    get: operations['getNegotiatedPricePolicies'];
   };
-  "/marketplace/{marketplace_id}/get_return_policies": {
+  '/marketplace/{marketplace_id}/get_return_policies': {
     /** @description This method returns the eBay policies that define whether or not you must include a return policy for the items you list in the categories of a specific marketplace, plus the guidelines for creating domestic and international return policies in the different eBay categories.  <br><br>By default, this method returns the entire category tree for the specified marketplace. You can limit the size of the result set by using the <b>filter</b> query parameter to specify only the category IDs you want to review.<br><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span> */
-    get: operations["getReturnPolicies"];
+    get: operations['getReturnPolicies'];
   };
-  "/country/{countryCode}/sales_tax_jurisdiction": {
+  '/country/{countryCode}/sales_tax_jurisdiction': {
     /** @description This method retrieves all sales-tax jurisdictions for the country specified in the <b>countryCode</b> path parameter. Countries with valid sales-tax jurisdictions are Canada and the US.<br><br>The response from this call tells you the jurisdictions for which a seller can configure tax tables. Although setting up tax tables is optional, you can use the <b>createOrReplaceSalesTax</b> method in the <b>Account API</b> call to configure the tax tables for the jurisdictions into which you sell.<br><br><span class="tablenote"><b>Note:</b> Sales-tax tables are only available for the US (EBAY_US) and Canada (EBAY_CA) marketplaces.</span><br><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> In the US, eBay now calculates, collects, and remits sales tax to the proper taxing authorities in all 50 states and Washington, DC. Sellers can no longer specify sales-tax rates for these jurisdictions using a tax table.<br><br>However, sellers may continue to use a sales-tax table to set rates for the following US territories:<ul><li>American Samoa (AS)</li><li>Guam (GU)</li><li>Northern Mariana Islands (MP)</li><li>Palau (PW)</li><li>US Virgin Islands (VI)</li></ul>For additional information, refer to <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121 " target="_blank">Taxes and import charges</a>.</p></div> */
-    get: operations["getSalesTaxJurisdictions"];
+    get: operations['getSalesTaxJurisdictions'];
   };
 }
 
@@ -51,18 +50,18 @@ export interface components {
       /** @description Indicates whether the category supports parts compatibility by either <code>ASSEMBLY</code> or by <code>SPECIFICATION</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/metadata/types/sel:CompatibilityTypeEnum'>eBay API documentation</a> */
       compatibilityBasedOn?: string;
       /** @description Indicates the compatibility classification of the part based on high-level vehicle types. */
-      compatibleVehicleTypes?: (string)[];
+      compatibleVehicleTypes?: string[];
       /**
-       * Format: int32 
+       * Format: int32
        * @description Specifies the maximum number of compatible vehicle-applications allowed per item.
        */
       maxNumberOfCompatibleVehicles?: number;
     };
     AutomotivePartsCompatibilityPolicyResponse: {
       /** @description A list of category IDs and the automotive-parts-compatibility policies for each of the listed categories. */
-      automotivePartsCompatibilityPolicies?: (components["schemas"]["AutomotivePartsCompatibilityPolicy"])[];
+      automotivePartsCompatibilityPolicies?: components['schemas']['AutomotivePartsCompatibilityPolicy'][];
       /** @description A list of the warnings that were generated as a result of the request. This field is not returned if no warnings were generated by the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description A container that defines the elements of error and warning messages. */
     Error: {
@@ -71,20 +70,20 @@ export interface components {
       /** @description Name of the domain containing the service or application. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A positive integer that uniquely identifies the specific error condition that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
        */
       errorId?: number;
       /** @description Identifies specific request elements associated with the error, if any. inputRefId's response is format specific. For JSON, use <i>JSONPath</i> notation. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description An expanded version of message that should be around 100-200 characters long, but is not required to be such. */
       longMessage?: string;
       /** @description An end user and app developer friendly device agnostic message. It explains what the error or warning is, and how to fix it (in a general sense). Its value is at most 50 characters long. If applicable, the value is localized in the end user's requested locale. */
       message?: string;
       /** @description Identifies specific response elements associated with the error, if any. Path format is the same as <code>inputRefId</code>. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description This optional complex field type contains a list of one or more context-specific <code>ErrorParameter</code> objects, with each item in the list entry being a parameter (or input field name) that caused an error condition. Each <code>ErrorParameter</code> object consists of two fields, a <code>name</code> and a <code>value</code>. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Name of the domain's subsystem or subdivision. For example, checkout is a subdomain in the buying domain. */
       subdomain?: string;
     };
@@ -111,14 +110,14 @@ export interface components {
       /** @description The unique identifier for the category tree under which the policy applies. */
       categoryTreeId?: string;
       /** @description The details regarding the attributes included in the policy, such as their usage guidelines and whether they can be specified at the listing variation level. */
-      supportedAttributes?: (components["schemas"]["ExtendedProducerResponsibility"])[];
+      supportedAttributes?: components['schemas']['ExtendedProducerResponsibility'][];
     };
     /** @description A type that defines the response fields for the <b>getExtendedProducerResponsibilityPolicies</b> method. */
     ExtendedProducerResponsibilityPolicyResponse: {
       /** @description An array of response fields detailing the Extended Producer Responsibility policies supported for the specified marketplace. */
-      extendedProducerResponsibilities?: (components["schemas"]["ExtendedProducerResponsibilityPolicy"])[];
+      extendedProducerResponsibilities?: components['schemas']['ExtendedProducerResponsibilityPolicy'][];
       /** @description A collection of warnings generated for the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description A type that describes hazard statements for hazardous materials labels */
     HazardStatement: {
@@ -130,18 +129,18 @@ export interface components {
     /** @description A type that defines the response fields for the <b>getHazardousMaterialsLabels</b> method. */
     HazardousMaterialDetailsResponse: {
       /** @description This array contains available hazardous materials signal words for the specified marketplace. */
-      signalWords?: (components["schemas"]["SignalWord"])[];
+      signalWords?: components['schemas']['SignalWord'][];
       /** @description This array contains available hazardous materials hazard statements for the specified marketplace. */
-      statements?: (components["schemas"]["HazardStatement"])[];
+      statements?: components['schemas']['HazardStatement'][];
       /** @description This array contains of available hazardous materials hazard pictograms for the specified marketplace. */
-      pictograms?: (components["schemas"]["Pictogram"])[];
+      pictograms?: components['schemas']['Pictogram'][];
     };
     /** @description <span class="tablenote"><b>Note: </b>In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Any seller who is not eligible for this feature will be blocked if they try to create a new listing or revise an existing listing with this item condition. Any active listings on any eBay marketplace that had 'Manufacturer Refurbished' as the item condition should have been automatically updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500). <br><br> Any seller that is interested in eligibility requirements to list with 'Certified Refurbished' should see the <a href="https://pages.ebay.com/seller-center/listing-and-marketing/certified-refurbished-program.html " target="_blank">Certified refurbished program</a> page in Seller Center. </span> */
     ItemCondition: {
       /** @description The human-readable label for the condition (e.g., "New"). This value is typically localized for each site.  <br><br>Note that the display name can vary by category. For example, the description for condition ID <code>1000</code> could be called "New: with Tags" in one category and "Brand New" in another. For details on condition IDs and descriptions, see <a href='/api-docs/sell/static/metadata/condition-id-values.html'>Item condition ID and name values</a>. */
       conditionDescription?: string;
       /** @description This array contains the possible condition descriptors and condition descriptor values applicable for the specified category. It also returns usage requirements, maximum length, cardinality, and help text.<br><br><span class="tablenote"><b>Note:</b> This array is only returned for categories that support condition descriptors.</span> */
-      conditionDescriptors?: (components["schemas"]["ItemConditionDescriptor"])[];
+      conditionDescriptors?: components['schemas']['ItemConditionDescriptor'][];
       /** @description A detailed description of the condition denoted by the <b>conditionID</b> and <b>conditionDescription</b>. */
       conditionHelpText?: string;
       /** @description The ID value of the selected item condition. For information on the supported condition ID values, see <a href='/api-docs/sell/static/metadata/condition-id-values.html'>Item condition ID and name values</a>. */
@@ -152,7 +151,7 @@ export interface components {
     /** @description This type is used to display the possible condition descriptors and condition values applicable for a specified category. It also returns usage requirements, maximum length, cardinality, and help text. */
     ItemConditionDescriptor: {
       /** @description This container shows the constraints on a condition descriptor, such as the maximum length, default condition descriptor value ID, cardinality, mode, usage, and applicable descriptor IDs. */
-      conditionDescriptorConstraint?: components["schemas"]["ItemConditionDescriptorConstraint"];
+      conditionDescriptorConstraint?: components['schemas']['ItemConditionDescriptorConstraint'];
       /** @description A description of the condition descriptor that directs a user to its condition descriptor values.<br><br> For example, the help text for <code>Card Condition</code> is <code>Select ungraded condition</code>. */
       conditionDescriptorHelpText?: string;
       /** @description The unique identification number of a condition descriptor associated with with a <b>conditionDescriptorName</b>. <br><br>For example, <code>40001</code> is the ID for <code>Card Condition</code>.<br><br>These IDs are used in the addItem family of calls of the <b>Trading API</b> to provide condition descriptor names for the item. These IDs are used by the inventoryItem family of calls of the <b>Inventory API</b> to provide condition descriptor names for the item. */
@@ -160,18 +159,18 @@ export interface components {
       /** @description The human-readable label for the condition descriptor associated with the <b>conditionDescriptorID</b>. <br><br>For example, <code>Card Condition</code> is the condition descriptor name for ID <code>40001</code> */
       conditionDescriptorName?: string;
       /** @description This array shows the possible values that map to the corresponding <b>conditionDescriptorName</b> values. Constraint information and help text are also shown for each value. <br><br>For example, The ID <code>40001</code> is ID for the condition descriptor <code>card condition</code>. The ID <code>400012</code> is the ID for the <code>Very Good</code> card condition value. */
-      conditionDescriptorValues?: (components["schemas"]["ItemConditionDescriptorValue"])[];
+      conditionDescriptorValues?: components['schemas']['ItemConditionDescriptorValue'][];
     };
     /** @description This type specifies the constraints on a condition descriptor, such as the maximum length, default condition descriptor value ID, cardinality, mode, usage, and applicable descriptor IDs. */
     ItemConditionDescriptorConstraint: {
       /** @description This array is returned if the corresponding condition descriptor requires that one or more other associated condition descriptors must also be specified in a listing. The condition descriptor IDs for the associated condition descriptors are returned here.<br><br>For example, the <code>Grade</code> and <code>Grader</code> condition descriptors must always be specified together in a listing for Graded cards. */
-      applicableToConditionDescriptorIds?: (string)[];
+      applicableToConditionDescriptorIds?: string[];
       /** @description The value returned in this field indicates whether a condition descriptor can have a single value or multiple values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/metadata/types/sel:CardinalityEnum'>eBay API documentation</a> */
       cardinality?: string;
       /** @description The default condition descriptor value that will be set if there are multiple values. */
       defaultConditionDescriptorValueId?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The maximum characters allowed for a condition descriptor. This field is only returned/applicable for condition descriptors that allow free text for condition descriptor values.
        */
       maxLength?: number;
@@ -183,9 +182,9 @@ export interface components {
     /** @description This type displays the possible values for the corresponding condition descriptor, along with help text and constraint information. */
     ItemConditionDescriptorValue: {
       /** @description Additional information about the the condition of the item that is not included in the <b>conditionDescriptorValueHelpText</b> field. */
-      conditionDescriptorValueAdditionalHelpText?: (string)[];
+      conditionDescriptorValueAdditionalHelpText?: string[];
       /** @description The constraints on a condition descriptor value, such as which descriptor value IDs and Descriptor ID it is associated with. */
-      conditionDescriptorValueConstraints?: (components["schemas"]["ItemConditionDescriptorValueConstraint"])[];
+      conditionDescriptorValueConstraints?: components['schemas']['ItemConditionDescriptorValueConstraint'][];
       /** @description A detailed description of the condition descriptor value. */
       conditionDescriptorValueHelpText?: string;
       /** @description The unique identification number of a condition descriptor value associated with the <b>conditionDescriptorValueName</b>. */
@@ -198,7 +197,7 @@ export interface components {
       /** @description This string is returned if the corresponding condition descriptor value requires an associated condition descriptor that must also be specified in a listing. The condition descriptor ID for the associated condition descriptors is returned here. */
       applicableToConditionDescriptorId?: string;
       /** @description This array is returned if the corresponding condition descriptor value is required for one or more associated condition descriptor values that must also be specified in a listing. The condition descriptor values IDs for the associated condition descriptor values are returned here. */
-      applicableToConditionDescriptorValueIds?: (string)[];
+      applicableToConditionDescriptorValueIds?: string[];
     };
     ItemConditionPolicy: {
       /** @description The category ID to which the item-condition policy applies. */
@@ -208,13 +207,13 @@ export interface components {
       /** @description This flag denotes whether or not you must list the item condition in a listing for the specified category. If set to <code>true</code>, you must specify an item condition for the associated category. */
       itemConditionRequired?: boolean;
       /** @description The item-condition values allowed in the category.<br><br><span class="tablenote"><b>Note:</b> The â€˜Seller Refurbishedâ€™ item condition (condition ID 2500) has been replaced by the 'Excellent - Refurbished', 'Very Good - Refurbished', and 'Good - Refurbished' item conditions in a select number of eBay marketplaces and categories. See the <a href="/api-docs/sell/static/metadata/condition-id-values.html#Category " target="_blank "> eBay Refurbished Program - Category and marketplace support</a> topic for more details.<br/><br/>Similar to the â€˜Certified Refurbishedâ€™ item condition (condition ID 2000), a sellerâ€™s OAuth user token will have to be used instead of an OAuth application token, since each seller must  go through an application and qualification process before using any of these new refurbished item conditions in supported categories. If a seller is not qualified to use the new refurbished item conditions, these item condition values will not be returned by <b>getItemConditionPolicies</b>.</span> */
-      itemConditions?: (components["schemas"]["ItemCondition"])[];
+      itemConditions?: components['schemas']['ItemCondition'][];
     };
     ItemConditionPolicyResponse: {
       /** @description A list of category IDs and the policies for how to indicate an item's condition in each of the listed categories. */
-      itemConditionPolicies?: (components["schemas"]["ItemConditionPolicy"])[];
+      itemConditionPolicies?: components['schemas']['ItemConditionPolicy'][];
       /** @description A list of the warnings that were generated as a result of the request. This field is not returned if no warnings were generated by the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     ListingStructurePolicy: {
       /** @description The category ID to which the listing-structure policy applies. */
@@ -226,9 +225,9 @@ export interface components {
     };
     ListingStructurePolicyResponse: {
       /** @description Returns a list of category IDs plus a flag indicating whether or not each listed category supports item variations. */
-      listingStructurePolicies?: (components["schemas"]["ListingStructurePolicy"])[];
+      listingStructurePolicies?: components['schemas']['ListingStructurePolicy'][];
       /** @description A list of the warnings that were generated as a result of the request. This field is not returned if no warnings were generated by the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     NegotiatedPricePolicy: {
       /** @description This flag denotes whether or not the category supports the setting of a price at which best offers are automatically accepted. If set to <code>true</code>, the category does support the setting of an automatic price for best-offers. */
@@ -244,9 +243,9 @@ export interface components {
     };
     NegotiatedPricePolicyResponse: {
       /** @description A list of category IDs and the policies related to negotiated-price items for each of the listed categories. */
-      negotiatedPricePolicies?: (components["schemas"]["NegotiatedPricePolicy"])[];
+      negotiatedPricePolicies?: components['schemas']['NegotiatedPricePolicy'][];
       /** @description A list of the warnings that were generated as a result of the request. This field is not returned if no warnings were generated by the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description A type that describes pictograms for hazardous materials labels. */
     Pictogram: {
@@ -263,9 +262,9 @@ export interface components {
       /** @description A value that indicates the root node of the category tree used for the response set. Each marketplace is based on a category tree whose root node is indicated by this unique category ID value. All category policy information returned by this call pertains to the categories included below this root node of the tree.    <br><br>A <i>category tree</i> is a hierarchical framework of eBay categories that begins at the root node of the tree and extends to include all the child nodes in the tree. Each child node in the tree is an eBay category that is represented by a unique <b>categoryId</b> value. Within a category tree, the root node has no parent node and <i>leaf nodes</i> are nodes that have no child nodes. */
       categoryTreeId?: string;
       /** @description This complex type defines the category policies related to domestic item returns. */
-      domestic?: components["schemas"]["ReturnPolicyDetails"];
+      domestic?: components['schemas']['ReturnPolicyDetails'];
       /** @description This complex type defines the category policies related to international item returns. */
-      international?: components["schemas"]["ReturnPolicyDetails"];
+      international?: components['schemas']['ReturnPolicyDetails'];
       /** @description If set to <code>true</code>, this flag indicates that you must specify a return policy for items listed in the associated category.  <br><br>Note that not accepting returns (setting <b>returnsAcceptedEnabled</b> to <code>false</code>) is a valid return policy. */
       required?: boolean;
     };
@@ -274,21 +273,21 @@ export interface components {
       /** @description If set to <code>true</code>, this flag indicates you can supply a detailed return policy description within your return policy (for example, by populating the <b>returnInstructions</b> field in the Account API's <b>createReturnPolicy</b>). User-supplied return policy details are allowed only in the DE, ES, FR, and IT marketplaces. */
       policyDescriptionEnabled?: boolean;
       /** @description A list of refund methods allowed for the associated category. */
-      refundMethods?: (string)[];
+      refundMethods?: string[];
       /** @description A list of return methods allowed for the associated category. */
-      returnMethods?: (string)[];
+      returnMethods?: string[];
       /** @description A list of return periods allowed for the associated category.  <br><br>Note that different APIs require you to enter the return period in different ways. For example, the Account API uses the complex <b>TimeDuration</b> type, which takes two values (a <b>unit</b> and a <b>value</b>), whereas the Trading API takes a single value (such as <code>Days_30</code>). */
-      returnPeriods?: (components["schemas"]["TimeDuration"])[];
+      returnPeriods?: components['schemas']['TimeDuration'][];
       /** @description If set to <code>true</code>, this flag indicates the seller can configure how they handle domestic returns. */
       returnsAcceptanceEnabled?: boolean;
       /** @description A list of allowed values for who pays for the return shipping cost.  <br><br>Note that for SNAD returns, the seller is always responsible for the return shipping cost. */
-      returnShippingCostPayers?: (string)[];
+      returnShippingCostPayers?: string[];
     };
     ReturnPolicyResponse: {
       /** @description A list of elements, where each contains a category ID and a flag that indicates whether or not listings in that category require a return policy. */
-      returnPolicies?: (components["schemas"]["ReturnPolicy"])[];
+      returnPolicies?: components['schemas']['ReturnPolicy'][];
       /** @description A list of the warnings that were generated as a result of the request. This field is not returned if no warnings were generated by the request. */
-      warnings?: (components["schemas"]["Error"])[];
+      warnings?: components['schemas']['Error'][];
     };
     /** @description A unique ID for a sales tax jurisdiction. */
     SalesTaxJurisdiction: {
@@ -298,7 +297,7 @@ export interface components {
     /** @description This complex type contains a list of sales-tax jurisdictions. */
     SalesTaxJurisdictions: {
       /** @description A list of sales-tax jurisdictions. */
-      salesTaxJurisdictions?: (components["schemas"]["SalesTaxJurisdiction"])[];
+      salesTaxJurisdictions?: components['schemas']['SalesTaxJurisdiction'][];
     };
     /** @description A type that describes signal words for hazardous materials labels. */
     SignalWord: {
@@ -312,7 +311,7 @@ export interface components {
       /** @description A time-measurement unit that specifies a singular period of time.  <br><br>A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>.  <br><br>Time-measurement units can be YEAR, MONTH, DAY, and so on. See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/metadata/types/ba:TimeDurationUnitEnum'>eBay API documentation</a> */
       unit?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description An integer that represents an amount of time, as measured by the time-measurement unit specified in the <b>unit</b> field.
        */
       value?: number;
@@ -328,7 +327,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method returns the eBay policies that define how to list automotive parts compatibility items in the categories of the specified marketplace.  <br><br>By default, this method returns all categories that support parts compatibility. You can limit the size of the result set by using the <b>filter</b> query parameter to specify only the category IDs you want to review.<br><br><span class="tablenote"><b>Note: </b>To return policy information for the eBay US marketplace, specify <code>EBAY_MOTORS_US</code> as the path parameter for <b>marketplace_id</b>.</span><br><span class="tablenote"><span style="color:#478415"><strong>Tip:</strong></span> This method can potentially return a very large response payload. eBay recommends that the response payload be compressed by passing in the <b>Accept-Encoding</b> request header and setting the value to <code>gzip</code>.</span><br>If you specify a valid marketplace ID but that marketplace does not contain policy information, or if you filter out all results, a <b>204 No content</b> status code is returned with an empty response body. */
   getAutomotivePartsCompatibilityPolicies: {
     parameters: {
@@ -338,7 +336,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information is retrieved.  <br><br><span class="tablenote"><b>Note: </b>Only the following eBay marketplaces support automotive parts compatibility: <ul> <li>EBAY_MOTORS_US</li> <li>EBAY_AU</li> <li>EBAY_CA</li> <li>EBAY_DE</li> <li>EBAY_ES</li> <li>EBAY_FR</li> <li>EBAY_GB</li> <li>EBAY_IT</li></ul></span> */
@@ -349,7 +347,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["AutomotivePartsCompatibilityPolicyResponse"];
+          'application/json': components['schemas']['AutomotivePartsCompatibilityPolicyResponse'];
         };
       };
       /** @description No content */
@@ -371,7 +369,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information shall be retrieved.<br><br>See <a href="/api-docs/static/rest-request-components.html#marketpl" target="_blank">HTTP Request Headers</a> for a list of supported eBay marketplace ID values. */
@@ -382,7 +380,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ExtendedProducerResponsibilityPolicyResponse"];
+          'application/json': components['schemas']['ExtendedProducerResponsibilityPolicyResponse'];
         };
       };
       /** @description No content */
@@ -407,7 +405,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["HazardousMaterialDetailsResponse"];
+          'application/json': components['schemas']['HazardousMaterialDetailsResponse'];
         };
       };
       /** @description Bad Request */
@@ -427,7 +425,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information is retrieved.<br><br>See <a href="/api-docs/static/rest-request-components.html#marketpl" target="_blank">HTTP Request Headers</a> for a list of supported eBay marketplace ID values. */
@@ -438,7 +436,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ItemConditionPolicyResponse"];
+          'application/json': components['schemas']['ItemConditionPolicyResponse'];
         };
       };
       /** @description No content */
@@ -460,7 +458,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information is retrieved. <br><br>See <a href="/api-docs/static/rest-request-components.html#marketpl" target="_blank">HTTP Request Headers</a> for a list of supported eBay marketplace ID values. */
@@ -471,7 +469,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ListingStructurePolicyResponse"];
+          'application/json': components['schemas']['ListingStructurePolicyResponse'];
         };
       };
       /** @description No content */
@@ -493,7 +491,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information is retrieved.<br><br>See <a href="/api-docs/static/rest-request-components.html#marketpl" target="_blank">HTTP Request Headers</a> for a list of supported eBay marketplace ID values. */
@@ -504,7 +502,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["NegotiatedPricePolicyResponse"];
+          'application/json': components['schemas']['NegotiatedPricePolicyResponse'];
         };
       };
       /** @description No content */
@@ -526,7 +524,7 @@ export interface operations {
       };
       header?: {
         /** @description This header indicates the compression-encoding algorithms the client accepts for the response. This value should be set to <code>gzip</code>. <br><br> For more information, refer to <a href="/api-docs/static/rest-request-components.html#HTTP" target="_blank ">HTTP request headers</a>. */
-        "Accept-Encoding"?: string;
+        'Accept-Encoding'?: string;
       };
       path: {
         /** @description This path parameter specifies the eBay marketplace for which policy information is retrieved.<br><br>See <a href="/api-docs/static/rest-request-components.html#marketpl" target="_blank">HTTP Request Headers</a> for a list of supported eBay marketplace ID values. */
@@ -537,7 +535,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ReturnPolicyResponse"];
+          'application/json': components['schemas']['ReturnPolicyResponse'];
         };
       };
       /** @description No content */
@@ -562,7 +560,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["SalesTaxJurisdictions"];
+          'application/json': components['schemas']['SalesTaxJurisdictions'];
         };
       };
       /** @description Bad Request */

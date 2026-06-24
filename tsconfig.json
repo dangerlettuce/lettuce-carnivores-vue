@@ -12,11 +12,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": [
-      "vue3-toastify/global"
-    ],
+    "types": ["vue3-toastify/global"],
     "noUnusedLocals": false,
     "noUnusedParameters": false
-  },
-  
+  }
 }

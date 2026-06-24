@@ -1,19 +1,19 @@
 // @ts-nocheck
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import debug from 'debug';
-import {stringify} from 'qs';
+import { stringify } from 'qs';
 
 const log = debug('ebay:request');
 
 export const defaultGlobalHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'X-Requested-With, Origin, Content-Type, X-Auth-Token',
-  'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE'
-}
+  'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE',
+};
 
 export const multipartHeader = {
-  'Content-Type': 'multipart/form-data'
-}
+  'Content-Type': 'multipart/form-data',
+};
 
 export interface IEBayApiRequest<T = AxiosInstance, C = AxiosRequestConfig, R = AxiosResponse> {
   readonly instance: T;
@@ -35,9 +35,9 @@ export class AxiosRequest implements IEBayApiRequest {
   constructor(config: AxiosRequestConfig = {}) {
     this.instance = axios.create({
       headers: {
-        ...defaultGlobalHeaders
+        ...defaultGlobalHeaders,
       },
-      ...config
+      ...config,
     });
   }
 
@@ -47,7 +47,7 @@ export class AxiosRequest implements IEBayApiRequest {
   }
 
   public post<R = any>(url: string, payload?: any, config?: AxiosRequestConfig): Promise<R> {
-    log('post: ' + url, {payload, config});
+    log('post: ' + url, { payload, config });
     return this.instance.post(url, payload, config);
   }
 
@@ -57,7 +57,7 @@ export class AxiosRequest implements IEBayApiRequest {
   }
 
   public put<R = any>(url: string, payload?: any, config?: AxiosRequestConfig): Promise<R> {
-    log('put: ' + url, {payload, config});
+    log('put: ' + url, { payload, config });
     return this.instance.put(url, payload, config);
   }
 
@@ -66,5 +66,4 @@ export class AxiosRequest implements IEBayApiRequest {
     const body = stringify(payload);
     return this.instance.post(url, body, config);
   }
-
 }

@@ -1,13 +1,12 @@
-import type {BuyFeedParams} from '../../../../types/index.js';
-import type {operations} from '../../../../types/restful/specs/buy_feed_v1_beta_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import type { BuyFeedParams } from '../../../../types/index.js';
+import type { operations } from '../../../../types/restful/specs/buy_feed_v1_beta_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * The Feed API provides the ability to download TSV_GZIP feed files containing eBay items and an hourly snapshot file
  * of the items that have changed within an hour for a specific category, date and marketplace.
  */
 export default class Feed extends Restful implements OpenApi<operations> {
-
   static id = 'Feed';
 
   get basePath() {
@@ -25,8 +24,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
     return this.get(`/item`, {
       params,
       headers: {
-        'Range': range
-      }
+        Range: range,
+      },
     });
   }
 
@@ -40,8 +39,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
     return this.get(`/item_group`, {
       params,
       headers: {
-        'Range': range
-      }
+        Range: range,
+      },
     });
   }
 
@@ -57,11 +56,11 @@ export default class Feed extends Restful implements OpenApi<operations> {
     return this.get(`/item_snapshot`, {
       params: {
         ...params,
-        snapshot_date: snapshotDate
+        snapshot_date: snapshotDate,
       },
       headers: {
-        'Range': range
-      }
+        Range: range,
+      },
     });
   }
 
@@ -77,11 +76,11 @@ export default class Feed extends Restful implements OpenApi<operations> {
     return this.get(`/product`, {
       params: {
         ...params,
-        snapshot_date: snapshotDate
+        snapshot_date: snapshotDate,
       },
       headers: {
-        'Range': range
-      }
+        Range: range,
+      },
     });
   }
 }

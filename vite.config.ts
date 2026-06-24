@@ -1,8 +1,8 @@
-import vueDevTools from 'vite-plugin-vue-devtools'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import svgLoader from 'vite-svg-loader'
-import path from 'node:path'
+import vueDevTools from 'vite-plugin-vue-devtools';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import svgLoader from 'vite-svg-loader';
+import path from 'node:path';
 
 export default defineConfig({
   define: {
@@ -12,14 +12,14 @@ export default defineConfig({
   plugins: [vue(), svgLoader(), vueDevTools()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "@/assets/scss/_variables.scss" as *;'
-      }
-    }
+        additionalData: '@use "@/assets/scss/_variables.scss" as *;',
+      },
+    },
   },
-})
+});

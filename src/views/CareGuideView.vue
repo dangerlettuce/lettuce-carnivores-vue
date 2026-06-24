@@ -1,5 +1,5 @@
 <template>
-    <GuideList />
+  <GuideList />
 </template>
 
 <script setup lang="ts">

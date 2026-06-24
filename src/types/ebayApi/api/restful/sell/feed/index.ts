@@ -1,13 +1,12 @@
-import {multipartHeader} from '../../../../request.js';
-import type {SellFeedParams} from '../../../../types/index.js';
-import type {operations} from '../../../../types/restful/specs/sell_feed_v1_oas3.js';
-import Restful, {type OpenApi} from '../../index.js';
+import { multipartHeader } from '../../../../request.js';
+import type { SellFeedParams } from '../../../../types/index.js';
+import type { operations } from '../../../../types/restful/specs/sell_feed_v1_oas3.js';
+import Restful, { type OpenApi } from '../../index.js';
 
 /**
  * The <strong>Feed API</strong> lets sellers upload input files, download reports and files including their status, filter reports using URI parameters, and retrieve customer service metrics task details.
  */
 export default class Feed extends Restful implements OpenApi<operations> {
-
   static id = 'Feed';
 
   get basePath(): string {
@@ -24,14 +23,7 @@ export default class Feed extends Restful implements OpenApi<operations> {
    * @param offset The number of order tasks to skip in the result set before returning the first order in the paginated response.
    * @param scheduleId The schedule ID associated with the order task.
    */
-  public getOrderTasks({
-                         dateRange,
-                         feedType,
-                         limit,
-                         lookBackDays,
-                         offset,
-                         scheduleId
-                       }: SellFeedParams = {}) {
+  public getOrderTasks({ dateRange, feedType, limit, lookBackDays, offset, scheduleId }: SellFeedParams = {}) {
     return this.get(`/order_task`, {
       params: {
         date_range: dateRange,
@@ -39,8 +31,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
         limit,
         look_back_days: lookBackDays,
         offset,
-        schedule_id: scheduleId
-      }
+        schedule_id: scheduleId,
+      },
     });
   }
 
@@ -58,7 +50,7 @@ export default class Feed extends Restful implements OpenApi<operations> {
    *
    * @param taskId The ID of the task. This ID is generated when the task was created by the createOrderTask method.
    */
-  public getOrderTask(taskId: string,) {
+  public getOrderTask(taskId: string) {
     taskId = encodeURIComponent(taskId);
 
     return this.get(`/order_task/${taskId}`);
@@ -67,14 +59,20 @@ export default class Feed extends Restful implements OpenApi<operations> {
   /**
    * This method searches for multiple tasks of a specific feed type, and includes date filters and pagination.
    */
-  public getInventoryTasks({feedType, scheduleId, lookBackDays, dateRange, limit, offset}
-                             : {
-    feedType?: string,
-    scheduleId?: string,
-    lookBackDays?: number,
-    dateRange?: string,
-    limit?: number,
-    offset?: number
+  public getInventoryTasks({
+    feedType,
+    scheduleId,
+    lookBackDays,
+    dateRange,
+    limit,
+    offset,
+  }: {
+    feedType?: string;
+    scheduleId?: string;
+    lookBackDays?: number;
+    dateRange?: string;
+    limit?: number;
+    offset?: number;
   } = {}) {
     return this.get('/inventory_task', {
       params: {
@@ -83,8 +81,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
         look_back_days: lookBackDays,
         date_range: dateRange,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -111,17 +109,13 @@ export default class Feed extends Restful implements OpenApi<operations> {
    * @param limit The maximum number of schedules that can be returned on each page of the paginated response.
    * @param offset The number of schedules to skip in the result set before returning the first schedule in the paginated response.
    */
-  public getSchedules({
-                        feedType,
-                        limit,
-                        offset,
-                      }: SellFeedParams = {}) {
+  public getSchedules({ feedType, limit, offset }: SellFeedParams = {}) {
     return this.get(`/schedule`, {
       params: {
         feed_type: feedType,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -192,17 +186,13 @@ export default class Feed extends Restful implements OpenApi<operations> {
    * @param limit The maximum number of schedules that can be returned on each page of the paginated response.
    * @param offset The number of schedules to skip in the result set before returning the first schedule in the paginated response.
    */
-  public getScheduleTemplates({
-                                feedType,
-                                limit,
-                                offset,
-                              }: SellFeedParams = {}) {
+  public getScheduleTemplates({ feedType, limit, offset }: SellFeedParams = {}) {
     return this.get(`/schedule_template`, {
       params: {
         feed_type: feedType,
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 
@@ -216,14 +206,7 @@ export default class Feed extends Restful implements OpenApi<operations> {
    * @param offset The number of order tasks to skip in the result set before returning the first order in the paginated response.
    * @param scheduleId The schedule ID associated with the task.
    */
-  public getTasks({
-                    dateRange,
-                    feedType,
-                    limit,
-                    lookBackDays,
-                    offset,
-                    scheduleId
-                  }: SellFeedParams = {}) {
+  public getTasks({ dateRange, feedType, limit, lookBackDays, offset, scheduleId }: SellFeedParams = {}) {
     return this.get(`/task`, {
       params: {
         date_range: dateRange,
@@ -231,8 +214,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
         limit,
         look_back_days: lookBackDays,
         offset,
-        schedule_id: scheduleId
-      }
+        schedule_id: scheduleId,
+      },
     });
   }
 
@@ -298,13 +281,7 @@ export default class Feed extends Restful implements OpenApi<operations> {
    * @param offset The number of order tasks to skip in the result set before returning the first order in the paginated response.
    * @param scheduleId The schedule ID associated with the task.
    */
-  public getCustomerServiceMetricTasks({
-                                         dateRange,
-                                         feedType,
-                                         limit,
-                                         lookBackDays,
-                                         offset,
-                                       }: SellFeedParams = {}) {
+  public getCustomerServiceMetricTasks({ dateRange, feedType, limit, lookBackDays, offset }: SellFeedParams = {}) {
     return this.get(`/customer_service_metric_task`, {
       params: {
         date_range: dateRange,
@@ -312,7 +289,7 @@ export default class Feed extends Restful implements OpenApi<operations> {
         limit,
         look_back_days: lookBackDays,
         offset,
-      }
+      },
     });
   }
 
@@ -325,8 +302,8 @@ export default class Feed extends Restful implements OpenApi<operations> {
   public createCustomerServiceMetricTask(acceptLanguage: string, data: any) {
     return this.post(`/customer_service_metric_task`, data, {
       headers: {
-        'accept-language': acceptLanguage
-      }
+        'accept-language': acceptLanguage,
+      },
     });
   }
 

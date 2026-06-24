@@ -3,65 +3,64 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/public_key/{public_key_id}": {
+  '/public_key/{public_key_id}': {
     /** @description This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br /><br />The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br /><br /><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a>.</span> */
-    get: operations["getPublicKey"];
+    get: operations['getPublicKey'];
   };
-  "/topic/{topic_id}": {
+  '/topic/{topic_id}': {
     /** @description This method allows applications to retrieve details for the specified topic. This information includes supported schema versions, formats, and other metadata for the topic.<br /><br />Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br /><br />A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic).<br /><br />Specify the topic to retrieve using the <b>topic_id</b> URI parameter.<br /><br /><span class="tablenote"><b>Note:</b> Use the <a href="/api-docs/commerce/notification/resources/topic/methods/getTopics">getTopics</a> method to find a topic if you do not know the topic ID.</span> */
-    get: operations["getTopic"];
+    get: operations['getTopic'];
   };
-  "/topic": {
+  '/topic': {
     /** @description This method returns a paginated collection of all supported topics, along with the details for the topics. This information includes supported schema versions, formats, and other metadata for the topics.<br /><br />Applications can subscribe to any of the topics for a supported schema version and format, limited by the authorization scopes required to subscribe to the topic.<br /><br />A topic specifies the type of information to be received and the data types associated with an event. An event occurs in the eBay system, such as when a user requests deletion or revokes access for an application. An event is an instance of an event type (topic). */
-    get: operations["getTopics"];
+    get: operations['getTopics'];
   };
-  "/subscription": {
+  '/subscription': {
     /** @description This method allows applications to retrieve a list of all subscriptions. The list returned is a paginated collection of subscription resources.<br /><br />Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business. */
-    get: operations["getSubscriptions"];
+    get: operations['getSubscriptions'];
     /** @description This method allows applications to create a subscription for a topic and supported schema version. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br/><br/>Each application and topic-schema pairing to a subscription should have a 1:1 cardinality.<br/><br/>You can create the subscription in disabled mode, test it (see the <b>test</b> method), and when everything is ready, you can enable the subscription (see the <b>enableSubscription</b> method).<br /><br /><span class="tablenote"><b>Note:</b> If an application is not authorized to subscribe to a topic, for example, if your authorization does not include the list of scopes required for the topic, an error code of 195011 is returned.</span> */
-    post: operations["createSubscription"];
+    post: operations['createSubscription'];
   };
-  "/subscription/{subscription_id}": {
+  '/subscription/{subscription_id}': {
     /** @description This method allows applications to retrieve subscription details for the specified subscription.<br /><br />Specify the subscription to retrieve using the <strong>subscription_id</strong>. Use the <strong>getSubscriptions</strong> method to browse all subscriptions if you do not know the <strong>subscription_id</strong>.<br /><br />Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business. */
-    get: operations["getSubscription"];
+    get: operations['getSubscription'];
     /** @description This method allows applications to update a subscription. Subscriptions allow applications to express interest in notifications and keep receiving the information relevant to their business.<br /><br /><span class="tablenote"><b>Note:</b> This call returns an error if an application is not authorized to subscribe to a topic.</span><br/><br/>You can pause and restart a subscription. See the <b>disableSubscription</b> and <b>enableSubscription</b> methods. */
-    put: operations["updateSubscription"];
+    put: operations['updateSubscription'];
     /** @description This method allows applications to delete a subscription. Subscriptions can be deleted regardless of status. */
-    delete: operations["deleteSubscription"];
+    delete: operations['deleteSubscription'];
   };
-  "/subscription/{subscription_id}/enable": {
+  '/subscription/{subscription_id}/enable': {
     /** @description This method allows applications to enable a disabled subscription. To pause (or disable) an enabled subscription, call <strong>disableSubscription</strong>. */
-    post: operations["enableSubscription"];
+    post: operations['enableSubscription'];
   };
-  "/subscription/{subscription_id}/disable": {
+  '/subscription/{subscription_id}/disable': {
     /** @description This method disables a subscription, which prevents the subscription from providing notifications. To restart a subscription, call <strong>enableSubscription</strong>. */
-    post: operations["disableSubscription"];
+    post: operations['disableSubscription'];
   };
-  "/subscription/{subscription_id}/test": {
+  '/subscription/{subscription_id}/test': {
     /** @description This method triggers a mocked test payload that includes a notification ID, publish date, and so on. Use this method to test your subscription end-to-end.<br /><br />You can create the subscription in disabled mode, test it using this method, and when everything is ready, you can enable the subscription (see the <strong>enableSubscription</strong> method).<br /><br /><span class="tablenote"><b>Note:</b> Use the <strong>notificationId</strong> to tell the difference between a test payload and a real payload.</span> */
-    post: operations["test"];
+    post: operations['test'];
   };
-  "/destination": {
+  '/destination': {
     /** @description This method allows applications to retrieve a paginated collection of destination resources and related details. The details include the destination names, statuses, and configurations, including the endpoints and verification tokens. */
-    get: operations["getDestinations"];
+    get: operations['getDestinations'];
     /** @description This method allows applications to create a destination. A destination is an endpoint that receives HTTP push notifications.<br /><br />A single destination for all topics is valid, as is individual destinations for each topic.<br /><br />To update a destination, use the <strong>updateDestination</strong> call.<br /><br />The destination created will need to be referenced while creating or updating a subscription to a topic.<br/><br/><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully. Refer to the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a> for more information.</span> */
-    post: operations["createDestination"];
+    post: operations['createDestination'];
   };
-  "/destination/{destination_id}": {
+  '/destination/{destination_id}': {
     /** @description This method allows applications to fetch the details for a destination. The details include the destination name, status, and configuration, including the endpoint and verification token. */
-    get: operations["getDestination"];
+    get: operations['getDestination'];
     /** @description This method allows applications to update a destination.<br/><br/><span class="tablenote"><b>Note:</b> The destination should be created and ready to respond with the expected <b>challengeResponse</b> for the endpoint to be registered successfully. Refer to the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a> for more information.</span> */
-    put: operations["updateDestination"];
+    put: operations['updateDestination'];
     /** @description This method provides applications a way to delete a destination.<br /><br />The same destination ID can be used by many destinations.<br /><br />Trying to delete an active destination results in an error. You can disable a subscription, and when the destination is no longer in use, you can delete it. */
-    delete: operations["deleteDestination"];
+    delete: operations['deleteDestination'];
   };
-  "/config": {
+  '/config': {
     /** @description This method allows applications to retrieve a previously created configuration. */
-    get: operations["getConfig"];
+    get: operations['getConfig'];
     /** @description This method allows applications to create a new configuration or update an existing configuration. This app-level configuration allows developers to set up alerts. */
-    put: operations["updateConfig"];
+    put: operations['updateConfig'];
   };
 }
 
@@ -81,7 +80,7 @@ export interface components {
       /** @description The status of this subscription. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a> */
       status?: string;
       /** @description The payload associated with this subscription. */
-      payload?: components["schemas"]["SubscriptionPayloadDetail"];
+      payload?: components['schemas']['SubscriptionPayloadDetail'];
       /** @description The unique identifier for the destination associated with this subscription. */
       destinationId?: string;
     };
@@ -110,12 +109,12 @@ export interface components {
       /** @description The status for this destination.<br /><br /><span class="tablenote"><b>Note:</b> The <b>MARKED_DOWN</b> value is set by eBay systems and cannot be used in a create or update call by applications.</span><br /><br /><b>Valid values:</b><ul><li><code>ENABLED</code></li><li><code>DISABLED</code></li><li><code>MARKED_DOWN</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:DestinationStatusEnum'>eBay API documentation</a> */
       status?: string;
       /** @description The configuration associated with this destination. */
-      deliveryConfig?: components["schemas"]["DeliveryConfig"];
+      deliveryConfig?: components['schemas']['DeliveryConfig'];
     };
     /** @description A type that contains information about the destination search response. */
     DestinationSearchResponse: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of matches for the search criteria.
        */
       total?: number;
@@ -124,12 +123,12 @@ export interface components {
       /** @description The URL to access the next set of results. This field includes a <strong>continuation_token</strong>. No <b>prev</b> field is returned, but this value is persistent during the session so that you can use it to return to the next page.<br><br>This field is not returned if fewer records than specified by the <strong>limit</strong> field are returned. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of records to show in the current response.<br /><br /><b>Default:</b> 20
        */
       limit?: number;
       /** @description An array that contains the destination details. */
-      destinations?: (components["schemas"]["Destination"])[];
+      destinations?: components['schemas']['Destination'][];
     };
     /** @description This type defines the fields that can be returned in an error. */
     Error: {
@@ -138,20 +137,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -166,7 +165,7 @@ export interface components {
       /** @description The supported schema version. */
       schemaVersion?: string;
       /** @description The supported format. Presently, <code>JSON</code> is the only supported format. */
-      format?: (string)[];
+      format?: string[];
       /** @description The supported delivery protocols. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ProtocolEnum'>eBay API documentation</a> */
       deliveryProtocol?: string;
       /** @description A deprecation indicator. */
@@ -192,7 +191,7 @@ export interface components {
       /** @description The creation date for this subscription. */
       creationDate?: string;
       /** @description The payload associated with this subscription. */
-      payload?: components["schemas"]["SubscriptionPayloadDetail"];
+      payload?: components['schemas']['SubscriptionPayloadDetail'];
       /** @description The unique identifier for the destination associated with this subscription. */
       destinationId?: string;
     };
@@ -208,7 +207,7 @@ export interface components {
     /** @description A type that describes the details of the subscription search response. */
     SubscriptionSearchResponse: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of matches for the search criteria.
        */
       total?: number;
@@ -217,12 +216,12 @@ export interface components {
       /** @description The URL to access the next set of results. This field includes a <strong>continuation_token</strong>. No <b>prev</b> field is returned, but this value is persistent during the session so that you can use it to return to the next page.<br><br>This field is not returned if fewer records than specified by the <strong>limit</strong> field are returned. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the limit parameter submitted in the request, which is the maximum number of items to return per page, from the result set. A result set is the complete set of results returned by the method.<br /><br /><span class="tablenote"><b>Note:</b> Though this parameter is not required to be submitted in the request, the parameter defaults to <code>20</code> if omitted.</span><br /><br /><b>Default:</b> 20
        */
       limit?: number;
       /** @description The subscriptions that match the search criteria. */
-      subscriptions?: (components["schemas"]["Subscription"])[];
+      subscriptions?: components['schemas']['Subscription'][];
     };
     /** @description A type that describes the details of the topic. */
     Topic: {
@@ -231,7 +230,7 @@ export interface components {
       /** @description The description of the topic. */
       description?: string;
       /** @description The authorization scopes required to subscribe to this topic. */
-      authorizationScopes?: (string)[];
+      authorizationScopes?: string[];
       /** @description The status of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:StatusEnum'>eBay API documentation</a> */
       status?: string;
       /** @description The business context associated with this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ContextEnum'>eBay API documentation</a> */
@@ -239,12 +238,12 @@ export interface components {
       /** @description The scope of this topic. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:ScopeEnum'>eBay API documentation</a> */
       scope?: string;
       /** @description The supported payloads for this topic. */
-      supportedPayloads?: (components["schemas"]["PayloadDetail"])[];
+      supportedPayloads?: components['schemas']['PayloadDetail'][];
     };
     /** @description A type that describes the details of the topic search response. */
     TopicSearchResponse: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of matches for the search criteria.
        */
       total?: number;
@@ -253,19 +252,19 @@ export interface components {
       /** @description The URL to access the next set of results. This field includes a <strong>continuation_token</strong>. No <b>prev</b> field is returned, but this value is persistent during the session so that you can use it to return to the next page.<br><br>This field is not returned if fewer records than specified by the <strong>limit</strong> field are returned. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the limit parameter submitted in the request, which is the maximum number of items to return per page, from the result set. A result set is the complete set of results returned by the method.<br /><br /><span class="tablenote"><b>Note:</b> Though this parameter is not required to be submitted in the request, the parameter defaults to <code>20</code> if omitted.</span>
        */
       limit?: number;
       /** @description An array of topics that match the specified criteria. */
-      topics?: (components["schemas"]["Topic"])[];
+      topics?: components['schemas']['Topic'][];
     };
     /** @description A type that describes the details of the update subscription request. */
     UpdateSubscriptionRequest: {
       /** @description The status of this subscription. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/notification/types/api:SubscriptionStatusEnum'>eBay API documentation</a> */
       status?: string;
       /** @description The payload associated with this subscription. */
-      payload?: components["schemas"]["SubscriptionPayloadDetail"];
+      payload?: components['schemas']['SubscriptionPayloadDetail'];
       /** @description The unique identifier for the destination associated with this subscription. */
       destinationId?: string;
     };
@@ -280,7 +279,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method allows users to retrieve a public key using a specified key ID. The public key that is returned in the response payload is used to process and validate eBay notifications.<br /><br />The public key ID, which is a required request parameter for this method, is retrieved from the Base64-encoded <b>X-EBAY-SIGNATURE</b> header that is included in the eBay notification.<br /><br /><span class="tablenote"><b>Note:</b> For more details about how to process eBay push notifications and validate notification message payloads, see the <a href="/api-docs/commerce/notification/overview.html">Notification API overview</a>.</span> */
   getPublicKey: {
     parameters: {
@@ -293,7 +291,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["PublicKey"];
+          'application/json': components['schemas']['PublicKey'];
         };
       };
       /** @description Bad Request */
@@ -316,7 +314,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Topic"];
+          'application/json': components['schemas']['Topic'];
         };
       };
       /** @description Bad Request */
@@ -341,7 +339,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["TopicSearchResponse"];
+          'application/json': components['schemas']['TopicSearchResponse'];
         };
       };
       /** @description Bad Request */
@@ -364,7 +362,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["SubscriptionSearchResponse"];
+          'application/json': components['schemas']['SubscriptionSearchResponse'];
         };
       };
       /** @description Bad Request */
@@ -378,7 +376,7 @@ export interface operations {
     /** @description The create subscription request. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["CreateSubscriptionRequest"];
+        'application/json': components['schemas']['CreateSubscriptionRequest'];
       };
     };
     responses: {
@@ -388,7 +386,7 @@ export interface operations {
           Location?: string;
         };
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Bad Request */
@@ -413,7 +411,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Subscription"];
+          'application/json': components['schemas']['Subscription'];
         };
       };
       /** @description Bad Request */
@@ -435,7 +433,7 @@ export interface operations {
     /** @description The create subscription request. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["UpdateSubscriptionRequest"];
+        'application/json': components['schemas']['UpdateSubscriptionRequest'];
       };
     };
     responses: {
@@ -543,7 +541,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["DestinationSearchResponse"];
+          'application/json': components['schemas']['DestinationSearchResponse'];
         };
       };
       /** @description Bad Request */
@@ -557,7 +555,7 @@ export interface operations {
     /** @description The create destination request. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["DestinationRequest"];
+        'application/json': components['schemas']['DestinationRequest'];
       };
     };
     responses: {
@@ -567,7 +565,7 @@ export interface operations {
           Location?: string;
         };
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Bad Request */
@@ -590,7 +588,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Destination"];
+          'application/json': components['schemas']['Destination'];
         };
       };
       /** @description Bad Request */
@@ -612,7 +610,7 @@ export interface operations {
     /** @description The create subscription request. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["DestinationRequest"];
+        'application/json': components['schemas']['DestinationRequest'];
       };
     };
     responses: {
@@ -655,7 +653,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["Config"];
+          'application/json': components['schemas']['Config'];
         };
       };
       /** @description Not Found */
@@ -669,7 +667,7 @@ export interface operations {
     /** @description The configurations for this application. */
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["Config"];
+        'application/json': components['schemas']['Config'];
       };
     };
     responses: {

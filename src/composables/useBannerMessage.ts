@@ -1,18 +1,18 @@
 import { ref, computed } from 'vue';
-import { findDocById, saveExistingItem, saveItem } from '@/apis/dataServices.ts'
+import { findDocById, saveExistingItem, saveItem } from '@/apis/dataServices.ts';
 
 const bannerCollectionName = 'banner' as const;
 const bannerDetailsDocId = 'bannerDetails' as const;
-const bannerStyles = ['sale', 'warning', 'info', ] as const;
+const bannerStyles = ['sale', 'warning', 'info'] as const;
 type BannerDetails = {
-  link: string | null,
-  style: typeof bannerStyles[number] | null,
-  message: string | null,
-  showBanner: boolean | null,
-}
+  link: string | null;
+  style: (typeof bannerStyles)[number] | null;
+  message: string | null;
+  showBanner: boolean | null;
+};
 
 export function useBannerMessage() {
-  const bannerDetails = ref<BannerDetails | null>({message: null, link: null, style: null, showBanner: null});
+  const bannerDetails = ref<BannerDetails | null>({ message: null, link: null, style: null, showBanner: null });
   const showBanner = computed(() => bannerDetails.value !== null && bannerDetails.value.showBanner === true);
 
   async function getBannerDetails() {
@@ -25,19 +25,21 @@ export function useBannerMessage() {
     bannerDetails.value = parseBannerDetails(res);
   }
 
-  async function saveBannerDetails(details: BannerDetails) {
+  async function saveBannerDetails(details: BannerDetails | null) {
+    if (details === null) {
+      console.error('Banner details cannot be null');
+      return false;
+    }
     const res = await saveExistingItem(bannerCollectionName, details, bannerDetailsDocId);
     if (!res) {
       console.error('Unable to save banner details');
       return false;
     }
     return true;
-
   }
 
   function parseBannerDetails(data: any): BannerDetails | null {
     if (!data || typeof data !== 'object') return null;
-
 
     return {
       link: data.link || null,
@@ -47,7 +49,7 @@ export function useBannerMessage() {
     };
   }
 
-  function getBannerStyle(style: typeof bannerStyles[number]) {
+  function getBannerStyle(style: (typeof bannerStyles)[number]) {
     if (bannerStyles.includes(style)) {
       return style;
     }

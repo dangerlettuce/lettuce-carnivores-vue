@@ -3,85 +3,84 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/order_task": {
+  '/order_task': {
     /** @description This method returns the details and status for an array of order tasks based on a specified <strong>feed_type</strong> or <strong>schedule_id</strong>. Specifying both <strong>feed_type</strong> and <strong>schedule_id</strong> results in an error. Since schedules are based on feed types, you can specify a schedule (<strong>schedule_id</strong>) that returns the needed <strong>feed_type</strong>.<br /><br />If specifying the <strong>feed_type</strong>, limit which order tasks are returned by specifying filters such as the creation date range or period of time using <strong>look_back_days</strong>. <br /><br />If specifying a <strong>schedule_id</strong>, the schedule template (that the <strong>schedule_id</strong> is based on) determines which order tasks are returned (see <strong>schedule_id</strong> for additional information). Each <strong>schedule_id</strong> applies to one <strong>feed_type</strong>. */
-    get: operations["getOrderTasks"];
+    get: operations['getOrderTasks'];
     /** @description This method creates an order download task with filter criteria for the order report. When using this method, specify the <b> feedType</b>, <b> schemaVersion</b>, and <b> filterCriteria</b> for the report. The method returns the <b> location</b> response header containing the getOrderTask call URI to retrieve the order task you just created. The URL includes the eBay-assigned task ID, which you can use to reference the order task. <br /><br />To retrieve the status of the task, use the <b> getOrderTask</b> method to retrieve a single task ID or the <b>getOrderTasks</b> method to retrieve multiple order task IDs.<p> <span class="tablenote"><strong>Note:</strong> The scope depends on the feed type. An error message results when an unsupported scope or feed type is specified.</span></p><p>The following list contains this method's authorization scope and its corresponding feed type:<ul><li>https://api.ebay.com/oauth/api_scope/sell.fulfillment: LMS_ORDER_REPORT</li></ul> </p><p>For details about how this method is used, see <a href="/api-docs/sell/static/feed/general-feed-tasks.html">General feed types</a> in the Selling Integration Guide. <p> <span class="tablenote"><strong>Note:</strong> At this time, the <strong>createOrderTask</strong> method only supports order creation date filters and not modified order date filters. Do not include the <strong>modifiedDateRange</strong> filter in your request payload.</span></p> */
-    post: operations["createOrderTask"];
+    post: operations['createOrderTask'];
   };
-  "/order_task/{task_id}": {
+  '/order_task/{task_id}': {
     /** @description This method retrieves the task details and status of the specified task. The input is <strong>task_id</strong>. <p>For details about how this method is used, see <a href="/api-docs/sell/static/orders/generating-and-retrieving-order-reports.html">Working with Order Feeds</a> in the Selling Integration Guide.  </p> */
-    get: operations["getOrderTask"];
+    get: operations['getOrderTask'];
   };
-  "/inventory_task": {
+  '/inventory_task': {
     /** @description This method searches for multiple tasks of a specific feed type, and includes date filters and pagination. */
-    get: operations["getInventoryTasks"];
+    get: operations['getInventoryTasks'];
     /** @description This method creates an inventory-related download task for a specified feed type with optional filter criteria. When using this method, specify the <strong>feedType</strong>. <br/><br/>This method returns the location response header containing the <strong>getInventoryTask</strong> call URI to retrieve the inventory task you just created. The URL includes the eBay-assigned task ID, which you can use to reference the inventory task.<br/><br/>To retrieve the status of the task, use the <strong>getInventoryTask</strong> method to retrieve a single task ID or the <strong>getInventoryTasks</strong> method to retrieve multiple task IDs.<p> <span class="tablenote"><strong>Note:</strong> The scope depends on the feed type. An error message results when an unsupported scope or feed type is specified.</span></p>Presently, this method supports Active Inventory Report. The <strong>ActiveInventoryReport</strong> returns a report that contains price and quantity information for all of the active listings for a specific seller. A seller can use this information to maintain their inventory on eBay. */
-    post: operations["createInventoryTask"];
+    post: operations['createInventoryTask'];
   };
-  "/inventory_task/{task_id}": {
+  '/inventory_task/{task_id}': {
     /** @description This method retrieves the task details and status of the specified inventory-related task. The input is <strong>task_id</strong>. */
-    get: operations["getInventoryTask"];
+    get: operations['getInventoryTask'];
   };
-  "/schedule": {
+  '/schedule': {
     /** @description This method retrieves an array containing the details and status of all schedules based on the specified <strong>feed_type</strong>. Use this method to find a schedule if you do not know the <strong>schedule_id</strong>. */
-    get: operations["getSchedules"];
+    get: operations['getSchedules'];
     /** @description This method creates a schedule, which is a subscription to the specified schedule template. A schedule periodically generates a report for the <strong>feedType</strong> specified by the template. Specify the same <strong>feedType</strong> as the <strong>feedType</strong> of the associated schedule template. When creating the schedule, if available from the template, you can specify a preferred trigger hour, day of the week, or day of the month. These and other fields are conditionally available as specified by the template.<p> <span class="tablenote"><strong>Note:</strong> Make sure to include all fields required by the schedule template (<strong>scheduleTemplateId</strong>). Call the <strong>getScheduleTemplate</strong> method (or the <strong>getScheduleTemplates</strong> method), to find out which fields are required or optional. If a field is optional and a default value is provided by the template, the default value will be used if omitted from the payload.</span></p>A successful call returns the location response header containing the <strong>getSchedule</strong> call URI to retrieve the schedule you just created. The URL includes the eBay-assigned schedule ID, which you can use to reference the schedule task. <br /><br />To retrieve the details of the create schedule task, use the <strong>getSchedule</strong> method for a single schedule ID or the <strong>getSchedules</strong> method to retrieve all schedule details for the specified <strong>feed_type</strong>. The number of schedules for each feedType is limited. Error code 160031 is returned when you have reached this maximum.<p> <span class="tablenote"><strong>Note:</strong> Except for schedules with a HALF-HOUR frequency, all schedules will ideally run at the start of each hour ('00' minutes). Actual start time may vary time may vary due to load and other factors.</span></p> */
-    post: operations["createSchedule"];
+    post: operations['createSchedule'];
   };
-  "/schedule/{schedule_id}": {
+  '/schedule/{schedule_id}': {
     /** @description This method retrieves schedule details and status of the specified schedule. Specify the schedule to retrieve using the <strong>schedule_id</strong>. Use the <strong>getSchedules</strong> method to find a schedule if you do not know the <strong>schedule_id</strong>. */
-    get: operations["getSchedule"];
+    get: operations['getSchedule'];
     /** @description This method updates an existing schedule. Specify the schedule to update using the <strong>schedule_id</strong> path parameter. If the schedule template has changed after the schedule was created or updated, the input will be validated using the changed template.<p> <span class="tablenote"><strong>Note:</strong> Make sure to include all fields required by the schedule template (<strong>scheduleTemplateId</strong>). Call the <strong>getScheduleTemplate</strong> method (or the <strong>getScheduleTemplates</strong> method), to find out which fields are required or optional. If you do not know the <strong>scheduleTemplateId</strong>, call the <strong>getSchedule</strong> method to find out.</span></p> */
-    put: operations["updateSchedule"];
+    put: operations['updateSchedule'];
     /** @description This method deletes an existing schedule. Specify the schedule to delete using the <strong>schedule_id</strong> path parameter. */
-    delete: operations["deleteSchedule"];
+    delete: operations['deleteSchedule'];
   };
-  "/schedule/{schedule_id}/download_result_file": {
+  '/schedule/{schedule_id}/download_result_file': {
     /** @description This method downloads the latest result file generated by the schedule. The response of this call is a compressed or uncompressed CSV, XML, or JSON file, with the applicable file extension (for example: csv.gz). Specify the <strong>schedule_id</strong> path parameter to download its last generated file. */
-    get: operations["getLatestResultFile"];
+    get: operations['getLatestResultFile'];
   };
-  "/schedule_template/{schedule_template_id}": {
+  '/schedule_template/{schedule_template_id}': {
     /** @description This method retrieves the details of the specified template. Specify the template to retrieve using the <strong>schedule_template_id</strong> path parameter. Use the <strong>getScheduleTemplates</strong> method to find a schedule template if you do not know the <strong>schedule_template_id</strong>. */
-    get: operations["getScheduleTemplate"];
+    get: operations['getScheduleTemplate'];
   };
-  "/schedule_template": {
+  '/schedule_template': {
     /** @description This method retrieves an array containing the details and status of all schedule templates based on the specified <strong>feed_type</strong>. Use this method to find a schedule template if you do not know the <strong>schedule_template_id</strong>. */
-    get: operations["getScheduleTemplates"];
+    get: operations['getScheduleTemplates'];
   };
-  "/task": {
+  '/task': {
     /** @description This method returns the details and status for an array of tasks based on a specified <strong>feed_type</strong> or <strong>scheduledId</strong>. Specifying both <strong>feed_type</strong> and <strong>scheduledId</strong> results in an error. Since schedules are based on feed types, you can specify a schedule (<strong>schedule_id</strong>) that returns the needed <strong>feed_type</strong>.<br /><br />If specifying the <strong>feed_type</strong>, limit which tasks are returned by specifying filters, such as the creation date range or period of time using <strong>look_back_days</strong>. Also, by specifying the <strong>feed_type</strong>, both on-demand and scheduled reports are returned.<br /><br />If specifying a <strong>scheduledId</strong>, the schedule template (that the schedule ID is based on) determines which tasks are returned (see <strong>schedule_id</strong> for additional information). Each <strong>scheduledId</strong> applies to one <strong>feed_type</strong>. */
-    get: operations["getTasks"];
+    get: operations['getTasks'];
     /** @description This method creates an upload task or a download task without filter criteria. When using this method, specify the <b> feedType</b> and the feed file <b> schemaVersion</b>. The feed type specified sets the task as a download or an upload task.  <p>For details about the upload and download flows, see <a href="/api-docs/sell/static/orders/generating-and-retrieving-order-reports.html">Working with Order Feeds</a> in the Selling Integration Guide.</p><p> <span class="tablenote"><strong>Note:</strong> The scope depends on the feed type. An error message results when an unsupported scope or feed type is specified.</span></p><p>The following list contains this method's authorization scopes and their corresponding feed types:</p><ul><li>https://api.ebay.com/oauth/api_scope/sell.inventory: See <a href="/api-docs/sell/static/lms-migration/lms-to-feed-feedtype.html" target="_blank">LMS FeedTypes</a></li><li>https://api.ebay.com/oauth/api_scope/sell.fulfillment: LMS_ORDER_ACK (specify for upload tasks). Also see <a href="/api-docs/sell/static/lms-migration/lms-to-feed-feedtype.html" target="_blank">LMS FeedTypes</a></li><li>https://api.ebay.com/oauth/api_scope/sell.marketing: None*</li><li>https://api.ebay.com/oauth/api_scope/commerce.catalog.readonly: None*</li></ul><p>* Reserved for future release</p> */
-    post: operations["createTask"];
+    post: operations['createTask'];
   };
-  "/task/{task_id}/download_input_file": {
+  '/task/{task_id}/download_input_file': {
     /** @description This method downloads the file previously uploaded using <strong>uploadFile</strong>. Specify the task_id from the <strong>uploadFile</strong> call. <p><span class="tablenote"><strong>Note:</strong> With respect to LMS, this method applies to all feed types except <code>LMS_ORDER_REPORT</code> and <code>LMS_ACTIVE_INVENTORY_REPORT</code>. See <a href="/api-docs/sell/static/feed/lms-feeds.html">LMS API Feeds</a> in the Selling Integration Guide.</span></p> */
-    get: operations["getInputFile"];
+    get: operations['getInputFile'];
   };
-  "/task/{task_id}/download_result_file": {
+  '/task/{task_id}/download_result_file': {
     /** @description This method retrieves the generated file that is associated with the specified task ID. The response of this call is a compressed or uncompressed CSV, XML, or JSON file, with the applicable file extension (for example: csv.gz). <p>For details about how this method is used, see <a href="/api-docs/sell/static/orders/generating-and-retrieving-order-reports.html">Working with Order Feeds</a> in the Selling Integration Guide. </p><p><span class="tablenote"><strong>Note:</strong> The status of the task to retrieve must be in the COMPLETED or COMPLETED_WITH_ERROR state before this method can retrieve the file. You can use the getTask or getTasks method to retrieve the status of the task.</span></p> */
-    get: operations["getResultFile"];
+    get: operations['getResultFile'];
   };
-  "/task/{task_id}": {
+  '/task/{task_id}': {
     /** @description This method retrieves the details and status of the specified task. The input is <strong>task_id</strong>. <br /><br />For details of how this method is used, see <a href="/api-docs/sell/static/orders/generating-and-retrieving-order-reports.html">Working with Order Feeds</a> in the Selling Integration Guide. */
-    get: operations["getTask"];
+    get: operations['getTask'];
   };
-  "/task/{task_id}/upload_file": {
+  '/task/{task_id}/upload_file': {
     /** @description This method associates the specified file with the specified task ID and uploads the input file. After the file has been uploaded, the processing of the file begins. <br /><br />Reports often take time to generate and it's common for this method to return an HTTP status of 202, which indicates the report is being generated. Use the <b> getTask</b> with the task ID or <b> getTasks</b> to determine the status of a report. <br /><br />The status flow is <code>QUEUED</code> &gt; <code>IN_PROCESS</code> &gt; <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code>. When the status is <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code>, this indicates the file has been processed and the order report can be downloaded. If there are errors, they will be indicated in the report file. <br /><br />For details of how this method is used in the upload flow, see <a href="/api-docs/sell/static/orders/generating-and-retrieving-order-reports.html">Working with Order Feeds</a> in the Selling Integration Guide. <p><span class="tablenote"><strong>Note:</strong> This method applies to all Seller Hub feed types and LMS feed types except <code>LMS_ORDER_REPORT</code> and <code>LMS_ACTIVE_INVENTORY_REPORT</code>. See <a href="/api-docs/sell/static/feed/lms-feeds-quick-reference.html#Availabl" target="_blank">LMS feed types</a> and <a href="/api-docs/sell/static/feed/fx-feeds-quick-reference.html#availabl" target="_blank">Seller Hub feed types</a>.</span></p><p> <span class="tablenote"><b>Note:</b> You must use a <strong>Content-Type</strong> header with its value set to "<strong>multipart/form-data</strong>". See <a href="/api-docs/sell/feed/resources/task/methods/uploadFile#h2-samples">Samples</a> for information.</span></p> */
-    post: operations["uploadFile"];
+    post: operations['uploadFile'];
   };
-  "/customer_service_metric_task": {
+  '/customer_service_metric_task': {
     /** @description Use this method to return an array of customer service metric tasks. You can limit the tasks returned by specifying a date range. </p> <p> <span class="tablenote"><strong>Note:</strong> You can pass in either the <code>look_back_days </code>or<code> date_range</code>, but not both.</span></p> */
-    get: operations["getCustomerServiceMetricTasks"];
+    get: operations['getCustomerServiceMetricTasks'];
     /** @description <p>Use this method to create a customer service metrics download task with filter criteria for the customer service metrics report. When using this method, specify the <strong>feedType</strong> and <strong>filterCriteria</strong> including both <strong>evaluationMarketplaceId</strong> and <strong>customerServiceMetricType</strong> for the report. The method returns the location response header containing the call URI to use with <strong>getCustomerServiceMetricTask</strong> to retrieve status and details on the task.</p><p>Only CURRENT Customer Service Metrics reports can be generated with the Sell Feed API. PROJECTED reports are not supported at this time. See the <a href="/api-docs/sell/analytics/resources/customer_service_metric/methods/getCustomerServiceMetric">getCustomerServiceMetric</a> method document in the Analytics API for more information about these two types of reports.</p><p><span class="tablenote"><strong>Note:</strong> Before calling this API, retrieve the summary of the seller's performance and rating for the customer service metric by calling <strong>getCustomerServiceMetric</strong> (part of the <a href="/api-docs/sell/analytics/resources/methods">Analytics API</a>). You can then populate the create task request fields with the values from the response. This technique eliminates failed tasks that request a report for a <strong>customerServiceMetricType</strong> and <strong>evaluationMarketplaceId</strong> that are without evaluation.</span></p> */
-    post: operations["createCustomerServiceMetricTask"];
+    post: operations['createCustomerServiceMetricTask'];
   };
-  "/customer_service_metric_task/{task_id}": {
+  '/customer_service_metric_task/{task_id}': {
     /** @description <p>Use this method to retrieve customer service metric task details for the specified task. The input is <strong>task_id</strong>.</p> */
-    get: operations["getCustomerServiceMetricTask"];
+    get: operations['getCustomerServiceMetricTask'];
   };
 }
 
@@ -95,14 +94,14 @@ export interface components {
       /** @description The feed type associated with the inventory task you are about to create. Use a <strong>feedType</strong> that is available for your API. Presently, only one feed type is available:<ul><li><code>LMS_ACTIVE_INVENTORY_REPORT</code></li></ul><br/>See <a href="/api-docs/sell/static/feed/lms-feeds-quick-reference.html#merchant-data-reports-download-feed-types" target="_blank">Report download feed types</a> for more information. */
       feedType?: string;
       /** @description The container for the filter fields. This container is used to set the filter criteria for the ActiveInventoryReport. A seller can retrieve listings for a specified format. */
-      filterCriteria?: components["schemas"]["InventoryFilterCriteria"];
+      filterCriteria?: components['schemas']['InventoryFilterCriteria'];
     };
     /** @description The type that defines the fields for the <b> createOrderTask</b> request. */
     CreateOrderTaskRequest: {
       /** @description The feed type associated with the task. The only presently supported value is <code>LMS_ORDER_REPORT</code>. See <a href="/api-docs/sell/static/feed/lms-feeds-quick-reference.html#merchant-data-reports-download-feed-types" target="_blank">Report download feed types</a> for more information. */
       feedType?: string;
       /** @description The container for the filter fields. This container is used to set the filter criteria for the order report. A seller can set date range filters and/or can retrieve orders in a specific state. */
-      filterCriteria?: components["schemas"]["OrderFilterCriteria"];
+      filterCriteria?: components['schemas']['OrderFilterCriteria'];
       /** @description The schema version of the LMS OrderReport. For the <code>LMS_ORDER_REPORT</code> feed type, see the <a href="/devzone/merchant-data/CallRef/OrderReport.html#OrderReport">OrderReport</a> reference page to see the present schema version. The <b> schemaVersion</b> value is the version number shown at the top of the <b> OrderReport</b> page. <br /><br /><b>Restriction: </b> This value must be 1113 or higher. The OrderReport schema version is updated about every two weeks. All version numbers are odd numbers (even numbers are skipped). For example, the next release version after '1113' is '1115'. */
       schemaVersion?: string;
     };
@@ -111,7 +110,7 @@ export interface components {
       /** @description The <strong>feedType</strong> specified for the task. The report lists the transaction details that contribute to the service metrics evaluation. Supported types include:<p><code>CUSTOMER_SERVICE_METRICS_REPORT</code></p> */
       feedType?: string;
       /** @description This container is used to customize and set criteria for Customer Service Metric report that will be associated with the task. */
-      filterCriteria?: components["schemas"]["CustomerServiceMetricsFilterCriteria"];
+      filterCriteria?: components['schemas']['CustomerServiceMetricsFilterCriteria'];
       /** @description The version number of the file format. <p><b>Valid value: </b><code>1.0</code><p> */
       schemaVersion?: string;
     };
@@ -127,7 +126,7 @@ export interface components {
       /** @description The name of the feed type for the created schedule. Match the <strong>feed_type</strong> from the schedule template associated with this schedule. */
       feedType?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value.<br /><br /><b>Minimum: </b>1<br /><br /><b>Maximum: </b>31
        */
       preferredTriggerDayOfMonth?: number;
@@ -150,23 +149,23 @@ export interface components {
       /** @description The URI of the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of tasks to return per page, from the result set. A result set is the complete set of tasks returned by the method. <p> <span class="tablenote"><strong>Note:</strong> Even though this parameter is not required to be submitted in the request, the parameter defaults to 10 if omitted.</span></p><p> <span class="tablenote"><strong>Note:</strong> If this is the last or only page of the result set, the page may contain fewer tasks than the limit value. To determine the number of pages in a result set, divide the total value (total number of tasks matching input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getCustomerServiceMetricTasks</strong> calls to view all tasks matching the input criteria.</span></p>
        */
       limit?: number;
       /** @description The relative path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before returning the first result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
        */
       offset?: number;
       /** @description The URI for the previous page of results. This parameter is returned if a previous page of results from the result set exists. */
       prev?: string;
       /** @description An array of the customer service tasks on this page. The tasks are sorted by creation date. An empty array is returned if the filter criteria excludes all tasks. */
-      tasks?: (components["schemas"]["ServiceMetricsTask"])[];
+      tasks?: components['schemas']['ServiceMetricsTask'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of tasks that match the criteria.
        */
       total?: number;
@@ -178,9 +177,9 @@ export interface components {
       /** @description An enumeration value that specifies the eBay marketplace where the evaluation occurs. See <strong>MarketplaceIdEnum</strong> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/bas:MarketplaceIdEnum'>eBay API documentation</a> */
       evaluationMarketplaceId?: string;
       /** @description A list of listing category IDs on which the service metric is measured. A seller can use one or more L1 (top-level) eBay categories to get metrics specific to those L1 categories. The Category IDs for each L1 category are required. Category ID values for L1 categories can be retrieved using the Taxonomy API.<p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_AS_DESCRIBED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p> */
-      listingCategories?: (string)[];
+      listingCategories?: string[];
       /** @description A list of shipping region enumeration values on which the service metric is measured. This comma delimited array allows the seller to customize the report to focus on domestic or international shipping. <p> <span class="tablenote"><strong>Note: </strong>Pass this attribute to narrow down your filter results for the <code>ITEM_NOT_RECEIVED</code> customerServiceMetricType.</span></p> <p>Supported categories include:</p><p><code>primary(L1) category Id</code></p>See <strong>ShippingRegionTypeEnum</strong> for values */
-      shippingRegions?: (string)[];
+      shippingRegions?: string[];
     };
     /** @description The type that defines the fields for a date range. */
     DateRange: {
@@ -196,20 +195,20 @@ export interface components {
       /** @description Name for the primary system where the error occurred. This is relevant for application errors. */
       domain?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description A unique number to identify the error.
        */
       errorId?: number;
       /** @description An array of request elements most closely associated to the error. */
-      inputRefIds?: (string)[];
+      inputRefIds?: string[];
       /** @description A more detailed explanation of the error. */
       longMessage?: string;
       /** @description Information on how to correct the problem, in the end user's terms and language where applicable. */
       message?: string;
       /** @description An array of request elements most closely associated to the error. */
-      outputRefIds?: (string)[];
+      outputRefIds?: string[];
       /** @description An array of name/value pairs that describe details the error condition. These are useful when multiple errors are returned. */
-      parameters?: (components["schemas"]["ErrorParameter"])[];
+      parameters?: components['schemas']['ErrorParameter'][];
       /** @description Further helps indicate which subsystem the error is coming from. System subcategories include: Initialization, Serialization, Security, Monitoring, Rate Limiting, etc. */
       subdomain?: string;
     };
@@ -236,7 +235,7 @@ export interface components {
       /** @description The date you read the file. <br /><br /><b> Format: </b> UTC <code>yyyy-MM-ddThh:mm:ss.SSSZ</code><p><b>For example:</b><p>Created on September 10, 2019</p><p><code>2019-09-10T00:00:00.000Z</code></p> */
       readDate?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The size of the file.
        */
       size?: number;
@@ -264,31 +263,31 @@ export interface components {
       /** @description The path to the call URI used to retrieve the task. This field points to the <strong>getInventoryTask</strong> URI. */
       detailHref?: string;
       /** @description This container provides summary information on an upload feed (not applicable for download feed types). */
-      uploadSummary?: components["schemas"]["UploadSummary"];
+      uploadSummary?: components['schemas']['UploadSummary'];
       /** @description This container is used to set the filter criteria for the ActiveInventoryReport. A seller can retrieve listings for a specified format. */
-      filterCriteria?: components["schemas"]["InventoryFilterCriteria"];
+      filterCriteria?: components['schemas']['InventoryFilterCriteria'];
     };
     InventoryTaskCollection: {
       /** @description The path to the call URI that produced the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of inventory tasks to return per page, from the result set. A result set is the complete set of tasks returned by the method.<br /><br /><span class="tablenote"><strong>Note:</strong> Though this parameter is not required to be submitted in the request, the parameter defaults to <code>10</code> if omitted. Additionally, if this is the last or only page of the result set, the page may contain fewer tasks than the <strong>limit</strong> value submitted in the request.</span><br /><br />To determine the number of pages in a result set, divide the total value (total number of tasks matching the input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getInventoryTasks</strong> calls to view all tasks matching the input criteria.
        */
       limit?: number;
       /** @description The path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be specified in the request with the <strong>offset</strong> query parameter.<br /><br /><span class="tablenote"><strong>Note:</strong> The items in a paginated result set use a zero-based list, where the first item in the list has an offset of <code>0</code>.</span>
        */
       offset?: number;
       /** @description The path to the call URI for the previous page of results. This is returned if there is a previous page of results from the result set. */
       prev?: string;
       /** @description An array of the inventory tasks on this page. The tasks are sorted by creation date.<br /><br /><span class="tablenote"><strong>Note:</strong> An empty array is returned if the filter criteria excludes all tasks.</span> */
-      tasks?: (components["schemas"]["InventoryTask"])[];
+      tasks?: components['schemas']['InventoryTask'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of inventory tasks that match the input criteria.
        */
       total?: number;
@@ -296,9 +295,9 @@ export interface components {
     /** @description The type that defines the fields for the order filters. */
     OrderFilterCriteria: {
       /** @description The creation date range of the orders you want returned. Set the date range so it contains less than 10 days (maximum). If you do not specify a <strong>DateRange</strong>, results from the last 10 days will be returned by default. */
-      creationDateRange?: components["schemas"]["DateRange"];
+      creationDateRange?: components['schemas']['DateRange'];
       /** @description The modified date range of the orders you want returned. <p> <span class="tablenote"><strong>Note:</strong> This container is for future use. At this time, the <strong>createOrderTask</strong> method only supports order creation date filters and not modified order date filters.</span></p> */
-      modifiedDateRange?: components["schemas"]["DateRange"];
+      modifiedDateRange?: components['schemas']['DateRange'];
       /** @description The order status of the orders returned. If the filter is omitted from createOrderTask call, orders that are in both <code>ACTIVE </code>and<code> COMPLETED</code> states are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:OrderStatusEnum'>eBay API documentation</a> */
       orderStatus?: string;
     };
@@ -313,7 +312,7 @@ export interface components {
       /** @description The feed type associated with the task. */
       feedType?: string;
       /** @description A container that returns the filter criteria used. */
-      filterCriteria?: components["schemas"]["OrderFilterCriteria"];
+      filterCriteria?: components['schemas']['OrderFilterCriteria'];
       /** @description The schema version number associated with the create task. */
       schemaVersion?: string;
       /** @description The enumeration value that indicates the state of the task that was submitted in the request. See <strong>FeedStatusEnum</strong> for information. <p>The values <code>COMPLETED </code>and<code> COMPLETED_WITH_ERROR</code> indicate the Order Report file is ready to download.</p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a> */
@@ -321,30 +320,30 @@ export interface components {
       /** @description The ID of the task that was submitted in the request. */
       taskId?: string;
       /** @description This container provides summary information on an upload feed (not applicable for download feed types). */
-      uploadSummary?: components["schemas"]["UploadSummary"];
+      uploadSummary?: components['schemas']['UploadSummary'];
     };
     /** @description The type that defines the fields for a paginated result set of orders. The response consists of 0 or more sequenced <em> pages</em> where each page has 0 or more items. */
     OrderTaskCollection: {
       /** @description The path to the call URI that produced the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of order tasks to return per page, from the result set. A result set is the complete set of tasks returned by the method. <p> <span class="tablenote"><strong>Note:</strong> Though this parameter is not required to be submitted in the request, the parameter defaults to <code>10</code> if omitted.</span></p><p> <span class="tablenote"><strong>Note:</strong> If this is the last or only page of the result set, the page may contain fewer tasks than the <strong>limit</strong> value. To determine the number of pages in a result set, divide the total value (total number of tasks matching input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getOrderTasks</strong> calls to view all tasks matching the input criteria.</span></p>
        */
       limit?: number;
       /** @description The path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
        */
       offset?: number;
       /** @description The path to the call URI for the previous page of results. This is returned if there is a previous page of results from the result set. */
       prev?: string;
       /** @description An array of the order tasks on this page. The tasks are sorted by creation date. An empty array is returned if the filter criteria excludes all tasks. */
-      tasks?: (components["schemas"]["OrderTask"])[];
+      tasks?: components['schemas']['OrderTask'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of order tasks that match the input criteria.
        */
       total?: number;
@@ -354,23 +353,23 @@ export interface components {
       /** @description The path to the call URI that produced the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of schedule templates to return per page, from the result set. A result set is the complete set of schedule templates returned by the method. <p> <span class="tablenote"><strong>Note:</strong> Though this parameter is not required to be submitted in the request, the parameter defaults to 10 if omitted.</span></p><p> <span class="tablenote"><strong>Note:</strong> If this is the last or only page of the result set, the page may contain fewer tasks than the <strong>limit</strong> value. To determine the number of pages in a result set, divide the total value (total number of tasks matching input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getScheduleTemplates</strong> calls to view all tasks matching the input criteria.</span></p>
        */
       limit?: number;
       /** @description The path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
        */
       offset?: number;
       /** @description The path to the call URI for the previous page of results. This is returned if there is a previous page of results from the result set. */
       prev?: string;
       /** @description An array of the schedule templates on this page. An empty array is returned if the filter criteria excludes all tasks. */
-      scheduleTemplates?: (components["schemas"]["ScheduleTemplateResponse"])[];
+      scheduleTemplates?: components['schemas']['ScheduleTemplateResponse'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of schedule templates that match the input criteria.
        */
       total?: number;
@@ -388,7 +387,7 @@ export interface components {
       /** @description The present status of the template. You cannot create or modify a schedule using a template with an <code>INACTIVE</code> status.  For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:StatusEnum'>eBay API documentation</a> */
       status?: string;
       /** @description An array of the configuration supported by this template. */
-      supportedConfigurations?: (components["schemas"]["SupportedConfiguration"])[];
+      supportedConfigurations?: components['schemas']['SupportedConfiguration'][];
     };
     ServiceMetricsTask: {
       /** @description The timestamp when the customer service metrics task went into the <code>COMPLETED</code> or <code>COMPLETED_WITH_ERROR</code> state. This field is only returned if the status is one of the two completed values. This state means that eBay has compiled the report for the seller based on the seller’s filter criteria, and the seller can run a <strong>getResultFile</strong> call to download the report. */
@@ -400,7 +399,7 @@ export interface components {
       /** @description The feed type associated with the task. */
       feedType?: string;
       /** @description This container shows the criteria set for the report. */
-      filterCriteria?: components["schemas"]["CustomerServiceMetricsFilterCriteria"];
+      filterCriteria?: components['schemas']['CustomerServiceMetricsFilterCriteria'];
       /** @description The schema version number of the file format. If omitted, the default value is used. <p><b>Default value: </b><code>1.0</code><p> */
       schemaVersion?: string;
       /** @description An enumeration value that indicates the state of the task. See <strong>FeedStatusEnum</strong> for values. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/feed/types/api:FeedStatusEnum'>eBay API documentation</a> */
@@ -436,30 +435,30 @@ export interface components {
       /** @description The ID of the task that was submitted in the request. */
       taskId?: string;
       /** @description This container provides summary information on an upload feed (not applicable for download feed types). */
-      uploadSummary?: components["schemas"]["UploadSummary"];
+      uploadSummary?: components['schemas']['UploadSummary'];
     };
     /** @description The type that defines the fields for a paginated result set of tasks. The response consists of 0 or more sequenced <em> pages</em> where each page has 0 or more items. */
     TaskCollection: {
       /** @description The path to the call URI that produced the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of tasks to return per page, from the result set. A result set is the complete set of tasks returned by the method. <p> <span class="tablenote"><strong>Note:</strong> Though this parameter is not required to be submitted in the request, the parameter defaults to 10 if omitted.</span></p><p> <span class="tablenote"><strong>Note:</strong> If this is the last or only page of the result set, the page may contain fewer tasks than the <strong>limit</strong> value. To determine the number of pages in a result set, divide the total value (total number of tasks matching input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getTasks</strong> calls to view all tasks matching the input criteria.</span></p>
        */
       limit?: number;
       /** @description The path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
        */
       offset?: number;
       /** @description The path to the call URI for the previous page of results. This is returned if there is a previous page of results from the result set. */
       prev?: string;
       /** @description An array of the tasks on this page. The tasks are sorted by creation date. An empty array is returned if the filter criteria excludes all tasks. */
-      tasks?: (components["schemas"]["Task"])[];
+      tasks?: components['schemas']['Task'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of tasks that match the input criteria.
        */
       total?: number;
@@ -467,7 +466,7 @@ export interface components {
     /** @description The type that defines the fields for a schedule update to a schedule generated with the Feed API. */
     UpdateUserScheduleRequest: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the actual number of days in the month. <br /><br />This field is available as specified by the template (<strong>scheduleTemplateId</strong>). The template can specify this field as optional or required, and optionally provides a default value. <br /><br /><b>Minimum: </b>1<b><br /><br /><b>Maximum: </b>31
        */
       preferredTriggerDayOfMonth?: number;
@@ -487,12 +486,12 @@ export interface components {
     /** @description This container provides summary information on an upload feed (not applicable for download feed types). */
     UploadSummary: {
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of records, such as the number of listings created or the number of pictures uploaded to a listing, that failed to process during the upload feed. Check the response file and correct any issues mentioned. If the feed fails before processing, no response file is provided. In this case check the REST output response.
        */
       failureCount?: number;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of records that were successfully processed during the upload feed.
        */
       successCount?: number;
@@ -502,23 +501,23 @@ export interface components {
       /** @description The path to the call URI that produced the current page of results. */
       href?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The value of the <strong>limit</strong> parameter submitted in the request, which is the maximum number of schedules to return per page, from the result set. A result set is the complete set of schedules returned by the method. <p> <span class="tablenote"><strong>Note:</strong> Though this parameter is not required to be submitted in the request, the parameter defaults to 10 if omitted.<p> <span class="tablenote"><strong>Note:</strong> If this is the last or only page of the result set, the page may contain fewer tasks than the <strong>limit</strong> value. To determine the number of pages in a result set, divide the total value (total number of tasks matching input criteria) by this limit value, and then round up to the next integer. For example, if the <strong>total</strong> value was <code>120</code> (120 total tasks) and the <strong>limit</strong> value was <code>50</code> (show 50 tasks per page), the total number of pages in the result set is three, so the seller would have to make three separate <strong>getSchedules</strong> calls to view all tasks matching the input criteria.</span></p></span></p>
        */
       limit?: number;
       /** @description The path to the call URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. */
       next?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The number of results skipped in the result set before listing the first returned result. This value can be set in the request with the <b>offset</b> query parameter. <p class="tablenote"><strong>Note: </strong>The items in a paginated result set use a zero-based list where the first item in the list has an offset of <code>0</code>.</p>
        */
       offset?: number;
       /** @description The path to the call URI for the previous page of results. This is returned if there is a previous page of results from the result set. */
       prev?: string;
       /** @description An array of the schedules on this page. An empty array is returned if the filter criteria excludes all tasks. */
-      schedules?: (components["schemas"]["UserScheduleResponse"])[];
+      schedules?: components['schemas']['UserScheduleResponse'][];
       /**
-       * Format: int32 
+       * Format: int32
        * @description The total number of schedules that match the input criteria.
        */
       total?: number;
@@ -534,7 +533,7 @@ export interface components {
       /** @description The date the schedule was last modified. */
       lastModifiedDate?: string;
       /**
-       * Format: int32 
+       * Format: int32
        * @description The preferred day of the month to trigger the schedule. This field can be used with <strong>preferredTriggerHour</strong> for monthly schedules. The last day of the month is used for numbers larger than the number of days in the month.
        */
       preferredTriggerDayOfMonth?: number;
@@ -568,7 +567,6 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** @description This method returns the details and status for an array of order tasks based on a specified <strong>feed_type</strong> or <strong>schedule_id</strong>. Specifying both <strong>feed_type</strong> and <strong>schedule_id</strong> results in an error. Since schedules are based on feed types, you can specify a schedule (<strong>schedule_id</strong>) that returns the needed <strong>feed_type</strong>.<br /><br />If specifying the <strong>feed_type</strong>, limit which order tasks are returned by specifying filters such as the creation date range or period of time using <strong>look_back_days</strong>. <br /><br />If specifying a <strong>schedule_id</strong>, the schedule template (that the <strong>schedule_id</strong> is based on) determines which order tasks are returned (see <strong>schedule_id</strong> for additional information). Each <strong>schedule_id</strong> applies to one <strong>feed_type</strong>. */
   getOrderTasks: {
     parameters: {
@@ -591,7 +589,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["OrderTaskCollection"];
+          'application/json': components['schemas']['OrderTaskCollection'];
         };
       };
       /** @description Bad Request */
@@ -607,13 +605,13 @@ export interface operations {
     parameters: {
       header?: {
         /** @description The ID of the eBay marketplace where the item is hosted. <p> <span class="tablenote"><strong>Note:</strong> This value is case sensitive.</span></p><p>For example:</p><p><code>X-EBAY-C-MARKETPLACE-ID:EBAY_US</code></p><p>This identifies the eBay marketplace that applies to this task. See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a>.</p> */
-        "X-EBAY-C-MARKETPLACE-ID"?: string;
+        'X-EBAY-C-MARKETPLACE-ID'?: string;
       };
     };
     /** @description description not needed */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateOrderTaskRequest"];
+        'application/json': components['schemas']['CreateOrderTaskRequest'];
       };
     };
     responses: {
@@ -641,7 +639,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["OrderTask"];
+          'application/json': components['schemas']['OrderTask'];
         };
       };
       /** @description Bad Request */
@@ -676,7 +674,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["InventoryTaskCollection"];
+          'application/json': components['schemas']['InventoryTaskCollection'];
         };
       };
       /** @description Bad Request */
@@ -692,13 +690,13 @@ export interface operations {
     parameters: {
       header?: {
         /** @description The ID of the eBay marketplace where the item is hosted. <p> <span class="tablenote"><strong>Note:</strong> This value is case sensitive.</span></p><p>For example:</p><p><code>X-EBAY-C-MARKETPLACE-ID:EBAY_US</code></p><p>This identifies the eBay marketplace that applies to this task. See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a>.</p> */
-        "X-EBAY-C-MARKETPLACE-ID"?: string;
+        'X-EBAY-C-MARKETPLACE-ID'?: string;
       };
     };
     /** @description The request payload containing the version, feedType, and optional filterCriteria. */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateInventoryTaskRequest"];
+        'application/json': components['schemas']['CreateInventoryTaskRequest'];
       };
     };
     responses: {
@@ -726,7 +724,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["InventoryTask"];
+          'application/json': components['schemas']['InventoryTask'];
         };
       };
       /** @description Bad Request */
@@ -755,7 +753,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["UserScheduleCollection"];
+          'application/json': components['schemas']['UserScheduleCollection'];
         };
       };
       /** @description Bad Request */
@@ -771,7 +769,7 @@ export interface operations {
     /** @description In the request payload: <strong>feedType</strong> and <strong>scheduleTemplateId</strong> are required; <strong>scheduleName</strong> is optional; <strong>preferredTriggerHour</strong>, <strong>preferredTriggerDayOfWeek</strong>, <strong>preferredTriggerDayOfMonth</strong>, <strong>scheduleStartDate</strong>, <strong>scheduleEndDate</strong>, and <strong>schemaVersion</strong> are conditional. */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateUserScheduleRequest"];
+        'application/json': components['schemas']['CreateUserScheduleRequest'];
       };
     };
     responses: {
@@ -781,7 +779,7 @@ export interface operations {
           Location?: string;
         };
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Bad Request */
@@ -806,7 +804,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["UserScheduleResponse"];
+          'application/json': components['schemas']['UserScheduleResponse'];
         };
       };
       /** @description Bad Request */
@@ -830,7 +828,7 @@ export interface operations {
     /** @description In the request payload: <strong>scheduleName</strong> is optional; <strong>preferredTriggerHour</strong>, <strong>preferredTriggerDayOfWeek</strong>, <strong>preferredTriggerDayOfMonth</strong>, <strong>scheduleStartDate</strong>, <strong>scheduleEndDate</strong>, and <strong>schemaVersion</strong> are conditional. */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["UpdateUserScheduleRequest"];
+        'application/json': components['schemas']['UpdateUserScheduleRequest'];
       };
     };
     responses: {
@@ -879,10 +877,10 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "content-disposition"?: string;
+          'content-disposition'?: string;
         };
         content: {
-          "application/octet-stream": components["schemas"]["StreamingOutput"];
+          'application/octet-stream': components['schemas']['StreamingOutput'];
         };
       };
       /** @description Bad Request */
@@ -907,7 +905,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ScheduleTemplateResponse"];
+          'application/json': components['schemas']['ScheduleTemplateResponse'];
         };
       };
       /** @description Bad Request */
@@ -934,7 +932,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ScheduleTemplateCollection"];
+          'application/json': components['schemas']['ScheduleTemplateCollection'];
         };
       };
       /** @description Bad Request */
@@ -965,7 +963,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["TaskCollection"];
+          'application/json': components['schemas']['TaskCollection'];
         };
       };
       /** @description Bad Request */
@@ -981,13 +979,13 @@ export interface operations {
     parameters: {
       header?: {
         /** @description The ID of the eBay marketplace where the item is hosted. <p> <span class="tablenote"><strong>Note:</strong> This value is case sensitive.</span></p><p>For example:</p><p><code>X-EBAY-C-MARKETPLACE-ID:EBAY_US</code></p><p>This identifies the eBay marketplace that applies to this task. See <a href="/api-docs/sell/feed/types/bas:MarketplaceIdEnum">MarketplaceIdEnum</a>.</p> */
-        "X-EBAY-C-MARKETPLACE-ID"?: string;
+        'X-EBAY-C-MARKETPLACE-ID'?: string;
       };
     };
     /** @description description not needed */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateTaskRequest"];
+        'application/json': components['schemas']['CreateTaskRequest'];
       };
     };
     responses: {
@@ -1015,10 +1013,10 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "content-disposition"?: string;
+          'content-disposition'?: string;
         };
         content: {
-          "application/octet-stream": components["schemas"]["StreamingOutput"];
+          'application/octet-stream': components['schemas']['StreamingOutput'];
         };
       };
       /** @description Bad Request */
@@ -1043,10 +1041,10 @@ export interface operations {
       /** @description Success */
       200: {
         headers: {
-          "content-disposition"?: string;
+          'content-disposition'?: string;
         };
         content: {
-          "application/octet-stream": components["schemas"]["StreamingOutput"];
+          'application/octet-stream': components['schemas']['StreamingOutput'];
         };
       };
       /** @description Bad Request */
@@ -1071,7 +1069,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["Task"];
+          'application/json': components['schemas']['Task'];
         };
       };
       /** @description Bad Request */
@@ -1094,14 +1092,14 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "multipart/form-data": components["schemas"]["FormDataContentDisposition"];
+        'multipart/form-data': components['schemas']['FormDataContentDisposition'];
       };
     };
     responses: {
       /** @description Success */
       200: {
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Bad Request */
@@ -1134,7 +1132,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["CustomerServiceMetricTaskCollection"];
+          'application/json': components['schemas']['CustomerServiceMetricTaskCollection'];
         };
       };
       /** @description Bad Request */
@@ -1150,13 +1148,13 @@ export interface operations {
     parameters: {
       header: {
         /** @description Use this header to specify the natural language in which the authenticated user desires the response. */
-        "accept-language": string;
+        'accept-language': string;
       };
     };
     /** @description Request payload containing version, feedType, and optional filterCriteria. */
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateServiceMetricsTaskRequest"];
+        'application/json': components['schemas']['CreateServiceMetricsTaskRequest'];
       };
     };
     responses: {
@@ -1182,7 +1180,7 @@ export interface operations {
       /** @description Success */
       200: {
         content: {
-          "application/json": components["schemas"]["ServiceMetricsTask"];
+          'application/json': components['schemas']['ServiceMetricsTask'];
         };
       };
       /** @description Bad Request */

@@ -53,13 +53,9 @@ export class ApiEnvError extends EBayError {
 export class EbayApiError extends EBayError {
   public readonly errorCode: number | undefined;
   public readonly meta?: EBayErrorMeta;
-  public readonly firstError?: EBayFirstError
+  public readonly firstError?: EBayFirstError;
 
-  constructor(message: string,
-              description?: string,
-              meta?: EBayErrorMeta,
-              errorCode?: number,
-              firstError?: EBayFirstError) {
+  constructor(message: string, description?: string, meta?: EBayErrorMeta, errorCode?: number, firstError?: EBayFirstError) {
     super(message, description, meta);
     this.errorCode = errorCode;
     this.firstError = firstError;
@@ -67,21 +63,17 @@ export class EbayApiError extends EBayError {
 }
 
 // Keep backwards compatibility.
-export class EBayApiError extends EbayApiError {
-}
+export class EBayApiError extends EbayApiError {}
 
-export class EBayAccessDenied extends EBayApiError {
-}
+export class EBayAccessDenied extends EBayApiError {}
 
-export class EBayInvalidGrant extends EBayApiError {
-}
+export class EBayInvalidGrant extends EBayApiError {}
 
 export class EBayNotFound extends EBayApiError {
   public static readonly code = 11001;
 }
 
-export class EBayInvalidAccessToken extends EBayApiError {
-}
+export class EBayInvalidAccessToken extends EBayApiError {}
 
 export class EBayIAFTokenExpired extends EBayApiError {
   public static readonly code = 21917053;
@@ -103,64 +95,63 @@ export class EBayTokenRequired extends EBayApiError {
   public static readonly code = 930;
 }
 
-export class EBayInvalidScope extends EBayApiError {
-}
+export class EBayInvalidScope extends EBayApiError {}
 
 export type EBayTraditionalError = {
-  ShortMessage: string
-  LongMessage: string
-  ErrorCode: number
-  SeverityCode: string
-  ErrorClassification: string
-}
+  ShortMessage: string;
+  LongMessage: string;
+  ErrorCode: number;
+  SeverityCode: string;
+  ErrorClassification: string;
+};
 
 export type EBayTraditionalErrorResponse = {
-  Timestamp: string
-  Ack: string
-  Errors: EBayTraditionalError | EBayTraditionalError[]
-  Version: number
-  Build: string
-}
+  Timestamp: string;
+  Ack: string;
+  Errors: EBayTraditionalError | EBayTraditionalError[];
+  Version: number;
+  Build: string;
+};
 
 export type EBayErrorParameter = {
-  name: string
-  value: string
-}
+  name: string;
+  value: string;
+};
 
 export type EBayRestfulError = {
-  message: string
-  errorId: number
-  domain: string
-  severity: string
-  category: string,
-  parameter?: EBayErrorParameter[]
-  longMessage: string,
-  inputRefIds?: any[],
-  httpStatusCode: number
-}
+  message: string;
+  errorId: number;
+  domain: string;
+  severity: string;
+  category: string;
+  parameter?: EBayErrorParameter[];
+  longMessage: string;
+  inputRefIds?: any[];
+  httpStatusCode: number;
+};
 
 export type EBayRestfulErrorResponse = {
-  errors: EBayRestfulError[]
-}
+  errors: EBayRestfulError[];
+};
 
 export type EBaySimpleError = {
-  message: string
-  description?: string
-}
+  message: string;
+  description?: string;
+};
 
 export type EBayPostOrderErrorResponse = {
   errorMessage: {
-    error: EBayRestfulError[] | EBayRestfulError
-  }
-}
+    error: EBayRestfulError[] | EBayRestfulError;
+  };
+};
 
 export type EBayOAuthErrorResponse = {
-  error: string
-  error_description?: string
-}
+  error: string;
+  error_description?: string;
+};
 
 export type EBayApiErrorResponse =
-  string
+  | string
   | EBayPostOrderErrorResponse
   | EBayRestfulErrorResponse
   | EBayTraditionalErrorResponse
@@ -168,68 +159,60 @@ export type EBayApiErrorResponse =
 
 export type ApiRequestResult = {
   response: {
-    data?: EBayApiErrorResponse
-    status?: number
-    statusText?: string
-    headers?: Record<string, string>
-  }
+    data?: EBayApiErrorResponse;
+    status?: number;
+    statusText?: string;
+    headers?: Record<string, string>;
+  };
 
   config?: {
-    url: string
-    method: string
-    headers?: Record<string, string>
-    params?: any
-  }
-}
+    url: string;
+    method: string;
+    headers?: Record<string, string>;
+    params?: any;
+  };
+};
 
 export type ErrorCommonMeta = {
   res?: {
-    data: any
-    status?: number
-    statusText?: string
-    headers?: Record<string, string>
-  }
+    data: any;
+    status?: number;
+    statusText?: string;
+    headers?: Record<string, string>;
+  };
 
   req?: {
-    url: string
-    method: string
-    headers?: Record<string, string>
-    params?: any
-  }
+    url: string;
+    method: string;
+    headers?: Record<string, string>;
+    params?: any;
+  };
 
-  [rawError]: any
-}
+  [rawError]: any;
+};
 
-export type EBayFirstError =
-  EBayTraditionalError
-  | EBayRestfulError
-  | EBayOAuthErrorResponse
-  | EBaySimpleError
+export type EBayFirstError = EBayTraditionalError | EBayRestfulError | EBayOAuthErrorResponse | EBaySimpleError;
 
-export type EBayErrorResponse =
-  EBayTraditionalErrorResponse
-  | EBayRestfulError
-  | EBayOAuthErrorResponse
-  | EBaySimpleError
+export type EBayErrorResponse = EBayTraditionalErrorResponse | EBayRestfulError | EBayOAuthErrorResponse | EBaySimpleError;
 
 export type EBayErrorMeta = EBayErrorResponse & ErrorCommonMeta;
 
 export type EBayErrorBag = {
-  message: string,
-  description?: string
-  errorCode?: number
-  meta: EBayErrorMeta,
-  firstError?: EBayFirstError
-}
+  message: string;
+  description?: string;
+  errorCode?: number;
+  meta: EBayErrorMeta;
+  firstError?: EBayFirstError;
+};
 
 export type EBayInventoryError = {
-  category: string,
-  domain: string,
-  errorId: number,
-  message: string,
-  subdomain: string,
-  parameters: {name: string, value: string}[],
-}
+  category: string;
+  domain: string;
+  errorId: number;
+  message: string;
+  subdomain: string;
+  parameters: { name: string; value: string }[];
+};
 /**
  * Extract the error if it wrapper in array.
  * @param data
@@ -238,13 +221,13 @@ function getEBayError(data?: EBayApiErrorResponse): EBayErrorResponse {
   if (!data) {
     return {
       message: `eBay API Error`,
-      description: 'No data is set in response result.'
+      description: 'No data is set in response result.',
     };
   }
 
   if (typeof data === 'string') {
     return {
-      message: data
+      message: data,
     };
   }
 
@@ -257,7 +240,7 @@ function getEBayError(data?: EBayApiErrorResponse): EBayErrorResponse {
   if ('error' in data && typeof data.error === 'string') {
     return {
       message: data.error,
-      description: data.error_description || ''
+      description: data.error_description || '',
     };
   }
 
@@ -274,7 +257,7 @@ function getEBayError(data?: EBayApiErrorResponse): EBayErrorResponse {
 
   return {
     message: `Unknown eBay API Error`,
-    description: 'This error response is not known. You should investigate the "meta.res.data" for more information.'
+    description: 'This error response is not known. You should investigate the "meta.res.data" for more information.',
   };
 }
 
@@ -306,7 +289,6 @@ const getErrorDescription = (eBayError: EBayErrorResponse, response: any) => {
   return (response?.status !== 200 ? response?.statusText : '') || '';
 };
 
-
 const getErrorCode = (eBayError: EBayErrorResponse): number | undefined => {
   if ('errorId' in eBayError) {
     // RESTful & Post Order
@@ -323,19 +305,18 @@ export const extractEBayError = (result: ApiRequestResult, data?: EBayApiErrorRe
 
   const meta: EBayErrorMeta = {
     ...eBayError,
-    [rawError]: result
+    [rawError]: result,
   };
 
-  const firstError: EBayFirstError = 'Errors' in eBayError
-    ? Array.isArray(eBayError.Errors) ? eBayError.Errors[0]
-      : eBayError.Errors : eBayError;
+  const firstError: EBayFirstError =
+    'Errors' in eBayError ? (Array.isArray(eBayError.Errors) ? eBayError.Errors[0] : eBayError.Errors) : eBayError;
 
   if (result?.response) {
     meta.res = {
       status: result.response.status,
       statusText: result.response.statusText,
       headers: result.response.headers,
-      data: result.response.data ?? {}
+      data: result.response.data ?? {},
     };
   }
 
@@ -344,7 +325,7 @@ export const extractEBayError = (result: ApiRequestResult, data?: EBayApiErrorRe
       url: result.config.url,
       method: result.config.method,
       headers: result.config.headers,
-      params: result.config.params
+      params: result.config.params,
     };
   }
 
@@ -353,7 +334,7 @@ export const extractEBayError = (result: ApiRequestResult, data?: EBayApiErrorRe
     description: getErrorDescription(eBayError, result?.response),
     errorCode: getErrorCode(eBayError),
     meta,
-    firstError
+    firstError,
   };
 };
 
@@ -366,13 +347,7 @@ export const handleEBayError = (error: any) => {
     throw new EBayError(error);
   }
 
-  const {
-    message,
-    meta,
-    description,
-    errorCode,
-    firstError
-  } = extractEBayError(error);
+  const { message, meta, description, errorCode, firstError } = extractEBayError(error);
 
   if ('domain' in meta && meta.domain === 'ACCESS') {
     throw new EBayAccessDenied(message, description, meta, errorCode, firstError);
@@ -401,13 +376,7 @@ export const checkEBayTraditionalResponse = (apiResponse: any, data: any) => {
     return;
   }
 
-  const {
-    message,
-    meta,
-    description,
-    errorCode,
-    firstError
-  } = extractEBayError(apiResponse, data as EBayApiErrorResponse);
+  const { message, meta, description, errorCode, firstError } = extractEBayError(apiResponse, data as EBayApiErrorResponse);
 
   if (typeof errorCode === 'undefined') {
     // Can happen on restful request

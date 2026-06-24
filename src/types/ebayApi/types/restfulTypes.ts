@@ -17,97 +17,97 @@ import {
   ReturnState,
   ReturnType,
   ShippingCarrier,
-  UserRoleFilter
+  UserRoleFilter,
 } from '../enums/index.js';
-import {components as buyBrowse, operations as buyBrowseOperations} from './restful/specs/buy_browse_v1_oas3.js';
-import {operations as buyMarketingOperations} from './restful/specs/buy_marketing_v1_beta_oas3.js';
-import {components as buyOffer} from './restful/specs/buy_offer_v1_beta_oas3.js';
-import {components as buyOrder} from './restful/specs/buy_order_v1_beta_oas3.js';
-import {operations as commerceCatalogOperations} from './restful/specs/commerce_catalog_v1_beta_oas3.js';
-import {components as commerceMedia} from './restful/specs/commerce_media_v1_beta_oas3.js';
-import {components as commerceNotification} from './restful/specs/commerce_notification_v1_oas3.js';
-import {components as commerceTranslation} from './restful/specs/commerce_translation_v1_beta_oas3.js';
+import { components as buyBrowse, operations as buyBrowseOperations } from './restful/specs/buy_browse_v1_oas3.js';
+import { operations as buyMarketingOperations } from './restful/specs/buy_marketing_v1_beta_oas3.js';
+import { components as buyOffer } from './restful/specs/buy_offer_v1_beta_oas3.js';
+import { components as buyOrder } from './restful/specs/buy_order_v1_beta_oas3.js';
+import { operations as commerceCatalogOperations } from './restful/specs/commerce_catalog_v1_beta_oas3.js';
+import { components as commerceMedia } from './restful/specs/commerce_media_v1_beta_oas3.js';
+import { components as commerceNotification } from './restful/specs/commerce_notification_v1_oas3.js';
+import { components as commerceTranslation } from './restful/specs/commerce_translation_v1_beta_oas3.js';
 
-import {components as sellAccount} from './restful/specs/sell_account_v1_oas3.js';
-import {components as sellCompliance} from './restful/specs/sell_compliance_v1_oas3.js';
+import { components as sellAccount } from './restful/specs/sell_account_v1_oas3.js';
+import { components as sellCompliance } from './restful/specs/sell_compliance_v1_oas3.js';
 
-import {components as sellFulfillment} from './restful/specs/sell_fulfillment_v1_oas3.js';
-import {components as sellInventory} from './restful/specs/sell_inventory_v1_oas3.js';
-import {components as sellMarketing} from './restful/specs/sell_marketing_v1_oas3.js';
-import {components as sellRecommendation} from './restful/specs/sell_recommendation_v1_oas3.js';
+import { components as sellFulfillment } from './restful/specs/sell_fulfillment_v1_oas3.js';
+import { components as sellInventory } from './restful/specs/sell_inventory_v1_oas3.js';
+import { components as sellMarketing } from './restful/specs/sell_marketing_v1_oas3.js';
+import { components as sellRecommendation } from './restful/specs/sell_recommendation_v1_oas3.js';
 
 export type BrowseSearchParams = {
-  aspect_filter?: string,
-  category_ids?: string,
-  charity_ids?: string,
-  compatibility_filter?: string,
-  epid?: string,
-  fieldgroups?: string,
-  filter?: string,
-  gtin?: string,
-  limit?: number,
-  offset?: number,
-  q?: string,
-  sort?: string
+  aspect_filter?: string;
+  category_ids?: string;
+  charity_ids?: string;
+  compatibility_filter?: string;
+  epid?: string;
+  fieldgroups?: string;
+  filter?: string;
+  gtin?: string;
+  limit?: number;
+  offset?: number;
+  q?: string;
+  sort?: string;
 };
 
 export type LegacyItemParams = {
-  legacy_item_id: string,
-  fieldgroups?: string,
-  legacy_variation_id?: string,
-  legacy_variation_sku?: string
+  legacy_item_id: string;
+  fieldgroups?: string;
+  legacy_variation_id?: string;
+  legacy_variation_sku?: string;
 };
 
 export type BuyFeedParams = {
-  feed_scope: string,
-  category_id: string,
-  date: string
+  feed_scope: string;
+  category_id: string;
+  date: string;
 };
 
 export type MarketingInsightsSearchParams = {
-  aspectFilter?: string
-  categoryIds?: string
-  epid?: string
-  fieldgroups?: string
-  filter?: string
-  gtin?: string
-  limit?: string
-  offset?: string
-  q?: string
-  sort?: string
-}
+  aspectFilter?: string;
+  categoryIds?: string;
+  epid?: string;
+  fieldgroups?: string;
+  filter?: string;
+  gtin?: string;
+  limit?: string;
+  offset?: string;
+  q?: string;
+  sort?: string;
+};
 
 export type NotificationParams = {
-  limit?: string
-  continuationToken?: string
-}
+  limit?: string;
+  continuationToken?: string;
+};
 
 export type SellFeedParams = {
-  dateRange?: string
-  feedType?: string
-  limit?: string
-  lookBackDays?: string
-  offset?: string
-  scheduleId?: string
-}
+  dateRange?: string;
+  feedType?: string;
+  limit?: string;
+  lookBackDays?: string;
+  offset?: string;
+  scheduleId?: string;
+};
 
 export type PaymentParams = {
-  orderId?: string
-  buyerUsername?: string
-  openDateFrom?: string
-  openDateTo?: string
-  paymentDisputeStatus?: string
-  limit?: string
-  offset?: string
-}
+  orderId?: string;
+  buyerUsername?: string;
+  openDateFrom?: string;
+  openDateTo?: string;
+  paymentDisputeStatus?: string;
+  limit?: string;
+  offset?: string;
+};
 
 //
 // Post Order --
 //
 export type CancelSortField = {
-  ascending: boolean,
-  enumValue: 'CANCEL_ID' | 'CANCEL_REQUEST_DATE',
-  field: '+' | '-'
+  ascending: boolean;
+  enumValue: 'CANCEL_ID' | 'CANCEL_REQUEST_DATE';
+  field: '+' | '-';
 };
 
 export type CancellationSearchParams = {
@@ -124,41 +124,41 @@ export type CancellationSearchParams = {
 };
 
 export type DateTime = {
-  formattedValue?: string, // reserver for future use
-  value: string
+  formattedValue?: string; // reserver for future use
+  value: string;
 };
 
 export type ConfirmRefundRequest = {
-  refundDate?: DateTime,
-  unpaidOrder?: boolean
+  refundDate?: DateTime;
+  unpaidOrder?: boolean;
 };
 
 export type LineItem = {
-  itemId: number,
-  quantity: number,
-  transactionId: number
+  itemId: number;
+  quantity: number;
+  transactionId: number;
 };
 
 export type CreateCancelRequest = {
-  buyerPaid?: boolean,
-  buyerPaidDate?: DateTime
-  cancelReason?: CancelReason | `${CancelReason}`,
-  legacyOrderId: string,
-  relistLineItem?: LineItem[]
+  buyerPaid?: boolean;
+  buyerPaidDate?: DateTime;
+  cancelReason?: CancelReason | `${CancelReason}`;
+  legacyOrderId: string;
+  relistLineItem?: LineItem[];
 };
 
 export type RejectCancelRequest = {
-  shipmentDate?: DateTime,
-  trackingNumber?: string
+  shipmentDate?: DateTime;
+  trackingNumber?: string;
 };
 
 export type AppealRequest = {
-  comments: Text
+  comments: Text;
 };
 
 export type BuyerCloseCaseRequest = {
-  closeReason: boolean,
-  comments?: Text
+  closeReason: boolean;
+  comments?: Text;
 };
 
 export type CaseSearchParams = {
@@ -176,68 +176,66 @@ export type CaseSearchParams = {
 };
 
 export type Address = {
-  addressLine1?: string,
-  addressLine2?: string,
-  addressType?: string,
-  city?: string,
-  country?: CountryCode | `${CountryCode}`,
-  county?: string,
-  isTransliterated?: boolean,
-  nationalRegion?: string,
-  postalCode?: string,
-  script?: string,
-  stateOrProvince?: string,
-  transliteratedFromScript?: string,
-  worldRegion?: string
+  addressLine1?: string;
+  addressLine2?: string;
+  addressType?: string;
+  city?: string;
+  country?: CountryCode | `${CountryCode}`;
+  county?: string;
+  isTransliterated?: boolean;
+  nationalRegion?: string;
+  postalCode?: string;
+  script?: string;
+  stateOrProvince?: string;
+  transliteratedFromScript?: string;
+  worldRegion?: string;
 };
 
 export type ReturnAddressRequest = {
   firstName?: string;
   lastName?: string;
-  returnAddress?: Address
-  RMA?: string
+  returnAddress?: Address;
+  RMA?: string;
 };
 
 export type Text = {
-  content: string,
-  language?: string,
-  translatedFromContent?: string,
-  translatedFromLanguage?: string
+  content: string;
+  language?: string;
+  translatedFromContent?: string;
+  translatedFromLanguage?: string;
 };
 
-export type Token = string;  // A string with normalized whitespace (e.g., dropped leading and trailing spaces).
+export type Token = string; // A string with normalized whitespace (e.g., dropped leading and trailing spaces).
 
 export type BuyerCloseInquiryRequest = {
-  closeReason?: Token,
-  comments?: Text
+  closeReason?: Token;
+  comments?: Text;
 };
 
 export type CheckInquiryEligibilityRequest = {
-  itemId: string,
-  transactionId: string
+  itemId: string;
+  transactionId: string;
 };
-
 
 export type CreateInquiryRequest = {
-  claimQuantity?: number,
+  claimQuantity?: number;
   comments?: Text;
-  desiredOutcome?: Token,
-  itemId: string,
-  transactionId: string
+  desiredOutcome?: Token;
+  itemId: string;
+  transactionId: string;
 };
 
-
 export type EscalateInquiryRequest = {
-  comments?: Text,
-  escalateInquiryReason: Token
+  comments?: Text;
+  escalateInquiryReason: Token;
 };
 
 export type InquiryVoluntaryRefundRequest = {
-  comments?: Text
+  comments?: Text;
 };
 
 export type SellerProvideRefundInfoRequest = {
-  message: Text
+  message: Text;
 };
 
 export type ShipmentInfoRequest = {
@@ -263,7 +261,7 @@ export type InquirySearchParams = {
 };
 
 export type SendMessageRequest = {
-  message: Text
+  message: Text;
 };
 
 export type CheckEligibilityRequest = {
@@ -275,8 +273,8 @@ export type CheckEligibilityRequest = {
 };
 
 export type CloseReturnRequest = {
-  buyerCloseReason?: Token,
-  comments?: Text
+  buyerCloseReason?: Token;
+  comments?: Text;
 };
 
 export type ReturnRequestType = {
@@ -287,19 +285,19 @@ export type ReturnRequestType = {
   requestType: RequestType | `${RequestType}`;
   returnQuantity?: number;
   transactionId: string;
-  type?: ReturnType | `${ReturnType}`
+  type?: ReturnType | `${ReturnType}`;
 };
 
 export type CreateReturnRequest = {
-  draftId?: string,
-  returnRequest: ReturnRequestType
+  draftId?: string;
+  returnRequest: ReturnRequestType;
 };
 
 export type Amount = {
-  convertedFromCurrency?: CurrencyCode | `${CurrencyCode}`,
-  convertedFromValue?: number,
-  currency?: CurrencyCode | `${CurrencyCode}`,
-  value: string
+  convertedFromCurrency?: CurrencyCode | `${CurrencyCode}`;
+  convertedFromValue?: number;
+  currency?: CurrencyCode | `${CurrencyCode}`;
+  value: string;
 };
 
 export type DecideReturnRequest = {
@@ -313,18 +311,18 @@ export type DecideReturnRequest = {
 
 export type EscalateRequest = {
   comments: Text;
-  reason: EscalateReason | `${EscalateReason}`
+  reason: EscalateReason | `${EscalateReason}`;
 };
 
 export type GetEstimateRequest = {
-  itemId: string,
-  reason?: ReturnReason | `${ReturnReason}`,
+  itemId: string;
+  reason?: ReturnReason | `${ReturnReason}`;
   returnQuantity?: number;
   transactionId: string;
 };
 
 export type MarkAsReceivedRequest = {
-  comments?: Text
+  comments?: Text;
 };
 
 export type MarkAsShippedRequest = {
@@ -338,12 +336,12 @@ export type MarkAsShippedRequest = {
 
 export type ItemizedRefundDetailType = {
   refundAmount: Amount;
-  refundFeeType: Token
+  refundFeeType: Token;
 };
 
-export type  RefundDetailType = {
+export type RefundDetailType = {
   itemizedRefundDetail: ItemizedRefundDetailType;
-  totalAmount: Amount
+  totalAmount: Amount;
 };
 
 export type MarkRefundSentRequest = {
@@ -353,40 +351,40 @@ export type MarkRefundSentRequest = {
 };
 
 export type Comments = {
-  content: string,
-  language?: string,
-  translatedFromContent?: string,
-  translatedFromLanguage?: string
-}
+  content: string;
+  language?: string;
+  translatedFromContent?: string;
+  translatedFromLanguage?: string;
+};
 
 export type PostOrderItemizedRefundDetailType = {
-  refundAmount: Amount,
-  refundFeeType: RefundFeeType | `${RefundFeeType}`,
-  restockingFeePercentage?: string,
-}
+  refundAmount: Amount;
+  refundFeeType: RefundFeeType | `${RefundFeeType}`;
+  restockingFeePercentage?: string;
+};
 
 export type RefundDetail = {
-  itemizedRefundDetail: PostOrderItemizedRefundDetailType[]
-  totalAmount: Amount
-}
+  itemizedRefundDetail: PostOrderItemizedRefundDetailType[];
+  totalAmount: Amount;
+};
 
 export type PostOrderIssueRefundRequest = {
-  comments?: Comments,
-  refundDetail: RefundDetail,
-  relistItem?: boolean
+  comments?: Comments;
+  refundDetail: RefundDetail;
+  relistItem?: boolean;
 };
 
 export type ProvideLabelRequest = {
-  carrierEnum?: ShippingCarrier | `${ShippingCarrier}`,
-  carrierName?: string,
-  comments?: Text,
-  fileId?: string,
-  forwardShippingLabelProvided?: boolean,
-  labelAction: Token,
-  labelSentDate?: DateTime,
-  noLabelReason: Token,
-  returnLabelCost?: Amount,
-  trackingNumber?: string
+  carrierEnum?: ShippingCarrier | `${ShippingCarrier}`;
+  carrierName?: string;
+  comments?: Text;
+  fileId?: string;
+  forwardShippingLabelProvided?: boolean;
+  labelAction: Token;
+  labelSentDate?: DateTime;
+  noLabelReason: Token;
+  returnLabelCost?: Amount;
+  trackingNumber?: string;
 };
 
 export type SearchReturnParams = {
@@ -401,11 +399,11 @@ export type SearchReturnParams = {
   role?: Token;
   sort?: ReturnCountFilter | `${ReturnCountFilter}`;
   states?: ReturnState | `${ReturnState}`;
-  transaction_id?: string
+  transaction_id?: string;
 };
 
 export type SetReturnCreationSessionRequest = {
-  returnRequest: ReturnRequestType
+  returnRequest: ReturnRequestType;
 };
 
 export type UpdateTrackingRequest = {
@@ -418,36 +416,36 @@ export type UpdateTrackingRequest = {
 };
 
 export type UploadFileRequest = {
-  data: any,
+  data: any;
   fileName?: string;
-  filePurpose: FilePurpose | `${FilePurpose}`
+  filePurpose: FilePurpose | `${FilePurpose}`;
 };
 
 export type VoidLabelRequest = {
   comments?: Text;
-  labelId: string
+  labelId: string;
 };
 
 // OpenApi
-export type CreateSubscriptionRequest = commerceNotification['schemas']['CreateSubscriptionRequest']
-export type UpdateSubscriptionRequest = commerceNotification['schemas']['UpdateSubscriptionRequest']
-export type DestinationRequest = commerceNotification['schemas']['DestinationRequest']
-export type CommerceNotificationConfig = commerceNotification['schemas']['Config']
+export type CreateSubscriptionRequest = commerceNotification['schemas']['CreateSubscriptionRequest'];
+export type UpdateSubscriptionRequest = commerceNotification['schemas']['UpdateSubscriptionRequest'];
+export type DestinationRequest = commerceNotification['schemas']['DestinationRequest'];
+export type CommerceNotificationConfig = commerceNotification['schemas']['Config'];
 
-export type TranslateRequest = commerceTranslation['schemas']['TranslateRequest']
+export type TranslateRequest = commerceTranslation['schemas']['TranslateRequest'];
 
-export type CommerceCatalogSearchParams = commerceCatalogOperations['search']['parameters']['query']
+export type CommerceCatalogSearchParams = commerceCatalogOperations['search']['parameters']['query'];
 
 export type CreateVideoRequest = commerceMedia['schemas']['CreateVideoRequest'];
 export type InputStream = commerceMedia['schemas']['InputStream'];
 
-export type AttributeNameValue = buyBrowse['schemas']['AttributeNameValue']
-export type CompatibilityPayload = buyBrowse['schemas']['CompatibilityPayload']
-export type AddCartItemInput = buyBrowse['schemas']['AddCartItemInput']
-export type RemoveCartItemInput = buyBrowse['schemas']['RemoveCartItemInput']
-export type UpdateCartItemInput = buyBrowse['schemas']['UpdateCartItemInput']
-export type PlaceProxyBidRequest = buyOffer['schemas']['PlaceProxyBidRequest']
-export type SearchByImageRequest = buyBrowse['schemas']['SearchByImageRequest']
+export type AttributeNameValue = buyBrowse['schemas']['AttributeNameValue'];
+export type CompatibilityPayload = buyBrowse['schemas']['CompatibilityPayload'];
+export type AddCartItemInput = buyBrowse['schemas']['AddCartItemInput'];
+export type RemoveCartItemInput = buyBrowse['schemas']['RemoveCartItemInput'];
+export type UpdateCartItemInput = buyBrowse['schemas']['UpdateCartItemInput'];
+export type PlaceProxyBidRequest = buyOffer['schemas']['PlaceProxyBidRequest'];
+export type SearchByImageRequest = buyBrowse['schemas']['SearchByImageRequest'];
 
 export type BuyBrowseSearchParams = buyBrowseOperations['search']['parameters']['query'];
 export type BuyBrowseSearchByImageParams = buyBrowseOperations['searchByImage']['parameters']['query'];
@@ -458,16 +456,16 @@ export type BuyMarketingGetAlsoBoughtByProductParams = buyMarketingOperations['g
 export type BuyMarketingGetAlsoViewedByProductParams = buyMarketingOperations['getAlsoViewedByProduct']['parameters']['query'];
 export type BuyMarketingGetMerchandisedProductsParams = buyMarketingOperations['getMerchandisedProducts']['parameters']['query'];
 
-export type CreateGuestCheckoutSessionRequest = buyOrder['schemas']['CreateGuestCheckoutSessionRequest']
-export type CheckoutSessionRequestWithoutPayment = buyOrder['schemas']['CheckoutSessionRequestWithoutPayment']
-export type CouponRequest = buyOrder['schemas']['CouponRequest']
-export type CreateSignInCheckoutSessionRequest = buyOrder['schemas']['CreateSignInCheckoutSessionRequest']
-export type GuestPlaceOrderRequest = buyOrder['schemas']['GuestPlaceOrderRequest']
-export type InitiatePaymentRequest = buyOrder['schemas']['InitiatePaymentRequest']
-export type ShippingAddressImpl = buyOrder['schemas']['ShippingAddressImpl']
-export type UpdatePaymentInformation = buyOrder['schemas']['UpdatePaymentInformation']
-export type UpdateQuantity = buyOrder['schemas']['UpdateQuantity']
-export type UpdateShippingOption = buyOrder['schemas']['UpdateShippingOption']
+export type CreateGuestCheckoutSessionRequest = buyOrder['schemas']['CreateGuestCheckoutSessionRequest'];
+export type CheckoutSessionRequestWithoutPayment = buyOrder['schemas']['CheckoutSessionRequestWithoutPayment'];
+export type CouponRequest = buyOrder['schemas']['CouponRequest'];
+export type CreateSignInCheckoutSessionRequest = buyOrder['schemas']['CreateSignInCheckoutSessionRequest'];
+export type GuestPlaceOrderRequest = buyOrder['schemas']['GuestPlaceOrderRequest'];
+export type InitiatePaymentRequest = buyOrder['schemas']['InitiatePaymentRequest'];
+export type ShippingAddressImpl = buyOrder['schemas']['ShippingAddressImpl'];
+export type UpdatePaymentInformation = buyOrder['schemas']['UpdatePaymentInformation'];
+export type UpdateQuantity = buyOrder['schemas']['UpdateQuantity'];
+export type UpdateShippingOption = buyOrder['schemas']['UpdateShippingOption'];
 
 export type SuppressViolationRequest = sellCompliance['schemas']['SuppressViolationRequest'];
 
@@ -488,53 +486,53 @@ export type ContestPaymentDisputeRequest = sellFulfillment['schemas']['ContestPa
 export type IssueRefundRequest = sellFulfillment['schemas']['IssueRefundRequest'];
 export type ShippingFulfillmentDetails = sellFulfillment['schemas']['ShippingFulfillmentDetails'];
 
-export type BulkEbayOfferDetailsWithKeys = sellInventory['schemas']['BulkEbayOfferDetailsWithKeys']
-export type BulkInventoryItem = sellInventory['schemas']['BulkInventoryItem']
-export type BulkMigrateListing = sellInventory['schemas']['BulkMigrateListing']
-export type BulkOffer = sellInventory['schemas']['BulkOffer']
-export type BulkPriceQuantity = sellInventory['schemas']['BulkPriceQuantity']
-export type Compatibility = sellInventory['schemas']['Compatibility']
-export type EbayOfferDetailsWithId = sellInventory['schemas']['EbayOfferDetailsWithId']
-export type EbayOfferDetailsWithKeys = sellInventory['schemas']['EbayOfferDetailsWithKeys']
-export type InventoryItemGroup = sellInventory['schemas']['InventoryItemGroup']
-export type InventoryLocation = sellInventory['schemas']['InventoryLocation']
-export type InventoryLocationFull = sellInventory['schemas']['InventoryLocationFull']
-export type OfferKeysWithId = sellInventory['schemas']['OfferKeysWithId']
-export type PublishByInventoryItemGroupRequest = sellInventory['schemas']['PublishByInventoryItemGroupRequest']
-export type WithdrawByInventoryItemGroupRequest = sellInventory['schemas']['WithdrawByInventoryItemGroupRequest']
-export type InventoryItem = sellInventory['schemas']['InventoryItem']
+export type BulkEbayOfferDetailsWithKeys = sellInventory['schemas']['BulkEbayOfferDetailsWithKeys'];
+export type BulkInventoryItem = sellInventory['schemas']['BulkInventoryItem'];
+export type BulkMigrateListing = sellInventory['schemas']['BulkMigrateListing'];
+export type BulkOffer = sellInventory['schemas']['BulkOffer'];
+export type BulkPriceQuantity = sellInventory['schemas']['BulkPriceQuantity'];
+export type Compatibility = sellInventory['schemas']['Compatibility'];
+export type EbayOfferDetailsWithId = sellInventory['schemas']['EbayOfferDetailsWithId'];
+export type EbayOfferDetailsWithKeys = sellInventory['schemas']['EbayOfferDetailsWithKeys'];
+export type InventoryItemGroup = sellInventory['schemas']['InventoryItemGroup'];
+export type InventoryLocation = sellInventory['schemas']['InventoryLocation'];
+export type InventoryLocationFull = sellInventory['schemas']['InventoryLocationFull'];
+export type OfferKeysWithId = sellInventory['schemas']['OfferKeysWithId'];
+export type PublishByInventoryItemGroupRequest = sellInventory['schemas']['PublishByInventoryItemGroupRequest'];
+export type WithdrawByInventoryItemGroupRequest = sellInventory['schemas']['WithdrawByInventoryItemGroupRequest'];
+export type InventoryItem = sellInventory['schemas']['InventoryItem'];
 
-export type BulkCreateAdRequest = sellMarketing['schemas']['BulkCreateAdRequest']
-export type BulkCreateAdsByInventoryReferenceRequest = sellMarketing['schemas']['BulkCreateAdsByInventoryReferenceRequest']
-export type BulkCreateKeywordRequest = sellMarketing['schemas']['BulkCreateKeywordRequest']
-export type BulkCreateNegativeKeywordRequest = sellMarketing['schemas']['BulkCreateNegativeKeywordRequest']
-export type BulkDeleteAdRequest = sellMarketing['schemas']['BulkDeleteAdRequest']
-export type BulkDeleteAdsByInventoryReferenceRequest = sellMarketing['schemas']['BulkDeleteAdsByInventoryReferenceRequest']
-export type BulkUpdateAdStatusByListingIdRequest = sellMarketing['schemas']['BulkUpdateAdStatusByListingIdRequest']
-export type BulkUpdateAdStatusRequest = sellMarketing['schemas']['BulkUpdateAdStatusRequest']
-export type BulkUpdateKeywordRequest = sellMarketing['schemas']['BulkUpdateKeywordRequest']
-export type BulkUpdateNegativeKeywordRequest = sellMarketing['schemas']['BulkUpdateNegativeKeywordRequest']
-export type CloneCampaignRequest = sellMarketing['schemas']['CloneCampaignRequest']
-export type CreateAdGroupRequest = sellMarketing['schemas']['CreateAdGroupRequest']
-export type CreateAdRequest = sellMarketing['schemas']['CreateAdRequest']
-export type CreateAdsByInventoryReferenceRequest = sellMarketing['schemas']['CreateAdsByInventoryReferenceRequest']
-export type CreateCampaignRequest = sellMarketing['schemas']['CreateCampaignRequest']
-export type CreateKeywordRequest = sellMarketing['schemas']['CreateKeywordRequest']
-export type CreateNegativeKeywordRequest = sellMarketing['schemas']['CreateNegativeKeywordRequest']
-export type CreateReportTask = sellMarketing['schemas']['CreateReportTask']
-export type ItemPriceMarkdown = sellMarketing['schemas']['ItemPriceMarkdown']
-export type ItemPromotion = sellMarketing['schemas']['ItemPromotion']
-export type TargetedBidRequest = sellMarketing['schemas']['TargetedBidRequest']
-export type TargetedKeywordRequest = sellMarketing['schemas']['TargetedKeywordRequest']
-export type UpdateAdGroupRequest = sellMarketing['schemas']['UpdateAdGroupRequest']
-export type UpdateAdrateStrategyRequest = sellMarketing['schemas']['UpdateAdrateStrategyRequest']
-export type UpdateBidPercentageRequest = sellMarketing['schemas']['UpdateBidPercentageRequest']
-export type UpdateCampaignBudgetRequest = sellMarketing['schemas']['UpdateCampaignBudgetRequest']
-export type UpdateCampaignIdentificationRequest = sellMarketing['schemas']['UpdateCampaignIdentificationRequest']
-export type UpdateKeywordRequest = sellMarketing['schemas']['UpdateKeywordRequest']
-export type UpdateNegativeKeywordRequest = sellMarketing['schemas']['UpdateNegativeKeywordRequest']
-export type CreateEmailCampaignRequest = sellMarketing['schemas']['CreateEmailCampaignRequest']
-export type UpdateCampaignRequest = sellMarketing['schemas']['UpdateCampaignRequest']
-export type QuickSetupRequest = sellMarketing['schemas']['QuickSetupRequest']
+export type BulkCreateAdRequest = sellMarketing['schemas']['BulkCreateAdRequest'];
+export type BulkCreateAdsByInventoryReferenceRequest = sellMarketing['schemas']['BulkCreateAdsByInventoryReferenceRequest'];
+export type BulkCreateKeywordRequest = sellMarketing['schemas']['BulkCreateKeywordRequest'];
+export type BulkCreateNegativeKeywordRequest = sellMarketing['schemas']['BulkCreateNegativeKeywordRequest'];
+export type BulkDeleteAdRequest = sellMarketing['schemas']['BulkDeleteAdRequest'];
+export type BulkDeleteAdsByInventoryReferenceRequest = sellMarketing['schemas']['BulkDeleteAdsByInventoryReferenceRequest'];
+export type BulkUpdateAdStatusByListingIdRequest = sellMarketing['schemas']['BulkUpdateAdStatusByListingIdRequest'];
+export type BulkUpdateAdStatusRequest = sellMarketing['schemas']['BulkUpdateAdStatusRequest'];
+export type BulkUpdateKeywordRequest = sellMarketing['schemas']['BulkUpdateKeywordRequest'];
+export type BulkUpdateNegativeKeywordRequest = sellMarketing['schemas']['BulkUpdateNegativeKeywordRequest'];
+export type CloneCampaignRequest = sellMarketing['schemas']['CloneCampaignRequest'];
+export type CreateAdGroupRequest = sellMarketing['schemas']['CreateAdGroupRequest'];
+export type CreateAdRequest = sellMarketing['schemas']['CreateAdRequest'];
+export type CreateAdsByInventoryReferenceRequest = sellMarketing['schemas']['CreateAdsByInventoryReferenceRequest'];
+export type CreateCampaignRequest = sellMarketing['schemas']['CreateCampaignRequest'];
+export type CreateKeywordRequest = sellMarketing['schemas']['CreateKeywordRequest'];
+export type CreateNegativeKeywordRequest = sellMarketing['schemas']['CreateNegativeKeywordRequest'];
+export type CreateReportTask = sellMarketing['schemas']['CreateReportTask'];
+export type ItemPriceMarkdown = sellMarketing['schemas']['ItemPriceMarkdown'];
+export type ItemPromotion = sellMarketing['schemas']['ItemPromotion'];
+export type TargetedBidRequest = sellMarketing['schemas']['TargetedBidRequest'];
+export type TargetedKeywordRequest = sellMarketing['schemas']['TargetedKeywordRequest'];
+export type UpdateAdGroupRequest = sellMarketing['schemas']['UpdateAdGroupRequest'];
+export type UpdateAdrateStrategyRequest = sellMarketing['schemas']['UpdateAdrateStrategyRequest'];
+export type UpdateBidPercentageRequest = sellMarketing['schemas']['UpdateBidPercentageRequest'];
+export type UpdateCampaignBudgetRequest = sellMarketing['schemas']['UpdateCampaignBudgetRequest'];
+export type UpdateCampaignIdentificationRequest = sellMarketing['schemas']['UpdateCampaignIdentificationRequest'];
+export type UpdateKeywordRequest = sellMarketing['schemas']['UpdateKeywordRequest'];
+export type UpdateNegativeKeywordRequest = sellMarketing['schemas']['UpdateNegativeKeywordRequest'];
+export type CreateEmailCampaignRequest = sellMarketing['schemas']['CreateEmailCampaignRequest'];
+export type UpdateCampaignRequest = sellMarketing['schemas']['UpdateCampaignRequest'];
+export type QuickSetupRequest = sellMarketing['schemas']['QuickSetupRequest'];
 
-export type FindListingRecommendationRequest = sellRecommendation['schemas']['FindListingRecommendationRequest']
+export type FindListingRecommendationRequest = sellRecommendation['schemas']['FindListingRecommendationRequest'];

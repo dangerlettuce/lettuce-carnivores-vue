@@ -1,10 +1,10 @@
 import ClientAlertsCalls from '../api/traditional/clientAlerts/index.js';
-import type {Fields} from '../api/traditional/fields.js';
+import type { Fields } from '../api/traditional/fields.js';
 import FindingCalls from '../api/traditional/finding/index.js';
 import MerchandisingCalls from '../api/traditional/merchandising/index.js';
 import ShoppingCalls from '../api/traditional/shopping/index.js';
 import TradingCalls from '../api/traditional/trading/index.js';
-import type {TraditionalApiConfig} from '../api/traditional/XMLRequest.js';
+import type { TraditionalApiConfig } from '../api/traditional/XMLRequest.js';
 
 export type XMLApiCall = (fields?: Fields | null, apiConfig?: TraditionalApiConfig) => Promise<any>;
 
@@ -29,14 +29,14 @@ export type Merchandising = {
 };
 
 type Endpoint = {
-  production: string,
-  sandbox: string
+  production: string;
+  sandbox: string;
 };
 
 export type TraditionalApi = {
-  endpoint: Endpoint,
-  xmlns: string,
-  path: string,
-  calls: typeof TradingCalls | typeof ShoppingCalls | typeof FindingCalls | typeof ClientAlertsCalls | typeof MerchandisingCalls,
-  headers: (callName: string, accessToken?: string | null) => object
+  endpoint: Endpoint;
+  xmlns: string;
+  path: string;
+  calls: typeof TradingCalls | typeof ShoppingCalls | typeof FindingCalls | typeof ClientAlertsCalls | typeof MerchandisingCalls;
+  headers: (callName: string, accessToken?: string | null) => object;
 };

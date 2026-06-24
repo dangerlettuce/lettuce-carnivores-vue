@@ -1,17 +1,11 @@
 <template>
-    <div class="guide-container">
-        <GuideCard 
-            v-for="(value, name, index) in guideData.genus"
-            :key="name" 
-            :care-data="value"
-            :alt-style="index % 2 !== 0 ? true : false" 
-        />
-    </div>
+  <div class="guide-container">
+    <GuideCard v-for="(value, name, index) in guideData.genus" :key="name" :care-data="value" :alt-style="index % 2 !== 0 ? true : false" />
+  </div>
 </template>
 <script setup lang="ts">
-import GuideCard from '@/components/GuideCard.vue'
-import { guideData }  from '@/apis/CareData'
-
+import GuideCard from '@/components/GuideCard.vue';
+import { guideData } from '@/apis/CareData';
 
 // quick reference option
 // fresh divisions
@@ -20,6 +14,6 @@ import { guideData }  from '@/apis/CareData'
 
 <style scoped>
 .guide-container {
-    padding: 0 clamp(.1em, 6vw, 20rem)
+  padding: 0 clamp(0.1em, 6vw, 20rem);
 }
 </style>

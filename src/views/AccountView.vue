@@ -1,10 +1,9 @@
 <template>
-    <div class="">
-        <AccountHome />
-    </div>
-    
+  <div class="">
+    <AccountHome />
+  </div>
 </template>
 
 <script setup lang="ts">
-import AccountHome from '@/components/AccountHome.vue'
+import AccountHome from '@/components/AccountHome.vue';
 </script>

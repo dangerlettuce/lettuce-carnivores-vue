@@ -27,16 +27,16 @@
 </template>
 
 <script setup lang="ts">
-import { type PropType } from 'vue'
-import type { PhotoItem } from '@/types/Product'
-import type { SelectedFile } from './usePhotoManager'
-import { getPhotoUrl, type AllowedSizes } from '@/composables/usePhotoUtils'
-import ThickArrowUp from '@/assets/icons/ThickArrowUp.vue'
-import ThickArrowDown from '@/assets/icons/ThickArrowDown.vue'
-import TrashcanIcon from '@/assets/icons/TrashcanIcon.vue'
-import BaseButton from '../ui/BaseButton.vue'
+import { type PropType } from 'vue';
+import type { PhotoItem } from '@/types/Product';
+import type { SelectedFile } from './usePhotoManager';
+import { getPhotoUrl, type AllowedSizes } from '@/composables/usePhotoUtils';
+import ThickArrowUp from '@/assets/icons/ThickArrowUp.vue';
+import ThickArrowDown from '@/assets/icons/ThickArrowDown.vue';
+import TrashcanIcon from '@/assets/icons/TrashcanIcon.vue';
+import BaseButton from '../ui/BaseButton.vue';
 
-const emit = defineEmits(['move-up', 'move-down', 'remove-photo'])
+const emit = defineEmits(['move-up', 'move-down', 'remove-photo']);
 defineProps({
   photo: {
     type: Object as PropType<PhotoItem>,
@@ -50,10 +50,10 @@ defineProps({
     type: Boolean,
     required: false,
   },
-})
+});
 
 function photoSrc(photo: PhotoItem | SelectedFile, size: AllowedSizes = 256) {
-  return getPhotoUrl((photo as PhotoItem).path, size)
+  return getPhotoUrl((photo as PhotoItem).path, size);
 }
 </script>
 
