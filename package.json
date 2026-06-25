@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
-	"packageManager": "pnpm@11.8.0",
+	"packageManager": "pnpm@11.9.0",
 	"scripts": {
 		"dev": "vite --host",
 		"build": "run-p type-check \"build-only {@}\" --",
@@ -65,7 +65,6 @@
 		"vite-plugin-vue-devtools": "^7.7.9",
 		"vite-svg-loader": "^5.1.1",
 		"vue": "^3.5.38",
-		"vue-router": "^4.6.4",
-		"vue-tsc": "^2.2.12"
+		"vue-router": "^4.6.4"
 	}
 }

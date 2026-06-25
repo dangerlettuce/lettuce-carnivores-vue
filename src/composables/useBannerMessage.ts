@@ -12,14 +12,14 @@ type BannerDetails = {
 };
 
 export function useBannerMessage() {
-  const bannerDetails = ref<BannerDetails | null>({ message: null, link: null, style: null, showBanner: null });
+  const bannerDetails = ref<BannerDetails>({ message: null, link: null, style: null, showBanner: null });
   const showBanner = computed(() => bannerDetails.value !== null && bannerDetails.value.showBanner === true);
 
   async function getBannerDetails() {
     const res = await findDocById(bannerCollectionName, bannerDetailsDocId);
     if (res === null) {
-      bannerDetails.value = null;
-      console.error('Unable to fetch banner details');
+      bannerDetails.value = { message: null, link: null, style: null, showBanner: null };
+      window.alert('Unable to fetch banner details');
       return;
     }
     bannerDetails.value = parseBannerDetails(res);
@@ -38,8 +38,8 @@ export function useBannerMessage() {
     return true;
   }
 
-  function parseBannerDetails(data: any): BannerDetails | null {
-    if (!data || typeof data !== 'object') return null;
+  function parseBannerDetails(data: any): BannerDetails {
+    if (!data || typeof data !== 'object') return { message: null, link: null, style: null, showBanner: null };
 
     return {
       link: data.link || null,

@@ -158,7 +158,7 @@ export const usePlantStore = defineStore('plant', () => {
     sortAlphabetically(availableCategories, 'name');
     return availableCategories;
   };
-  const getAvailablePlants = (category: PlantCategory | undefined, includeHidden?: boolean) => {
+  const getAvailablePlants = (category: PlantCategory | undefined, includeHidden?: boolean, hiddenPassword?: string | null) => {
     if (category === undefined) {
       return [];
     }
@@ -174,6 +174,7 @@ export const usePlantStore = defineStore('plant', () => {
     filteredPlants = filteredPlants.filter((plant) => selectedStatuses.includes(plant.status));
     filteredPlants = filteredPlants.filter((plant) => (selectedOther.includes('Specimen') ? true : plant.isRepresentative));
     filteredPlants = filteredPlants.filter((plant) => (selectedOther.includes('Representative') ? true : !plant.isRepresentative));
+    filteredPlants = filteredPlants.filter((plant) => (plant.password === undefined || plant.password === null || plant.password === '' || plant.password === hiddenPassword));
     return filteredPlants;
   };
 

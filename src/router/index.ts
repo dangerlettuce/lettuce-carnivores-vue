@@ -40,8 +40,21 @@ const routeData = [
     },
   },
   {
-    path: '/plants/:id/hidden/:password?',
+    path: '/plants/:id/:sku?',
     name: 'productDetails',
+    label: 'Products Details',
+    key: '$route.params.id',
+    component: ProductDetailView,
+    props: (route: RouteLocation) => ({ query: route.query.showHidden }),
+    meta: {
+      showInNav: false,
+      requiresLogin: false,
+      requiresAdmin: false,
+    },
+  },
+  {
+    path: '/plants/:id/hidden/:password?',
+    name: 'productDetailsHiddenPassword',
     label: 'Products Details',
     key: '$route.params.id',
     component: ProductDetailView,
@@ -53,12 +66,12 @@ const routeData = [
     },
   },
   {
-    path: '/plants/:id/:sku?',
-    name: 'productDetails',
+    path: '/plants/:id/:sku?/hidden/:password?',
+    name: 'productDetailsSkuHiddenPassword',
     label: 'Products Details',
     key: '$route.params.id',
     component: ProductDetailView,
-    props: (route: RouteLocation) => ({ query: route.query.showHidden }),
+    props: (route: RouteLocation) => ({ showHidden: true, password: route.params.password }),
     meta: {
       showInNav: false,
       requiresLogin: false,

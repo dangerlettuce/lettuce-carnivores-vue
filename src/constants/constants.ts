@@ -25,6 +25,8 @@ export const sizeList = [
   { label: 'Snack Bag', value: 'Snack Bag' },
   { label: 'Sandwich Bag', value: 'Sandwich Bag' },
   { label: 'Quart Bag', value: 'Quart Bag' },
+  { label: '1 jar', value: '1 jar' },
+  { label: 'each', value: 'each' }
 ];
 
 export const genusListArr = ['', 'Heliamphora', 'Cephalotus', 'Darlingtonia', 'Nepenthes', 'Other'];

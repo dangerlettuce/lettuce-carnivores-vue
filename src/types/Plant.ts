@@ -23,6 +23,7 @@ export type Plant = {
   price: number;
   discountedPrice?: number;
   isDiscounted?: boolean;
+  password?: string;
   quantity: number;
   photos: PhotoItem[];
   plantCategoryId: string;
@@ -55,4 +56,6 @@ export type PotSize =
   | 'Bundle - 3 lg'
   | 'Snack Bag'
   | 'Sandwich Bag'
-  | 'Quart Bag';
+  | 'Quart Bag'
+  | '1 jar'
+  | 'each';

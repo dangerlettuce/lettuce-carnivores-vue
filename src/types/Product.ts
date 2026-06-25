@@ -69,7 +69,9 @@ export type PotSize =
   | 'Bundle - 3 lg'
   | 'Snack Bag'
   | 'Sandwich Bag'
-  | 'Quart Bag';
+  | 'Quart Bag'
+  | '1 jar'
+  | 'each';
 // Product Category:
 //   - type: plant, supply
 //     - category: Heli, Nep, pots, fertilizer, growingMedia
