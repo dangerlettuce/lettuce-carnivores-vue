@@ -2,6 +2,7 @@ import type { Product, ProductCategory, Plant, PlantCategory } from '@/types/Pro
 import type { PlantCategory as OldPlantCategory } from '@/types/Plant';
 import { deleteAllPhotosUtil } from '@/composables/usePhotoUtils';
 import { findAll, deleteItem, findDocById } from '@/apis/dataServices';
+import type { CartItem } from '@/types/Orders';
 
 export async function findProductById(id: number | string, collectionName: string) {
   const res = await findDocById(collectionName, id).catch((err) => console.log(err));
@@ -38,6 +39,18 @@ export async function deleteById(id: number | string, collectionName: string, co
   return { success: true, error: false, response: res, message: 'Deleted' };
 }
 
+export const getProductDisplayName = (item: CartItem | ProductCategory | PlantCategory | OldPlantCategory) => {
+  let name = item.name;
+  if ('location' in item && item.location) {
+    name += ` (${item.location})`;
+  }
+  if ('clone' in item && item.clone) {
+    name += ` - ${item.clone}`;
+  }
+
+  return name;
+}
+
 export const newProductCategory: ProductCategory = {
   id: '',
   category: '',
@@ -56,6 +69,7 @@ export const newPlantCategory: PlantCategory = {
   category: 'Plants',
   speciesHybrid: '',
   source: '',
+  location: '',
   genus: '',
   clone: '',
 };

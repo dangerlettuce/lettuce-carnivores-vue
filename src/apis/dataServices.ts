@@ -188,7 +188,7 @@ export async function getAllPlants() {
   if (res) {
     for (const category of res as PlantCategory[]) {
       for (const plant of category.plants) {
-        plants.push({ ...plant, name: category.name, genus: category.genus, clone: category.clone });
+        plants.push({ ...plant, name: category.name, genus: category.genus, location: category.location, clone: category.clone });
       }
     }
   }

@@ -4,9 +4,12 @@ import type { PhotoItem } from '@/types/Product';
 export const productCategoryList = ['Plants', 'Supplies'];
 export const productStatusList = ['Active', 'Inactive', 'Hidden', 'Archived'];
 
+export const Category = ['Plant', 'Supplies', 'Merchandise'] as const;
+
 export const subCategories = new Map([
   ['Plants', ['Heliamphora', 'Nepenthes', 'Cephalotus', 'Other']],
-  ['Supplies', ['Fertilizer', 'Tools', 'Other']],
+  ['Supplies', ['Fertilizer', 'Tools', 'Potting Media', 'Other']],
+  ['Merchandise', ['Apparel', 'Accessories', 'Other']],
 ]);
 
 export const photoResolutions = [256, 512, 960, 1600];
@@ -116,7 +119,9 @@ export const defaultSort = [
 export const newPlantCategory: PlantCategory = {
   id: '',
   name: '',
+  category: 'Plant',
   genus: '',
+  location: '',
   clone: '',
   speciesHybrid: '',
   experience: '',

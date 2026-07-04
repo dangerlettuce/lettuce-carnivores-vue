@@ -11,48 +11,48 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from 'vue';
-import { findAll, findByProperty } from '@/apis/dataServices';
-import { toast } from 'vue3-toastify';
-import { sortNumerically } from '@/utils/utils';
-import OrdersList from '@/components/OrdersList.vue';
-import type { Order } from '@/types/Orders';
-import OrderPickList from '@/components/OrderPickList.vue';
-const orders: Ref<Order[]> = ref([]);
-const isLoading = ref(false);
-onMounted(() => {
-  fetchOpenOrders();
-});
+  import { onMounted, ref, type Ref } from 'vue';
+  import { findAll, findByProperty } from '@/apis/dataServices';
+  import { toast } from 'vue3-toastify';
+  import { sortNumerically } from '@/utils/utils';
+  import OrdersList from '@/components/OrdersList.vue';
+  import type { Order } from '@/types/Orders';
+  import OrderPickList from '@/features/admin/OrderPickList.vue';
+  const orders: Ref<Order[]> = ref([]);
+  const isLoading = ref(false);
+  onMounted(() => {
+    fetchOpenOrders();
+  });
 
-const fetchOpenOrders = async () => {
-  isLoading.value = true;
-  try {
-    const res = await findByProperty('orders', 'orderStatus.status', '!=', 'Complete');
-    if (res !== undefined && res.length !== 0) {
+  const fetchOpenOrders = async () => {
+    isLoading.value = true;
+    try {
+      const res = await findByProperty('orders', 'orderStatus.status', '!=', 'Complete');
+      if (res !== undefined && res.length !== 0) {
+        sortNumerically(res);
+        orders.value = res as Order[];
+      }
+    } catch (e: any) {
+      console.error(e);
+      toast.error('Error fetching orders');
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  async function findAllOrders() {
+    const res = await findAll(`orders`);
+    if (res) {
       sortNumerically(res);
       orders.value = res as Order[];
     }
-  } catch (e: any) {
-    console.error(e);
-    toast.error('Error fetching orders');
-  } finally {
-    isLoading.value = false;
   }
-};
-
-async function findAllOrders() {
-  const res = await findAll(`orders`);
-  if (res) {
-    sortNumerically(res);
-    orders.value = res as Order[];
-  }
-}
 </script>
 
 <style scoped>
-.admin-layout {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
+  .admin-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 </style>

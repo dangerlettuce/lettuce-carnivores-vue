@@ -1,12 +1,5 @@
 import { type PlantCategory, type Plant } from '@/types/Plant';
 
-export function getCardName(category: PlantCategory) {
-  if (category.clone === undefined || !category.clone || category.clone === '') {
-    return category.name;
-  } else {
-    return `${category.name} - ${category.clone}`;
-  }
-}
 export function getDisplayPrice(category: PlantCategory, availablePlants: Plant[]) {
   if (availablePlants.length === 0) {
     return '';

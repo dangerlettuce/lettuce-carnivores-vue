@@ -9,7 +9,7 @@ export type ShoppingCart = {
 };
 
 export type CartItem = Pick<Plant, 'id' | 'sku' | 'size' | 'isRepresentative' | 'shelfLocation' | 'dateListedForSale' | 'price'> &
-  Pick<PlantCategory, 'name' | 'clone'> & {
+  Pick<PlantCategory, 'name' | 'clone' | 'location' | 'category'> & {
     plantCategoryId: PlantCategory['id'];
     categoryId: PlantCategory['id'];
     quantity: number;

@@ -1,9 +1,14 @@
 import type { Timestamp } from 'firebase/firestore';
 import type { PhotoItem } from './Product';
+
+const Category = ['Plant', 'Supplies', 'Merchandise'] as const;
+
 export type PlantCategory = {
   name: string;
+  category: typeof Category[number];
   genus: string;
   clone: string;
+  location: string;
   speciesHybrid: '' | 'Species' | 'Hybrid';
   experience: '' | 'Beginner Friendly' | 'Intermediate' | 'Advanced';
   description: string;
@@ -37,6 +42,7 @@ export interface PlantWithCategoryDetails extends Plant {
   name: string;
   genus: string;
   clone: string;
+  location: string;
 }
 export type PotSize =
   | ''

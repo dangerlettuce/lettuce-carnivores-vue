@@ -1,6 +1,6 @@
 export interface ProductCategory {
   id: string;
-  category: 'Plants' | 'Supplies' | '';
+  category: 'Plants' | 'Supplies' | 'Merchandise' | '';
   subCategory: string;
   name: string;
   description: string;
@@ -15,6 +15,7 @@ export interface PlantCategory extends ProductCategory {
   speciesHybrid: '' | 'Species' | 'Hybrid';
   source: string;
   genus: string;
+  location: string;
   clone: string;
 }
 

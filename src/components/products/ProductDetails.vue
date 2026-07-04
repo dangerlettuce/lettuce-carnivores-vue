@@ -3,7 +3,12 @@
     <PhotoCarousel class="photo-section" :photos="photosToDisplay" />
     <article class="product-information">
       <h1>{{ plantCategory.name }}</h1>
-      <h2 v-if="plantCategory.clone !== ''">Clone {{ plantCategory.clone }}</h2>
+      <dl>
+        <dt v-if="plantCategory.location">Location:</dt>
+        <dd v-if="plantCategory.location">{{ plantCategory.location }}</dd>
+        <dt v-if="plantCategory.clone !== ''">Clone:</dt>
+        <dd v-if="plantCategory.clone !== ''">{{ plantCategory.clone }}</dd>
+      </dl>
       <p class="description" :class="hideDescription ? '' : 'description-one-line'" @click="toggleHideDescription">
         {{ plantCategory.description }}
       </p>
@@ -25,7 +30,7 @@
           class="px-4 specimen-button"
           :type="selectedPlant?.sku === plant.sku ? 'primary' : 'secondary-outline'"
           @click="setSelectedPlant(plant)">
-          {{ `Specimen ${plant.id} - ${plant.size}` }}
+          {{ `${plant.id} - ${plant.size}` }}
         </BaseButton>
       </div>
       <div v-if="daysSinceDivision && freshDivision?.isFreshDivision" class="mt-4">
@@ -120,7 +125,7 @@
     if (selectedPlant.value === undefined) {
       return '';
     }
-    return selectedPlant.value.isRepresentative ? 'Representative' : 'Specimen';
+    return selectedPlant.value.isRepresentative ? 'Representative' : 'Exact';
   });
 
   const plantTypeDescription = computed(() => {
@@ -128,8 +133,8 @@
       return '';
     }
     return selectedPlant.value.isRepresentative
-      ? 'The photos show a plant or item that is similar to what you will receive.'
-      : 'The photos show the exact plant/item your will receive.';
+      ? 'The photos show a plant or item that is similar in size and maturity to what you will receive.'
+      : 'The photos show the exact plant/item you will receive. Rarely, the exact plant/item may not be available or in good health. In those situations, substitutions for an equivalent plant/items may be made.';
   });
 
   async function fetchData() {
@@ -204,6 +209,7 @@
       const res = await addItemToCart({
         sku: selectedPlant.value.sku,
         id: selectedPlant.value.id,
+        category: plantCategory.value.category,
         plantCategoryId: selectedPlant.value.plantCategoryId,
         price: selectedPlant.value.price,
         quantity: 1,
@@ -211,6 +217,7 @@
         categoryId: plantCategory.value.id,
         name: plantCategory.value.name,
         clone: plantCategory.value.clone,
+        location: plantCategory.value.location,
         photo: selectedPlant.value.photos[0],
         size: selectedPlant.value.size,
         isRepresentative: selectedPlant.value.isRepresentative,
@@ -289,10 +296,19 @@
     justify-content: center;
     margin: 0 1rem;
     max-width: 30rem;
-  }
+    gap: 0.5rem;
 
-  .description {
-    margin-block: 1rem;
+    dl {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: max-content max-content;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    dt {
+      font-weight: bold;
+    }
   }
 
   .specimen-button-container {

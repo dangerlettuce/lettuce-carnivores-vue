@@ -11,7 +11,7 @@
 		"deploy": "firebase deploy --except functions",
 		"test:unit": "vitest",
 		"build-only": "vite build",
-		"type-check": "vue-tsc --build --force",
+		"type-check": "tsc --build --force",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"format": "prettier --write src/"

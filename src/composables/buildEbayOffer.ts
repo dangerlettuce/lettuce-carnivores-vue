@@ -1,7 +1,7 @@
 import type { EbayOfferDetailsWithKeys } from '@/types/ebayApi/types';
 import type { Plant, PlantCategory } from '@/types/Plant';
 import { formattedDate } from '@/utils/utils';
-const ebayMarkupPercentage = 1.13 as const;
+const ebayMarkupPercentage = 1.05 as const;
 const autoDeclinePricePercentage = 0.7 as const;
 const autoAcceptPricePercentage = 0.9 as const;
 export async function buildEbayOffer(plantCategory: PlantCategory, plant: Plant) {
