@@ -36,6 +36,7 @@ export type PotSize =
   | '4" deep'
   | '4.33" semi-round'
   | '4.5" deep'
+  | '4.75" deep'
   | '5" semi-round'
   | '5" deep'
   | 'Bare Root';

@@ -36,6 +36,7 @@ export function plantToProduct(plant: OldPlant, plantCategory: OldPlantCategory)
     source: '',
     genus: plantCategory.genus,
     clone: plantCategory.clone,
+    location: plantCategory.location,
   } as PlantCategory;
 
   const newPlant = {

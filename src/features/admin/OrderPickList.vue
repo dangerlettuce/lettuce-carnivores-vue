@@ -25,10 +25,16 @@
     </div>
 
     <ul class="black-text">
-      <li v-for="item in order.lineItems" :key="item.price_data.product_data.metadata.sku" class="order-item">
-        <span class="square" />{{
-          `${item.price_data.product_data.metadata.sku} - ${item.price_data.product_data.name} - ${item.price_data.product_data.metadata.size}`
-        }}
+      <li v-for="(item, index) in order.lineItems" :key="getLineItemId(order.id, item, index)" class="order-item">
+        <label class="order-item-label" :for="getLineItemId(order.id, item, index)">
+          <input
+            :id="getLineItemId(order.id, item, index)"
+            type="checkbox"
+            :checked="isLineItemChecked(order.id, item, index)"
+            @change="onLineItemCheckedChange($event, order.id, item, index)"
+          />
+          <span>{{ getLineItemLabel(item) }}</span>
+        </label>
       </li>
     </ul>
     <br />
@@ -44,6 +50,7 @@
 <script setup lang="ts">
 import type { Order } from '@/types/Orders';
 import { formatDate } from '@/utils/utils';
+import { useOrderPickList } from './useOrderPickList';
 import { computed, type PropType } from 'vue';
 
 const props = defineProps({ orders: { type: Array as PropType<Order[]>, required: true } });
@@ -64,6 +71,8 @@ const pickList = computed(() => {
   });
   return list.sort((a, b) => a.localeCompare(b));
 });
+
+const { getLineItemLabel, getLineItemId, isLineItemChecked, onLineItemCheckedChange } = useOrderPickList();
 
 // TEMP: Stripe is all fucked up because you forgot the break so now you gotta leave this shit here until those flow through dumbass.
 const standardShippingId = 'shr_1PhcE1HlHApXEku9jEjOnRY5';
@@ -153,13 +162,10 @@ h2 {
   margin-top: 2rem;
 }
 
-.square {
-  display: inline-block;
-  height: 1rem;
-  width: 1rem;
-  background-color: #ffffff;
-  border: 2px solid black;
-  margin: auto 2ch;
+.order-item-label {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 1ch;
 }
 
 .black-text {

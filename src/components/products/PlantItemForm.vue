@@ -1,43 +1,48 @@
 <template>
-  <form class="plant-item-form">
-    <FormKit type="text" label="ID" input-class="w-100" validation="required" v-model="plant.id"
-      @change="setRepresentative" />
-    <FormKit type="text" label="SKU" inner-class="w-100" v-model="plant.sku" />
-    <FormKit type="select" label="Size" validation="required" :options="sizeList" v-model="plant.size" />
-    <FormKit type="text" number label="Price" validation="required|number|min:0" v-model="plant.price" />
-    <FormKit type="text" number label="Quantity" validation="required|number|min:0" v-model="plant.quantity" />
-    <FormKit type="select" label="Status" validation-visibility="live" :options="statusListArr"
-      v-model="plant.status" />
-    <FormKit type="text" label="Password" v-if="plant.status === 'Hidden'" v-model="plant.password" />
-    <FormKit type="date" label="Propagation Date" v-model="plant.propagationDate" />
-    <div class="other-stuff">
-      <FormKit type="checkbox" label="Representative" outer-class="flex-2 align-center"
-        v-model="plant.isRepresentative" />
-      <div>
-        {{ `Photo: ${mostRecentPhoto}` }}
+  <DragUpload class="plant-item-drop-zone" @files-dropped="uploadDroppedFiles" #default="{ dropZoneActive }">
+    <form class="plant-item-form" :class="{ 'drop-active': dropZoneActive }">
+      <FormKit type="text" label="ID" input-class="w-100" validation="required" v-model="plant.id"
+        @change="setRepresentative" />
+      <FormKit type="text" label="SKU" inner-class="w-100" v-model="plant.sku" />
+      <FormKit type="select" label="Size" validation="required" :options="sizeList" v-model="plant.size" />
+      <FormKit type="text" number label="Price" validation="required|number|min:0" v-model="plant.price" />
+      <FormKit type="text" number label="Quantity" validation="required|number|min:0" v-model="plant.quantity" />
+      <FormKit type="select" label="Status" validation-visibility="live" :options="statusListArr"
+        v-model="plant.status" />
+      <FormKit type="text" label="Password" v-if="plant.status === 'Hidden'" v-model="plant.password" />
+      <FormKit type="date" label="Propagation Date" v-model="plant.propagationDate" />
+      <div class="other-stuff">
+        <FormKit type="checkbox" label="Representative" outer-class="flex-2 align-center"
+          v-model="plant.isRepresentative" />
+        <div>
+          {{ `Photo: ${mostRecentPhoto}` }}
+        </div>
       </div>
-    </div>
 
-    <BaseButton @click.prevent="addPhotos" type="info">Photos <span>({{ plant.photos.length }})</span></BaseButton>
-    <BaseButton v-if="plant.status === 'Delete'" type="danger" @click.prevent="$emit('deletePlant')"
-      :disabled="plant.status !== 'Delete'">Delete</BaseButton>
-    <BaseButton @click.prevent="$emit('createEbayItem')" :disabled="plant.status === 'Sold'">
-      {{ `${isListedOnEbay ? 'Update' : 'Create'} eBay Item` }}</BaseButton>
-    <BaseButton @click.prevent="$emit('listEbayOffer')" :disabled="plant.status === 'Sold' || isListedOnEbay">List on
-      eBay</BaseButton>
-    <BaseButton @click.prevent="$emit('deleteEbayItem')" type="danger" :disabled="!isListedOnEbay">Delete from eBay
-    </BaseButton>
-    <div v-if="plant.soldNotes">{{ getSoldNotesDisplay(plant.soldNotes) }}</div>
-  </form>
+      <BaseButton @click.prevent="addPhotos" type="info">Photos <span>({{ plant.photos.length }})</span></BaseButton>
+      <BaseButton v-if="plant.status === 'Delete'" type="danger" @click.prevent="$emit('deletePlant')"
+        :disabled="plant.status !== 'Delete'">Delete</BaseButton>
+      <BaseButton @click.prevent="$emit('createEbayItem')" :disabled="plant.status === 'Sold'">
+        {{ `${isListedOnEbay ? 'Update' : 'Create'} eBay Item` }}</BaseButton>
+      <BaseButton @click.prevent="$emit('listEbayOffer')" :disabled="plant.status === 'Sold' || isListedOnEbay">List on
+        eBay</BaseButton>
+      <BaseButton @click.prevent="$emit('deleteEbayItem')" type="danger" :disabled="!isListedOnEbay">Delete from eBay
+      </BaseButton>
+      <div v-if="plant.soldNotes">{{ getSoldNotesDisplay(plant.soldNotes) }}</div>
+    </form>
+  </DragUpload>
 </template>
 
 <script setup lang="ts">
-  import { computed, inject, watch, type PropType } from 'vue';
+  import { computed, inject, ref, watch, type PropType } from 'vue';
   import { type Plant } from '@/types/Plant';
+  import type { PhotoItem } from '@/types/Product';
   import { sizeList, statusListArr } from '@/constants/constants';
   import { formatDate } from '@/utils/utils';
+  import DragUpload from '@/components/photo/DragUpload.vue';
+  import { usePhotoUpload } from '@/components/photo/usePhotoUpload';
 
-  defineEmits(['triggerSave', 'deletePlant', 'createEbayItem', 'listEbayOffer', 'deleteEbayItem']);
+  const emit = defineEmits(['triggerSave', 'deletePlant', 'createEbayItem', 'listEbayOffer', 'deleteEbayItem']);
 
   const plant = defineModel('plant', { type: Object as PropType<Plant>, required: true });
   const props = defineProps({
@@ -62,6 +67,19 @@
   );
 
   const managePhotos = inject<Function>('managePhotos');
+
+  const plantPhotos = computed<PhotoItem[]>({
+    get: () => plant.value.photos || [],
+    set: (nextPhotos) => {
+      plant.value.photos = nextPhotos;
+    },
+  });
+
+  const { filesDropped: uploadDroppedFiles } = usePhotoUpload({
+    storageFolder: ref('plants'),
+    photos: plantPhotos,
+    saveFn: () => emit('triggerSave'),
+  });
 
   function addPhotos() {
     if (managePhotos === undefined) {
@@ -101,6 +119,16 @@
 </script>
 
 <style scoped>
+  .plant-item-drop-zone {
+    width: 100%;
+  }
+
+  .drop-active {
+    outline: 2px dashed rebeccapurple;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
   .plant-item-form {
     width: 100%;
     margin: 0.25rem 0;
@@ -135,5 +163,10 @@
     justify-content: center;
     margin: 0.1rem 0;
     gap: 0.25rem;
+  }
+
+  .drop-hint {
+    font-size: 0.8rem;
+    color: #8a8a8a;
   }
 </style>

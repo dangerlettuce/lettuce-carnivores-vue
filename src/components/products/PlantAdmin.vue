@@ -21,6 +21,7 @@
           <BaseButton @click="toggleArchived" type="info">{{ showSoldArchived ? 'Hide' : 'Show' }}
             Archived/Sold
           </BaseButton>
+          <BaseButton @click="sortById(plantCategoryToEdit.id)" type="info">Sort by ID</BaseButton>
         </div>
       </div>
       <div class="">
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  <PhotoUploadModal v-if="plantCategoryToEdit !== undefined" :photos="photoModalArr" :storageFolder="photoModalFolder"
+  <PhotoUploadModal v-if="plantCategoryToEdit !== undefined" v-model:photos="photoModalArr" :storageFolder="photoModalFolder"
     ref="photoModal" @triggerSave="saveCategory(plantCategoryToEdit)" />
 </template>
 
@@ -82,7 +83,7 @@
   import ThickArrowUp from '@/assets/icons/ThickArrowUp.vue';
   import ThickArrowDown from '@/assets/icons/ThickArrowDown.vue';
 
-  const { fetchAllCategories, findPlantCategoryById, setCategoryToEdit, saveCategory, addPlant, getAvailablePlants, removePlant } =
+  const { fetchAllCategories, findPlantCategoryById, setCategoryToEdit, saveCategory, addPlant, sortById, removePlant } =
     usePlantStore();
   const { plantCategories, plantCategoryToEdit, isSaving } = storeToRefs(usePlantStore());
   const route = useRoute();

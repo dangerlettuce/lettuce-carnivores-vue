@@ -105,8 +105,9 @@ export function usePhotoManager() {
 
   async function deleteAllPhotos(photo: PhotoItem) {
     const resolutions = ['256x256', '512x512', '960x960', '1600x1600'];
+    const folder = photo.folder || 'plants';
     resolutions.forEach((resolution) => {
-      deletePhoto(`plants/${photo.name}_${resolution}`);
+      deletePhoto(`${folder}/${photo.name}_${resolution}`);
     });
   }
 

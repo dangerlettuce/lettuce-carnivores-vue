@@ -32,14 +32,16 @@ export const usePlantStore = defineStore('plant', () => {
       return false;
     }
     if (isDuplicate(plantCategory, 'id') || isDuplicate(plantCategory, 'sku')) {
-      const duplicateIds = getDuplicates(plantCategory.plants.map((plant) => plant.id));
+      const duplicateIds = getDuplicates(plantCategory.plants, 'id');
       if (duplicateIds.length !== 0) {
-        toast.error('Duplicate Category ID detected. IDs: ' + duplicateIds.join(', '));
+        debugger
+        toast.error('Duplicate Category ID detected: ' + formatDuplicateDetails(duplicateIds));
+        console.log(duplicateIds);
         return false;
       }
-      const duplicateSkus = getDuplicates(plantCategory.plants.map((plant) => plant.sku));
+      const duplicateSkus = getDuplicates(plantCategory.plants, 'sku');
       if (duplicateSkus.length !== 0) {
-        toast.error('Duplicate SKU detected. SKUs: ' + duplicateSkus.join(', '));
+        toast.error('Duplicate SKU detected: ' + formatDuplicateDetails(duplicateSkus));
         return false;
       }
       return false;
@@ -71,17 +73,41 @@ export const usePlantStore = defineStore('plant', () => {
     return ids.length !== idSet.size;
   }
 
-  function getDuplicates(arr: any[]) {
-    const seen = new Set();
-    const duplicates = arr.filter((item) => {
-      if (seen.has(item)) {
-        return true; // It's a duplicate
+  function getDuplicates<T extends Record<string, any>>(items: T[], property: keyof T) {
+    const seen = new Map<T[keyof T], number>();
+    const duplicates: Array<{ value: T[keyof T]; firstIndex: number; duplicateIndexes: number[] }> = [];
+
+    items.forEach((item, index) => {
+      const value = item[property];
+      const firstIndex = seen.get(value);
+
+      if (firstIndex === undefined) {
+        seen.set(value, index);
+        return;
       }
-      seen.add(item);
-      return false; // Not a duplicate yet
+
+      const existingDuplicate = duplicates.find((duplicate) => Object.is(duplicate.value, value));
+      if (existingDuplicate) {
+        existingDuplicate.duplicateIndexes.push(index);
+        return;
+      }
+
+      duplicates.push({
+        value,
+        firstIndex,
+        duplicateIndexes: [firstIndex, index],
+      });
     });
-    return [...new Set(duplicates)]; // Get only unique duplicate values
+
+    return duplicates;
   }
+
+  function formatDuplicateDetails<T extends { value: any; firstIndex: number; duplicateIndexes: number[] }>(duplicates: T[]) {
+    return duplicates
+      .map((duplicate) => `${String(duplicate.value)} (first at index ${duplicate.firstIndex}, repeated at indexes ${duplicate.duplicateIndexes.slice(1).join(', ')})`)
+      .join('; ');
+  }
+
   function setDateListed(plantCategory: PlantCategory) {
     const now = new Date();
     plantCategory.plants.forEach((plant) => {
@@ -230,6 +256,13 @@ export const usePlantStore = defineStore('plant', () => {
     }
     return plantCategories.value.find((category) => category.id === plant.plantCategoryId);
   }
+
+  function sortById(plantCategoryId: string) {
+    const plantCategory = plantCategories.value.find((category) => category.id === plantCategoryId);
+    if (plantCategory) {
+      plantCategory.plants.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+    }
+  }
   return {
     isLoading,
     isSaving,
@@ -246,6 +279,7 @@ export const usePlantStore = defineStore('plant', () => {
     removePhoto,
     getAvailablePlants,
     getAvailableCategories,
+    sortById,
     productFilters,
     updateFilteredCategories,
     filteredCategories,
