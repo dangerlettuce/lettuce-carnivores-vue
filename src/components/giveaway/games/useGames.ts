@@ -1,4 +1,4 @@
-import { blackholeGame } from './Blackhole/blackhole';
+import { blackHoleGame } from './Blackhole/blackhole';
 import { runaway } from './Runaway/runaway';
 import { createFlashlight, destroyFlashlight } from './Flashlight/flashlight';
 
@@ -191,7 +191,7 @@ export default function useGames({ setGhostMessage, appendGhost, setShowBlackout
 		doAFlip,
 		// rickRoll,
 		// hideTreat,
-		blackholeGame,
+		blackHoleGame,
 	]);
 
 	return { allGames };

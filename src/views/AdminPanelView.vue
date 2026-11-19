@@ -22,6 +22,7 @@
   import PlantInventory from '@/components/PlantInventory.vue';
   import ProductAdminForm from '@/components/products/ProductAdminForm.vue';
   import PlantAdmin from '@/components/products/PlantAdmin.vue';
+  import SalesReporting from '@/features/admin/reporting/SalesReporting.vue';
 
   const selectedComponent = shallowRef();
 
@@ -29,6 +30,10 @@
     {
       label: 'Giveaway Admin',
       component: GiveawayAdmin,
+    },
+    {
+      label: 'Sales Reporting',
+      component: SalesReporting,
     },
     {
       label: 'Ebay Admin',

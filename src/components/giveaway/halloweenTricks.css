@@ -23,7 +23,7 @@
 	background: radial-gradient(
 		circle at var(--cursor-x) var(--cursor-y),
 		transparent 10px,
-		rgba(0, 0, 0, 0.98) clamp(75px, 25dvw, 150px)
+		rgba(0, 0, 0, 0.98) clamp(75px, 25dvw, 200px)
 	);
 }
 

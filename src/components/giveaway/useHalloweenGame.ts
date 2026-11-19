@@ -18,6 +18,8 @@ function shuffleGames<T>(games: T[]) {
 	return shuffledGames;
 }
 
+let availableTricks: GameTrick[] = []
+
 export function useHalloweenGame() {
 	const giveawayStore = useGiveawayStore();
 	const { addLetter, newGame, fetchActiveGiveaway } = giveawayStore;
@@ -45,7 +47,9 @@ export function useHalloweenGame() {
 		},
 		getInputMode: () => inputMode.value,
 	});
-	let availableTricks: GameTrick[] = shuffleGames(allGames);
+	if (availableTricks.length === 0) {
+		availableTricks = shuffleGames(allGames);
+	}
 
 	function appendGhost(ghostDuration = 4000) {
 		showGhost.value = true;
@@ -81,6 +85,7 @@ export function useHalloweenGame() {
 	}
 
 	function getNextTrick() {
+		debugger;
 		if (availableTricks.length === 0) {
 			availableTricks = shuffleGames(allGames);
 		}

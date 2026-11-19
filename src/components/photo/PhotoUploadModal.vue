@@ -7,14 +7,14 @@
         <button type="button" class="" aria-label="Close" data-bs-dismiss="modal" @click="toggleModal"></button>
       </header>
       <div class="modal-body photo-items-grid">
-        <template v-for="(photo, index) of photos" :key="photo.name">
+        <template v-for="(photo, index) of photos" :key="`${photo.path}-${photo.name}-${index}`">
           <PhotoPreviewItem
             :photo
             :index
-            :isLast="index === photos.length"
+            :isLast="index === photos.length - 1"
             @move-up="move"
             @move-down="move"
-            @remove-photo="(i) => removePhoto(i, photo)" />
+            @remove-photo="removePhoto" />
         </template>
       </div>
       <DragUpload @files-dropped="filesDropped" #default="{ dropZoneActive }">

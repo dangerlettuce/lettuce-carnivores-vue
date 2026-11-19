@@ -1,11 +1,11 @@
 import { onBeforeUnmount, type Ref } from 'vue';
-import { usePhotoManager, type SelectedFile } from "./usePhotoManager";
+import { usePhotoManager } from "./usePhotoManager";
 import type { PhotoItem } from "@/types/Product";
 import { arrayMove } from '@/utils/utils';
 
 type UsePhotoUploadOptions = {
   storageFolder: Ref<string>;
-  saveFn: () => void;
+  saveFn: () => void | Promise<void>;
   photos: Ref<PhotoItem[]>;
 };
 
@@ -18,20 +18,28 @@ export function usePhotoUpload({ storageFolder, saveFn, photos }: UsePhotoUpload
     resetSelectedFiles();
   });
 
-  function removePhoto(index: number, photo: SelectedFile | PhotoItem) {
-    if (index !== -1) {
-      photos.value = photos.value.filter((_, i) => i !== index);
-      if (photo.hasOwnProperty('folder')) {
-        deleteAllPhotos(photo as PhotoItem);
-      }
-      saveFn();
+  async function removePhoto(index: number) {
+    let targetIndex = index;
+    if (targetIndex < 0 || targetIndex >= photos.value.length) {
+      return;
+    }
+
+    const [removedPhoto] = photos.value.splice(targetIndex, 1);
+    if (!removedPhoto) {
+      return;
+    }
+
+    await Promise.resolve(saveFn());
+
+    if (removedPhoto.folder && removedPhoto.name) {
+      void deleteAllPhotos(removedPhoto).catch((err) => {
+        console.error('Failed to delete one or more photo resolutions from storage', err);
+      });
     }
   }
 
   function move(index: number, newPosition: number) {
-    const nextPhotos = [...photos.value];
-    arrayMove(nextPhotos, index, newPosition);
-    photos.value = nextPhotos;
+    arrayMove(photos.value, index, newPosition);
     saveFn();
   }
 

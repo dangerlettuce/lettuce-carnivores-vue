@@ -15,6 +15,7 @@ const AccountView = () => import('@/views/AccountView.vue');
 const GiveawayView = () => import('@/views/GiveawayView.vue');
 const EbayLoginSuccess = () => import('@/views/EbayLoginSuccess.vue');
 const AdminPanel = () => import('@/views/AdminPanelView.vue');
+
 const routeData = [
   {
     path: '/',

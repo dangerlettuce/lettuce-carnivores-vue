@@ -2,14 +2,14 @@
 // @ts-nocheck
 import './blackhole.css';
 
-let blackholeState = null;
+let blackHoleState = null;
 
-export function blackholeGame(resetDuration: number = 5000) {
-	createBlackhole(resetDuration);
+export function blackHoleGame(resetDuration: number = 5000) {
+	createBlackHole(resetDuration);
 }
 
-function createBlackhole(resetDuration: number = 5000) {
-	resetBlackhole();
+function createBlackHole(resetDuration: number = 5000) {
+	resetBlackHole();
 
 	const originalOverflowX = document.body.style['overflow-x'] || '';
 	const originalBodyOverflow = document.body.style.overflow || '';
@@ -30,7 +30,7 @@ function createBlackhole(resetDuration: number = 5000) {
 	portal.className = 'blackhole-portal';
 	portal.setAttribute('aria-hidden', 'true');
 
-	blackholeState = {
+	blackHoleState = {
 		originalOverflowX,
 		originalBodyOverflow,
 		originalHtmlOverflow,
@@ -62,14 +62,14 @@ function createBlackhole(resetDuration: number = 5000) {
 	document.body.style['overflow-x'] = 'hidden';
 
 	//Get all the elements of the page
-	const elements = document.querySelectorAll('*:not(html, head, title, link, meta, script, style, noscript, body, li, p, span, .blackhole-viewport, .blackhole-portal)');
-	let all_elements = Array.from(elements);
+	const elements = document.querySelectorAll('*:not(html, head, title, link, meta, script, style, noscript, body, .blackhole-viewport, .blackhole-portal)');
+	let allElements = Array.from(elements);
 
 	// Duration is a minimum; if the page has a lot of elements, keep the effect alive until
 	// the absorption cycle has had enough time to process and clear every clone.
-	const estimatedAbsorptionTime = Math.max(3000, all_elements.length * 220 + 2500);
+	const estimatedAbsorptionTime = Math.max(3000, allElements.length * 220 + 3000);
 	const endTimer = setTimeout(() => {
-		resetBlackhole();
+		resetBlackHole();
 	}, Math.max(resetDuration, estimatedAbsorptionTime));
 	timers.push(endTimer);
 
@@ -79,31 +79,31 @@ function createBlackhole(resetDuration: number = 5000) {
 	const absorptionDelay = 250;
 
 	//Start the loop
-	var recursion = 0;
+	let recursion = 0;
 	absorbElement();
 
 	function absorbElement() {
-		if (!blackholeState) return;
-		if (all_elements.length === 0) {
+		if (!blackHoleState) return;
+		if (allElements.length === 0) {
 			const finishTimer = setTimeout(() => {
-				resetBlackhole();
+				resetBlackHole();
 			}, 450);
 			timers.push(finishTimer);
 			return;
 		}
 		if (recursion > 20) {
-			resetBlackhole();
+			resetBlackHole();
 			return;
 		}
 
 		//Select a random element
-		var random = Math.floor(Math.random() * all_elements.length);
-		var el = all_elements[random];
+		const random = Math.floor(Math.random() * allElements.length);
+		const el = allElements[random];
 
-		var childs = el.querySelectorAll('*:not(.vortex-flagged)');
+		const children = el.querySelectorAll('*:not(.vortex-flagged)');
 
 		//If the element is invalid or if it has too many childs retry
-		if (typeof el == 'undefined' || childs.length > 100) {
+		if (typeof el == 'undefined' || children.length > 100) {
 			recursion++;
 			const retryTimer = setTimeout(absorbElement, absorptionDelay);
 			timers.push(retryTimer);
@@ -112,19 +112,19 @@ function createBlackhole(resetDuration: number = 5000) {
 			recursion = 0;
 		}
 
-		//Flag all the child so they can't be selected on the next iterations
-		childs.forEach(function (node) {
+		//Flag all children so they can't be selected on the next iterations
+		children.forEach(function (node) {
 			node.classList.add('vortex-flagged');
 		});
 
 		//Clone the element and hide the original
-		var el_width = el.offsetWidth;
-		var el_height = el.offsetHeight;
-		var rect = el.getBoundingClientRect();
-		var el_offset_x = rect.left;
-		var el_offset_y = rect.top;
+		const el_width = el.offsetWidth;
+		const el_height = el.offsetHeight;
+		const rect = el.getBoundingClientRect();
+		const el_offset_x = rect.left;
+		const el_offset_y = rect.top;
 
-		var el_clone = el.cloneNode(true);
+		const el_clone = el.cloneNode(true);
 		el_clone.classList.add('vortex-attracted');
 		el.classList.add('vortex-removed');
 		el.classList.add('vortex-flagged');
@@ -161,7 +161,7 @@ function createBlackhole(resetDuration: number = 5000) {
 		timers.push(removeTimer);
 
 		//Reduce the set of available elements
-		all_elements = all_elements.filter(function (node) {
+		allElements = allElements.filter(function (node) {
 			return !node.classList.contains('vortex-flagged');
 		});
 
@@ -170,11 +170,11 @@ function createBlackhole(resetDuration: number = 5000) {
 	}
 }
 
-function resetBlackhole() {
-	if (!blackholeState) return;
+function resetBlackHole() {
+	if (!blackHoleState) return;
 
-	const currentState = blackholeState;
-	blackholeState = null;
+	const currentState = blackHoleState;
+	blackHoleState = null;
 
 	currentState.timers.forEach(function (timer) {
 		clearTimeout(timer);
