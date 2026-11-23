@@ -5,6 +5,7 @@
     <div class="row gap-2 mt-4 justify-space-around hide-print">
       <BaseButton @click="fetchOpenOrders">View Open Orders</BaseButton>
       <BaseButton type="info" @click="findAllOrders">View All Orders</BaseButton>
+      <BaseButton type="info" @click="exportShipping(orders)">Export Shipping</BaseButton>
     </div>
     <OrderPickList :orders />
   </div>
@@ -18,11 +19,31 @@
   import OrdersList from '@/components/OrdersList.vue';
   import type { Order } from '@/types/Orders';
   import OrderPickList from '@/features/admin/OrderPickList.vue';
+  import { useExportShipping } from './shipping/useExportShipping';
+
   const orders: Ref<Order[]> = ref([]);
   const isLoading = ref(false);
+  const { exportShipping } = useExportShipping();
   onMounted(() => {
     fetchOpenOrders();
   });
+
+  /**
+   * Package property added to orders Nov 2026.  If older orders are loaded, this populates a default object
+   */
+  function addPackageToOrders(orders: Order[]) {
+    for (const order of orders) {
+      if (!order.shippingInfo.package) {
+        order.shippingInfo.package = {
+          length: null,
+          width: null,
+          height: null,
+          weight: null,
+          weight_unit: 'POUND'
+        };
+      }
+    }
+  }
 
   const fetchOpenOrders = async () => {
     isLoading.value = true;
@@ -31,6 +52,7 @@
       if (res !== undefined && res.length !== 0) {
         sortNumerically(res);
         orders.value = res as Order[];
+        addPackageToOrders(orders.value);
       }
     } catch (e: any) {
       console.error(e);
@@ -47,6 +69,8 @@
       orders.value = res as Order[];
     }
   }
+
+
 </script>
 
 <style scoped>

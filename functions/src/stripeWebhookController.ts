@@ -75,6 +75,13 @@ async function fulfillCheckout(data: Stripe.Checkout.Session) {
       email: data.customer_details?.email,
       phone: data.customer_details?.phone,
       shippingType: shippingType,
+      package: {
+        length: null,
+        width: null,
+        height: null,
+        weight: null,
+        weight_unit: "POUND"
+      },
     },
     orderStatus: {
       status: 'Processing',

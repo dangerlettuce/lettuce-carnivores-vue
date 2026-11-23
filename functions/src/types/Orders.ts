@@ -147,6 +147,13 @@ export type Order = {
     name: string;
     email: string;
     shippingType: 'Standard' | 'Expedited';
+    package: {
+      length: number | null;
+      width: number | null;
+      height: number | null;
+      weight: number | null;
+      weight_unit: 'POUND' | 'OUNCE'
+    }
   };
   fullResponse: any;
 };

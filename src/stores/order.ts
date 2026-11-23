@@ -67,7 +67,7 @@ export const useOrderStore = defineStore('order', () => {
         cart.value.cartItems[cartIndex].quantity--;
         return;
       }
-      if ((cart.value.cartItems[cartIndex].quantity = 1)) {
+      if (cart.value.cartItems[cartIndex].quantity === 1) {
         cart.value.cartItems.splice(cartIndex, 1);
         return;
       }

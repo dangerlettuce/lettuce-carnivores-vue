@@ -28,12 +28,24 @@
               label="Tracking Number"
               outer-class="grid-col-2"
               v-model="order.orderStatus.trackingNumber"
-              @change="setCarrier(order)"
-            />
+              @change="setCarrier(order)" />
           </div>
           <div>
             <Label for="carrier">Carrier</Label>
             <Input type="text" id="carrier" outer-class="grid-col-2" v-model="order.orderStatus.carrier" />
+          </div>
+          <div>
+            <label for="dimensions">Dimensions</label>
+            <div class="length-width-height">
+              <input type="text" placeholder="L" v-model="order.shippingInfo.package.length" />
+              <p>x</p>
+              <input type="text" placeholder="W" v-model="order.shippingInfo.package.width" />
+              <p>x</p>
+              <input type="text" placeholder="H" v-model="order.shippingInfo.package.height" />
+            </div>
+            <label for="weight">Weight</label>
+            <input type="text" placeholder="Weight" name="weight"
+              v-model="order.shippingInfo.package.weight" />
           </div>
           <BaseButton @click="save(props.order)">Save</BaseButton>
         </form>
@@ -43,77 +55,93 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import BaseDialog from '@/components/ui/BaseDialog.vue';
-import type { Order } from '@/types/Orders';
-import Input from '@/components/ui/input/Input.vue';
-import { useOrders } from '@/composables/useOrders';
-import { getCarrier } from '@/composables/useShippingUtils';
+  import { ref } from 'vue';
+  import BaseDialog from '@/components/ui/BaseDialog.vue';
+  import type { Order } from '@/types/Orders';
+  import Input from '@/components/ui/input/Input.vue';
+  import { useOrders } from '@/composables/useOrders';
+  import { getCarrier } from '@/composables/useShippingUtils';
 
-const { saveOrder } = useOrders();
-const props = defineProps<{ order: Order }>();
+  const { saveOrder } = useOrders();
+  const props = defineProps<{ order: Order }>();
 
-async function save(order: Order) {
-  await saveOrder(order);
-  toggleModal();
-}
-const open = ref(false);
-defineExpose({ toggleModal });
-function toggleModal() {
-  open.value = !open.value;
-}
-
-function setCarrier(order: Order) {
-  const carrier = getCarrier(order.orderStatus.trackingNumber);
-  if (carrier) {
-    order.orderStatus.carrier = carrier;
+  async function save(order: Order) {
+    await saveOrder(order);
+    toggleModal();
   }
-}
+  const open = ref(false);
+  defineExpose({ toggleModal });
+  function toggleModal() {
+    open.value = !open.value;
+  }
+
+  function setCarrier(order: Order) {
+    const carrier = getCarrier(order.orderStatus.trackingNumber);
+    if (carrier) {
+      order.orderStatus.carrier = carrier;
+    }
+  }
 </script>
 
 <style scoped>
-.modal-container {
-  display: flex;
-  gap: 2rem;
-}
+  .modal-container {
+    display: flex;
+    gap: 2rem;
+  }
 
-.order-modal {
-  min-width: 16rem;
-  max-width: 90dvw;
-  overflow: none;
-}
+  .order-modal {
+    min-width: 16rem;
+    max-width: 90dvw;
+    overflow: none;
+  }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  margin-block: 1rem;
-  box-sizing: border-box;
-}
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 1rem;
+    box-sizing: border-box;
+  }
 
-.close-button {
-  top: 2px;
-  right: 24px;
-}
+  .close-button {
+    top: 2px;
+    right: 24px;
+  }
 
-.status-form > div {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin-block: 0.5rem;
-  align-items: center;
-}
+  .status-form>div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-block: 0.5rem;
+    align-items: center;
+  }
 
-.shipping-address {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-}
+  .shipping-address {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
 
-.tracking-form {
-  display: flex;
-  flex-direction: column;
-  width: 200rem;
-  margin-top: 0 !important;
-}
+  .shipping-info {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 90px 140px;
+  }
+
+  .length-width-height {
+    display: grid;
+    grid-template-columns: 24px 8px 24px 8px 24px;
+    gap: 6px;
+
+    input {
+      padding-inline: .2rem;
+    }
+  }
+
+  .tracking-form {
+    display: flex;
+    flex-direction: column;
+    width: 200rem;
+    margin-top: 0 !important;
+  }
 </style>
 
 <!-- TODO: Bootstrap replace close button -->
