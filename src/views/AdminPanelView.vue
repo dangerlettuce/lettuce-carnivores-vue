@@ -23,6 +23,7 @@
   import ProductAdminForm from '@/components/products/ProductAdminForm.vue';
   import PlantAdmin from '@/components/products/PlantAdmin.vue';
   import SalesReporting from '@/features/admin/reporting/SalesReporting.vue';
+  import SkuMaintenance from '@/features/admin/SkuMaintenance.vue';
 
   const selectedComponent = shallowRef();
 
@@ -59,6 +60,10 @@
       label: 'Plant Admin (Legacy)',
       component: PlantAdmin,
     },
+    {
+      label: 'SKU Lookup',
+      component: SkuMaintenance
+    }
   ];
 
   function setSelectedComponent(adminComponent: { label: string; component: Component }) {

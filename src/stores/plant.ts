@@ -144,9 +144,7 @@ export const usePlantStore = defineStore('plant', () => {
     isLoading.value = true;
     try {
       const categories = await findAll(collectionName);
-      if (categories !== undefined && categories.length !== 0) {
-        plantCategories.value = categories as PlantCategory[];
-      }
+      plantCategories.value = categories as PlantCategory[];
       sortAlphabetically(plantCategories.value, 'name' as keyof any[]);
     } catch (e: any) {
       throw new Error(e.toString());
